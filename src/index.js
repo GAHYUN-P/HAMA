@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './shared/App';
-import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from 'styled-components';
 
 // styled-components 공통변수
@@ -24,5 +23,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-reportWebVitals();
