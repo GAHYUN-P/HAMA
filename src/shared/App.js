@@ -19,6 +19,7 @@ import AppLayout from '../components/AppLayout';
 import Home from '../pages/Home';
 import PasswordFind from '../pages/PasswordFind';
 import UserInfo from '../pages/UserInfo';
+import Rank from '../components/Rank';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/userInfo" exact component={UserInfo} />
           <Route path="/findPassword" exact component={PasswordFind} />
           <Route path="/answer" exact component={Answer} />
+          <Route path="/test" exact component={Rank} />
           <Route component={NotFound} />
         </Switch>
       </AppLayout>
