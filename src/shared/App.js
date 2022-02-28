@@ -12,6 +12,7 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Chatting from '../pages/Chatting';
 import Signup from '../pages/Signup';
+import Answer from '../pages/Answer';
 
 // component
 import AppLayout from '../components/AppLayout';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/signup" exact component={Signup} />
           <Route path="/userInfo" exact component={UserInfo} />
           <Route path="/findPassword" exact component={PasswordFind} />
+          <Route path="/answer" exact component={Answer} />
           <Route component={NotFound} />
         </Switch>
       </AppLayout>
