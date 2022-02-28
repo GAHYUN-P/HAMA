@@ -21,7 +21,7 @@ export const userAPI = {
     return axios.post(`/api/user/signup`, data);
   },
   emailCheck: function (data) {
-    return axios.post(`/api/user/signup/emailCheck`, data);
+    return axios.post(`/api/user/idcheck`, data);
   },
   findPassword: function (data) {
     return axios.post('/api/user/findPassword', data);
