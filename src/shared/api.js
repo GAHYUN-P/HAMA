@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://52.79.54.15';
+axios.defaults.baseURL = 'http://13.125.247.226';
 
 /* const openApi = axios.create();
 openApi.defaults.withCredentials=false;

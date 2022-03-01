@@ -2,18 +2,16 @@ import React, { useState, useMemo } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
-const QuillEditor = (props) => {
-    const [value, setValue] = useState('');    
-    const inputRef = React.useRef();
+import axios from "axios";
 
-    const loging = (editor) =>{
-        const _editor = inputRef.current.getEditorContents();
-        console.log(_editor);
-    }
+const QuillEditor = (props) => {
+    const [value, setValue] = useState('');  
+    const quillRef = React.useRef();
 
     const modules = useMemo(()=>{
         return {
-            toolbar: [
+            toolbar: {
+            container:[
                 // 제목용 
                   [{ 'header': [1, 2, false] }],
                 // 폰트 꾸미기   
@@ -23,11 +21,11 @@ const QuillEditor = (props) => {
                 // 서식 꾸미기  
                   ['blockquote',],
                 // 글자외 부분들  
-                  ['link', 'image','video'],
+                  ['link'],
                 ],
+            }               
         }
-    });
-      
+    },[]);
 
     const formats = [
         // 제목 느낌 주는 header
@@ -37,19 +35,19 @@ const QuillEditor = (props) => {
         // 서식 꾸미기
         'blockquote',
         // 서식 이외의 것들
-        'link', 'image' , 'video'
+        'link'
       ]
 
     return (
-        <>
+        <React.Fragment>
         <ReactQuill 
+            height='300px'
             placeholder="당신이 해낸 일을 보여주세요."
-            ref={inputRef}
+            ref={quillRef}
             modules={modules} formats={formats}
             theme="snow" value={value} 
             onChange={setValue} />
-            <button onClick={loging} >check</button>
-        </>
+        </React.Fragment>
     )
 };
 
