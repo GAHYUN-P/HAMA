@@ -10,6 +10,9 @@ import Chat from './modules/chat';
 import Header from './modules/header';
 import Util from './modules/util';
 import image from './modules/image';
+import Rank from './modules/rank';
+import Point from './modules/point';
+
 
 export const history = createBrowserHistory();
 
@@ -20,6 +23,8 @@ const rootReducer = combineReducers({
   header: Header,
   util: Util,
   image: image,
+  point: Point,
+  rank: Rank,
   router: connectRouter(history)
 });
 
