@@ -36,6 +36,8 @@ function App() {
           <Route path="/answer" exact component={Answer} />
           <Route path="/request" exact component={Request} />
           <Route path="/test" exact component={Rank} />
+          <Route path="/home" exact component={Home} />
+
           <Route component={NotFound} />
         </Switch>
       </AppLayout>
