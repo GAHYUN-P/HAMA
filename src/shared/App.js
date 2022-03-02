@@ -13,6 +13,7 @@ import NotFound from '../pages/NotFound';
 import Chatting from '../pages/Chatting';
 import Signup from '../pages/Signup';
 import Answer from '../pages/Answer';
+import Request from '../pages/Request';
 
 // component
 import AppLayout from '../components/AppLayout';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/userInfo" exact component={UserInfo} />
           <Route path="/findPassword" exact component={PasswordFind} />
           <Route path="/answer" exact component={Answer} />
+          <Route path="/request" exact component={Request} />
           <Route path="/test" exact component={Rank} />
           <Route component={NotFound} />
         </Switch>
