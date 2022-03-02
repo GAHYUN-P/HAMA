@@ -1,7 +1,8 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { deleteCookie, setCookie } from '../../shared/cookie';
-import { postAPI } from '../../shared/api';
+import { postAPI, requestAPI } from '../../shared/api';
+
 
 export const initialState = {
     list: [],
@@ -18,10 +19,21 @@ const post = createReducer(initialState, {
 
 // thunk
 
+const makeRequest = (title,content,category,level) => async (dispatch, getState, {history}) => {
+    try{
+        const data = {title:title, content: content, category: category, level:level}
+        const res = await requestAPI.makeRequest(data);
+        // window.alert('요청작성 완료!')
+    } catch (error) {
+        console.log(error);
+        alert(error.response.data.errorMessage);
+    }
+}
 
 export const postActions = {
     setList,
     // getPostList,
+    makeRequest,
 };
 
 export default post;
