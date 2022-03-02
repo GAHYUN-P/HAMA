@@ -1,27 +1,37 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { deleteCookie, setCookie } from '../../shared/cookie';
-import { userAPI } from '../../shared/api';
+import { utilAPI } from '../../shared/api';
 
 export const initialState = {
-    rank: 1,
-    nickname: "hyun",
-    status: "up",
-    is_changed: true,
+    data: [],
 };
+
 
 const setRank = createAction('rank/UPDATERANK')
 
 const rank = createReducer(initialState, {
     [setRank] : (state, action) => {
-        state.rank = action.payload;
+        state.data = action.payload;
       }
 });
 
 // thunk
+// 랭크 조회
+const getRankList = () => async (dispatch, getState, { history }) => {
+    try {
+      const res = await utilAPI.getRank();
+      console.log(res.data);
+      dispatch(setRank(res.data));
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
 
 export const rankActions = {
     setRank,
+    getRankList,
 };
 
 export default rank;

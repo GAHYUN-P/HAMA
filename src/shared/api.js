@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://13.125.247.226';
+axios.defaults.baseURL = 'http://15.164.219.84/';
 
 /* const openApi = axios.create();
 openApi.defaults.withCredentials=false;
@@ -61,14 +61,26 @@ export const chatAPI = {
   }
 };
 
+export const postAPI = {
+  getPostList: function () {
+    return axios.get(`/api/post`);
+  },
+  selectPostCategory: function (category) {
+    return axios.get(`/api/post/category/${category}`);
+  },
+};
+
 export const utilAPI = {
-  uploadImage: function (userId, data) {
-    return axios({
-      method: 'post',
-      url: `/api/s3upload`,
-      data: data,
-      headers: { 'Content-Type': 'multipart/form-data' }
-    });
-    //return axios.put(`/api/s3upload`, data);
-  }
+  getRank: function () {
+    return axios.get(`/api/rank`);
+  },
+  submitSurvey: function (data) {
+    return axios.post(`/api/survey`, data);
+  },
+  getSurveyList: function () {
+    return axios.get(`/api/survey`);
+  },
+  getAchievement: function () {
+    return axios.get(`/api/achievement`);
+  },
 };
