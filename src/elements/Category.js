@@ -41,7 +41,7 @@ const Category = (props) => {
             <button onClick={(e) => { selectTag(e) }} value='visit'>방문</button>
             <button onClick={(e) => { selectTag(e) }} value='job'>직업</button>
             <button onClick={(e) => { selectTag(e) }} value='pet'>반려동물</button>
-            <button onClick={(e) => { selectTag(e) }} value='fasion'>패션뷰티</button>
+            <button onClick={(e) => { selectTag(e) }} value='fashion'>패션뷰티</button>
             <button onClick={(e) => { selectTag(e) }} value='consult'>고민상담</button>
             <button onClick={(e) => { selectTag(e) }} value='device'>가전</button>
             <button onClick={(e) => { selectTag(e) }} value='life'>생활</button>
