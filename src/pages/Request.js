@@ -4,11 +4,19 @@ import ReactQuill from 'react-quill';
 import Tag from '../elements/Tag';
 import Level from '../elements/Level';
 
+import { useDispatch } from 'react-redux';
+import { postActions } from '../redux/modules/post';
+import axios from 'axios';
+
 const Request = (props) => {
+    const dispatch = useDispatch();
+
     const [title, setTitle] = useState(''); 
     const [content, setContent] = useState('');
     const [category, setCategory] = useState('');
     const [level, setLevel] = useState('');
+
+    const token = document.cookie.split('=')[1];    
 
     // 카테고리와 레벨 배열
     const categoies = [
@@ -32,9 +40,28 @@ const Request = (props) => {
             window.alert('모든 항목을 채워주세요.')
             return
         }
+        const data = {
+            title: title,
+            content: content,
+            category: category,
+            level: level
+        }
+        const config = {
+            headers:{
+                'token':token
+            }
+        }
 
-        console.log(title, content, category, level);
+        axios.post('/api/post',data,config)
+        .then(res => {
+            window.alert('성공')
+        })
+        .catch(err => {
+            window.alert('error')
+        })
     }
+
+    console.log(token);
 
     return(
     <React.Fragment>
