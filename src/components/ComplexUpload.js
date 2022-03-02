@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 
 import { imgActions } from "../redux/modules/image";
 import { useDispatch, useSelector } from "react-redux";
+
 import styled from "styled-components";
 
 const ComplexUpload = (props) => {
@@ -33,48 +34,47 @@ const ComplexUpload = (props) => {
         window.alert('올바른 형식의 데이터가 아닙니다.')
     }
 
-    console.log(preview,files);
-
     return (
         <React.Fragment>
-          <div style={{width:'100%', padding:'8px', display:'flex', justifyContent:'center', alignItems:'center'}} >  
-            <Ellabel htmlFor="complex" >+</Ellabel>
-            <input onChange={previewmake} id='complex' type='file' accept='image/*, video/*' style={{display:'none'}} />
-          </div>
-            {preview.map((p,i)=>{
-                const _type = files[i].type.split('/')[0];
-                if(_type === 'image'){
-                    return(<div style={{padding:'0 8px'}} key={i} >
-                        <Elpre url={p} />
-                    </div>) 
-                }
-                return (
-                    <ReactPlayer src={p} />
-                )
-            })}            
+              <div style={{width:'80%', margin:'0 auto', padding:'4px'}} >
+                {/* 이미지 업로드 버튼 */}
+                <Grid width='auto'>
+                    <label htmlFor='upload'
+                    style={{width:'75px',height:'75px',border:'1px solid black',display:'block'}}
+                    >+</label>
+                    <input onChange={previewmake} id='upload' type='file' accept='image/*, video/*' style={{display:'none'}} />
+                </Grid>
+                
+                {/* 이미지 리스트 정리 */}
+                <Grid width='60%'>
+                    {preview.map((p,i)=>{
+                        const is_data = p.split(':')[0] === 'data' ? true : false;
+                        if(is_data){
+                            return (<Eldiv key={i} url={p} ></Eldiv>)
+                        }
+                        return (<ReactPlayer style={{display:'inline-block',margin:'0 4px'}} url={p} key={i} width='75px' height='75px' playing={true} muted={true} />)
+                    })}
+                </Grid>
+
+            </div>     
         </React.Fragment>
     )
 }
 
-const Ellabel = styled.label`
-    display: block;
-    margin: 0;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    line-height: 100px;
-    font-size: 40px;
-    border: solid 2px black;
-    border-radius: 8px;
-    box-sizing: 'border-box;
+const Grid = styled.div`
+    width: ${props => props.width};
+    display: inline-block;
+    padding: 4px;
+    white-space: nowrap;
+    overflow-x: scroll;
 `;
 
-const Elpre = styled.div`
-    width: 100px;
-    height: 100px;
-    border: solid 2px black;
+const Eldiv = styled.div`
+    width: 75px;
+    height: 75px;
+    margin: 0 4px;
     border-radius: 8px;
-    box-sizing: 'border-box;
+    display: inline-block;
     background-image: url(${props => props.url});
     background-size: cover;
 `
