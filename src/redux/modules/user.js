@@ -107,6 +107,9 @@ const fetchLogin = (data) => async (dispatch, getState, { history }) => {
     // 헤더에 토큰 저장
     axios.defaults.headers.common['token'] = `${token}`;
 
+    // 로그인 성공시 home으로 이동
+    history.push('/home');
+
   } catch (error) {
     console.error(error);
     dispatch(setLoginError(error.response.data.errorMessage));
