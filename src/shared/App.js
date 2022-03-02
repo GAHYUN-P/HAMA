@@ -33,7 +33,7 @@ function App() {
           <Route path="/userInfo" exact component={UserInfo} />
           <Route path="/findPassword" exact component={PasswordFind} />
           <Route path="/answer" exact component={Answer} />
-          <Route path="/test" exact component={Rank} />
+          <Route path="/home" exact component={Home} />
           <Route component={NotFound} />
         </Switch>
       </AppLayout>
