@@ -71,6 +71,12 @@ export const postAPI = {
   },
 };
 
+export const requestAPI = {
+  makeRequest: function(data) {
+    return axios.post('/api/post',data)
+  }
+}
+
 export const utilAPI = {
   getRank: function () {
     return axios.get(`/api/rank`);
