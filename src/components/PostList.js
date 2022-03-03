@@ -6,11 +6,14 @@ import { postActions } from '../redux/modules/post';
 import { postAPI } from '../shared/api';
 
 const PostList = (props) => {
+    // 트러블 슈팅: 카테고리 누르면 나오는데 안누르고 딱 로딩됐을때
+    // 전체페이지가 안나왔었음
     // post 모듈에 처음에 전체 데이터 넣어주는 thunk 함수 만들어준담에
     // 아예 여기서 thunk써서 이니셜 데이터 쑤셔넣어 useEffect써
 
     const dispatch = useDispatch();
 
+    // 전체 리스트 불러오기
     React.useEffect(() => {
         dispatch(postActions.getPostList());
     }, []);
