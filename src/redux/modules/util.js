@@ -3,7 +3,7 @@ import { utilAPI } from '../../shared/api';
 
 // initialState
 const initialState = {
-  list: [],
+  list: null,
 };
 
 // action
