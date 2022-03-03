@@ -9,20 +9,29 @@ const getCookie = (name) => {
 
 // 유저 고유 아이디 가져오기
 const getUserId = () => {
-  const userId = document.cookie.split('userId=')[1];
-  return userId;
+  if(document.cookie){
+    const userId = document?.cookie.split('userId=')[1];
+    return userId;
+  }
+  return null;
 }
 
 // 유저 닉네임 가져오기
 const getUserName = () => {
-  const userName = document.cookie.split('username=')[1].split(';')[0];
-  return userName;
+  if(document.cookie){
+    const userName = document.cookie.split('username=')[1].split(';')[0];
+    return userName;
+  }
+  return null;
 }
 
 // 유저 토큰 가져오기
 const getToken = () => {
-  const token = document.cookie.split('=')[1].split(';')[0];
-  return token;
+  if(document.cookie){
+    const token = document.cookie.split('=')[1].split(';')[0];
+    return token;
+  }
+  return null;
 }
 
 const setCookie = (name, value, exp = 5) => {
