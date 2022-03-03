@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { history } from '../redux/configureStore';
 import { utilAPI } from '../shared/api';
+import axios from 'axios';
 
 const Survey = (props) => {
     //[a,aSet] 만들어서 답변하나 선택했을때
