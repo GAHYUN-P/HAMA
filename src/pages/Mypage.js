@@ -9,11 +9,15 @@ const Mypage = (props) => {
         dispatch(utilActions.getBanner());
     }, []);
 
-    const banner_info = useSelector((state) => state.post.list);
+    const nickname = useSelector((state) => state.util.list.nickname);
+    const email = useSelector((state) => state.util.list.email);
+    const hippoName = useSelector((state) => state.util.list.hippoName);
+    const point = useSelector((state) => state.util.list.point);
+    const hippolv = useSelector((state) => state.util.list.hippolv);
 
   return (
     <div>
-      <div>mypage 헤더</div>
+      <div>{nickname} | {email} | {hippoName} | {point} | {hippolv}</div>
       <div>업적</div>
       <div>내가쓴글</div>
     </div>
