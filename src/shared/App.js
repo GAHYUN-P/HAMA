@@ -46,7 +46,7 @@ function App() {
           <Route path="/result" exact component={SurveyResult} />
           <Route path="/mypage" exact component={Mypage} />
 
-          <Route component={NotFound} />
+          <Route path="*" exact component={NotFound} />
         </Switch>
       </AppLayout>
     </ConnectedRouter>

@@ -96,4 +96,8 @@ export const utilAPI = {
   getAchievement: function () {
     return axios.get(`/api/achievement`);
   },
+  getBannerInfo: function () {
+    return axios.get(`/api/mybanner`, config);
+  },
+  
 };
