@@ -6,14 +6,55 @@ import { postAPI, requestAPI } from '../../shared/api';
 
 export const initialState = {
     list: [],
+    request:{
+        requestWriter: 'requester',
+        title : '이러쿵 저러쿵 해주시라예',
+        content : '죠로쿵 요로콤 해주심 됨더',
+        modifiedAt : '2020-02-03T10:10:10',
+        answerCount : 0,
+        userId : 0,
+        answerLikeCount: 0,
+        level: '중',
+        category: '기타',
+        fileList: [],
+    },
+    likeUserIdList:[1,2,3,4,5],
+    answers: [{
+        answerId: 0,
+        answerWritter: 'responser',
+        title:'responsetitle',
+        modifiedAt:'2020-02-03T20:20:20',
+        answerLikeCount: 1,
+        commentCount: 1,
+    },]
 };
 
 const setList = createAction('post/SETLIST');
+const setRequest = createAction('post/setRequest');
+const setAnswer = createAction('post/setAnswer');
+const setLike = createAction('post/setLike');
+const test = createAction('post/test');
 // const tag = createAction('post/TAG');
 
 const post = createReducer(initialState, {
     [setList] : (state, action) => {
         state.list = action.payload;
+    },
+    [setRequest] : (state, action) => {
+        state.request = action.payload.request;
+        state.likeUserIdList = action.payload.like;
+        state.answers = action.payload.answer;
+    },
+    [setAnswer] : (state, action) => {
+        state.answers = action.payload;
+    },
+    [setLike] : (state, action) => {
+        state.likeUserIdList = action.payload;
+    },
+    [test] : (state, action) => {
+        console.log(action.payload.request);
+        console.log(action.payload.like);
+        console.log(action.payload.answer);
     },
 });
 
@@ -22,10 +63,27 @@ const post = createReducer(initialState, {
 const makeRequest = (data) => async (dispatch, getState, {history}) => {
     try{
         const res = await requestAPI.makeRequest(data);
-        // window.alert('요청작성 완료!')
+        
     } catch (error) {
         console.log(error);
         alert(error.response.data.errorMessage);
+    }
+}
+
+const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
+    try{
+        const request = await requestAPI.getOneRequestDB(postId);
+        const answers = await requestAPI.getRequestAnswers(postId);
+        
+        const data = {
+            request: request.data,
+            like: request.data.likeUserIdList,
+            answer: answers.data
+        }
+
+        dispatch(setRequest(data));
+    }catch(error){
+        window.alert('오류가 발생했습니다. 콘솔의 네트워크를 확인해주세요.')
     }
 }
 
@@ -46,6 +104,7 @@ export const postActions = {
     setList,
     getPostList,
     makeRequest,
+    getOneRequest
 };
 
 export default post;

@@ -80,6 +80,15 @@ export const postAPI = {
 export const requestAPI = {
   makeRequest: function(data) {
     return axios.post('/api/post',data,config)
+  },
+  getOneRequestDB: function(postId){
+    return axios.get(`/api/post/${postId}`)
+  },
+  getRequestAnswers: function(postId){
+    return axios.get(`/api/answer/${postId}`)
+  },
+  getRequestLiker: function(postId){
+    return axios.get(`/api/like/${postId}`)
   }
 }
 
