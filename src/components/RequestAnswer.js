@@ -5,7 +5,7 @@ import AnswerCard from './AnswerCard';
 
 const RequestAnswer = (props) => {
     const standard = ['전체글', '조회수', '댓글순', '좋아요순']
-    const answerList = [1]
+    const answerList = props.answers;
 
     return (
         <React.Fragment>
