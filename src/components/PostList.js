@@ -6,13 +6,14 @@ import { postActions } from '../redux/modules/post';
 import { postAPI } from '../shared/api';
 
 const PostList = (props) => {
+    // post 모듈에 처음에 전체 데이터 넣어주는 thunk 함수 만들어준담에
+    // 아예 여기서 thunk써서 이니셜 데이터 쑤셔넣어 useEffect써
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // React.useEffect(() => {
-    //     const totalList = postAPI.getPostList();
-    //     dispatch(postActions.setList(totalList.data));
-    // }, []);
+    React.useEffect(() => {
+        dispatch(postActions.getPostList());
+    }, []);
 
     // postlist 리덕스로부터 가져오기
     const post_list = useSelector((state) => state.post.list);

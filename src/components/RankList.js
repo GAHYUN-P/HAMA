@@ -20,8 +20,14 @@ const RankList = (props) => {
     // console.log(rankList);
     // console.log(rankList[0].rank);
 
+    const updateRank = () => {
+        dispatch(rankActions.getRankList());
+        console.log('업뎃됨!');
+    }
+
     return (
     <div>
+        <button onClick={updateRank}>refresh</button>
         {rankList.map((info, idx) => {
           return (
             <Rank

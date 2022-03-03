@@ -30,9 +30,22 @@ const makeRequest = (title,content,category,level) => async (dispatch, getState,
     }
 }
 
+const getPostList = () => async (dispatch, getState, { history }) => {
+    try {
+      const res = await postAPI.getPostList();
+      console.log(res.data);
+      dispatch(setList(res.data));
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
 export const postActions = {
     setList,
-    // getPostList,
+    getPostList,
     makeRequest,
 };
 
