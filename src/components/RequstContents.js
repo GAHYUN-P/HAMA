@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const RequestContents = (props) => {
     const { category, title, level, content, fileList  } = props;
-    console.log('중복체크');
 
     return(
         <React.Fragment>
@@ -28,7 +27,7 @@ const RequestContents = (props) => {
                     <div style={{width:'100%',whiteSpace:'nowrap', overflowX:'scroll'}} >
                         {fileList.map((f,i)=>{
                             const type = f.split('.')[5]
-                            console.log(type);
+                            
                             if(type === 'jpg'){
                                 return <div key={i} style={{display:'inline-block', width:'100px'}} >이미지</div>
                             }

@@ -1,12 +1,20 @@
 import axios from 'axios';
+import { getToken } from './cookie';
 
 //axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://15.164.219.84';
 
 const token = document.cookie.split('=')[1];
+
 const config = {
   headers:{
-      'token':token
+      'token':getToken()
+  }
+}
+
+const postingconfig = {
+  headers:{
+    'token': getToken()
   }
 }
 
@@ -87,9 +95,13 @@ export const requestAPI = {
   getRequestAnswers: function(postId){
     return axios.get(`/api/answer/${postId}`)
   },
-  getRequestLiker: function(postId){
-    return axios.get(`/api/like/${postId}`)
+  pushLike: function(postId){
+    return axios.post(`/api/post/like/${postId}`)
   }
+}
+
+export const answerAPI = {
+
 }
 
 export const utilAPI = {

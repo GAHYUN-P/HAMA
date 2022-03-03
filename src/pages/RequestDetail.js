@@ -9,12 +9,14 @@ import RequestAnswer from "../components/RequestAnswer";
 
 const RequestDetail = (props) => {
     const dispatch =useDispatch();
+    const postId = props.match.params.postId;
+
     const request = useSelector(state => state.post.request);
     const like = useSelector(state => state.post.likeUserIdList);
     const answers = useSelector(state => state.post.answers);
 
     React.useEffect(()=>{
-        dispatch(postActions.getOneRequest(1));
+        dispatch(postActions.getOneRequest(postId));
     },[])
 
     return (

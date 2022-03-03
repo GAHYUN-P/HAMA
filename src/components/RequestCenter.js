@@ -1,24 +1,28 @@
 import React from 'react';
 import axios from 'axios';
 
+import { useDispatch } from 'react-redux';
+import { postActions } from '../redux/modules/post';
+
 import { getUserId, getUserName, getToken } from '../shared/cookie';
 
 const RequestCenter = (props) => {
-    const token = getToken();
+    const dispatch = useDispatch();
 
     const pushlike = () => {
-        const config = {
-            headers:{
-                'token':token
-            }
-        }
-        axios.post(`/api/post/like/${props.request.postId}`,config)
-        .then(()=>{
-            window.alert('좋아요 성공');
-        })
-        .catch(err => {
-            console.log('error',err);
-        })
+        // const config = {
+        //     headers:{
+        //         'token':token
+        //     }
+        // }
+        // axios.post(`/api/post/like/${props.request.postId}`,config)
+        // .then(()=>{
+        //     window.alert('좋아요 성공');
+        // })
+        // .catch(err => {
+        //     console.log('error',err);
+        // })
+        dispatch(postActions.pushLikeDB(props.request.postId));
     }
 
     return (

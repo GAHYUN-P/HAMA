@@ -2,7 +2,7 @@ import { createReducer, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { deleteCookie, setCookie } from '../../shared/cookie';
 import { postAPI, requestAPI } from '../../shared/api';
-
+import { getUserId } from '../../shared/cookie';
 
 export const initialState = {
     list: [],
@@ -33,7 +33,8 @@ const setList = createAction('post/SETLIST');
 const setRequest = createAction('post/setRequest');
 const setAnswer = createAction('post/setAnswer');
 const setLike = createAction('post/setLike');
-const test = createAction('post/test');
+const pushLike = createAction('post/pushLike');
+
 // const tag = createAction('post/TAG');
 
 const post = createReducer(initialState, {
@@ -51,10 +52,13 @@ const post = createReducer(initialState, {
     [setLike] : (state, action) => {
         state.likeUserIdList = action.payload;
     },
-    [test] : (state, action) => {
-        console.log(action.payload.request);
-        console.log(action.payload.like);
-        console.log(action.payload.answer);
+    [pushLike] : (state, action) => {
+        console.log(state.likeUserIdList.includes(Number(action.payload)))
+        if(state.likeUserIdList.includes(Number(action.payload))){
+            state.likeUserIdList = state.likeUserIdList.filter(s => Number(s) !== Number(action.payload));
+        }else{
+            state.likeUserIdList = [...state.likeUserIdList,Number(action.payload)];
+        }
     },
 });
 
@@ -75,6 +79,8 @@ const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
         const request = await requestAPI.getOneRequestDB(postId);
         const answers = await requestAPI.getRequestAnswers(postId);
         
+        console.log(request.data.likeUserIdList);
+
         const data = {
             request: request.data,
             like: request.data.likeUserIdList,
@@ -90,7 +96,7 @@ const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
 const getPostList = () => async (dispatch, getState, { history }) => {
     try {
       const res = await postAPI.getPostList();
-      console.log(res.data);
+    //   console.log(res.data);
       dispatch(setList(res.data));
     }
     catch (error) {
@@ -98,13 +104,22 @@ const getPostList = () => async (dispatch, getState, { history }) => {
     }
   };
 
+const pushLikeDB = (postId) => async (dispatch, getState, {history}) => {
+    try{
+        const _like = await requestAPI.pushLike(postId);
+        const userId = getUserId();
+        dispatch(pushLike(userId));
+    }catch(error){
 
+    }
+}
 
 export const postActions = {
     setList,
     getPostList,
     makeRequest,
-    getOneRequest
+    getOneRequest,
+    pushLikeDB
 };
 
 export default post;
