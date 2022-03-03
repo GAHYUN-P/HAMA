@@ -44,7 +44,7 @@ export const userAPI = {
   },
   getAllUserList: function (data) {
     return axios.get(`/api/user`);
-  }
+  },
 };
 
 export const chatAPI = {
@@ -97,12 +97,16 @@ export const utilAPI = {
     return axios.get(`/api/rank`);
   },
   submitSurvey: function (data) {
-    return axios.post(`/api/survey`, data);
+    return axios.post(`/api/survey`, data, config);
   },
   getSurveyResult: function () {
-    return axios.get(`/api/survey`);
+    return axios.get(`/api/survey`, config);
   },
   getAchievement: function () {
     return axios.get(`/api/achievement`);
   },
+  getBannerInfo: function () {
+    return axios.get(`/api/mybanner`, config);
+  },
+  
 };
