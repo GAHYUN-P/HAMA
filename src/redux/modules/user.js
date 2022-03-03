@@ -30,7 +30,6 @@ const user = createReducer(initialState, {
     // 로그인시 쿠키에 저장한 정보 삭제
     deleteCookie('access-token');
     deleteCookie('username');
-    deleteCookie('email');
     deleteCookie('userId');
 
     // 헤더에서 토큰삭제
@@ -99,10 +98,14 @@ const fetchLogin = (data) => async (dispatch, getState, { history }) => {
     const res = await userAPI.login(data);
     console.log(res);
 
-    const token = res.data;
+    const token = res.data.token;
+    const username = res.data.nickname;
+    const userId = res.data.userId;
 
     // 쿠키에 정보 저장
     setCookie('access-token', token);
+    setCookie('username', username);
+    setCookie('userId', userId);
 
     // 헤더에 토큰 저장
     axios.defaults.headers.common['token'] = `${token}`;
