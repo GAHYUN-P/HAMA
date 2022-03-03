@@ -84,7 +84,7 @@ export const utilAPI = {
   submitSurvey: function (data) {
     return axios.post(`/api/survey`, data);
   },
-  getSurveyList: function () {
+  getSurveyResult: function () {
     return axios.get(`/api/survey`);
   },
   getAchievement: function () {

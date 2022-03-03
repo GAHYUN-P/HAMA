@@ -22,6 +22,8 @@ import Home from '../pages/Home';
 import PasswordFind from '../pages/PasswordFind';
 import UserInfo from '../pages/UserInfo';
 import Rank from '../components/Rank';
+import Survey from '../pages/Survey';
+import SurveyResult from '../pages/SurveyResult';
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
           <Route path="/requestdetail/:postId" exact component={RequestDetail} />
           <Route path="/test" exact component={Rank} />
           <Route path="/home" exact component={Home} />
+          <Route path="/survey" exact component={Survey} />
+          <Route path="/result" exact component={SurveyResult} />
 
           <Route component={NotFound} />
         </Switch>
