@@ -1,9 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
+import { getUserId, getUserName, getToken } from '../shared/cookie';
+
 const RequestCenter = (props) => {
+    const token = getToken();
+
     const pushlike = () => {
-        const token = document.cookie.split('=')[1];
         const config = {
             headers:{
                 'token':token

@@ -7,6 +7,24 @@ const getCookie = (name) => {
   }
 };
 
+// 유저 고유 아이디 가져오기
+const getUserId = () => {
+  const userId = document.cookie.split('userId=')[1];
+  return userId;
+}
+
+// 유저 닉네임 가져오기
+const getUserName = () => {
+  const userName = document.cookie.split('username=')[1].split(';')[0];
+  return userName;
+}
+
+// 유저 토큰 가져오기
+const getToken = () => {
+  const token = document.cookie.split('=')[1].split(';')[0];
+  return token;
+}
+
 const setCookie = (name, value, exp = 5) => {
   let date = new Date();
   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
@@ -19,4 +37,4 @@ const deleteCookie = (name) => {
   document.cookie = `${name}=; expires=${date}`;
 };
 
-export { getCookie, setCookie, deleteCookie };
+export { getCookie, setCookie, deleteCookie, getUserId, getUserName, getToken };
