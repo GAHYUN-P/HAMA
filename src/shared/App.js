@@ -14,6 +14,7 @@ import Chatting from '../pages/Chatting';
 import Signup from '../pages/Signup';
 import Answer from '../pages/Answer';
 import Request from '../pages/Request';
+import RequestDetail from '../pages/RequestDetail';
 
 // component
 import AppLayout from '../components/AppLayout';
@@ -35,6 +36,7 @@ function App() {
           <Route path="/findPassword" exact component={PasswordFind} />
           <Route path="/answer" exact component={Answer} />
           <Route path="/request" exact component={Request} />
+          <Route path="/requestdetail/:postId" exact component={RequestDetail} />
           <Route path="/test" exact component={Rank} />
           <Route path="/home" exact component={Home} />
 
