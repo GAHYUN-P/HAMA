@@ -46,19 +46,22 @@ const Request = (props) => {
             category: category,
             level: level
         }
-        const config = {
-            headers:{
-                'token':token
-            }
-        }
 
-        axios.post('/api/post',data,config)
-        .then(res => {
-            window.alert('성공')
-        })
-        .catch(err => {
-            window.alert('error')
-        })
+        dispatch(postActions.makeRequest(data));
+
+        // const config = {
+        //     headers:{
+        //         'token':token
+        //     }
+        // }
+
+        // axios.post('/api/post',data,config)
+        // .then(res => {
+        //     window.alert('성공')
+        // })
+        // .catch(err => {
+        //     window.alert('error')
+        // })
     }
 
     console.log(token);
