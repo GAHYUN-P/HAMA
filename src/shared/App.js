@@ -24,6 +24,7 @@ import UserInfo from '../pages/UserInfo';
 import Rank from '../components/Rank';
 import Survey from '../pages/Survey';
 import SurveyResult from '../pages/SurveyResult';
+import Mypage from '../pages/Mypage';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/home" exact component={Home} />
           <Route path="/survey" exact component={Survey} />
           <Route path="/result" exact component={SurveyResult} />
+          <Route path="/mypage" exact component={Mypage} />
 
           <Route component={NotFound} />
         </Switch>
