@@ -11,6 +11,10 @@ const PostList = (props) => {
 
     const dispatch = useDispatch();
 
+    React.useEffect(() => {
+        dispatch(postActions.getPostList());
+    }, []);
+
     // postlist 리덕스로부터 가져오기
     const post_list = useSelector((state) => state.post.list);
     console.log(post_list);
