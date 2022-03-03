@@ -100,9 +100,13 @@ const fetchLogin = (data) => async (dispatch, getState, { history }) => {
     console.log(res);
 
     const token = res.data;
+    const username = res.data.username;
+    const userId = res.data.userid;
 
     // 쿠키에 정보 저장
     setCookie('access-token', token);
+    setCookie('username', username);
+    setCookie('userId', userId);
 
     // 헤더에 토큰 저장
     axios.defaults.headers.common['token'] = `${token}`;
