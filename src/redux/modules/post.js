@@ -19,9 +19,8 @@ const post = createReducer(initialState, {
 
 // thunk
 
-const makeRequest = (title,content,category,level) => async (dispatch, getState, {history}) => {
+const makeRequest = (data) => async (dispatch, getState, {history}) => {
     try{
-        const data = {title:title, content: content, category: category, level:level}
         const res = await requestAPI.makeRequest(data);
         // window.alert('요청작성 완료!')
     } catch (error) {

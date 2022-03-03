@@ -3,6 +3,12 @@ import axios from 'axios';
 //axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://15.164.219.84';
 
+const token = document.cookie.split('=')[1];
+const config = {
+  headers:{
+      'token':token
+  }
+}
 
 /* const openApi = axios.create();
 openApi.defaults.withCredentials=false;
@@ -73,7 +79,7 @@ export const postAPI = {
 
 export const requestAPI = {
   makeRequest: function(data) {
-    return axios.post('/api/post',data)
+    return axios.post('/api/post',data,config)
   }
 }
 
