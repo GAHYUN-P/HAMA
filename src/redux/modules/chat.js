@@ -13,6 +13,7 @@ export const initialState = {
     roomId: null,
     roomName: null,
     category: null,
+    latestMessage: "",
   },
   // 현재 접속 채팅 메시지
   messages: [],

@@ -30,12 +30,13 @@ import NoRoom from './NoRoom';
 // 채팅 방 컴포넌트
 const ChattingRoom = (props) => {
   // 소켓 통신 객체
-  const sock = new SockJS('http://52.79.54.15/chatting');
+  const sock = new SockJS('http://15.164.219.84/chatting');
   const ws = Stomp.over(sock);
 
   // 방 제목 가져오기
   const { roomName, category } = useSelector((state) => state.chat.currentChat);
   const roomId = useSelector((state) => state.chat.currentChat.roomId);
+  console.log(roomId);
 
   // 토큰
   const token = getCookie('access-token');
@@ -49,6 +50,7 @@ const ChattingRoom = (props) => {
     sender = getCookie('username');
   }
 
+  
   // 렌더링 될 때마다 연결,구독 다른 방으로 옮길 때 연결, 구독 해제
   React.useEffect(() => {
     wsConnectSubscribe();
@@ -158,9 +160,10 @@ const ChattingRoom = (props) => {
     );
   }
 
+  
+
   return (
     <Container>
-      <ChatList prevRoomId={roomId} />
       {!roomId && <NoRoom />}
       {roomId && (
         <ChatWrap>

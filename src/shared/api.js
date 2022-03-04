@@ -72,14 +72,17 @@ export const chatAPI = {
     return axios.post(`/api/chat/invite`, data);
   },
   getChatList: function () {
-    return axios.get(`/api/chat/rooms`);
+    return axios.get(`/api/chat/rooms`, config);
   },
   getChatMessages: function (roomId) {
-    return axios.get(`/api/chat/rooms/${roomId}/messages`);
+    return axios.get(`/api/chat/rooms/${roomId}/messages`, config);
   },
   selectCategory: function (category) {
     return axios.get(`/api/chat/rooms/search/${category}`);
-  }
+  },
+  connectChat: function (roomId) {
+    return axios.post(`/api/chat/rooms/${roomId}`, config);
+  },
 };
 
 export const postAPI = {
@@ -143,5 +146,10 @@ export const utilAPI = {
   getBannerInfo: function () {
     return axios.get(`/api/mybanner`, config);
   },
-  
+  getMypostList: function () {
+    return axios.get(`/api/mypost`, config);
+  },
+  getMyanswerList: function () {
+    return axios.get(`/api/myanswer`, config);
+  },
 };

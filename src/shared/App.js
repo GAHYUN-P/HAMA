@@ -26,6 +26,7 @@ import Rank from '../components/Rank';
 import Survey from '../pages/Survey';
 import SurveyResult from '../pages/SurveyResult';
 import Mypage from '../pages/Mypage';
+import ChatList from '../components/ChatList';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" exact component={Login} />
           <Route path="/login/kakao" exact component={Login} />
           <Route path="/chat" exact component={Chatting} />
+          <Route path="/chatlist" exact component={ChatList} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/userInfo" exact component={UserInfo} />
           <Route path="/findPassword" exact component={PasswordFind} />
