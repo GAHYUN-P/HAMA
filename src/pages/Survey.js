@@ -19,10 +19,10 @@ const Survey = (props) => {
       console.log(a);
       qSet(q+1);
       console.log(q);
-      if(q === 8) {
-        const res = await utilAPI.submitSurvey({result: a});
+      if(q === 9) {
+        const res = await utilAPI.submitSurvey({num: a});
         console.log(res);
-        // history.push('/result');
+        history.push('/result');
       }
     }
 
@@ -95,10 +95,20 @@ const Survey = (props) => {
       </div>
     );
   }
+
+  if(q===8) {
+    return (
+      <div>
+        <div>질문8</div>
+        <button onClick={(e) => { onClickHandler(e) }} value = '0'>응답1</button>
+        <button onClick={(e) => { onClickHandler(e) }} value = '1'>응답2</button>
+      </div>
+    );
+  }
   
   return (
     <div>
-      <div>질문8</div>
+      <div>질문9</div>
       <button onClick={(e) => { onClickHandler(e) }} value = '0'>응답1</button>
       <button onClick={(e) => { onClickHandler(e) }} value = '1'>응답2</button>
     </div>
