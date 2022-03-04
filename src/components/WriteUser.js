@@ -1,6 +1,7 @@
 import React from 'react';
 
 const WriteUser = (props) => {
+    console.log(props);
 
     return(
         <React.Fragment>
@@ -12,10 +13,10 @@ const WriteUser = (props) => {
                 
                 <div style={{display:'inline-block'}} >
                     <div>
-                        유저닉네임
+                        {props.answerWriter}
                     </div>
                     <div>
-                        날짜 시간
+                        {props.modifiedAt}
                     </div>
                 </div>
 

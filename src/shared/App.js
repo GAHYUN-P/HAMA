@@ -13,6 +13,7 @@ import NotFound from '../pages/NotFound';
 import Chatting from '../pages/Chatting';
 import Signup from '../pages/Signup';
 import Answer from '../pages/Answer';
+import AnswerDetail from '../pages/AnswerDetail';
 import Request from '../pages/Request';
 import RequestDetail from '../pages/RequestDetail';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/userInfo" exact component={UserInfo} />
           <Route path="/findPassword" exact component={PasswordFind} />
           <Route path="/answer" exact component={Answer} />
+          <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
           <Route path="/request" exact component={Request} />
           <Route path="/requestdetail/:postId" exact component={RequestDetail} />
           <Route path="/test" exact component={Rank} />

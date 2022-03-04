@@ -13,6 +13,7 @@ import image from './modules/image';
 import Rank from './modules/rank';
 import Point from './modules/point';
 import Post from './modules/post';
+import Answer from './modules/answer';
 
 
 export const history = createBrowserHistory();
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   point: Point,
   rank: Rank,
   post: Post,
+  answer: Answer,
   router: connectRouter(history)
 });
 
