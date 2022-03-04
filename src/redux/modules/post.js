@@ -78,15 +78,13 @@ const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
     try{
         const request = await requestAPI.getOneRequestDB(postId);
         const answers = await requestAPI.getRequestAnswers(postId);
-        
-        console.log(request.data.likeUserIdList);
 
         const data = {
             request: request.data,
             like: request.data.likeUserIdList,
             answer: answers.data
         }
-
+        
         dispatch(setRequest(data));
     }catch(error){
         window.alert('오류가 발생했습니다. 콘솔의 네트워크를 확인해주세요.')

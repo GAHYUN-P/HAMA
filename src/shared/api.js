@@ -2,19 +2,25 @@ import axios from 'axios';
 import { getToken } from './cookie';
 
 //axios.defaults.withCredentials = true;
+
+// 민기님 서버
 axios.defaults.baseURL = 'http://15.164.219.84';
+
+// 규진님 서버
+// axios.defaults.baseURL = 'http://dean900404.shop/';
+
 
 const token = document.cookie.split('=')[1];
 
 const config = {
   headers:{
-      'token':getToken()
+      'token':getToken(),
   }
 }
 
 const postingconfig = {
   headers:{
-    'token': getToken()
+    'token': getToken(),
   }
 }
 
@@ -101,7 +107,24 @@ export const requestAPI = {
 }
 
 export const answerAPI = {
-
+  getAnswer: function (answerId) {
+    return axios.get(`/api/answer/detail/${answerId}`)
+  },
+  getComment: function (answerId) {
+    return axios.get(`/api/answer/${answerId}`)
+  },
+  addComment: function(answerId,comment) {
+    return axios.post(`/api/comment/${answerId}`,{comment: comment},config)
+  },
+  editComment: function(commentId,comment) {
+    return axios.put(`/api/comment/${commentId}`,{comment: comment},config)
+  },
+  removeComment: function(commentId) {
+    return axios.delete(`/api/comment/${commentId}`,config)
+  },
+  pushLike: function(answerId) {
+    return axios.post(`/api/answer/like/${answerId}`,config)
+  }
 }
 
 export const utilAPI = {
