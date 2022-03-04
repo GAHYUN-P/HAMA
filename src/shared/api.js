@@ -138,7 +138,7 @@ export const utilAPI = {
     return axios.get(`/api/survey`, config);
   },
   getAchievement: function () {
-    return axios.get(`/api/achievement`);
+    return axios.get(`/api/achievement`, config);
   },
   getBannerInfo: function () {
     return axios.get(`/api/mybanner`, config);
