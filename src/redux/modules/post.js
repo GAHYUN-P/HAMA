@@ -26,7 +26,8 @@ export const initialState = {
         modifiedAt:'2020-02-03T20:20:20',
         answerLikeCount: 1,
         commentCount: 1,
-    },]
+    },],
+
 };
 
 const setList = createAction('post/SETLIST');
@@ -34,8 +35,7 @@ const setRequest = createAction('post/setRequest');
 const setAnswer = createAction('post/setAnswer');
 const setLike = createAction('post/setLike');
 const pushLike = createAction('post/pushLike');
-
-// const tag = createAction('post/TAG');
+const setTag = createAction('post/TAG');
 
 const post = createReducer(initialState, {
     [setList] : (state, action) => {
@@ -59,6 +59,9 @@ const post = createReducer(initialState, {
         }else{
             state.likeUserIdList = [...state.likeUserIdList,Number(action.payload)];
         }
+    },
+    [setTag] : (state, action) => {
+        state.likeUserIdList = action.payload;
     },
 });
 

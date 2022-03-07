@@ -61,7 +61,7 @@ const Login = ({ history, match }) => {
       {!username && (
         <Wrapper is_column>
           <Title>로그인</Title>
-          <Wrapper margin="0.5rem 0">
+          {/* <Wrapper margin="0.5rem 0">
             <Input
               _onChange={onChangeEmail}
               placeholder="이메일을 입력해주세요"
@@ -82,7 +82,7 @@ const Login = ({ history, match }) => {
           </Wrapper>
           <Wrapper margin="0.5rem 0">
             <ErrorMsg valid={loginError}>{loginError}</ErrorMsg>
-          </Wrapper>
+          </Wrapper> */}
           <Wrapper>
             <KaKaoLogin
               //styled component 통해 style을 입혀 줄 예정
@@ -98,14 +98,14 @@ const Login = ({ history, match }) => {
             ></KaKaoLogin>
           </Wrapper>
 
-          <Wrapper margin="0.5rem 0">
+          {/* <Wrapper margin="0.5rem 0">
             <Button disabled={!email || !password} _onClick={onLogin}>
               로그인
             </Button>
           </Wrapper>
           <Wrapper>
             <Button _onClick={() => history.push('/signup')}>회원가입</Button>
-          </Wrapper>
+          </Wrapper> */}
         </Wrapper>
       )}
     </Container>

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PostEach from './PostEach';
 import { postActions } from '../redux/modules/post';
 import { postAPI } from '../shared/api';
+import { push } from 'connected-react-router';
 
 const PostList = (props) => {
     // 트러블 슈팅: 카테고리 누르면 나오는데 안누르고 딱 로딩됐을때
@@ -22,8 +23,15 @@ const PostList = (props) => {
     const post_list = useSelector((state) => state.post.list);
     console.log(post_list);
 
+    const selectTag = (e) => {
+
+    }
+
     return (
         <div>
+            <button onClick={(e) => { selectTag(e) }} value='latest'>최신순</button>
+            <button onClick={(e) => { selectTag(e) }} value='time'>잔여시간</button>
+            <button onClick={(e) => { selectTag(e) }} value='like'>좋아요순</button>
             {post_list.map((info, idx) => {
                 return (
                 <PostEach

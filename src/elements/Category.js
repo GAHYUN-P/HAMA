@@ -9,8 +9,15 @@ const Category = (props) => {
     // onclick에서 밸류를 받아와서 api콜 (밸류) 넣어서 해주고
     // state에 넣어주기
 
+
+    // 태그를 모듈화하기
+    // state에 잘 담아가지고 그거 데이터 보내주기
+    // 그 데이터를 ?
+    // 아니다 여기서 그냥 useState 두번하자
+    // 아니면 태그만 모듈화 그리고 sort는 그냥 여기서?
     const dispatch = useDispatch();
     const [tag, setTag] = React.useState();
+    const [sort, setSort] = React.useState();
 
     React.useEffect(() => {
         setTag('all');
