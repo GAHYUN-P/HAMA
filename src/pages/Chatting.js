@@ -18,6 +18,7 @@ const Chatting = (props) => {
 
   const dispatch = useDispatch();
   React.useEffect(() => {
+    console.log('chatting compo');
     dispatch(chatActions.getChatList());
   }, []);
 

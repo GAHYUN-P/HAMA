@@ -20,7 +20,7 @@ const Survey = (props) => {
       qSet(q+1);
       console.log(q);
       if(q === 9) {
-        const res = await utilAPI.submitSurvey({num: a});
+        const res = await utilAPI.submitSurvey({result: a});
         console.log(res);
         history.push('/result');
       }
