@@ -67,7 +67,7 @@ const MessageList = (props) => {
   return (
     <Container className="scroll" id="messagelist">
       {messages.map((m, idx) => {
-        return <Message key={idx} messageInfo={m} is_me={true} />;
+        return <Message key={idx} messageInfo={m} is_me= {true}/>;
       })}
 
       <div ref={messageEndRef}></div>

@@ -23,7 +23,7 @@ export const initialState = {
   // 메시지 총 페이지
   messageTotalPage: null,
   // 메시지 로딩
-  loading: false,
+  loading: true,
   // 사용자가 설정한 카테고리(채팅방 생성시)
   selectedCategory: [],
 };

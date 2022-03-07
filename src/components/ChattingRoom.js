@@ -36,7 +36,7 @@ const ChattingRoom = (props) => {
   // 방 제목 가져오기
   const { roomName, category } = useSelector((state) => state.chat.currentChat);
   const roomId = useSelector((state) => state.chat.currentChat.roomId);
-  console.log(roomId);
+  console.log(roomId + '룸ID');
 
   // 토큰
   const token = getCookie('access-token');
@@ -164,7 +164,7 @@ const ChattingRoom = (props) => {
 
   return (
     <Container>
-      {!roomId && <NoRoom />}
+      {roomId && <NoRoom />}
       {roomId && (
         <ChatWrap>
           <ChatName roomName={roomName} category={category} />

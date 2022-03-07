@@ -1,7 +1,8 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { deleteCookie, setCookie } from '../../shared/cookie';
+import { deleteCookie, getCookie, setCookie } from '../../shared/cookie';
 import { userAPI } from '../../shared/api';
+import { getUserId } from '../../shared/cookie';
 
 export const initialState = {
   userInfo: null, // user정보 - id, username, email, profile
@@ -95,6 +96,7 @@ const emailCheck = (email) => async (dispatch, getState, { history }) => {
 // 일반 로그인
 const fetchLogin = (data) => async (dispatch, getState, { history }) => {
   try {
+    
     const res = await userAPI.login(data);
     console.log(res);
 
@@ -111,7 +113,9 @@ const fetchLogin = (data) => async (dispatch, getState, { history }) => {
     axios.defaults.headers.common['token'] = `${token}`;
 
     // 로그인 성공시 home으로 이동
-    history.push('/home');
+    // history.push('/home');
+    
+    dispatch(fetchUserProfile(1));
 
   } catch (error) {
     console.error(error);
@@ -137,8 +141,9 @@ const loginByKakao = (data) => async (dispatch, getState, { history }) => {
     // 헤더에 토큰 저장
     axios.defaults.headers.common['token'] = `${token}`;
 
-    // // 토큰으로 유저정보 받아옴
-    // dispatch(fetchUserProfile(1));
+    // 토큰으로 유저정보 받아옴
+    dispatch(fetchUserProfile(1));
+
   } catch (error) {
     console.error(error);
     dispatch(setLoginError(error.response.data.errorMessage));
@@ -187,6 +192,27 @@ const updateUserProfile = (userId, data) => async (
   }
 };
 
+// 토큰으로 user 정보 가져옴
+const fetchUserProfile = (type = 0) => async (
+  dispatch,
+  getState,
+  { history }
+) => {
+  try {
+    const userId = getUserId();
+    console.log(userId);
+    dispatch(login(userId));
+    // 헤더에 토큰으로 유저정보 가져오는 로직
+    // 로그인 유지와 로그인에서 사용
+
+    // 첫 로그인시에 페이지이동 하기 위해 type으로 분기, type=0은 로그인 유지이므로 페이지이동 x
+    if (type === 1) {
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // 유저 이메일 닉네임 리스트 가져오기
 const getAllUserList = () => async (dispatch, getState, { history }) => {
   try {
@@ -213,7 +239,8 @@ export const userActions = {
   setAuthNumber,
   updatePassword,
   loginByKakao,
-  updateUserProfile
+  updateUserProfile,
+  fetchUserProfile,
 };
 
 export default user;
