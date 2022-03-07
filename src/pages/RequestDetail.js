@@ -35,9 +35,14 @@ const RequestDetail = (props) => {
                 <RequestContents {...request}/>
                 <RequestCenter request={request} like={like} />
                 <RequestAnswer answers = {answers} />
+                <div>
+                    <button
+                    onClick={()=>{history.push(`/answer/${postId}`)}}
+                    style={{border:'none',backgroundColor:'#fff'}} >글쓰기</button>
+                </div>
             </div>
-            <button onClick = {onClickChat}>채팅방</button>
-            {/* <EnterChattingBtn
+            {/* <button onClick = {onClickChat}>채팅방</button>
+            <EnterChattingBtn
              roomId = {roomId}
              /> */}
         </React.Fragment>

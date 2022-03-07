@@ -2,16 +2,31 @@ import React, {useState} from 'react';
 
 import ImageUploader from '../components/ImageUploader';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../redux/modules/post';
+import { imgActions } from '../redux/modules/image';
 
 const RequestEdit = (props) => {
     const dispatch = useDispatch();
+    const requestData = useSelector(state => state.post.request);
     const postId = props.match.params.postId;
-    const [content,setContent] = useState('내용입니다.');
+    const [content,setContent] = useState(requestData.content);
+
+    React.useEffect(()=>{
+        if(Number(postId) !== requestData.postId){
+            dispatch(postActions.getOneRequest(postId));
+            return
+        }
+        setContent(requestData.content);
+        dispatch(imgActions.setEdit(requestData.fileList));
+    },[])
 
     const editing = () => {
-        
+        if(!content){
+            window.alert('내용이 비어있으면 수정할 수 없어요.')
+            return
+        }
+        dispatch(postActions.editRequestDB(postId,content));
     }
 
     return(
@@ -21,6 +36,7 @@ const RequestEdit = (props) => {
         <div style={{width:'90%', margin:'0 auto'}} >
             <div style={{margin:'10px 0'}} >
                 <h3>제목</h3>
+                <p>{requestData.title}</p>
             </div>
             <h3>내용</h3>
             <div style={{width:'100%'}} >
@@ -39,7 +55,7 @@ const RequestEdit = (props) => {
         {/* 이미지 업로드 */}
         <div style={{width:'90%', margin:'0 auto'}} >
             <h3>이미지</h3>
-            <ImageUploader />
+            <ImageUploader is_edit={true} />
         </div>
         {/* 작성버튼 */}
         <div style={{display:'flex', justifyContent:'center', margin:'50px 0 0'}} >

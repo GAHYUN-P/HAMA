@@ -7,6 +7,7 @@ import { getUserId } from '../../shared/cookie';
 export const initialState = {
     list: [],
     request:{
+        postId: 0,
         requestWriter: 'requester',
         title : '이러쿵 저러쿵 해주시라예',
         content : '죠로쿵 요로콤 해주심 됨더',
@@ -90,6 +91,19 @@ const makeRequest = (data) => async (dispatch, getState, {history}) => {
     }
 }
 
+const editRequestDB = (postId,content) => async (dispatch, getState, {history}) => {
+    try{
+
+        const file = getState().image.files;
+        const data = {file:file,content:content};
+        console.log(data);
+        const res = await requestAPI.editRequest(postId,data);
+
+    }catch(error){
+        console.log('error',error);
+    }
+}
+
 const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
     try{
         const request = await requestAPI.getOneRequestDB(postId);
@@ -110,7 +124,6 @@ const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
 const getPostList = () => async (dispatch, getState, { history }) => {
     try {
       const res = await postAPI.getPostList();
-    //   console.log(res.data);
       dispatch(setList(res.data));
     }
     catch (error) {
@@ -133,7 +146,8 @@ export const postActions = {
     getPostList,
     makeRequest,
     getOneRequest,
-    pushLikeDB
+    pushLikeDB,
+    editRequestDB
 };
 
 export default post;

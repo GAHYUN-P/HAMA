@@ -4,13 +4,13 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 민기님 서버
-// axios.defaults.baseURL = 'http://15.164.219.84';
+axios.defaults.baseURL = 'http://3.36.53.246';
 
 // 규진님 서버
 // axios.defaults.baseURL = 'http://dean900404.shop/';
 
 // 재균님 서버
-axios.defaults.baseURL = 'http://13.124.171.147';
+// axios.defaults.baseURL = 'http://13.124.171.147';
 
 
 
@@ -101,16 +101,19 @@ export const postAPI = {
 
 export const requestAPI = {
   makeRequest: function(data) {
-    return axios.post('/api/post',data,config)
+    return axios.post('/api/post',data,config);
   },
   getOneRequestDB: function(postId){
-    return axios.get(`/api/post/${postId}`)
+    return axios.get(`/api/post/${postId}`);
   },
   getRequestAnswers: function(postId){
-    return axios.get(`/api/answer/${postId}`)
+    return axios.get(`/api/answer/${postId}`);
   },
   pushLike: function(postId){
-    return axios.post(`/api/post/like/${postId}`)
+    return axios.post(`/api/post/like/${postId}`);
+  },
+  editRequest: function(postId,data){
+    return axios.put(`/api/post/${postId}`,data);
   }
 }
 
@@ -122,7 +125,7 @@ export const answerAPI = {
     return axios.get(`/api/answer/detail/${answerId}`)
   },
   getComment: function (answerId) {
-    return axios.get(`/api/comment/${answerId}`)
+    return axios.get(`/api/comment/answer/${answerId}`)
   },
   addComment: function(data) {
     return axios.post(`/api/comment/${data.answerId}`,{
