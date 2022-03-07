@@ -1,7 +1,7 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { deleteCookie, setCookie } from '../../shared/cookie';
-import { postAPI, requestAPI } from '../../shared/api';
+import { postAPI, requestAPI, imgAPI } from '../../shared/api';
 import { getUserId } from '../../shared/cookie';
 
 export const initialState = {
@@ -66,6 +66,22 @@ const post = createReducer(initialState, {
 
 const makeRequest = (data) => async (dispatch, getState, {history}) => {
     try{
+        let file = [];
+        const files = getState().image.files;
+        const formdata = new FormData();
+        // files.length > 0 ? (files.map(f=>{return formdata.append('file',f)})) : formdata.append('file',null);
+        if(files.length > 0){
+            files.map(f => {
+                formdata.append('file',f)
+                return f
+            })
+            formdata.append('video',null);
+            const ires = await imgAPI.fileUpload(formdata);
+            file = [...ires.data.file];
+        }
+
+        data = {...data,file:file };
+        console.log(data);
         const res = await requestAPI.makeRequest(data);
         
     } catch (error) {
@@ -78,7 +94,7 @@ const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
     try{
         const request = await requestAPI.getOneRequestDB(postId);
         const answers = await requestAPI.getRequestAnswers(postId);
-
+        console.log(request.data);
         const data = {
             request: request.data,
             like: request.data.likeUserIdList,

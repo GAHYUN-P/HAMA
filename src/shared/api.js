@@ -4,10 +4,14 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 민기님 서버
-axios.defaults.baseURL = 'http://15.164.219.84';
+// axios.defaults.baseURL = 'http://15.164.219.84';
 
 // 규진님 서버
 // axios.defaults.baseURL = 'http://dean900404.shop/';
+
+// 재균님 서버
+axios.defaults.baseURL = 'http://13.124.171.147';
+
 
 
 const token = document.cookie.split('=')[1];
@@ -18,9 +22,10 @@ const config = {
   }
 }
 
-const postingconfig = {
+const uploadconfig = {
   headers:{
     'token': getToken(),
+    'Content-Type': 'multipart/form-data'
   }
 }
 
@@ -107,23 +112,38 @@ export const requestAPI = {
 }
 
 export const answerAPI = {
+  answering: function(data,postId) {
+    return axios.post(`/api/answer/${postId}`,data,config)
+  },
   getAnswer: function (answerId) {
     return axios.get(`/api/answer/detail/${answerId}`)
   },
   getComment: function (answerId) {
-    return axios.get(`/api/answer/${answerId}`)
+    return axios.get(`/api/comment/${answerId}`)
   },
-  addComment: function(answerId,comment) {
-    return axios.post(`/api/comment/${answerId}`,{comment: comment},config)
+  addComment: function(data) {
+    return axios.post(`/api/comment/${data.answerId}`,{
+      comment: data.comment,
+      parentCommentId: data.parentCommentId
+    },config)
   },
   editComment: function(commentId,comment) {
-    return axios.put(`/api/comment/${commentId}`,{comment: comment},config)
+    return axios.put(`/api/comment/${commentId}`,{content: comment},config)
   },
   removeComment: function(commentId) {
     return axios.delete(`/api/comment/${commentId}`,config)
   },
   pushLike: function(answerId) {
     return axios.post(`/api/answer/like/${answerId}`,config)
+  },
+  rating: function(data) {
+    return axios.post(`/api/star/${data.answerId}`,{star:data.star})
+  }
+}
+
+export const imgAPI = {
+  fileUpload: function (data) {
+    return axios.post('/api/upload',data,uploadconfig);
   }
 }
 

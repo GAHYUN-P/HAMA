@@ -1,7 +1,7 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 import { getUserId } from '../../shared/cookie';
 
-import { answerAPI } from '../../shared/api';
+import { answerAPI, imgAPI } from '../../shared/api';
 
 export const initialState = {
     answer: {
@@ -14,12 +14,13 @@ export const initialState = {
         star: 0,
         category:'먹방/음식',
         commentCount: 0,
-        likeUserId: [],
+        likeUserList: [],
         answerLikeCount: 0,
         answerWriter:'라면무쨔',
         fileList:[]
     },
-    comments: [{
+    comments: [
+        {
 
         answerId : 2,
         commentId : 2,
@@ -39,25 +40,122 @@ export const initialState = {
             }
         ]
 
-    },]
+    },
+]
 }
 
 //actions 
 const setAnswer = createAction('answer/setAnswer');
+const deleteComment = createAction('answer/deleteComment');
+const pushLike = createAction('answer/pushLike');
 
 // reducer
 const answer = createReducer(initialState,{
     [setAnswer]: (state,action) => {
         state.answer = action.payload.answer
-        state.comments = action
+        state.comments = action.payload.comment
+    },
+    [deleteComment]: (state,action) => {
+        state.answer = action.payload.answer
+        state.comments = action.payload.comment
+    },
+    [pushLike]: (state,action) => {
+        if(state.answer.likeUserList.includes(action.payload)){
+            state.answer.likeUserList = state.answer.likeUserList.filter(l => {return l !== action.payload})
+        }else{
+            state.answer.likeUserList = [...state.answer.likeUserList,action.payload];
+        }
     }
 })
 
 // middlewares
+const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
+    try{
+        const formdata = new FormData();
 
+        const image = getState().image.files;
+        const video = getState().image.videoFile;
+
+        image ? (image.map(i=>{return formdata.append('file',i)})) : formdata.append('file',null)
+        video ? formdata.append('video',video) : formdata.append('video',null)
+        
+        const urls = await imgAPI.fileUpload(formdata);
+        data = {
+            ...data,
+            file:urls.data.file,
+            video:urls.data.video
+        }
+
+        const res = await answerAPI.answering(data,postId);
+        
+    }catch(error){
+        console.log('error',error);
+    }
+}
+const getOneAnswer = (answerId) => async (dispatch, getState, { history }) => {
+    try{
+        const oneAnswer = await answerAPI.getAnswer(answerId);
+        const comment = await answerAPI.getComment(answerId);
+        const data = {
+            answer: oneAnswer.data,
+            comment: comment.data
+        }
+        // console.log(comment.data)
+        dispatch(setAnswer(data))
+    }catch(error){
+        console.log(error);
+    }
+};
+
+const addCommentDB = (data) => async (dispatch, getState, { history }) => {
+    try{
+        const addedComment = answerAPI.addComment(data);
+    }catch(error){
+        console.log('error',error);
+    }
+};
+
+const deleteCommentDB = (data) => async (dispatch, getState, {history}) => {
+    try{
+        const _delete = answerAPI.removeComment(data.commentId);
+    }catch(error){
+        console.log('error',error);
+    }
+}
+
+const editCommentDB = (data) => async (dispatch, getState, {history}) => {
+    try{
+        const _edit = answerAPI.editComment(data.commentId,data.comment);
+    }catch(error){
+        console.log('error',error);
+    }
+}
+
+const pushLikeDB = (data) => async (dispatch, getState, {history}) => {
+    try{
+        const _like = answerAPI.pushLike(data.answerId);
+        dispatch(pushLike(data.userId));
+    }catch(error){
+        console.log('error',error);
+    }
+}
+
+const starDB = (data) => async (dispatch, getState, {history}) => {
+    try{
+        const _star = answerAPI.rating(data);
+    }catch(error){
+        console.log('error',error);
+    }
+}
 
 export const answerActions = {
-
+    answeringDB,
+    getOneAnswer,
+    addCommentDB,
+    deleteCommentDB,
+    editCommentDB,
+    pushLikeDB,
+    starDB
 }
 
 export default answer;

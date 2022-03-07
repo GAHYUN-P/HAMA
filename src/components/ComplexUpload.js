@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 
 import { imgActions } from "../redux/modules/image";
@@ -7,31 +7,17 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 const ComplexUpload = (props) => {
-    const preview = useSelector(state => state.image.preview);
+    const [preview,setPreview] = useState([]);
     const files = useSelector(state => state.image.files);
     const dispatch = useDispatch();
 
-    const previewmake = (event) => {
+    const previewmake = async (event) => {
         const file = event.target.files[0];
-        const _type = file.type.split('/')[0];
-        console.log(_type);
-        if(_type === 'image'){
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                const pre = reader.result;
-                dispatch(imgActions.setFiles(file));
-                dispatch(imgActions.setPreview(pre));
-            }
+        if(file){
+            
             return
         }
-        if(_type === 'video'){
-            const pre = URL.createObjectURL(file);
-            dispatch(imgActions.setFiles(file));
-            dispatch(imgActions.setPreview(pre));
-            return
-        }
-        window.alert('올바른 형식의 데이터가 아닙니다.')
+        console.log('안들어옴')
     }
 
     return (

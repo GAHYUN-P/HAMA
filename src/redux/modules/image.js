@@ -1,26 +1,39 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
+import { imgAPI } from '../../shared/api';
 
 export const initialState = {
-  preview: [],
-  files: [],
+  preview:[],
+  files:[],
+  videoPreview:'',
+  videoFile:'',
 };
 
+// actions
 const uploading = createAction('image/UPLOADING');
-const setPreview = createAction('image/SET_PREVIEW');
-const setFiles = createAction('image/SET_FILES');
+const setImage = createAction('image/SET_IMAGE');
+const setVideo = createAction('image/SET_VIDEO');
 
+// reducer
 const image = createReducer(initialState,{
-  [setPreview]: (state,action) => {
-    state.preview = [...state.preview, action.payload];
+  [setImage]: (state,action) => {
+    state.preview = [...state.preview,action.payload.preview];
+    state.files = [...state.files,action.payload.file];
   },
-  [setFiles]: (state, action) => {
-    state.files = [...state.files, action.payload];
+  [setVideo]: (state,action) => {
+    state.videoPreview = action.payload.prevideo;
+    state.videoFile = action.payload.file;
   },
-})
+});
+
+// middlewares
+const uploadToDB = (file) => async (dispatch,getState,{history}) => {
+
+}
 
 export const imgActions = {
-  setPreview,
-  setFiles,
+  uploadToDB,
+  setImage,
+  setVideo,
 }
 
 export default image;
