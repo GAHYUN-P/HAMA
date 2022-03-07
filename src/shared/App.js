@@ -15,6 +15,7 @@ import Signup from '../pages/Signup';
 import Answer from '../pages/Answer';
 import AnswerDetail from '../pages/AnswerDetail';
 import Request from '../pages/Request';
+import RequestEdit from '../pages/RequestEdit';
 import RequestDetail from '../pages/RequestDetail';
 
 // component
@@ -38,9 +39,10 @@ function App() {
           <Route path="/signup" exact component={Signup} />
           <Route path="/userInfo" exact component={UserInfo} />
           <Route path="/findPassword" exact component={PasswordFind} />
-          <Route path="/answer" exact component={Answer} />
+          <Route path="/answer/:postId" exact component={Answer} />
           <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
           <Route path="/request" exact component={Request} />
+          <Route path="/request/:postId" exact component={RequestEdit} />
           <Route path="/requestdetail/:postId" exact component={RequestDetail} />
           <Route path="/test" exact component={Rank} />
           <Route path="/home" exact component={Home} />

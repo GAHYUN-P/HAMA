@@ -1,10 +1,29 @@
 import React from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { answerActions } from "../redux/modules/answer";
+
 import WriteUser from "./WriteUser";
+import { getUserId } from "../shared/cookie";
+
+import styled from "styled-components";
 
 const AnswerContent = (props) => {
+    const dispatch = useDispatch();
+    // 이미지 리스트
     const fileList = props.fileList;
-    console.log(fileList);
+
+    // 좋아여 작용
+    const likeList = useSelector(state => state.answer.answer.likeUserList);
+    const likeColor = likeList.includes(Number(getUserId())) ? 'coral' : '#eee';
+    
+    const push = () => {
+        const data = {
+            answerId: props.answerId,
+            userId: Number(getUserId()),
+        }
+        dispatch(answerActions.pushLikeDB(data));
+    }
 
     return (
         <React.Fragment>
@@ -14,15 +33,18 @@ const AnswerContent = (props) => {
                 <div style={{padding:'5px 0'}} >
                     <div>{props.category}</div>
 
-                    <div style={{width:'100%',display:'flex'}} >
+                    <div style={{width:'100%',display:'flex',justifyContent:'space-between'}} >
                         <div>{props.title}</div>
-                        <button>좋아요{props.answerLikeCount}</button>
+                        <Likebtn 
+                        onClick={push}
+                        likeColor={likeColor}
+                        >{likeList.length}</Likebtn>
                     </div>
                 </div>
 
                 {/* 중단 */}
                 <div style={{padding:'5px 0'}} >
-                    <WriteUser {...props} />
+                    <WriteUser profile={props.profile} writer={props.answerWriter} modifiedAt={props.modifiedAt} />
                 </div>
 
                 {/* 하단 */}
@@ -30,9 +52,9 @@ const AnswerContent = (props) => {
                     <div>
                         {props.content}
                     </div>
-                    <div>
+                    <div style={{whiteSpace:'nowrap', overflowX:'scroll',padding:'4px'}} >
                         {fileList.map((f,i)=>{
-                            return <div key={i} >파일입니다.</div>
+                            return <div style={{display:'inline-block'}} key={i} >파일입니다.</div>
                         })}
                     </div>
                 </div>
@@ -41,5 +63,12 @@ const AnswerContent = (props) => {
         </React.Fragment>
     )
 }
+
+const Likebtn = styled.button`
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: ${props => props.likeColor};
+`;
 
 export default AnswerContent;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const WriteUser = (props) => {
-    console.log(props);
+    const { writer, modifiedAt, profile } = props;
 
     return(
         <React.Fragment>
@@ -13,10 +13,10 @@ const WriteUser = (props) => {
                 
                 <div style={{display:'inline-block'}} >
                     <div>
-                        {props.answerWriter}
+                        {writer}
                     </div>
                     <div>
-                        {props.modifiedAt}
+                        {modifiedAt}
                     </div>
                 </div>
 
