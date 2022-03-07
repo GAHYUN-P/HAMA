@@ -27,7 +27,8 @@ export const initialState = {
         answerLikeCount: 1,
         commentCount: 1,
     },],
-
+    tag: "all",
+    sort: "latest",
 };
 
 const setList = createAction('post/SETLIST');
@@ -36,6 +37,7 @@ const setAnswer = createAction('post/setAnswer');
 const setLike = createAction('post/setLike');
 const pushLike = createAction('post/pushLike');
 const setTag = createAction('post/TAG');
+const setSort = createAction('post/SORT');
 
 const post = createReducer(initialState, {
     [setList] : (state, action) => {
@@ -61,8 +63,12 @@ const post = createReducer(initialState, {
         }
     },
     [setTag] : (state, action) => {
-        state.likeUserIdList = action.payload;
+        state.tag = action.payload;
     },
+    [setSort] : (state, action) => {
+        state.sort = action.payload;
+    },
+
 });
 
 // thunk
@@ -131,12 +137,22 @@ const pushLikeDB = (postId) => async (dispatch, getState, {history}) => {
     }
 }
 
+const getSortList = (tag, sort) => async (dispatch, getState, {history}) => {
+    try{
+        const sortList = await postAPI.selectPostSort(tag, sort);
+        dispatch(setSort(sort));
+    }catch(error){
+
+    }
+}
+
 export const postActions = {
     setList,
     getPostList,
     makeRequest,
     getOneRequest,
-    pushLikeDB
+    pushLikeDB,
+    setTag,
 };
 
 export default post;

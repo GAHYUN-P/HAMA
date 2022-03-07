@@ -16,25 +16,25 @@ const Category = (props) => {
     // 아니다 여기서 그냥 useState 두번하자
     // 아니면 태그만 모듈화 그리고 sort는 그냥 여기서?
     const dispatch = useDispatch();
-    const [tag, setTag] = React.useState();
+    // const [tag, setTag] = React.useState();
     const [sort, setSort] = React.useState();
 
-    React.useEffect(() => {
-        setTag('all');
-    }, []);
+    const tag = useSelector((state) => state.post.tag);
     
     const selectTag = async (e) => {
-        setTag(e.target.value)
+        dispatch(postActions.setTag(e.target.value));
         console.log(tag);
+        
         if (e.target.value === 'all') {
+          dispatch(postActions.setTag(e.target.value));
           // 전체조회를 선택한 경우 전체조회 API 호출
           const totalList = await postAPI.getPostList();
-          console.log(totalList);
           dispatch(postActions.setList(totalList.data));
           return
         }
+
+        dispatch(postActions.setTag(e.target.value));
         const tagChatList = await postAPI.selectPostCategory(e.target.value);
-        console.log(tagChatList+'성공')
         dispatch(postActions.setList(tagChatList.data))
     }
 

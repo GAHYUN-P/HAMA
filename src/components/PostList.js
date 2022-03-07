@@ -23,8 +23,22 @@ const PostList = (props) => {
     const post_list = useSelector((state) => state.post.list);
     console.log(post_list);
 
-    const selectTag = (e) => {
+    const sort = useSelector((state) => state.post.sort);
 
+    const selectTag = async (e) => {
+        dispatch(postActions.setTag(e.target.value));
+        
+        if (e.target.value === 'all') {
+          dispatch(postActions.setTag(e.target.value));
+          // 전체조회를 선택한 경우 전체조회 API 호출
+          const totalList = await postAPI.getPostList();
+          dispatch(postActions.setList(totalList.data));
+          return
+        }
+
+        dispatch(postActions.setTag(e.target.value));
+        const tagChatList = await postAPI.selectPostCategory(e.target.value);
+        dispatch(postActions.setList(tagChatList.data))
     }
 
     return (
