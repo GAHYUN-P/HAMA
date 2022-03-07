@@ -97,6 +97,9 @@ export const postAPI = {
   selectPostCategory: function (category) {
     return axios.get(`/api/post/category/${category}`);
   },
+  selectPostSort: function (tag, sort) {
+    return axios.get(`/api/post/category/${tag}/${sort}`);
+  },
 };
 
 export const requestAPI = {

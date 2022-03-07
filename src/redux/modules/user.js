@@ -128,10 +128,11 @@ const loginByKakao = (data) => async (dispatch, getState, { history }) => {
   try {
     // 카카오 로그인으로 받아온 토큰으로 서버에서 jwt 토근을 받아옴
     const res = await userAPI.loginByKakao(data);
+    console.log(res);
 
     const token = res.data.token;
-    const username = res.data.username;
-    const userId = res.data.userid;
+    const username = res.data.nickname;
+    const userId = res.data.userId;
 
     // 받아온정보 쿠키저장
     setCookie('access-token', token);
@@ -143,6 +144,9 @@ const loginByKakao = (data) => async (dispatch, getState, { history }) => {
 
     // 토큰으로 유저정보 받아옴
     dispatch(fetchUserProfile(1));
+
+    // 로그인 성공시 home으로 이동
+    // history.push('/home');
 
   } catch (error) {
     console.error(error);
