@@ -1,7 +1,10 @@
 import React from 'react';
-import { utilActions } from '../redux/modules/util';
+import util, { utilActions } from '../redux/modules/util';
 import { useSelector,useDispatch } from 'react-redux';
 import Medal from '../components/Medal';
+import MypageList from '../components/MypageList';
+import { utilAPI } from '../shared/api';
+import CategoryMypage from '../elements/CategoryMypage';
 
 const Mypage = (props) => {
 
@@ -17,19 +20,21 @@ const Mypage = (props) => {
     const point = useSelector((state) => state.util.list.point);
     const hippolv = useSelector((state) => state.util.list.hippolv);
 
-    // const achievement_list =  useSelector((state) => state.util.achievement);
-    // console.log(achievement_list);
-    
+    const achievement_list =  useSelector((state) => state.util.achievement);
+    console.log(achievement_list);
 
   return (
     <div>
       <div>{nickname} | {email} | {hippoName} | {point} | {hippolv}</div>
       {/* {achievement_list.map((info, idx) => {
                 return (
-                  <Medal></Medal>
+                  <Medal
+                    value = {info}/>
                 );
             })} */}
-      <div>내가쓴글</div>
+      <CategoryMypage/>
+      <MypageList/>
+      
     </div>
   );
 };

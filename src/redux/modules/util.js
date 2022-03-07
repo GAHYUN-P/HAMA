@@ -13,13 +13,30 @@ const initialState = {
   achievement : [],
   result: {
     hippoName: "",
-  }
+  },
+  mypost: [{
+    requestId: null,
+    title : "요청초기값",
+    modifiedAt: "",
+    likeCount: null,
+  }],
+  myanswer: [{
+    answerId: null,
+    title : "답변초기값",
+    modifiedAt: "",
+    likeCount: null,
+  }],
+  category: '',
 };
 
 // action
 const setBanner = createAction('util/SET_BANNER');
 const setAchievement = createAction('util/SET_ACHIEVEMENT');
 const setSurveyResult = createAction('util/SET_SURVEY_RESULT');
+const setMypost = createAction('util/SET_MYPOST');
+const setMyanswer = createAction('util/SET_MYANSWER');
+const setCategory = createAction('util/SET_CATEGORY');
+
 
 // reducer
 const util = createReducer(initialState, {
@@ -31,7 +48,16 @@ const util = createReducer(initialState, {
   },
   [setAchievement]: (state, action) => {
     state.achievement = action.payload;
-  }
+  },
+  [setMypost] : (state, action) => {
+    state.mypost = action.payload;
+  },
+  [setMyanswer] : (state, action) => {
+    state.myanswer = action.payload;
+  },
+  [setCategory] : (state, action) => {
+    state.category = action.payload;
+  },
 });
 
 // middleware actions
@@ -68,11 +94,37 @@ const getAchievement = () => async (dispatch, getState, { history }) => {
   }
 };
 
+const getMypost = () => async (dispatch, getState, { history }) => {
+  try {
+    const res = await utilAPI.getMypostList();
+    console.log(res.data);
+    dispatch(setMypost(res.data));
+  }
+  catch (error) {
+    console.log(error);
+  }
+};
+
+const getMyanswer = () => async (dispatch, getState, { history }) => {
+  try {
+    const res = await utilAPI.getMyanswerList();
+    console.log(res.data);
+    dispatch(setMyanswer(res.data));
+  }
+  catch (error) {
+    console.log(error);
+  }
+};
+
+
 // action creator export
 export const utilActions = {
   getBanner,
   getAchievement,
   getSurveyResult,
+  getMypost,
+  getMyanswer,
+  setCategory,
 };
 
 export default util;

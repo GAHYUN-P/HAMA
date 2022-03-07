@@ -18,6 +18,8 @@ import { Select } from '@class101/ui';
 // 카테고리 통신
 import { chatAPI } from '../shared/api';
 
+import { history } from '../redux/configureStore';
+
 // 채팅 리스트 컴포넌트
 // 모바일, 데스크탑에 따라 위치가 달리지도록 한다
 // 모바일 : 채팅 리스트를 상단의 원으로 표시
@@ -57,7 +59,7 @@ const ChatList = (props) => {
     dispatch(chatActions.getChat(tagChatList.data))
   }
   // 채팅방 들어가기
-  const enterRoom = (roomId, roomName, category) => {
+  const enterRoom = (roomId, roomName, category, latestMessage) => {
     console.log(prevRoomId, roomId);
 
     // 입장한 채팅방을 다시 클릭하면 리턴
@@ -66,7 +68,7 @@ const ChatList = (props) => {
     }
 
     dispatch(chatActions.clearMessages());
-    dispatch(chatActions.moveChat({ roomId: roomId, roomName: roomName, category: category }));
+    dispatch(chatActions.moveChat({ roomId: roomId, roomName: roomName, category: category, latestMessage: latestMessage }));
     // 해당 채팅방의 DB 가져오기
     dispatch(chatActions.getChatMessages());
     // 나가기상태를 다시 false로 만들어주기
@@ -95,8 +97,8 @@ const ChatList = (props) => {
           return (
             <Chat
               key={idx}
-              roomId={info.id}
-              roomName={info.chatRoomName}
+              roomId={info.roomId}
+              roomName={info.roomName}
               createdAt={info.createdAt}
               modifiedAt={info.modifiedAt}
               roomImg={info.chatRoomImg}
@@ -104,7 +106,8 @@ const ChatList = (props) => {
               userProfile={info.user?.profileUrl}
               category={info.category}
               _onClick={(e) => {
-                enterRoom(info.id, info.chatRoomName, info.category);
+                enterRoom(info.roomId, info.roomName, info.category, info.latestMessage);
+                history.push('/chat')
               }}
             />
           );
