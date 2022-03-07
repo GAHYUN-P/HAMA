@@ -31,12 +31,8 @@ const CommentList = (props) => {
         <React.Fragment>
             <div>
                 <div style={{display:'flex'}} >
-                    <Elinput ref={commentRef} type='text' placeholder='댓글을 작성해 주세요.'/>
+                    <Elinput ref={commentRef} type='text' placeholder='00:00:00(타임 스탬프)댓글을 작성해 주세요.'/>
                     <button onClick={commenting} >작성</button>
-                </div>
-                <div style={{display:'flex'}} >
-                    <Elinput ref={timestampRef} type='text' placeholder='원하는 시간을 선정! ex)04:44:44'/>
-                    <button onClick={cancel} >취소</button>
                 </div>
                 {commentArray.map((c,i)=>{
                     return(<AnswerComments commentRef={commentRef} timestampRef={timestampRef} key={i} {...c} />)
@@ -51,8 +47,12 @@ const Elinput = styled.input`
     display: inline-block;
     border: none;
     outline: none;
-    border-bottom: 1px solid #ddd;
     padding: 8px 4px;
+`;
+
+const AddBox = styled.div`
+    width: 100%;
+    border: #eee;
 `;
 
 export default CommentList;
