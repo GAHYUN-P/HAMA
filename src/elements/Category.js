@@ -9,25 +9,32 @@ const Category = (props) => {
     // onclick에서 밸류를 받아와서 api콜 (밸류) 넣어서 해주고
     // state에 넣어주기
 
-    const dispatch = useDispatch();
-    const [tag, setTag] = React.useState();
 
-    React.useEffect(() => {
-        setTag('all');
-    }, []);
+    // 태그를 모듈화하기
+    // state에 잘 담아가지고 그거 데이터 보내주기
+    // 그 데이터를 ?
+    // 아니다 여기서 그냥 useState 두번하자
+    // 아니면 태그만 모듈화 그리고 sort는 그냥 여기서?
+    const dispatch = useDispatch();
+    // const [tag, setTag] = React.useState();
+    const [sort, setSort] = React.useState();
+
+    const tag = useSelector((state) => state.post.tag);
     
     const selectTag = async (e) => {
-        setTag(e.target.value)
+        dispatch(postActions.setTag(e.target.value));
         console.log(tag);
+        
         if (e.target.value === 'all') {
+          dispatch(postActions.setTag(e.target.value));
           // 전체조회를 선택한 경우 전체조회 API 호출
           const totalList = await postAPI.getPostList();
-          console.log(totalList);
           dispatch(postActions.setList(totalList.data));
           return
         }
+
+        dispatch(postActions.setTag(e.target.value));
         const tagChatList = await postAPI.selectPostCategory(e.target.value);
-        console.log(tagChatList+'성공')
         dispatch(postActions.setList(tagChatList.data))
     }
 
