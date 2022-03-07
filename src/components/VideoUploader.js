@@ -10,6 +10,7 @@ const VideoUploader = (props) => {
     const dispatch = useDispatch();
     const preview = useSelector(state => state.image.videoPreview);
     const videoRef = React.useRef();
+    const is_edit = props.is_edit;
 
     const change = () => {
         const file = videoRef.current.files[0];
@@ -24,6 +25,18 @@ const VideoUploader = (props) => {
         console.log('not get')
     }
 
+    const edit = () => {
+        const file = videoRef.current.files[0];
+        if(file){
+            const formdata = new FormData();
+            formdata.append('file',null);
+            formdata.append('video',file);
+            dispatch(imgActions.uploadToVideo(formdata));
+            return
+        }
+        console.log('not get')
+    }
+
     return(
         <React.Fragment>
             <div>
@@ -33,7 +46,7 @@ const VideoUploader = (props) => {
                     <input id='videoupload'
                     type='file' ref={videoRef}
                     accept='video/*'
-                    onChange={change}
+                    onChange={!is_edit ? change : edit}
                     style={{display:'none'}}/>
                 </div>
                 <div style={{height:'15rem'}} >

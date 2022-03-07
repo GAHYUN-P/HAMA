@@ -104,16 +104,19 @@ export const postAPI = {
 
 export const requestAPI = {
   makeRequest: function(data) {
-    return axios.post('/api/post',data,config)
+    return axios.post('/api/post',data,config);
   },
   getOneRequestDB: function(postId){
-    return axios.get(`/api/post/${postId}`)
+    return axios.get(`/api/post/${postId}`);
   },
   getRequestAnswers: function(postId){
-    return axios.get(`/api/answer/${postId}`)
+    return axios.get(`/api/answer/${postId}`);
   },
   pushLike: function(postId){
-    return axios.post(`/api/post/like/${postId}`)
+    return axios.post(`/api/post/like/${postId}`);
+  },
+  editRequest: function(postId,data){
+    return axios.put(`/api/post/${postId}`,data);
   }
 }
 
@@ -125,7 +128,7 @@ export const answerAPI = {
     return axios.get(`/api/answer/detail/${answerId}`)
   },
   getComment: function (answerId) {
-    return axios.get(`/api/comment/${answerId}`)
+    return axios.get(`/api/comment/answer/${answerId}`)
   },
   addComment: function(data) {
     return axios.post(`/api/comment/${data.answerId}`,{

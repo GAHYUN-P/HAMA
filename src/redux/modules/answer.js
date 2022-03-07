@@ -5,9 +5,9 @@ import { answerAPI, imgAPI } from '../../shared/api';
 
 export const initialState = {
     answer: {
-        answerId: 1,
-        requestWriterId: 1,
-        answerWriterId: 2,
+        answerId: 0,
+        requestWriterId: 0,
+        answerWriterId: 0,
         title:'라면 무따 아이가',
         content:'시원하고 얼큰하네예',
         modifiedAt: '2020-10-10T11:27:39',
@@ -17,31 +17,19 @@ export const initialState = {
         likeUserList: [],
         answerLikeCount: 0,
         answerWriter:'라면무쨔',
-        fileList:[]
+        fileList:['https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png'],
+        video:'',
     },
     comments: [
         {
-
-        answerId : 2,
-        commentId : 2,
-        commentWriterId : 2,
+        answerId : 0,
+        commentId : 0,
+        commentWriterId : 0,
         commentWriter : '라면 무따',
         content : '개마싯게네요',
         modifiedAt : '2020-10-10T11:27:39',
-
-        childComment:[
-            {
-                answerId : 2,
-                commentId : 2,
-                commentWriterId : 2,
-                commentWriter : '멍멍 먹쟈',
-                content : '얼큰하게써요 ㅎㅎ',
-                modifiedAt : '2020-10-10T11:27:39'
-            }
-        ]
-
-    },
-]
+    },],
+    childComment: []
 }
 
 //actions 
@@ -100,7 +88,6 @@ const getOneAnswer = (answerId) => async (dispatch, getState, { history }) => {
             answer: oneAnswer.data,
             comment: comment.data
         }
-        // console.log(comment.data)
         dispatch(setAnswer(data))
     }catch(error){
         console.log(error);

@@ -5,13 +5,11 @@ import { answerActions } from '../redux/modules/answer';
 import ChildComment from './ChildComment';
 
 const AnswerComments = (props) => {
-    const childComment = props.childComment;
     const dispatch = useDispatch();
 
     // 댓글 수정을 위한 초기 스테이트들
     const [is_edit, setEdit] = React.useState(false);
     const [comment,setComment] = React.useState('');
-    const editRef = React.useRef();
     
     // 댓글 삭제 요청
     const delcom = () => {
@@ -23,8 +21,10 @@ const AnswerComments = (props) => {
 
     // 댓글 수정 준비
     const _setEdit = () => {
-        setComment(props.content);
-        setEdit(true);
+        props.commentRef.current.value = props.content;
+        props.timestampRef.current.value = '04:44:44';
+        props.commentRef.current.commentId = props.commentId;
+        props.commentRef.current.focus();
     }
 
     // 댓글 수정 요청
@@ -51,10 +51,10 @@ const AnswerComments = (props) => {
                         <button onClick={delcom} >삭제</button>
                     </div>
                 </div>
-
                 <div>{props.content}</div>
-                
-                <div style={{display:'flex'}} >
+                <hr/>
+                <div>00:02:05</div>
+                <div style={{display:'flex',justifyContent:'space-between'}} >
                     <div>{props.modifiedAt}</div>
                     <button onClick={()=>{
                         props.commentRef.current.placeholder = `${props.commentWriter}님에게 대댓글`
@@ -62,24 +62,9 @@ const AnswerComments = (props) => {
                         props.commentRef.current.focus()
                     }} >답글쓰기</button>
                 </div>
+                <br/>
                 
-                {is_edit && 
-                <div style={{display:'flex',padding:'3px 0'}} >
-                    <input 
-                    type='text' 
-                    value={comment}
-                    ref={editRef}
-                    onChange={(e)=>{setComment(e.target.value)}} 
-                    placeholder='내용이 없다면 수정할 수 없어요!' />
-                    <div style={{display:'flex'}} >
-                        <button onClick={_editComment} >수정</button>
-                        <button onClick={()=>{setEdit(false)}} >취소</button>
-                    </div>
-                </div>}
                 
-                {childComment.map((c,i)=>{
-                    return <ChildComment parentId={props.commentId} key={i} {...c} />
-                })}
             </div>
         </React.Fragment>
     )
