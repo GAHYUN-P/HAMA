@@ -32,7 +32,7 @@ const AnswerDetail = (props) => {
                     {open ? '닫기':'댓글'}{!open ? answer.commentCount : ''}
                 </button>
                 {open &&
-                <CommentList />}
+                <CommentList answerId={answerId} />}
             </div>
         </React.Fragment>
     )

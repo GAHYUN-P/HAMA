@@ -36,6 +36,10 @@ export const initialState = {
 const setAnswer = createAction('answer/setAnswer');
 const deleteComment = createAction('answer/deleteComment');
 const pushLike = createAction('answer/pushLike');
+const addComment = createAction('answer/addComment');
+const editComment = createAction('answer/editComment');
+const delComment = createAction('answer/delComment');
+
 
 // reducer
 const answer = createReducer(initialState,{
@@ -53,7 +57,24 @@ const answer = createReducer(initialState,{
         }else{
             state.answer.likeUserList = [...state.answer.likeUserList,action.payload];
         }
-    }
+    },
+    [addComment]: (state,action) => {
+        state.comments = [...state.comments,action.payload];
+    },
+    [editComment]: (state,action) => {
+        state.comments = state.comments.map((c)=>{
+            console.log(c)
+            if(c.commentId === action.payload.commentId){
+                return c ={...c,content:action.payload.comment}
+            }
+            return c
+        })
+    },
+    [delComment]: (state,action) => {
+        state.comments = state.comments.filter(c=>{
+            return c.commentId !== action.payload.commentId
+        })
+    },
 })
 
 // middlewares
@@ -97,6 +118,17 @@ const editAnswerDB = (data,answerId) => async (dispatch, getState, { history }) 
     }
 }
 
+const deleteAnswerDB = (answerId) => async (dispatch, getState, { history }) => {
+    answerAPI.deleteAnswer(answerId)
+    .then(()=>{
+        window.alert('삭제완료');
+        history.replace('/home');
+    })
+    .catch(err=>{
+        console.log('error',err);
+    })
+}
+
 const getOneAnswer = (answerId) => async (dispatch, getState, { history }) => {
     try{
         const oneAnswer = await answerAPI.getAnswer(answerId);
@@ -113,7 +145,9 @@ const getOneAnswer = (answerId) => async (dispatch, getState, { history }) => {
 
 const addCommentDB = (data) => async (dispatch, getState, { history }) => {
     try{
-        const addedComment = answerAPI.addComment(data);
+        const res = await answerAPI.addComment(data);
+        console.log('댓글 작성 완료!');
+        dispatch(addComment(res.data));
     }catch(error){
         console.log('error',error);
     }
@@ -121,7 +155,9 @@ const addCommentDB = (data) => async (dispatch, getState, { history }) => {
 
 const deleteCommentDB = (data) => async (dispatch, getState, {history}) => {
     try{
-        const _delete = answerAPI.removeComment(data.commentId);
+        const _delete = await answerAPI.removeComment(data.commentId);
+        console.log('댓글 삭제 완료!');
+        dispatch(delComment(data));
     }catch(error){
         console.log('error',error);
     }
@@ -129,7 +165,9 @@ const deleteCommentDB = (data) => async (dispatch, getState, {history}) => {
 
 const editCommentDB = (data) => async (dispatch, getState, {history}) => {
     try{
-        const _edit = answerAPI.editComment(data.commentId,data.comment);
+        const _edit = await answerAPI.editComment(data.commentId,data.comment);
+        console.log('댓글 수정 완료!');
+        dispatch(editComment(data));
     }catch(error){
         console.log('error',error);
     }
@@ -155,6 +193,7 @@ const starDB = (data) => async (dispatch, getState, {history}) => {
 export const answerActions = {
     answeringDB,
     editAnswerDB,
+    deleteAnswerDB,
     getOneAnswer,
     addCommentDB,
     deleteCommentDB,

@@ -15,8 +15,9 @@ const AnswerContent = (props) => {
     // 이미지 리스트
     const fileList = props.fileList;
     const video = props.videoUrl;
-    console.log(props)
-    // 좋아여 작용
+    const answerId = props.answerId;
+
+    // 좋아요 작용
     const likeList = useSelector(state => state.answer.answer.likeUserList);
     const likeColor = likeList.includes(Number(getUserId())) ? 'coral' : '#eee';
     
@@ -26,6 +27,10 @@ const AnswerContent = (props) => {
             userId: Number(getUserId()),
         }
         dispatch(answerActions.pushLikeDB(data));
+    }
+
+    const delAnswer =() => {
+        dispatch(answerActions.deleteAnswerDB(answerId));
     }
 
     return (
@@ -50,7 +55,7 @@ const AnswerContent = (props) => {
                     <WriteUser profile={props.profile} writer={props.answerWriter} modifiedAt={props.modifiedAt} />
                     <div>
                         <button onClick={()=>{history.push(`/answeredit/${props.answerId}`)}} >수정</button>
-                        <button>삭제</button>
+                        <button onClick={delAnswer} >삭제</button>
                     </div>
                 </div>
 
