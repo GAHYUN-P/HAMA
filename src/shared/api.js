@@ -127,6 +127,9 @@ export const answerAPI = {
   answering: function(data,postId) {
     return axios.post(`/api/answer/${postId}`,data,config)
   },
+  editAnswer: function(data,answerId) {
+    return axios.put(`/api/answer/${answerId}`,data,config)
+  },
   getAnswer: function (answerId) {
     return axios.get(`/api/answer/detail/${answerId}`)
   },

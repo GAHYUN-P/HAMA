@@ -19,7 +19,7 @@ const Viewer = (props) => {
 
     const mainFile = video ? video : fileList[0];
     fileList = video ? fileList : (fileList.filter((f,i)=>{return i !== 0}));
-   console.log(mainFile);
+    
     return (
         <React.Fragment>
             <div style={{padding:'0 0 4px',width:'100%',margin:'0 auto 5px'}} >

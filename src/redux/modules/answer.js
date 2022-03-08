@@ -80,6 +80,23 @@ const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
         console.log('error',error);
     }
 }
+
+const editAnswerDB = (data,answerId) => async (dispatch, getState, { history }) => {
+    try{
+        const file = getState().image.files
+        const video = getState().image.videoFile
+        data = {
+            ...data,
+            file: file,
+            video: video
+        }
+        console.log(data);
+        const _edit = answerAPI.editAnswer(data,answerId);
+    }catch(error){
+        console.log('error',error);
+    }
+}
+
 const getOneAnswer = (answerId) => async (dispatch, getState, { history }) => {
     try{
         const oneAnswer = await answerAPI.getAnswer(answerId);
@@ -137,6 +154,7 @@ const starDB = (data) => async (dispatch, getState, {history}) => {
 
 export const answerActions = {
     answeringDB,
+    editAnswerDB,
     getOneAnswer,
     addCommentDB,
     deleteCommentDB,
