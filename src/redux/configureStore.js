@@ -14,6 +14,7 @@ import Rank from './modules/rank';
 import Point from './modules/point';
 import Post from './modules/post';
 import Answer from './modules/answer';
+import Mypage from './modules/mypage';
 
 
 export const history = createBrowserHistory();
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   rank: Rank,
   post: Post,
   answer: Answer,
+  mypage: Mypage,
   router: connectRouter(history)
 });
 
