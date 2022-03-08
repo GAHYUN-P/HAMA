@@ -4,17 +4,13 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 민기님 서버
-// axios.defaults.baseURL = 'http://3.36.53.246';
+axios.defaults.baseURL = 'http://3.36.53.246';
 
 // 규진님 서버
 // axios.defaults.baseURL = 'http://dean900404.shop/';
 
 // 재균님 서버
-axios.defaults.baseURL = 'http://13.124.171.147';
-
-
-
-const token = document.cookie.split('=')[1];
+// axios.defaults.baseURL = 'http://13.124.171.147';
 
 const config = {
   headers:{
@@ -125,37 +121,43 @@ export const requestAPI = {
 
 export const answerAPI = {
   answering: function(data,postId) {
-    return axios.post(`/api/answer/${postId}`,data,config)
+    return axios.post(`/api/answer/${postId}`,data,config);
   },
   editAnswer: function(data,answerId) {
-    return axios.put(`/api/answer/${answerId}`,data,config)
+    return axios.put(`/api/answer/${answerId}`,data,config);
   },
   deleteAnswer: function(answerId) {
     return axios.delete(`/api/answer/${answerId}`,config)
   },
   getAnswer: function (answerId) {
-    return axios.get(`/api/answer/detail/${answerId}`)
+    return axios.get(`/api/answer/detail/${answerId}`);
   },
   getComment: function (answerId) {
-    return axios.get(`/api/comment/answer/${answerId}`)
+    return axios.get(`/api/comment/answer/${answerId}`);
   },
   addComment: function(data) {
     return axios.post(`/api/comment/${data.answerId}`,{
       comment: data.comment,
       parentCommentId: data.parentCommentId
-    },config)
+    },config);
   },
   editComment: function(commentId,comment) {
-    return axios.put(`/api/comment/${commentId}`,{content: comment},config)
+    return axios.put(`/api/comment/${commentId}`,{content: comment},config);
   },
   removeComment: function(commentId) {
-    return axios.delete(`/api/comment/${commentId}`,config)
+    return axios.delete(`/api/comment/${commentId}`,config);
   },
   pushLike: function(answerId) {
-    return axios.post(`/api/answer/like/${answerId}`,config)
+    return axios.post(`/api/answer/like/${answerId}`,config);
   },
   rating: function(data) {
-    return axios.post(`/api/star/${data.answerId}`,{star:data.star})
+    return axios.post(`/api/star/${data.answerId}`,{star:data.star});
+  }
+}
+
+export const childAPI = {
+  getChilds: function(commentId) {
+    return axios.get(`/api/comment/${commentId}`);
   }
 }
 

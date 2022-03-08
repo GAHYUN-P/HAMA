@@ -74,9 +74,4 @@ const Elinput = styled.input`
     padding: 8px 4px;
 `;
 
-const AddBox = styled.div`
-    width: 100%;
-    border: #eee;
-`;
-
 export default CommentList;
