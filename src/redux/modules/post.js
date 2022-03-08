@@ -17,7 +17,13 @@ export const initialState = {
         answerLikeCount: 0,
         level: '중',
         category: '기타',
-        fileList: [],
+        fileList: [
+            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
+            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
+            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
+            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
+            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
+        ],
     },
     likeUserIdList:[1,2,3,4,5],
     answers: [{
@@ -167,7 +173,6 @@ export const postActions = {
     pushLikeDB,
     editRequestDB,
     setTag,
-
 };
 
 export default post;

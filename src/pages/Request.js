@@ -7,7 +7,6 @@ import ImageUploader from '../components/ImageUploader';
 
 import { useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
-import axios from 'axios';
 
 const Request = (props) => {
     const dispatch = useDispatch();
@@ -108,8 +107,11 @@ const Request = (props) => {
                         >{l}</Level>)
             })}
             </div>
+            <span style={{fontSize:'0.8rem',color:'red'}} >요청을 등록한 이후에는 삭제할 수 없습니다.</span>
         </div>
-        <div style={{display:'flex', justifyContent:'center', margin:'50px 0 0'}} >
+        <div style={{display:'flex', justifyContent:'space-evenly', margin:'50px 0 0'}} >
+            <button onClick={()=>{}} style={{width:'80px', height:'30px',border:'none',}} >취소</button>
+            <button onClick={()=>{}} style={{width:'80px', height:'30px',border:'none',}} >임시작성</button>
             <button onClick={posting} style={{width:'80px', height:'30px',border:'none',}} >작성</button>
         </div>
         </div>

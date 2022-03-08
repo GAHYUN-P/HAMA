@@ -26,7 +26,7 @@ const AnswerDetail = (props) => {
         <React.Fragment>
             <div style={{width:'90%', margin:'0 auto'}}>
                 <AnswerContent {...answer} />
-                {answer.requestWriterId === getUserId() &&
+                {answer.requestWriterId === Number(getUserId()) &&
                 <RateBox answerId={answerId} />}
                 <button onClick={()=>{setOpen(!open)}} >
                     {open ? '닫기':'댓글'}{!open ? answer.commentCount : ''}

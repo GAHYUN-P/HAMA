@@ -11,7 +11,6 @@ const CommentList = (props) => {
     const dispatch = useDispatch();
     const commentArray = useSelector(state=>state.answer.comments);
     const commentRef = React.useRef();
-    const timestampRef = React.useRef();
 
     const commenting = () => {
         if(commentRef.current.commentId){
@@ -23,7 +22,6 @@ const CommentList = (props) => {
 
     const cancel = () => {
         commentRef.current.value = '';
-        timestampRef.current.value = '';
         commentRef.current.commentId = null;
     }
 
@@ -35,7 +33,7 @@ const CommentList = (props) => {
                     <button onClick={commenting} >작성</button>
                 </div>
                 {commentArray.map((c,i)=>{
-                    return(<AnswerComments commentRef={commentRef} timestampRef={timestampRef} key={i} {...c} />)
+                    return(<AnswerComments commentRef={commentRef} key={i} {...c} />)
                 })}
             </div>
         </React.Fragment>

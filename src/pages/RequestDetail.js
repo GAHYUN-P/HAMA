@@ -17,21 +17,20 @@ const RequestDetail = (props) => {
     const request = useSelector(state => state.post.request);
     const like = useSelector(state => state.post.likeUserIdList);
     const answers = useSelector(state => state.post.answers);
-    const roomId = useSelector(state => state.post.request.roomId);
-    console.log(roomId);
+    // const roomId = useSelector(state => state.post.request.roomId);
 
     React.useEffect(()=>{
         dispatch(postActions.getOneRequest(postId));
     },[])
 
-    const onClickChat = async() => {
-        const res = await chatAPI.connectChat(roomId);
-        history.push('/chatlist');
-    }
+    // const onClickChat = async() => {
+    //     const res = await chatAPI.connectChat(roomId);
+    //     history.push('/chatlist');
+    // }
 
     return (
         <React.Fragment>
-            <div style={{width:'100%', padding:'16px'}} >
+            <div style={{width:'90%', padding:'16px'}} >
                 <RequestContents {...request}/>
                 <RequestCenter request={request} like={like} />
                 <RequestAnswer answers = {answers} />

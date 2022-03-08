@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Tag from '../elements/Tag';
 import AnswerCard from './AnswerCard';
 
 const RequestAnswer = (props) => {
-    const standard = ['전체글', '조회수', '댓글순', '좋아요순']
+    const [stand, setStand] = useState('최신순');
+    const standard = ['최신순', '조회수', '댓글순', '좋아요순']
     const answerList = props.answers;
 
     return (
@@ -12,7 +13,10 @@ const RequestAnswer = (props) => {
             <div style={{ width:'90%', margin:'10px auto 0' }}>
                 <div>
                     {standard.map((s,i)=>{
-                        return (<Tag key={i} >{s}</Tag>)
+                        return (<Tag 
+                                key={i} 
+                                _onClick={()=>{setStand(s)}}
+                                tag={stand} >{s}</Tag>)
                     })}
                 </div>
                 <div>
