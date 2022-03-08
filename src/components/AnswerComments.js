@@ -43,7 +43,7 @@ const AnswerComments = (props) => {
                 <div>{props.modifiedAt}</div>
                 <button
                 style={{border:'none', backgroundColor:'#eee', padding:'8px'}}
-                onClick={()=>{history.push(`/`)}} >답글</button>
+                onClick={()=>{history.push(`/comment/${props.commentId}`)}} >답글</button>
                 <br/>
                 
                 
