@@ -53,6 +53,7 @@ function App() {
           <Route path="/survey" exact component={Survey} />
           <Route path="/result" exact component={SurveyResult} />
           <Route path="/mypage" exact component={Mypage} />
+          <Route path="/userinfo" exact component={UserInfo} />
 
           <Route path="*" exact component={NotFound} />
         </Switch>
