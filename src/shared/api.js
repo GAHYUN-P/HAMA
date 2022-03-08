@@ -64,6 +64,9 @@ export const userAPI = {
   getAllUserList: function (data) {
     return axios.get(`/api/user`);
   },
+  userInfo : function (data) {
+    return axios.post(`/api/user`, data, config);
+  },
 };
 
 export const chatAPI = {

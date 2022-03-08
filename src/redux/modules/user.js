@@ -6,6 +6,7 @@ import { getUserId } from '../../shared/cookie';
 
 export const initialState = {
   userInfo: null, // user정보 - id, username, email, profile
+  is_info: "",
   isValidEmailMultiple: false, // email 중복체크 결과
   loginError: null, // 로그인시 서버에러
   authNumber: '', // 비밀번호 찾기시 인증번호
@@ -14,6 +15,7 @@ export const initialState = {
 };
 
 const login = createAction('user/LOGIN'); // 로그인 - user정보, 로그인상태 변경
+const infoCheck = createAction('user/INFOCHECK');
 const logout = createAction('user/LOGOUT'); // 로그아웃 액션 - 쿠키정보삭제
 const setLoginError = createAction('user/SET_LOGIN_ERROR'); // 로그인 서버에러 액션
 const setIsValidEmailMultiple = createAction(
@@ -22,10 +24,14 @@ const setIsValidEmailMultiple = createAction(
 const setAuthNumber = createAction('user/SET_AUTH_NUMBER'); // 비밀번호 찾기 메일 인증번호
 const setAllUserList = createAction('user/SET_ALL_USER_LIST'); // 모든 유저 정보 가져오기
 
+
 const user = createReducer(initialState, {
   [login]: (state, { payload }) => {
     state.userInfo = payload; //유저정보
     state.is_login = true; //로그인상태
+  },
+  [infoCheck]: (state, { payload }) => {
+    state.is_info = payload; //유저정보
   },
   [logout]: (state, { payload }) => {
     // 로그인시 쿠키에 저장한 정보 삭제
