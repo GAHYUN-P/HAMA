@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import {history} from '../redux/configureStore';
 import { answerActions } from "../redux/modules/answer";
 
 import WriteUser from "./WriteUser";
@@ -13,7 +14,7 @@ const AnswerContent = (props) => {
     const dispatch = useDispatch();
     // 이미지 리스트
     const fileList = props.fileList;
-    const video = props.video;
+    const video = props.videoUrl;
     console.log(props)
     // 좋아여 작용
     const likeList = useSelector(state => state.answer.answer.likeUserList);
@@ -45,9 +46,12 @@ const AnswerContent = (props) => {
                 </div>
 
                 {/* 중단 */}
-                <div style={{padding:'5px 0'}} >
+                <div style={{padding:'5px 0',display:'flex',justifyContent:'space-between'}} >
                     <WriteUser profile={props.profile} writer={props.answerWriter} modifiedAt={props.modifiedAt} />
-                    
+                    <div>
+                        <button onClick={()=>{history.push(`/answeredit/${props.answerId}`)}} >수정</button>
+                        <button>삭제</button>
+                    </div>
                 </div>
 
                 {/* 하단 */}

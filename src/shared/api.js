@@ -4,13 +4,13 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 민기님 서버
-// axios.defaults.baseURL = 'http://3.36.53.246';
+axios.defaults.baseURL = 'http://3.36.53.246';
 
 // 규진님 서버
 // axios.defaults.baseURL = 'http://dean900404.shop/';
 
 // 재균님 서버
-axios.defaults.baseURL = 'http://13.124.171.147';
+// axios.defaults.baseURL = 'http://13.124.171.147';
 
 
 
@@ -123,6 +123,9 @@ export const requestAPI = {
 export const answerAPI = {
   answering: function(data,postId) {
     return axios.post(`/api/answer/${postId}`,data,config)
+  },
+  editAnswer: function(data,answerId) {
+    return axios.put(`/api/answer/${answerId}`,data,config)
   },
   getAnswer: function (answerId) {
     return axios.get(`/api/answer/detail/${answerId}`)
