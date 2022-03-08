@@ -19,10 +19,6 @@ export const initialState = {
         category: '기타',
         fileList: [
             'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
-            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
-            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
-            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
-            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
         ],
     },
     likeUserIdList:[1,2,3,4,5],
@@ -41,7 +37,6 @@ export const initialState = {
 const setList = createAction('post/SETLIST');
 const setRequest = createAction('post/setRequest');
 const setAnswer = createAction('post/setAnswer');
-const setLike = createAction('post/setLike');
 const pushLike = createAction('post/pushLike');
 const setTag = createAction('post/TAG');
 const setSort = createAction('post/SORT');
@@ -58,11 +53,7 @@ const post = createReducer(initialState, {
     [setAnswer] : (state, action) => {
         state.answers = action.payload;
     },
-    [setLike] : (state, action) => {
-        state.likeUserIdList = action.payload;
-    },
     [pushLike] : (state, action) => {
-        console.log(state.likeUserIdList.includes(Number(action.payload)))
         if(state.likeUserIdList.includes(Number(action.payload))){
             state.likeUserIdList = state.likeUserIdList.filter(s => Number(s) !== Number(action.payload));
         }else{

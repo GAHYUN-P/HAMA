@@ -14,7 +14,7 @@ const RequestContents = (props) => {
                   <div style={{ display:'flex', justifyContent:'space-between' }} >  
                     <div style={{ display:'flex' }} >
                         <p>마감시간</p>
-                        <p>{level}</p>
+                        <button>{level}</button>
                     </div>
                     <div style={{ display:'flex' }} >
                         <button onClick={()=>{}} >마감</button>

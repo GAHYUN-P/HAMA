@@ -130,6 +130,9 @@ export const answerAPI = {
   editAnswer: function(data,answerId) {
     return axios.put(`/api/answer/${answerId}`,data,config)
   },
+  deleteAnswer: function(answerId) {
+    return axios.delete(`/api/answer/${answerId}`,config)
+  },
   getAnswer: function (answerId) {
     return axios.get(`/api/answer/detail/${answerId}`)
   },
