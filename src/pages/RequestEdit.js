@@ -10,7 +10,7 @@ const RequestEdit = (props) => {
     const dispatch = useDispatch();
     const requestData = useSelector(state => state.post.request);
     const postId = props.match.params.postId;
-    const [content,setContent] = useState(requestData.content);
+    const [content,setContent] = useState('');
 
     React.useEffect(()=>{
         if(Number(postId) !== requestData.postId){
@@ -20,6 +20,11 @@ const RequestEdit = (props) => {
         setContent(requestData.content);
         dispatch(imgActions.setEdit(requestData.fileList));
     },[])
+
+    React.useEffect(()=>{
+        setContent(requestData.content);
+        dispatch(imgActions.setEdit(requestData.fileList));
+    },[requestData])
 
     const editing = () => {
         if(!content){

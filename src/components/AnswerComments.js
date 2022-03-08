@@ -22,7 +22,6 @@ const AnswerComments = (props) => {
     // 댓글 수정 준비
     const _setEdit = () => {
         props.commentRef.current.value = props.content;
-        props.timestampRef.current.value = '04:44:44';
         props.commentRef.current.commentId = props.commentId;
         props.commentRef.current.focus();
     }
@@ -52,15 +51,9 @@ const AnswerComments = (props) => {
                     </div>
                 </div>
                 <div>{props.content}</div>
-                <hr/>
-                <div>00:02:05</div>
                 <div style={{display:'flex',justifyContent:'space-between'}} >
                     <div>{props.modifiedAt}</div>
-                    <button onClick={()=>{
-                        props.commentRef.current.placeholder = `${props.commentWriter}님에게 대댓글`
-                        props.commentRef.current.parentId = props.commentId
-                        props.commentRef.current.focus()
-                    }} >답글쓰기</button>
+                    <button onClick={()=>{}} >답글쓰기</button>
                 </div>
                 <br/>
                 
