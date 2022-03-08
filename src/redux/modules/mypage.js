@@ -15,15 +15,26 @@ const initialState = {
     requestId: null,
     title : "요청초기값",
     modifiedAt: "",
-    likeCount: null,
+    nickname: '',
+    imgUrl: 'https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/5xq2/image/0lp8RLaJ2IgctTWVl2nEa-JRCSc.jpg',
+    category: '',
   }],
   myanswer: [{
     answerId: null,
     title : "답변초기값",
     modifiedAt: "",
-    likeCount: null,
+    nickname: '',
+    imgUrl: 'http://san.chosun.com/site/data/img_dir/2019/04/24/2019042401956_0.jpg',
+    category: '',
   }],
   category: '',
+  is_what: '',
+  userinfo: {
+      nickname: '',
+      hippoName: '',
+      postCount: null,
+      answerCount: null,
+  }
 };
 
 // action
@@ -32,6 +43,8 @@ const setAchievement = createAction('mypage/SET_ACHIEVEMENT');
 const setMypost = createAction('mypage/SET_MYPOST');
 const setMyanswer = createAction('mypage/SET_MYANSWER');
 const setCategory = createAction('mypage/SET_CATEGORY');
+const setDetail = createAction('mypage/SET_DETAIL');
+const setUserInfo = createAction('mypage/SET_USERINFO');
 
 
 // reducer
@@ -50,6 +63,12 @@ const mypage = createReducer(initialState, {
   },
   [setCategory] : (state, action) => {
     state.category = action.payload;
+  },
+  [setDetail] : (state, action) => {
+    state.is_what = action.payload;
+  },
+  [setUserInfo] : (state, action) => {
+    state.userinfo = action.payload;
   },
 });
 
@@ -99,6 +118,17 @@ const getMyanswer = () => async (dispatch, getState, { history }) => {
   }
 };
 
+const getUserInfo = () => async (dispatch, getState, { history }) => {
+    try {
+      const res = await mypageAPI.getMypageUserInfo();
+      console.log(res.data);
+      dispatch(setUserInfo(res.data));
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
 
 // action creator export
 export const mypageActions = {
@@ -107,6 +137,7 @@ export const mypageActions = {
   getMypost,
   getMyanswer,
   setCategory,
+  setDetail,
 };
 
 export default mypage;

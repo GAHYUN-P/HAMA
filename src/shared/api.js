@@ -190,4 +190,7 @@ export const mypageAPI = {
   getMyanswerList: function () {
     return axios.get(`/api/myanswer`, config);
   },
+  getMypageUserInfo: function () {
+    return axios.get(`/api/mycount`, config);
+  },
 };
