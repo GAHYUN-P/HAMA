@@ -26,26 +26,21 @@ const PostList = (props) => {
     const sort = useSelector((state) => state.post.sort);
 
     const selectTag = async (e) => {
-        dispatch(postActions.setTag(e.target.value));
         
-        if (e.target.value === 'all') {
-          dispatch(postActions.setTag(e.target.value));
-          // 전체조회를 선택한 경우 전체조회 API 호출
-          const totalList = await postAPI.getPostList();
-          dispatch(postActions.setList(totalList.data));
+        if (e.target.value === 'latest') {
           return
         }
 
-        dispatch(postActions.setTag(e.target.value));
-        const tagChatList = await postAPI.selectPostCategory(e.target.value);
-        dispatch(postActions.setList(tagChatList.data))
+        if (e.target.value === 'time') {
+            return
+          }
     }
 
     return (
         <div>
-            <button onClick={(e) => { selectTag(e) }} value='latest'>최신순</button>
+            {/* <button onClick={(e) => { selectTag(e) }} value='latest'>최신순</button>
             <button onClick={(e) => { selectTag(e) }} value='time'>잔여시간</button>
-            <button onClick={(e) => { selectTag(e) }} value='like'>좋아요순</button>
+            <button onClick={(e) => { selectTag(e) }} value='like'>좋아요순</button> */}
             {post_list.map((info, idx) => {
                 return (
                 <PostEach

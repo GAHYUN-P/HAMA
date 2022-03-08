@@ -35,7 +35,7 @@ export const initialState = {
         commentCount: 1,
     },],
     tag: "all",
-    sort: "latest",
+    sort: "",
 };
 
 const setList = createAction('post/SETLIST');
@@ -173,6 +173,8 @@ export const postActions = {
     pushLikeDB,
     editRequestDB,
     setTag,
+    getSortList,
+    setSort,
 };
 
 export default post;
