@@ -7,7 +7,10 @@ import styled from "styled-components";
 
 const RateBox = (props) => {
     const dispatch = useDispatch();
+    const starPoint = useSelector(state => state.answer.answer.star);
     const [point, setPoint] = React.useState(0);
+
+    console.log(starPoint);
 
     const rating = () => {
         if(point === 0){
@@ -19,6 +22,27 @@ const RateBox = (props) => {
             star: point
         }
         dispatch(answerActions.starDB(data));
+    }
+
+    console.log(props);
+
+    if(starPoint > 0){
+        return (
+            <React.Fragment>
+            <div style={{padding:'10px 0'}} >
+                <div style={{ display:'flex' }} >
+                    <div>평가완료</div>
+                </div>
+                <div>
+                    <Elstar starColor={starPoint > 0 ? '#ffcd48':'#eee'} />
+                    <Elstar starColor={starPoint > 1 ? '#ffcd48':'#eee'} />
+                    <Elstar starColor={starPoint > 2 ? '#ffcd48':'#eee'} />
+                    <Elstar starColor={starPoint > 3 ? '#ffcd48':'#eee'} />
+                    <Elstar starColor={starPoint > 4 ? '#ffcd48':'#eee'} />
+                </div>
+            </div>
+        </React.Fragment>
+        )
     }
 
     return (

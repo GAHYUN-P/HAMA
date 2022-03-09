@@ -116,6 +116,9 @@ export const requestAPI = {
   },
   editRequest: function(postId,data){
     return axios.put(`/api/post/${postId}`,data);
+  },
+  concluseRequest: function(postId){
+    return axios.post(`/api/post/${postId}`,config);
   }
 }
 
