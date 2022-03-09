@@ -30,6 +30,7 @@ import Survey from '../pages/Survey';
 import SurveyResult from '../pages/SurveyResult';
 import Mypage from '../pages/Mypage';
 import ChatList from '../components/ChatList';
+import MypageDetail from '../pages/MypageDetail';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="/survey" exact component={Survey} />
           <Route path="/result" exact component={SurveyResult} />
           <Route path="/mypage" exact component={Mypage} />
+          <Route path="/mypage_detail" exact component={MypageDetail} />
           <Route path="/userinfo" exact component={UserInfo} />
 
           <Route path="*" exact component={NotFound} />
