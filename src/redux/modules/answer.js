@@ -39,7 +39,7 @@ const pushLike = createAction('answer/pushLike');
 const addComment = createAction('answer/addComment');
 const editComment = createAction('answer/editComment');
 const delComment = createAction('answer/delComment');
-
+const rateStar = createAction('answer/rateStar');
 
 // reducer
 const answer = createReducer(initialState,{
@@ -74,6 +74,9 @@ const answer = createReducer(initialState,{
         state.comments = state.comments.filter(c=>{
             return c.commentId !== action.payload.commentId
         })
+    },
+    [rateStar]: (state,action) => {
+        state.answer.star = Number(action.payload.star);
     },
 })
 
@@ -185,6 +188,7 @@ const pushLikeDB = (data) => async (dispatch, getState, {history}) => {
 const starDB = (data) => async (dispatch, getState, {history}) => {
     try{
         const _star = answerAPI.rating(data);
+        dispatch(rateStar(data));
     }catch(error){
         console.log('error',error);
     }

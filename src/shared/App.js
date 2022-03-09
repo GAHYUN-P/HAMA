@@ -18,6 +18,7 @@ import AnswerDetail from '../pages/AnswerDetail';
 import Request from '../pages/Request';
 import RequestEdit from '../pages/RequestEdit';
 import RequestDetail from '../pages/RequestDetail';
+import ChildComment from '../pages/ChildComment';
 
 // component
 import AppLayout from '../components/AppLayout';
@@ -46,6 +47,7 @@ function App() {
           <Route path="/answer/:postId" exact component={Answer} />
           <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
           <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
+          <Route path="/comment/:commentId" exact component={ChildComment} />
           <Route path="/request" exact component={Request} />
           <Route path="/request/:postId" exact component={RequestEdit} />
           <Route path="/requestdetail/:postId" exact component={RequestDetail} />
