@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { postActions } from '../redux/modules/post';
+
 import Tag from '../elements/Tag';
 import AnswerCard from './AnswerCard';
 
 const RequestAnswer = (props) => {
+    const dispatch = useDispatch();
     const [stand, setStand] = useState('최신순');
-    const standard = ['최신순', '조회수', '댓글순', '좋아요순'];
-    const answerList = props.answers;
-    console.log(answerList)
-    let List = answerList;
-    if(stand === '댓글순'){
-        // List = answerList.sort((a,b)=>{return b.commentCount - a.commentCount});
-    }
+    const standard = ['최신순', '댓글순', '좋아요순'];
+    const answerList = useSelector(state => state.post.answers);
+
     return (
         <React.Fragment>
             <div style={{ width:'90%', margin:'10px auto 0' }}>
@@ -19,12 +19,15 @@ const RequestAnswer = (props) => {
                     {standard.map((s,i)=>{
                         return (<Tag 
                                 key={i} 
-                                _onClick={()=>{setStand(s)}}
+                                _onClick={()=>{
+                                    dispatch(postActions.sortAnswer(s));
+                                    setStand(s);
+                                }}
                                 tag={stand} >{s}</Tag>)
                     })}
                 </div>
                 <div>
-                    {List.map((a,i)=>{
+                    {answerList.map((a,i)=>{
                         return(<AnswerCard {...a} key={i} />)
                     })}
                 </div>

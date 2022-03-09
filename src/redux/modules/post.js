@@ -32,6 +32,14 @@ export const initialState = {
         answerLikeCount: 1,
         commentCount: 1,
     },],
+    basic:[{
+        answerId: 0,
+        answerWritter: 'responser',
+        title:'responsetitle',
+        modifiedAt:'2020-02-03T20:20:20',
+        answerLikeCount: 1,
+        commentCount: 1,
+    },],
     tag: "all",
     sort: "",
 };
@@ -42,7 +50,8 @@ const setAnswer = createAction('post/setAnswer');
 const pushLike = createAction('post/pushLike');
 const setTag = createAction('post/TAG');
 const setSort = createAction('post/SORT');
-const concluseRequest = createAction('post/concluseRequest')
+const concluseRequest = createAction('post/concluseRequest');
+const sortAnswer = createAction('post/sortAnswer');
 
 const post = createReducer(initialState, {
     [setList] : (state, action) => {
@@ -52,6 +61,7 @@ const post = createReducer(initialState, {
         state.request = action.payload.request;
         state.likeUserIdList = action.payload.like;
         state.answers = action.payload.answer;
+        state.basic = action.payload.answer;
     },
     [setAnswer] : (state, action) => {
         state.answers = action.payload;
@@ -73,7 +83,24 @@ const post = createReducer(initialState, {
         state.request.status = 'false';
         state.request.timeSet = '마감된 요청입니다.';
     },
-
+    [sortAnswer] : (state, action) => {
+        if(action.payload === '댓글순'){
+            state.answers = state.answers.sort((a,b)=>{
+                return b.commentCount - a.commentCount;
+            })
+            return
+        }
+        if(action.payload === '좋아요순'){
+            state.answers = state.answers.sort((a,b)=>{
+                return b.answerLikeCount - a.answerLikeCount;
+            })
+            return
+        }
+        if(action.payload === '최신순'){
+            state.answers = state.basic
+            return
+        }
+    },
 });
 
 // thunk
@@ -185,6 +212,7 @@ export const postActions = {
     getSortList,
     setSort,
     concluseRequest,
+    sortAnswer,
 };
 
 export default post;
