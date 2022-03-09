@@ -61,7 +61,7 @@ export const userAPI = {
     return axios.get(`/api/user`);
   },
   userInfo : function (data) {
-    return axios.post(`/api/user`, data, config);
+    return axios.post(`/api/userinfo`, data, config);
   },
 };
 
@@ -154,7 +154,7 @@ export const answerAPI = {
     return axios.post(`/api/answer/like/${answerId}`,config);
   },
   rating: function(data) {
-    return axios.post(`/api/star/${data.answerId}`,{star:data.star});
+    return axios.post(`/api/star/${data.answerId}`, {star:data.star}, config)
   }
 }
 
@@ -194,5 +194,17 @@ export const mypageAPI = {
   },
   getMyanswerList: function () {
     return axios.get(`/api/myanswer`, config);
+  },
+  getMypageUserInfo: function () {
+    return axios.get(`/api/mycount`, config);
+  },
+};
+
+export const searchAPI = {
+  getResultPost: function (searchWord) {
+    return axios.get(`/api/postsearch/${searchWord}`, config);
+  },
+  getResultAnswer: function (searchWord) {
+    return axios.get(`/api/postsearch/${searchWord}`, config);
   },
 };

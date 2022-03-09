@@ -12,6 +12,7 @@ const Mypage = (props) => {
     React.useEffect(() => {
         dispatch(mypageActions.getBanner());
         dispatch(mypageActions.getAchievement());
+        dispatch(mypageActions.getUserInfo());
     }, []);
 
     const nickname = useSelector((state) => state.mypage.list.nickname);
@@ -22,6 +23,16 @@ const Mypage = (props) => {
 
     const achievement_list =  useSelector((state) => state.mypage.achievement);
     console.log(achievement_list);
+
+    const onClickMypost = (e) => {
+      dispatch(mypageActions.setDetail(e.target.value));
+      history.push('/mypage_detail');
+    }
+
+    const onClickMyanswer = (e) => {
+      dispatch(mypageActions.setDetail(e.target.value));
+      history.push('/mypage_detail');
+    }
 
   return (
     <div>
@@ -34,10 +45,10 @@ const Mypage = (props) => {
             })}
       <hr/>
       <MypostList/>
-      <button onClick={()=> history.push('/')}>더보기</button>
+      <button onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기</button>
       <hr/>
       <MyanswerList/>
-      <button>더보기</button>
+      <button onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기</button>
     </div>
   );
 };
