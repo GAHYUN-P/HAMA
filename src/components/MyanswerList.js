@@ -13,8 +13,9 @@ const MyanswerList = (props) => {
         dispatch(mypageActions.getMyanswer());
     }, []);
 
-    const myanswer_list = useSelector((state) => state.util.myanswer);
+    const myanswer_list = useSelector((state) => state.mypage.myanswer);
     const prev_list = myanswer_list.slice(0,2);
+    console.log(myanswer_list);
 
     return (
         <div>
@@ -25,7 +26,6 @@ const MyanswerList = (props) => {
                     key={info.answerId}
                     title={info.title}
                     modifiedAt={info.modifiedAt}
-                    likeCount={info.postLikeCount}
                     />
                 );
             })}

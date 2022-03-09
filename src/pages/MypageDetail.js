@@ -6,18 +6,25 @@ import MypageDetailEach from '../components/MypageDetailEach';
 
 const MypageDetail = (props) => {
 
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(mypageActions.getUserInfo());
+    }, []);
+
     const is_what = useSelector((state)=>state.mypage.is_what);
     console.log(is_what);
     const mypostList = useSelector((state)=>state.mypage.mypost);
     const myanswerList = useSelector((state)=>state.mypage.myanswer);
-    const userInfo = useSelector((state)=>state.mypage.userInfo);
+    const userInfo = useSelector((state)=>state.mypage.userinfo);
+
+    console.log(userInfo);
 
     
     if(is_what === 'mypost') {
         return (
             <div>
                 <div>내가 요청한 글</div>
-                {/* <div>{userInfo.nickname} | {userInfo.hippoName} | {userInfo.postCount} | {userInfo.answerCount}</div> */}
+                <div>{userInfo.nickname} | {userInfo.hippoName} | 내가 요청한글 갯수 {userInfo.postCount} | 내가 답변한 글 갯수 {userInfo.answerCount}</div>
                 <hr/>
                 {mypostList.map((info, idx) => {
                 return (
@@ -40,7 +47,7 @@ const MypageDetail = (props) => {
         return (
             <div>
                 <div>나의 답변 글</div>
-                {/* <div>{userInfo.nickname} | {userInfo.hippoName} | {userInfo.postCount} | {userInfo.answerCount}</div> */}
+                <div>{userInfo.nickname} | {userInfo.hippoName} | 내가 요청한글 갯수 {userInfo.postCount} | 내가 답변한 글 갯수 {userInfo.answerCount}</div>
                 <hr/>
                 {myanswerList.map((info, idx) => {
                 return (

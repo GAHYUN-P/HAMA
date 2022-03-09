@@ -12,7 +12,7 @@ const Mypage = (props) => {
     React.useEffect(() => {
         dispatch(mypageActions.getBanner());
         dispatch(mypageActions.getAchievement());
-        // dispatch(mypageActions.getUserInfo());
+        dispatch(mypageActions.getUserInfo());
     }, []);
 
     const nickname = useSelector((state) => state.mypage.list.nickname);

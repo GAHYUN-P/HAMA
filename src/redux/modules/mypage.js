@@ -138,6 +138,7 @@ export const mypageActions = {
   getMyanswer,
   setCategory,
   setDetail,
+  getUserInfo,
 };
 
 export default mypage;

@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import MypageListEach from './MypageListEach';
 import { mypageActions } from '../redux/modules/mypage';
+import user from '../redux/modules/user';
 
 const MypostList = (props) => {
 
@@ -13,6 +14,7 @@ const MypostList = (props) => {
         dispatch(mypageActions.getMypost());
     }, []);
 
+    
     const mypost_list = useSelector((state) => state.mypage.mypost);
     const prev_list = mypost_list.slice(0,2);
     

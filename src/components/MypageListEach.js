@@ -8,7 +8,7 @@ const MypageListEach = (props) => {
     
   return (
     <div>
-      {props.title} | {props.modifiedAt} | {props.likeCount}
+      {props.title} | {props.modifiedAt}
     </div>
   );
 };
