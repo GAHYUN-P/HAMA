@@ -3,7 +3,7 @@ import React from 'react';
 import { history } from '../redux/configureStore';
 
 const AnswerCard = (props) => {
-    const { answerWritter, modifiedAt, title, commentCount, answerId,imageCount } = props;
+    const { answerWritter, modifiedAt, title, commentCount, answerId, imageCount, answerLikeCount } = props;
     console.log(props)
     return(
         <React.Fragment>
@@ -13,7 +13,7 @@ const AnswerCard = (props) => {
                     <div>{title}</div>
                     <div>
                         <div>{answerWritter} {modifiedAt} 조회수</div>
-                        <div>사진수{imageCount} 좋아요{commentCount}</div>
+                        <div>사진수{imageCount} 댓글{commentCount} 좋아요{answerLikeCount}</div>
                     </div>
                 </div>
             </div>

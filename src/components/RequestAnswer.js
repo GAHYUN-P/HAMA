@@ -5,9 +5,13 @@ import AnswerCard from './AnswerCard';
 
 const RequestAnswer = (props) => {
     const [stand, setStand] = useState('최신순');
-    const standard = ['최신순', '조회수', '댓글순', '좋아요순']
+    const standard = ['최신순', '조회수', '댓글순', '좋아요순'];
     const answerList = props.answers;
-
+    console.log(answerList)
+    let List = answerList;
+    if(stand === '댓글순'){
+        // List = answerList.sort((a,b)=>{return b.commentCount - a.commentCount});
+    }
     return (
         <React.Fragment>
             <div style={{ width:'90%', margin:'10px auto 0' }}>
@@ -20,7 +24,7 @@ const RequestAnswer = (props) => {
                     })}
                 </div>
                 <div>
-                    {answerList.map((a,i)=>{
+                    {List.map((a,i)=>{
                         return(<AnswerCard {...a} key={i} />)
                     })}
                 </div>

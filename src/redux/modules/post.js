@@ -20,6 +20,8 @@ export const initialState = {
         fileList: [
             'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
         ],
+        status: 'true',
+        timeSet:'n시간 남았습니다.',
     },
     likeUserIdList:[1,2,3,4,5],
     answers: [{
@@ -40,6 +42,7 @@ const setAnswer = createAction('post/setAnswer');
 const pushLike = createAction('post/pushLike');
 const setTag = createAction('post/TAG');
 const setSort = createAction('post/SORT');
+const concluseRequest = createAction('post/concluseRequest')
 
 const post = createReducer(initialState, {
     [setList] : (state, action) => {
@@ -65,6 +68,10 @@ const post = createReducer(initialState, {
     },
     [setSort] : (state, action) => {
         state.sort = action.payload;
+    },
+    [concluseRequest] : (state, action) => {
+        state.request.status = 'false';
+        state.request.timeSet = '마감된 요청입니다.';
     },
 
 });
@@ -108,6 +115,16 @@ const editRequestDB = (postId,content) => async (dispatch, getState, {history}) 
     }catch(error){
         console.log('error',error);
     }
+}
+
+const concluseRequestDB = (postId) => async (dispatch, getState, {history}) => {
+    requestAPI.concluseRequest(postId)
+    .then(()=>{
+        dispatch(concluseRequest());
+    })
+    .catch(err=>{
+        console.log('error',err);
+    })
 }
 
 const getOneRequest = (postId) => async (dispatch, getState, {history}) => {
@@ -163,9 +180,11 @@ export const postActions = {
     getOneRequest,
     pushLikeDB,
     editRequestDB,
+    concluseRequestDB,
     setTag,
     getSortList,
     setSort,
+    concluseRequest,
 };
 
 export default post;

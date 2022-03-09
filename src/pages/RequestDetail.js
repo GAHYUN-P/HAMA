@@ -34,11 +34,12 @@ const RequestDetail = (props) => {
                 <RequestContents {...request}/>
                 <RequestCenter request={request} like={like} />
                 <RequestAnswer answers = {answers} />
+                { request.status === 'true' && 
                 <div>
                     <button
                     onClick={()=>{history.push(`/answer/${postId}`)}}
                     style={{border:'none',backgroundColor:'#fff'}} >글쓰기</button>
-                </div>
+                </div>}
             </div>
             {/* <button onClick = {onClickChat}>채팅방</button>
             <EnterChattingBtn
