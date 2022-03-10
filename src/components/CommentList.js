@@ -53,7 +53,7 @@ const CommentList = (props) => {
                     value={content}
                     onChange={(e)=>{setContent(e.target.value)}}
                     type='text' 
-                    placeholder='00:00:00(타임 스탬프)댓글을 작성해 주세요.'/>
+                    placeholder='00:00(타임 스탬프)댓글을 작성해 주세요.'/>
                     {content &&
                     <div style={{padding:'5px 8px'}} onClick={cancel} >x</div>}
                     <button style={{border:'none'}} onClick={commenting} >작성</button>

@@ -1,16 +1,19 @@
 import React from "react";
+
 import { history } from '../redux/configureStore';
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
+
+import { getUserId } from "../shared/cookie";
 
 import Viewer from "./Viewer";
 
 const RequestContents = (props) => {
     const dispatch = useDispatch();
-    const { category, title, level, content, fileList, postId, timeSet } = props;
+    const { category, title, level, content, fileList, postId, timeSet, user_id } = props;
     
     const _conclusion = useSelector(state => state.post.request.status);
-    console.log(_conclusion);
+
     const conclusion = () => {
         if(window.confirm('마감을 누르시면 되돌릴 수 없습니다. 마감하시겠습니까?')){
             dispatch(postActions.concluseRequestDB(postId));
@@ -29,7 +32,7 @@ const RequestContents = (props) => {
                         <p>{timeSet}</p>
                         <button>{level}</button>
                     </div>
-                    { _conclusion === 'true' &&
+                    { _conclusion === 'true' && user_id === Number(getUserId()) &&
                     <div style={{ display:'flex' }} >
                         <button onClick={conclusion} >마감</button>
                         <button onClick={()=>{history.push(`/request/${postId}`)}} >수정</button>
