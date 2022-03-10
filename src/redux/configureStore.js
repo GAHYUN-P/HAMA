@@ -17,6 +17,7 @@ import Answer from './modules/answer';
 import Mypage from './modules/mypage';
 import Child from './modules/child';
 import Search from './modules/search';
+import Shorts from './modules/shorts';
 
 
 export const history = createBrowserHistory();
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   mypage: Mypage,
   child: Child,
   search: Search,
+  shorts: Shorts,
   router: connectRouter(history)
 });
 

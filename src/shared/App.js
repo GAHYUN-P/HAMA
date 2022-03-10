@@ -27,12 +27,13 @@ import AppLayout from '../components/AppLayout';
 import Home from '../pages/Home';
 import PasswordFind from '../pages/PasswordFind';
 import UserInfo from '../pages/UserInfo';
-import Rank from '../components/Rank';
 import Survey from '../pages/Survey';
 import SurveyResult from '../pages/SurveyResult';
 import Mypage from '../pages/Mypage';
 import ChatList from '../components/ChatList';
 import MypageDetail from '../pages/MypageDetail';
+import Shorts from '../pages/Shorts';
+import Test from '../pages/Test';
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
           <Route path="/request" exact component={Request} />
           <Route path="/request/:postId" exact component={RequestEdit} />
           <Route path="/requestdetail/:postId" exact component={RequestDetail} />
-          <Route path="/test" exact component={Rank} />
+          <Route path="/test" exact component={Test} />
           <Route path="/home" exact component={Home} />
           <Route path="/survey" exact component={Survey} />
           <Route path="/result" exact component={SurveyResult} />
@@ -62,6 +63,7 @@ function App() {
           <Route path="/userinfo" exact component={UserInfo} />
           <Route path="/search" exact component={Search} />
           <Route path="/search/:keyword" exact component={SearchResult} />
+          <Route path="/shorts" exact component={Shorts} />
 
           <Route path="*" exact component={NotFound} />
         </Switch>
