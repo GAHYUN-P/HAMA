@@ -124,10 +124,10 @@ export const requestAPI = {
 
 export const answerAPI = {
   answering: function(data,postId) {
-    return axios.post(`/api/answer/${postId}`,data,config);
+    return axios.post(`/api/answer/${postId}`,data, config);
   },
   editAnswer: function(data,answerId) {
-    return axios.put(`/api/answer/${answerId}`,data,config);
+    return axios.put(`/api/answer/${answerId}`,data, config);
   },
   deleteAnswer: function(answerId) {
     return axios.delete(`/api/answer/${answerId}`,config)
