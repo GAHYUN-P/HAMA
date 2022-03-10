@@ -28,7 +28,8 @@ export const initialState = {
         commentWriter : '라면 무따',
         content : '개마싯게네요',
         modifiedAt : '2020-10-10T11:27:39',
-    },],
+    }
+    ,],
     childComment: []
 }
 

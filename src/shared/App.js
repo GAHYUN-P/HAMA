@@ -19,6 +19,8 @@ import Request from '../pages/Request';
 import RequestEdit from '../pages/RequestEdit';
 import RequestDetail from '../pages/RequestDetail';
 import ChildComment from '../pages/ChildComment';
+import SearchResult from '../pages/SearchResult';
+import Search from '../pages/Search';
 
 // component
 import AppLayout from '../components/AppLayout';
@@ -59,6 +61,8 @@ function App() {
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage_detail" exact component={MypageDetail} />
           <Route path="/userinfo" exact component={UserInfo} />
+          <Route path="/search" exact component={Search} />
+          <Route path="/search/:keyword" exact component={SearchResult} />
           <Route path="/shorts" exact component={Shorts} />
 
           <Route path="*" exact component={NotFound} />
