@@ -207,6 +207,15 @@ export const searchAPI = {
   getResultAnswer: function (searchWord) {
     return axios.get(`/api/answersearch/${searchWord}`, config);
   },
+  getRecentWord: function (){
+    return axios.get('/api/search',config);
+  },
+  deleteRecentWord: function (searchId){
+    return axios.delete(`/api/search/${searchId}`,config);
+  },
+  deleteAll: function (){
+    return axios.delete(`/api/search`,config);
+  },
 };
 
 export const shortsAPI = {

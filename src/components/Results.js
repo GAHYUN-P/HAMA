@@ -10,8 +10,10 @@ const Results = (props) => {
 
     return(
         <React.Fragment>
-            {!list &&
-            <div>잠시만용</div>}
+            {list.length === 0 && 
+                <div style={{display:'flex',justifyContent:'center',padding:'4rem 0'}} >
+                    검색 결과가 없습니다.
+                </div>}
             {list &&
             list.map((l,i)=>{
                 return (
