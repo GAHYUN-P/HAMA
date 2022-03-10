@@ -15,7 +15,7 @@ axios.defaults.baseURL = 'http://3.36.53.246';
 const config = {
   headers:{
       'token':getToken(),
-  }
+  } 
 }
 
 const uploadconfig = {
@@ -206,5 +206,11 @@ export const searchAPI = {
   },
   getResultAnswer: function (searchWord) {
     return axios.get(`/api/postsearch/${searchWord}`, config);
+  },
+};
+
+export const shortsAPI = {
+  getShorts : function () {
+    return axios.get(`/api/shorts`);
   },
 };
