@@ -205,6 +205,6 @@ export const searchAPI = {
     return axios.get(`/api/postsearch/${searchWord}`, config);
   },
   getResultAnswer: function (searchWord) {
-    return axios.get(`/api/postsearch/${searchWord}`, config);
+    return axios.get(`/api/answersearch/${searchWord}`, config);
   },
 };

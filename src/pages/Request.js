@@ -13,21 +13,22 @@ const Request = (props) => {
 
     const contentRef = React.useRef();
     const titleRef = React.useRef();
-    const timeRef = React.useRef();
     const [category, setCategory] = useState('');
     const [level, setLevel] = useState('');
+    const [time,setTime] = useState('기한없음');
 
     // 카테고리와 레벨 배열
     const categoies = [
         '먹방/요리','운동','지식','창작','방문','직업',
         '반려동물','패션/뷰티','고민상담','가전','생활','기타'
-    ]
-    const levels = ['상','중','하']
+    ];
+    const levels = ['상','중','하'];
+    const timeset = ['기한없음','3','6','12','24'];
 
     const posting = () => {
         const title = titleRef.current.value;
         const content = contentRef.current.value;
-        const timeset = timeRef.current.value;
+        const timeSet = time === '기한없음' ? 0 : Number(time)
         if(!title || !content || !category || !level){
             window.alert('제목,내용,분야,난이도는 필수 선택사항이다 이 새꺄!')
             return
@@ -37,17 +38,16 @@ const Request = (props) => {
             content: content,
             category: category,
             level: level,
-            timeSet: timeset ? timeset : 0,
+            timeSet: timeSet,
         }
-
         dispatch(postActions.makeRequest(data));
     }
 
     return(
     <React.Fragment>
-        <div style={{width:'90%',padding:'8px 4px'}} >
+        <div style={{width:'90%', height:'100%',padding:'8px 4px',overflowY:'scroll'}} >
         {/* 제목과 내용 */}
-        <div style={{width:'90%', margin:'0 auto'}} >
+        <div style={{width:'100%', margin:'0 auto'}} >
             <div style={{margin:'10px 0'}} >
                 <h3>제목</h3>
             </div>
@@ -58,8 +58,6 @@ const Request = (props) => {
             
             <div style={{margin:'10px 0',display:'flex',justifyContent:'space-between'}} >
                 <h3>내용</h3>
-                <input type='text' placeholder='기한없음' ref={timeRef}
-                style={{border:'none',outline:'none',width:'20%',padding:'4px'}} />
             </div>
             <div style={{width:'100%'}} >
                 <textarea
@@ -74,13 +72,13 @@ const Request = (props) => {
         </div>
 
         {/* 이미지 업로드 */}
-        <div style={{width:'90%', margin:'0 auto'}} >
-            <h3>이미지</h3>
+        <div style={{width:'100%', margin:'0 auto'}} >
+            <h3>사진등록</h3>
             <ImageUploader />
         </div>
 
         {/* 태그 */}
-        <div style={{width:'90%', margin:'10px auto 0'}} >
+        <div style={{width:'100%', margin:'10px auto 0'}} >
             <div style={{margin:'10px 0 10px'}}>
                 <h3>카테고리</h3>
             </div>
@@ -93,8 +91,26 @@ const Request = (props) => {
             })}
         </div>
         
+        {/* 시간설정 */}
+        <div style={{width:'100%', margin:'10px auto 0'}} >
+            <div style={{margin:'10px 0 10px'}}>
+                <h3>시간설정</h3>
+            </div>
+            <div>
+            {timeset.map((t,i)=>{
+                return(
+                    <Tag 
+                    key={i}
+                    tag={time}
+                    value={t}
+                    _onClick={(e)=>{setTime(e.target.innerHTML)}}>{t}</Tag>
+                )
+            })}
+            </div>
+        </div>
+        
         {/* 난이도 */}
-        <div style={{width:'90%', margin:'0 auto'}}>
+        <div style={{width:'100%', margin:'0 auto'}}>
             <div style={{margin:'10px 0'}} >
                 <h3>난이도</h3>
             </div>
