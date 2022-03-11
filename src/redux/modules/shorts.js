@@ -5,7 +5,16 @@ import { shortsAPI } from '../../shared/api';
 import { StompSocketState } from '@stomp/stompjs';
 
 export const initialState = {
-    shortsList: [],
+    shortsList: [
+      {
+        videoUrl: "",
+        title: "",
+        nickname: "",
+        profileUrl: "",
+        answerId: null,
+        // postId: null,
+      },
+    ],
     shorts: {
         videoUrl: "",
         title: "",
@@ -19,18 +28,17 @@ export const initialState = {
 
 
 const setShortsList = createAction('shorts/SETSHORTSLIST');
-const addOneShort = createAction('shorts/ADDONESHORT');
+const addShorts = createAction('shorts/ADDSHORTS');
 const setIdx = createAction('shorts/SETIDX');
 const isLoading = createAction('shorts/SETISLOADING');
 
 const shorts = createReducer(initialState, {
     [setShortsList] : (state, action) => {
-        console.log(action.payload);
-        state.shortsList = [...action.payload];
+        state.shortsList = action.payload;
       },
-    [addOneShort] : (state, action) => {
+    [addShorts] : (state, action) => {
         console.log(action.payload);
-        state.shortsList.push(action.payload);
+        state.shortsList.push(...action.payload);
       },
     [setIdx] : (state, action) => {
         console.log(action.payload);
@@ -47,23 +55,22 @@ const shorts = createReducer(initialState, {
 
 const getShort = () => async (dispatch, getState, { history }) => {
     try {
-      dispatch(isLoading(true));
-      const res1 = await shortsAPI.getShorts();
-      const res2 = await shortsAPI.getShorts();
-      const res3 = await shortsAPI.getShorts();
-      dispatch(setShortsList([res1.data, res2.data, res3.data]));
+      const res = await shortsAPI.getShorts();
+      dispatch(setShortsList(res.data));
       console.log(getState().shorts.shortsList);
+      dispatch(isLoading(true));
     }
     catch (error) {
       console.log(error);
     }
-    dispatch(isLoading(false));
   };
 
 const addShort = () => async (dispatch, getState, { history }) => {
     try {
-      const res = await shortsAPI.getShorts();
-      dispatch(addOneShort(res.data));
+      const res1 = await shortsAPI.getShorts();
+      const res2 = await shortsAPI.getShorts();
+      const res3 = await shortsAPI.getShorts();
+      dispatch(addShorts([res1.data, res2.data, res3.data]));
     }
     catch (error) {
       console.log(error);
