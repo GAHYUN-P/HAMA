@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { postActions } from "../redux/modules/post";
 import { history } from '../redux/configureStore';
+import { getUserId } from "../shared/cookie";
 import { chatAPI } from "../shared/api";
 
 // 각 항목의 컴포넌트
@@ -14,11 +15,9 @@ const RequestDetail = (props) => {
     const dispatch =useDispatch();
     const postId = props.match.params.postId;
     
-    const request = useSelector(state => state.post.request);
-    const like = useSelector(state => state.post.likeUserIdList);
-    const answers = useSelector(state => state.post.answers);
+    const { request, likeUserIdList, answers } = useSelector(state => state.post);
     // const roomId = useSelector(state => state.post.request.roomId);
-
+    const can_write = request.status === 'true' && props.user_id === getUserId() ? true : false;
     React.useEffect(()=>{
         dispatch(postActions.getOneRequest(postId));
     },[])
@@ -32,9 +31,9 @@ const RequestDetail = (props) => {
         <React.Fragment>
             <div style={{width:'90%', padding:'16px'}} >
                 <RequestContents {...request}/>
-                <RequestCenter request={request} like={like} />
+                <RequestCenter request={request} like={likeUserIdList} />
                 <RequestAnswer answers = {answers} />
-                { request.status === 'true' && 
+                { can_write && 
                 <div>
                     <button
                     onClick={()=>{history.push(`/answer/${postId}`)}}

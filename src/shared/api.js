@@ -141,11 +141,15 @@ export const answerAPI = {
   addComment: function(data) {
     return axios.post(`/api/comment/${data.answerId}`,{
       comment: data.comment,
-      parentCommentId: data.parentCommentId
+      parentCommentId: data.parentCommentId,
+      timestamp: data.timestamp
     },config);
   },
-  editComment: function(commentId,comment) {
-    return axios.put(`/api/comment/${commentId}`,{content: comment},config);
+  editComment: function(data) {
+    return axios.put(`/api/comment/${data.commentId}`,{
+      content: data.comment,
+      timestamp: data.timestamp
+    },config);
   },
   removeComment: function(commentId) {
     return axios.delete(`/api/comment/${commentId}`,config);
@@ -222,4 +226,8 @@ export const shortsAPI = {
   getShorts : function () {
     return axios.get(`/api/shorts`);
   },
+};
+
+export const alamAPI = {
+
 };

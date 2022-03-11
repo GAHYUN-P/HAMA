@@ -10,7 +10,8 @@ const getCookie = (name) => {
 // 유저 고유 아이디 가져오기
 const getUserId = () => {
   if(document.cookie){
-    const userId = document.cookie.split('userId=')[1];
+    let userId = document.cookie.split('userId=')[1];
+    userId = Number(userId);
     return userId;
   }
   return null;
