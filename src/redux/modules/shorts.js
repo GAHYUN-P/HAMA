@@ -2,7 +2,6 @@ import { createReducer, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { deleteCookie, setCookie } from '../../shared/cookie';
 import { shortsAPI } from '../../shared/api';
-import { StompSocketState } from '@stomp/stompjs';
 
 export const initialState = {
     shortsList: [
