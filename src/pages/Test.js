@@ -1,15 +1,20 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-import React, { Component } from "react";
+import React, { useRef } from "react";
 import Slider from "react-slick";
 import { shortsActions } from "../redux/modules/shorts";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from 'react-player';
+import { history } from "../redux/configureStore";
 
 const Test = (props) => {
     const dispatch = useDispatch();
-    const idx = useSelector((state) => state.shorts.idx);
+    const slider = useRef();
+    const player = useRef();
+
+    const [play, setPlay] = React.useState(false);
+    const [lastpg, setLastpg] = React.useState(false);
 
     React.useEffect(() => {
         console.log('유즈이펙트');
@@ -19,55 +24,88 @@ const Test = (props) => {
     
     const items = useSelector((state) => state.shorts.shortsList);
     console.log(items);
-    const is_loading = useSelector((state) => state.shorts.is_loading);
-    
-    const item_list = items.slice(-3);
-    console.log(item_list);
-
 
     const settings = {
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
+        infinite: false,
+        lazyLoad: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         beforeChange: () => {
-            dispatch(shortsActions.setIdx(idx + 1));
-            console.log('바뀌기전~'+idx);
-            if(idx===2){
-                dispatch(shortsActions.setIdx(0));
-                dispatch(shortsActions.addShort());
+            console.log('바뀌기전~')
+            if(player.current.props.idx < items.length - 1) {
+              setLastpg(false); 
             }
         },
-        afterChange: () => {    
-            console.log('바뀌고나서~' + idx)},
+        afterChange: () => { 
+            setPlay(true);
+            console.log('바뀌고나서~');
+            if(player.current.props.idx === items.length - 1) {
+              setLastpg(true);
+            }
+            if(player.current.props.idx < items.length - 1) {
+              setLastpg(false); 
+            }
+          },
+        onEdge: () => {
+          window.location.reload();
+        }
     };
 
+    const handleVideo = () => {
+      console.log('영상끝');
+      setTimeout(() => {
+          slider.current.slickNext();
+        }, 1000);
+    }
+
+    const handlePlaying = () => {
+      if(play === true) {
+        return true;
+      }
+      return false;
+    }
+
+    const is_loading = useSelector((state) => state.shorts.is_loading);
     
-    
-    return (
+    if(is_loading) {
+      return (
         <Container>
           <h2> Single Item</h2>
-          <StyledSlider {...settings}>
-            {item_list.map((item, idx) => {
+          <StyledSlider {...settings} ref={slider}>
+            {items.map((item, idx) => {
               return (
                 <div key={idx}>
-                    <div>{item.title}</div> 
                     <ImageContainer>
                         <ReactPlayer 
+                            ref={player}
+                            idx={idx}
                             url={item.videoUrl}
-                            controls
-                            playing={true}
+                            // controls
+                            playing={handlePlaying}
                             muted={true}
                             width={'800px'}
-                            height={'500px'}/>
+                            height={'500px'}
+                            onEnded={handleVideo}
+                            />
                     </ImageContainer>
+                    <div>
+                      <div onClick={() => history.push(`/answerdetail/${item.answerId}`)}>{item.title}</div> 
+                      <div>{item.profileUrl} | {item.nickname}</div> 
+                    </div>
                 </div>
               );
-            })}
+            })} 
           </StyledSlider>
+          {lastpg && 
+            <div>
+              목록에 있는 영상을 다 보셨습니다 옆으로 넘기면 갱신됩니다!
+            </div>
+            }
         </Container>
     );
+    }
+
+    return <></>;
 };
 
 const Container = styled.div`
