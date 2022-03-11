@@ -1,12 +1,17 @@
 import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { answerActions } from '../redux/modules/answer';
+import { history } from '../redux/configureStore';
+
 import { getUserId } from '../shared/cookie';
-import { history } from '../redux/configureStore'
+import { getComment, getBtnString } from '../shared/separator';
+
+import styled from 'styled-components';
 
 const AnswerComments = (props) => {
     const dispatch = useDispatch();
-    
+    const {videoRef,timestamp,content} = props;
     // 댓글 삭제 요청
     const delcom = () => {
         const data = {
@@ -22,7 +27,9 @@ const AnswerComments = (props) => {
         props.commentRef.current.focus();
     };
 
-    console.log(props)
+    const pushStamp = () => {
+        videoRef.current.seekTo(timestamp);
+    }
 
     return (
         <React.Fragment>
@@ -39,17 +46,33 @@ const AnswerComments = (props) => {
                         <button onClick={delcom} >삭제</button>
                     </div>}
                 </div>
-                <div>{props.content}</div>
+                {/* 타임스탬프가 있을 때 나올 댓글 */}
+                {timestamp &&
+                <div>
+                    <TimeStampBtn onClick={pushStamp} >{getBtnString(content)}</TimeStampBtn>
+                    {getComment(content)}
+                </div>}
+                {/* 타임스탬프가 없을 때 나올 댓글 */}
+                {!timestamp &&
+                <div>
+                    {content}
+                </div>}
                 <div>{props.modifiedAt}</div>
                 <button
                 style={{border:'none', backgroundColor:'#eee', padding:'8px'}}
                 onClick={()=>{history.push(`/comment/${props.commentId}`)}} >답글</button>
                 <br/>
                 
-                
             </div>
         </React.Fragment>
     )
 }
+
+const TimeStampBtn = styled.button`
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #f5f5f5;
+    color: #ff7a7a;
+`;
 
 export default AnswerComments;

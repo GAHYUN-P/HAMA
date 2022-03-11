@@ -10,8 +10,6 @@ const RateBox = (props) => {
     const starPoint = useSelector(state => state.answer.answer.star);
     const [point, setPoint] = React.useState(0);
 
-    console.log(starPoint);
-
     const rating = () => {
         if(point === 0){
             window.alert('적어도 1점은 주셔야 합니다!')
@@ -23,8 +21,6 @@ const RateBox = (props) => {
         }
         dispatch(answerActions.starDB(data));
     }
-
-    console.log(props);
 
     if(starPoint > 0){
         return (

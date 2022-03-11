@@ -13,9 +13,7 @@ import styled from "styled-components";
 const AnswerContent = (props) => {
     const dispatch = useDispatch();
     // 이미지 리스트
-    const fileList = props.fileList;
-    const video = props.videoUrl;
-    const answerId = props.answerId;
+    const { videoRef, fileList, videoUrl, answerId } = props;
 
     // 좋아요 작용
     const likeList = useSelector(state => state.answer.answer.likeUserList);
@@ -65,7 +63,7 @@ const AnswerContent = (props) => {
                         {props.content}
                     </div>
                     
-                    <Viewer fileList={fileList} video={video} is_answer  />
+                    <Viewer videoRef={videoRef} fileList={fileList} video={videoUrl} is_answer  />
                 </div>
 
             </div>

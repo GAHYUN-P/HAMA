@@ -18,7 +18,7 @@ export const initialState = {
         answerLikeCount: 0,
         answerWriter:'라면무쨔',
         fileList:['https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png'],
-        video:'',
+        videoUrl:'',
     },
     comments: [
         {
@@ -63,10 +63,11 @@ const answer = createReducer(initialState,{
         state.comments = [...state.comments,action.payload];
     },
     [editComment]: (state,action) => {
+        const {comment,timestamp} = action.payload
         state.comments = state.comments.map((c)=>{
             console.log(c)
             if(c.commentId === action.payload.commentId){
-                return c ={...c,content:action.payload.comment}
+                return c ={...c,content: comment,timestamp: timestamp}
             }
             return c
         })
@@ -169,7 +170,7 @@ const deleteCommentDB = (data) => async (dispatch, getState, {history}) => {
 
 const editCommentDB = (data) => async (dispatch, getState, {history}) => {
     try{
-        const _edit = await answerAPI.editComment(data.commentId,data.comment);
+        const _edit = await answerAPI.editComment(data);
         console.log('댓글 수정 완료!');
         dispatch(editComment(data));
     }catch(error){
