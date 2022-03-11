@@ -44,7 +44,7 @@ const Shorts = (props) => {
         <ReactPlayer 
             url={shortsList[playIndex].videoUrl}
             controls
-            onEnded={() => {handleNextVideo()}}
+            oenEnded={() => {handleNextVideo()}}
             width={'800px'}
             height={'500px'}/>
         <div>
