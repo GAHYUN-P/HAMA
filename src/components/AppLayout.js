@@ -37,12 +37,11 @@ function AppLayout(props) {
   // }, []);
   
   return (
-    <div></div>
-    // <Container>
-    //   {/* 로그인했을 때만 헤더 노출 */}
-    //   {is_login && <Header />}
-    //   <Main>{props.children}</Main>
-    // </Container>
+    <Container>
+      {/* 로그인했을 때만 헤더 노출 */}
+      <Header />
+      <Main>{props.children}</Main>
+    </Container>
   );
 }
 
