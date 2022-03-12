@@ -39,7 +39,7 @@ function AppLayout(props) {
   return (
     <Container>
       {/* 로그인했을 때만 헤더 노출 */}
-      {is_login && <Header />}
+      <Header />
       <Main>{props.children}</Main>
     </Container>
   );
