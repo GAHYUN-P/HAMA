@@ -17,6 +17,7 @@ const paddings = {
   xl: calcRem(14),
   xxl: calcRem(16),
   xxxl: calcRem(18),
+  xxxxl: calcRem(23),
 };
 
 const margins = {

@@ -92,7 +92,7 @@ const Container = styled.div`
     margin: 0 auto;
     padding: 0 auto;
     box-sizing: border-box;
-    background-color: #d9e3ee;
+    background-color: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     @media screen and (min-width: 1024px) {
