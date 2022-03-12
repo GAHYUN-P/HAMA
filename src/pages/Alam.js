@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { alamActions } from "../redux/modules/alam";
 
 import AlamCard from "../components/AlamCard";
+import Header from '../components/Header';
 
 const Alam = (props) => {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Alam = (props) => {
 
     return(
         <React.Fragment>
+            <Header />
             <div style={{width:'90%',height:'100%',margin:'auto',padding:'5rem 0'}} >
                 {/* 오늘자 알림 */}
                 <div style={{width:'100%', margin:'0 0 2rem'}} >

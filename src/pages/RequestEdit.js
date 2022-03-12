@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import ImageUploader from '../components/ImageUploader';
+import Header from '../components/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../redux/modules/post';
@@ -36,7 +37,8 @@ const RequestEdit = (props) => {
 
     return(
         <React.Fragment>
-            <div style={{width:'90%',padding:'8px 4px'}} >
+        <Header />
+        <div style={{width:'90%',padding:'8px 4px'}} >
         {/* 제목과 내용 */}
         <div style={{width:'90%', margin:'0 auto'}} >
             <div style={{margin:'10px 0'}} >
