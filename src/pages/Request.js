@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Tag from '../elements/Tag';
 import Level from '../elements/Level';
 import ImageUploader from '../components/ImageUploader';
+import Header from '../components/Header';
 
 import { useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
@@ -45,6 +46,7 @@ const Request = (props) => {
 
     return(
     <React.Fragment>
+         <Header />   
         <div style={{width:'90%', height:'100%',padding:'8px 4px',overflowY:'scroll'}} >
         {/* 제목과 내용 */}
         <div style={{width:'100%', margin:'0 auto'}} >

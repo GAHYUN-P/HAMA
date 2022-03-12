@@ -5,6 +5,7 @@ import { searchActions } from '../redux/modules/search';
 import { history } from '../redux/configureStore';
 
 import Results from '../components/Results';
+import Header from '../components/Header';
 
 import styled from 'styled-components';
 
@@ -47,6 +48,7 @@ const SearchResult = (props) => {
 
     return(
         <React.Fragment>
+            <Header />
             <div style={{width:'100%',height:'100%'}} >
                 {/* 검색창 */}
                 <div

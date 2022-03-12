@@ -5,6 +5,7 @@ import { history } from '../redux/configureStore';
 import { searchActions } from '../redux/modules/search';
 
 import RecentWord from '../components/RecentWord';
+import Header from '../components/Header';
 
 const Search = (props) => {
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const Search = (props) => {
 
     return(
         <React.Fragment>
+            <Header />
             <div style={{width:'100%',height:'100%'}} >
                 {/* 검색창 */}
                 <div style={{width:'90%',border:'1px solid #000', borderRadius:'1rem',padding:'0.5rem 0.5rem',margin:'15px auto',display:'flex'}} >

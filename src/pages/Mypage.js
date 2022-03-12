@@ -4,6 +4,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import Medal from '../components/Medal';
 import MypostList from '../components/MypostList';
 import MyanswerList from '../components/MyanswerList';
+import Header from '../components/Header';
 import { history } from '../redux/configureStore';
 
 const Mypage = (props) => {
@@ -36,6 +37,7 @@ const Mypage = (props) => {
 
   return (
     <div>
+      <Header />
       <div>{nickname} | {email} | {hippoName} | {point} | {hippolv}</div>
       {achievement_list.map((info, idx) => {
                 return (

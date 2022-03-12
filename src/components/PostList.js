@@ -6,6 +6,8 @@ import { postActions } from '../redux/modules/post';
 import { postAPI } from '../shared/api';
 import { push } from 'connected-react-router';
 
+import Footer from './Footer';
+
 const PostList = (props) => {
     // 트러블 슈팅: 카테고리 누르면 나오는데 안누르고 딱 로딩됐을때
     // 전체페이지가 안나왔었음

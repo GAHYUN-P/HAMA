@@ -5,7 +5,6 @@ import RankList from '../components/RankList';
 import Banner from '../components/Banner';
 import Category from '../elements/Category';
 import PostList from '../components/PostList';
-import Footer from '../components/Footer';
 
 const Home = (props) => {
   return (
@@ -15,7 +14,6 @@ const Home = (props) => {
       <RankList/>
       <Category/>
       <PostList/>
-      <Footer/>
     </div>
   );
 };
