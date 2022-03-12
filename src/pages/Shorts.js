@@ -7,7 +7,7 @@ import { shortsActions } from "../redux/modules/shorts";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from 'react-player';
 import { history } from "../redux/configureStore";
-
+import Header from "../components/Header";
 
 const Shorts = (props) => {
     const dispatch = useDispatch();
@@ -75,6 +75,7 @@ const Shorts = (props) => {
     if(is_loading) {
       return (
         <Container>
+          <Header />
           <h2> Single Item</h2>
           <StyledSlider {...settings} ref={slider}>
             {items.map((item, idx) => {

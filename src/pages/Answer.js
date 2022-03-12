@@ -5,6 +5,7 @@ import { answerActions } from '../redux/modules/answer';
 
 import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
+import Header from '../components/Header';
 
 const Answer = (props) => {
     const dispatch = useDispatch(); 
@@ -24,6 +25,7 @@ const Answer = (props) => {
 
     return (
         <React.Fragment>
+          <Header />
             <div style={{width:'80%', margin: '16px auto', padding:'16px',}}>
 
               <div style={{margin:'5px 0'}} >

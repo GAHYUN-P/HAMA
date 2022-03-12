@@ -34,6 +34,7 @@ import Mypage from '../pages/Mypage';
 import ChatList from '../components/ChatList';
 import MypageDetail from '../pages/MypageDetail';
 import Shorts from '../pages/Shorts';
+import Footer from '../components/Footer';
 
 function App() {
   return (
@@ -65,9 +66,9 @@ function App() {
               <Route path="/search/:keyword" exact component={SearchResult} />
               <Route path="/shorts" exact component={Shorts} />
               <Route path="/alam" exact component={Alam} />
-
               <Route path="*" exact component={NotFound} />
             </Switch>
+            <Footer />
         </div>
       </Container>
     </ConnectedRouter>

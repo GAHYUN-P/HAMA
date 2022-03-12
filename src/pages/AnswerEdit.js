@@ -7,6 +7,7 @@ import { getUserId } from "../shared/cookie";
 
 import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
+import Header from '../components/Header';
 
 const AnswerEdit = (props) => {
     const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const AnswerEdit = (props) => {
 
     return (
         <React.Fragment>
+            <Header />
             <div style={{width:'80%', margin: '16px auto', padding:'16px'}} >
                 
                 <div style={{margin:'5px 0'}} >

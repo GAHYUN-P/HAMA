@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { childActions } from '../redux/modules/child';
 import { getUserId } from '../shared/cookie';
 
+import Header from '../components/Header';
+
 import styled from 'styled-components';
 
 const ChildComment = (props) => {
@@ -57,6 +59,7 @@ const ChildComment = (props) => {
 
     return(
         <React.Fragment>
+            <Header />
             <div style={{width:'90%', margin:'0 auto',position:'relative'}} >
                 {/* 부모댓글 */}
                 <div style={{display:'flex', justifyContent:'space-between'}} >

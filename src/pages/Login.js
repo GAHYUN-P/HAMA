@@ -50,6 +50,7 @@ const Login = ({ history, match }) => {
 
   return (
     <Container>
+      <Header />
       {username && (
         <Wrapper is_column>
           {username}님 환영합니다

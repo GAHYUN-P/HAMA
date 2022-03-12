@@ -6,7 +6,6 @@ import RankList from '../components/RankList';
 import Banner from '../components/Banner';
 import Category from '../elements/Category';
 import PostList from '../components/PostList';
-import Footer from '../components/Footer';
 
 import { Wrapper } from '../elements';
 
