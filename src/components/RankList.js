@@ -27,7 +27,10 @@ const RankList = (props) => {
 
     return (
     <div>
-        <button onClick={updateRank}>refresh</button>
+        <TitleWrap>
+          <div>유저 랭킹 TOP 5</div>
+          <button onClick={updateRank}>refresh</button>
+        </TitleWrap>
         {rankList.map((info, idx) => {
           return (
             <Rank
@@ -43,5 +46,11 @@ const RankList = (props) => {
     </div>
     );
 };
+
+const TitleWrap = styled.div`
+    display: flex;
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-weight: 600;
+`;
 
 export default RankList;
