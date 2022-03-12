@@ -9,9 +9,6 @@ import theme from './shared/theme';
 import { Provider } from 'react-redux';
 import store from './redux/configureStore';
 
-// CSS reset
-import './styles/reset.css';
-
 // 스크롤 css
 import './styles/scroll.css';
 
@@ -23,3 +20,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+

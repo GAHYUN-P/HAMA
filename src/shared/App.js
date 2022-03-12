@@ -85,6 +85,10 @@ const Container = styled.div`
   background: #d9e3ee;
   overflow: hidden;
   position: relative;
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   #wrap {
     width: 100%;
     max-width: 412px;
