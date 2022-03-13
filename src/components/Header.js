@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 
 import { useSelector,useDispatch } from 'react-redux';
+import { history } from '../redux/configureStore';
 
-import { getPage } from '../shared/getPages';
+import { getPage, NeedAlam } from '../shared/getPages';
 
-import { FiChevronLeft } from 'react-icons/fi';
+import { FiInfo, FiChevronLeft, FiSearch, FiBell, FiMoreHorizontal } from 'react-icons/fi';
 import styled from 'styled-components';
 
 const Header = (props) => {
   const pathname = window.location.pathname;
-
-  getPage(pathname);
+  const {is_what} =props; 
 
   if(pathname === '/'){
     return(
-      <Grid>
+      <Grid onClick={()=>{history.goBack()}} >
         x
       </Grid>
     )
@@ -23,14 +23,53 @@ const Header = (props) => {
   if(getPage(pathname).type === 'basic'){
     return(
       <Grid fSize='1rem' padding='1rem' is_flex justifyContent='space-around' >
+        
+        {pathname === '/home' && 
         <div>
+          로고
+        </div>}
+
+        { pathname !== '/home' &&
+        <div onClick={()=>{history.goBack()}} >
           <FiChevronLeft />
-        </div>
-        <div style={{fontWeight:'800',color:'#000',fontSize:'1.25rem'}} >
+        </div>}
+
+        {!is_what &&
+        <PageTitle style={{fontWeight:'800',color:'#000',fontSize:'1.25rem'}} >
           {getPage(pathname).title}
-        </div>
-        <div>
-          {/* 정보,검색,알람 */}
+        </PageTitle>}
+        {is_what &&
+        <PageTitle style={{fontWeight:'800',color:'#000',fontSize:'1.25rem'}} >
+          {is_what==='mypost' ? '내가 요청한 글':'내가 답변한 글'}
+        </PageTitle>}
+
+        <div style={{display:'flex'}} >
+
+          { pathname === '/home' &&
+          <div style={{padding:'0 1rem 0 0'}} >
+            <FiInfo />
+          </div>}
+
+          { NeedAlam(pathname) &&
+          <div>
+            <FiBell onClick={()=>{history.push('/alam')}} />
+          </div>}
+
+          { NeedAlam(pathname) &&
+          <div style={{padding:'0 0 0 1rem'}} >
+            <FiSearch onClick={()=>{history.push('/search')}} />
+          </div>}
+          
+          {pathname === '/alam' && 
+          <div>
+            on/off
+          </div>}
+
+          {pathname === '/mypage'  &&
+          <div  style={{padding:'0 0 0 1rem'}} >
+            <FiMoreHorizontal />
+          </div>}
+
         </div>
       </Grid>
     )
@@ -48,6 +87,10 @@ const Grid = styled.div`
   justify-content: space-between; 
   ${props => props.justifyContent ? `justify-content: ${props => props.justifyContent};` : ''}
   box-sizing: border-box;
+`;
+
+const PageTitle =styled.div`
+  font-size: ${({ theme })=>theme.fontSizes.titleSize};
 `;
 
 export default Header;

@@ -229,5 +229,16 @@ export const shortsAPI = {
 };
 
 export const alamAPI = {
-
+  getAlams: function () {
+    return axios.get(``,config)
+  },
+  deleteOneAlam: function(alamId){
+    return axios.delete(``,config)
+  },
+  deleteAllAlam: function(){
+    return axios.delete(``,config)
+  },
+  checkAlam: function(alamId){
+    return axios.post(``,config)
+  },
 };

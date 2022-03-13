@@ -3,6 +3,7 @@ import { mypageActions } from '../redux/modules/mypage';
 import { useSelector,useDispatch } from 'react-redux';
 import { history } from '../redux/configureStore';
 import MypageDetailEach from '../components/MypageDetailEach';
+import Header from '../components/Header';
 
 const MypageDetail = (props) => {
 
@@ -23,6 +24,7 @@ const MypageDetail = (props) => {
     if(is_what === 'mypost') {
         return (
             <div>
+                <Header is_what={is_what} />
                 <div>내가 요청한 글</div>
                 <div>{userInfo.nickname} | {userInfo.hippoName} | 내가 요청한글 갯수 {userInfo.postCount} | 내가 답변한 글 갯수 {userInfo.answerCount}</div>
                 <hr/>
@@ -46,6 +48,7 @@ const MypageDetail = (props) => {
     if(is_what === 'myanswer') {
         return (
             <div>
+                <Header is_what={is_what} />
                 <div>나의 답변 글</div>
                 <div>{userInfo.nickname} | {userInfo.hippoName} | 내가 요청한글 갯수 {userInfo.postCount} | 내가 답변한 글 갯수 {userInfo.answerCount}</div>
                 <hr/>

@@ -1,61 +1,94 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
+
 import { alamAPI } from '../../shared/api';
 
 export const initialState = {
-    today:[1],
-    lastday:[],
-    notCheck:'',
+    alams:'',
 }
 
 // actions
 const setAlam = createAction('alam/setAlam');
 const deleteAlam = createAction('alam/deleteAlam');
 const deleteAll = createAction('alam/deleteAlam');
-const setNotCheck = createAction('alam/setNotCheck')
+const readingCheck = createAction('alam/readingCheck');
+const getNewAlam = createAction('alam/getNewAlam');
 
 // reducer
 const alam = createReducer(initialState,{
     [setAlam]:(state,action) => {
-        const {today,lastday} = action.payload;
-        state.today = today;
-        state.lastday = lastday;
+        state.alams = action.payload;
+    },
+    [getNewAlam]:(state,action) => {
+        state.alams = [...state.alams,action.payload];
     },
     [deleteAlam]:(state,action) => {
-        const {type,alamId} = action.payload;
-        if(type){
-            state.today = state.today.filter((t)=>{return t.id !== alamId });
-        }
-        if(!type){
-            state.today = state.today.filter((t)=>{return t.id !== alamId });
-        }
+       state.alams = state.alams.filter(a=>{return a.id !== action.payload })
     },
     [deleteAll]:(state,action) => {
-        state.today = [];
-        state.lastday = [];
+        state.alams = [];
     },
-    [setNotCheck]:(state,action) => {
-        state.notCheck = action.payload;
+    [readingCheck]:(state,action) => {
+        state.alams = state.alams.map((a)=>{
+            if(a.id === action.payload){
+                return {...a, reading:'Y'}
+            }
+            return a
+        })
     },
 })
 
 const getAlamsDB = () => async (dispatch,getState,{history}) => {
-    // 알람페이지 들어갈 시 받는 서버요청
+    alamAPI.getAlams()
+    .then(res => {
+        console.log(res.data)
+        dispatch(setAlam(res.data));
+    })
+    .catch(err=>{
+        console.log('error',err)
+    })
 };
 
-const deleteAlamDB = () => async (dispatch,getState,{history}) => {
-    // 알람페이지에서 하나 삭제 버튼 누를 시 박는 요청
+const deleteAlamDB = (alamId) => async (dispatch,getState,{history}) => {
+    alamAPI.deleteOneAlam(alamId)
+    .then(()=>{
+        dispatch(deleteAlam(alamId));
+        console.log('삭제완료');
+    })
+    .catch(err=>{
+        console.log('error',err);
+    })
 };
 
 const deleteAllDB = () => async (dispatch,getState,{history}) => {
-    
+    alamAPI.deleteAllAlam()
+    .then(()=>{
+        dispatch(deleteAll());
+    })
+    .catch(err => {
+        console.log('error',err);
+    })
 };
 
+const checkAlamDB = (alamId) => async (dispatch,getState,{history}) => {
+    alamAPI.checkAlam(alamId)
+    .then(()=>{
+        dispatch(readingCheck(alamId));
+        console.log('읽었습니다.');
+    })
+    .catch(err=>{
+        console.log(err => {
+            console.log('error',err);
+        })
+    })
+}
 
 
 export const alamActions = {
     getAlamsDB,
     deleteAlamDB,
     deleteAllDB,
+    checkAlamDB,
+    getNewAlam,
 }
 
 export default alam

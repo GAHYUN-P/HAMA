@@ -6,6 +6,7 @@ import { searchActions } from '../redux/modules/search';
 
 import RecentWord from '../components/RecentWord';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Search = (props) => {
     const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const Search = (props) => {
                     <RecentWord />
                 </div>
             </div>
+            <Footer />
         </React.Fragment>
     )
 }

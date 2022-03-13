@@ -34,7 +34,6 @@ import Mypage from '../pages/Mypage';
 import ChatList from '../components/ChatList';
 import MypageDetail from '../pages/MypageDetail';
 import Shorts from '../pages/Shorts';
-import Footer from '../components/Footer';
 
 function App() {
   return (
@@ -68,7 +67,6 @@ function App() {
               <Route path="/alam" exact component={Alam} />
               <Route path="*" exact component={NotFound} />
             </Switch>
-            <Footer />
         </div>
       </Container>
     </ConnectedRouter>
@@ -82,7 +80,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: #d9e3ee;
+  background: #d9e3ee;  
   overflow: hidden;
   position: relative;
   #wrap {

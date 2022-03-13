@@ -11,6 +11,8 @@ import RequestCenter from "../components/RequestCenter";
 import RequestAnswer from "../components/RequestAnswer";
 import EnterChattingBtn from "../elements/EnterChattingBtn";
 
+import Header from "../components/Header";
+
 const RequestDetail = (props) => {
     const dispatch =useDispatch();
     const postId = props.match.params.postId;
@@ -29,7 +31,8 @@ const RequestDetail = (props) => {
 
     return (
         <React.Fragment>
-            <div style={{width:'90%', padding:'16px'}} >
+            <div style={{}} >
+                <Header />
                 <RequestContents {...request}/>
                 <RequestCenter request={request} like={likeUserIdList} />
                 <RequestAnswer answers = {answers} />

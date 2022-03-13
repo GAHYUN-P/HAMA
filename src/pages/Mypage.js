@@ -6,6 +6,7 @@ import MypostList from '../components/MypostList';
 import MyanswerList from '../components/MyanswerList';
 import Header from '../components/Header';
 import { history } from '../redux/configureStore';
+import Footer from '../components/Footer';
 
 const Mypage = (props) => {
 
@@ -51,6 +52,7 @@ const Mypage = (props) => {
       <hr/>
       <MyanswerList/>
       <button onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기</button>
+      <Footer />
     </div>
   );
 };

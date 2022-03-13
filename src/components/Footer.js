@@ -21,7 +21,7 @@ import styled from 'styled-components';
 
 const Footer = (props) => {
   const pathname = window.location.pathname;
-
+  
   if(getFooter(pathname)){
     return null
   }
@@ -32,18 +32,25 @@ const Footer = (props) => {
       <Btn 
       onClick={()=>{
         if(getFixed(pathname)==='home'){return;}
+        history.push('/home')
         console.log('작동')
       }}
       basic={ getFixed(pathname) === 'home' ? home : home_n} hover={home} />
 
       {/* 작성 */}
       <Btn 
-      onClick={()=>{console.log('작동')}}
+      onClick={()=>{
+        history.push('/request')
+        console.log('작동')
+      }}
       basic={write_n} hover={write} />
 
       {/* 쇼츠 */}
       <Btn 
-      onClick={()=>{console.log('작동')}}
+      onClick={()=>{
+        history.push('/shorts')
+        console.log('작동')
+      }}
       basic={shorts_n} hover={shorts} />
 
       {/* 평가하기 */}
@@ -55,6 +62,7 @@ const Footer = (props) => {
       <Btn 
       onClick={()=>{
         if(getFixed(pathname)==='mypage'){return;}
+        history.push('/mypage')
         console.log('작동')
       }}
       basic={getFixed(pathname) === 'mypage' ? mypage : mypage_n } hover={mypage} />

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { userActions } from '../redux/modules/user';
 import { userAPI } from '../shared/api';
 
+import Header from '../components/Header';
+
 const UserInfo = (props) => {
   
   const dispatch = useDispatch();
@@ -44,6 +46,7 @@ const UserInfo = (props) => {
 
   return (
     <div>
+      <Header />
       <input onChange={nicknameInput}/>
       <input onChange={genderInput}/>
       <input onChange={ageInput}/>
