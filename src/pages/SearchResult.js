@@ -6,6 +6,7 @@ import { history } from '../redux/configureStore';
 
 import Results from '../components/Results';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 import styled from 'styled-components';
 
@@ -88,6 +89,7 @@ const SearchResult = (props) => {
                 </div>
                 }
             </div>
+            <Footer />
         </React.Fragment>
     )
 };

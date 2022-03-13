@@ -68,7 +68,7 @@ const ChattingRoom = (props) => {
         },
         () => {
           ws.subscribe(
-            `/sub/api/chat/rooms/${roomId}`,
+            `구독해야할 주소`,
             (data) => {
               const newMessage = JSON.parse(data.body);
               dispatch(chatActions.getMessages(newMessage));

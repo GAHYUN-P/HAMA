@@ -1,10 +1,10 @@
 const Basic =[
     'home','request','requestedit','answer','answeredit','requestdetail','answerdetail',
-    'comment','search','searchresult','shorts','alam','mypage',
+    'comment','search','searchresult','shorts','alam','mypage','mypage_detail'
 ];
 const BasicName = [
     '','요청 작성','요청 수정','답변 작성','답변수정','게시판','게시판',
-    '답글','검색하기','검색결과','숏츠','알림','마이페이지',
+    '답글','검색하기','검색결과','숏츠','알림','마이페이지','내가 작성한 글'
 ];
 
 export const getPage = (pathname) => {
@@ -26,7 +26,7 @@ export const getPage = (pathname) => {
 export const getFooter = (pathname) => {
     const List = ['home','search','mypage'];
     let name = pathname.split('/')[1];
-    console.log(List.includes(name))
+
     return !List.includes(name)
 };
 
@@ -35,3 +35,10 @@ export const getFixed = (pathname) => {
  
     return name
 }
+
+export const NeedAlam = (pathname) => {
+    const list = ['mypage','mypage_detail','alam','search'];
+    let name = pathname.split('/')[1];
+    
+    return !list.includes(name);
+};

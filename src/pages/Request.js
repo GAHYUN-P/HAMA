@@ -9,6 +9,8 @@ import Header from '../components/Header';
 import { useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
 
+import styled from 'styled-components';
+
 const Request = (props) => {
     const dispatch = useDispatch();
 
@@ -47,94 +49,101 @@ const Request = (props) => {
     return(
     <React.Fragment>
          <Header />   
-        <div style={{width:'90%', height:'100%',padding:'8px 4px',overflowY:'scroll'}} >
-        {/* 제목과 내용 */}
-        <div style={{width:'100%', margin:'0 auto'}} >
-            <div style={{margin:'10px 0'}} >
-                <h3>제목</h3>
+        <Grid>
+            {/* 제목과 내용 */}
+            <div style={{width:'100%', margin:'0 auto'}} >
+                <div style={{margin:'10px 0'}} >
+                    <h3>제목</h3>
+                </div>
+                <input 
+                ref={titleRef}
+                placeholder='제목을 입력해주세요.' 
+                style={{width:'100%',border:'none',outline:'none',borderBottom:'1px solid black', padding:'4px',boxSizing:'border-box'}} />
+                
+                <div style={{margin:'10px 0',display:'flex',justifyContent:'space-between'}} >
+                    <h3>내용</h3>
+                </div>
+                <div style={{width:'100%'}} >
+                    <textarea
+                    ref={contentRef}
+                    placeholder='요청할 내용을 작성해 주세요.'
+                    rows={5} 
+                    style={{
+                        width:'100%', padding:'16px 12px', fontSize:'1.25rem',
+                        border:'none', outline:'none', backgroundColor:'#efe',
+                        boxSizing:'border-box' }} />
+                </div>
             </div>
-            <input 
-            ref={titleRef}
-            placeholder='제목을 입력해주세요.' 
-            style={{width:'100%',border:'none',outline:'none',borderBottom:'1px solid black', padding:'4px',boxSizing:'border-box'}} />
+
+            {/* 이미지 업로드 */}
+            <div style={{width:'100%', margin:'0 auto'}} >
+                <h3>사진등록</h3>
+                <ImageUploader />
+            </div>
+
+            {/* 태그 */}
+            <div style={{width:'100%', margin:'10px auto 0'}} >
+                <div style={{margin:'10px 0 10px'}}>
+                    <h3>카테고리</h3>
+                </div>
+                {categoies.map((c,i)=>{
+                    return (<Tag
+                            key={i}
+                            tag={category}
+                            _onClick={(e)=>{setCategory(e.target.innerHTML)}}
+                            >{c}</Tag>)
+                })}
+            </div>
             
-            <div style={{margin:'10px 0',display:'flex',justifyContent:'space-between'}} >
-                <h3>내용</h3>
-            </div>
-            <div style={{width:'100%'}} >
-                <textarea
-                ref={contentRef}
-                placeholder='요청할 내용을 작성해 주세요.'
-                rows={5} 
-                style={{
-                    width:'100%', padding:'16px 12px', fontSize:'1.25rem',
-                    border:'none', outline:'none', backgroundColor:'#efe',
-                    boxSizing:'border-box' }} />
-            </div>
-        </div>
-
-        {/* 이미지 업로드 */}
-        <div style={{width:'100%', margin:'0 auto'}} >
-            <h3>사진등록</h3>
-            <ImageUploader />
-        </div>
-
-        {/* 태그 */}
-        <div style={{width:'100%', margin:'10px auto 0'}} >
-            <div style={{margin:'10px 0 10px'}}>
-                <h3>카테고리</h3>
-            </div>
-            {categoies.map((c,i)=>{
-                return (<Tag
+            {/* 시간설정 */}
+            <div style={{width:'100%', margin:'10px auto 0'}} >
+                <div style={{margin:'10px 0 10px'}}>
+                    <h3>시간설정</h3>
+                </div>
+                <div>
+                {timeset.map((t,i)=>{
+                    return(
+                        <Tag 
                         key={i}
-                        tag={category}
-                        _onClick={(e)=>{setCategory(e.target.innerHTML)}}
-                        >{c}</Tag>)
-            })}
-        </div>
-        
-        {/* 시간설정 */}
-        <div style={{width:'100%', margin:'10px auto 0'}} >
-            <div style={{margin:'10px 0 10px'}}>
-                <h3>시간설정</h3>
+                        tag={time}
+                        value={t}
+                        _onClick={(e)=>{setTime(e.target.innerHTML)}}>{t}</Tag>
+                    )
+                })}
+                </div>
             </div>
-            <div>
-            {timeset.map((t,i)=>{
-                return(
-                    <Tag 
-                    key={i}
-                    tag={time}
-                    value={t}
-                    _onClick={(e)=>{setTime(e.target.innerHTML)}}>{t}</Tag>
-                )
-            })}
+            
+            {/* 난이도 */}
+            <div style={{width:'100%', margin:'0 auto'}}>
+                <div style={{margin:'10px 0'}} >
+                    <h3>난이도</h3>
+                </div>
+                <div style={{width:'auto', margin:'auto'}} >
+                {levels.map((l,i)=>{
+                    return (<Level 
+                            key={i}
+                            level={level}
+                            _onClick={(e)=>{setLevel(e.target.innerHTML)}}
+                            >{l}</Level>)
+                })}
+                </div>
+                <span style={{fontSize:'0.8rem',color:'red'}} >요청을 등록한 이후에는 삭제할 수 없습니다.</span>
             </div>
-        </div>
-        
-        {/* 난이도 */}
-        <div style={{width:'100%', margin:'0 auto'}}>
-            <div style={{margin:'10px 0'}} >
-                <h3>난이도</h3>
+            <div style={{display:'flex', justifyContent:'space-evenly', margin:'50px 0 0'}} >
+                <button onClick={()=>{}} style={{width:'80px', height:'30px',border:'none',}} >취소</button>
+                <button onClick={()=>{}} style={{width:'80px', height:'30px',border:'none',}} >임시작성</button>
+                <button onClick={posting} style={{width:'80px', height:'30px',border:'none',}} >작성</button>
             </div>
-            <div style={{width:'auto', margin:'auto'}} >
-            {levels.map((l,i)=>{
-                return (<Level 
-                        key={i}
-                        level={level}
-                        _onClick={(e)=>{setLevel(e.target.innerHTML)}}
-                        >{l}</Level>)
-            })}
-            </div>
-            <span style={{fontSize:'0.8rem',color:'red'}} >요청을 등록한 이후에는 삭제할 수 없습니다.</span>
-        </div>
-        <div style={{display:'flex', justifyContent:'space-evenly', margin:'50px 0 0'}} >
-            <button onClick={()=>{}} style={{width:'80px', height:'30px',border:'none',}} >취소</button>
-            <button onClick={()=>{}} style={{width:'80px', height:'30px',border:'none',}} >임시작성</button>
-            <button onClick={posting} style={{width:'80px', height:'30px',border:'none',}} >작성</button>
-        </div>
-        </div>
+        </Grid>
     </React.Fragment>
     )
 };
+
+const Grid = styled.div`
+    overflow-Y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+`;
 
 export default Request;

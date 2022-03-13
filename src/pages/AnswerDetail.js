@@ -7,6 +7,7 @@ import { getUserId } from '../shared/cookie';
 import AnswerContent from '../components/AnswerContent';
 import CommentList from '../components/CommentList';
 import RateBox from '../components/RateBox';
+import Header from '../components/Header';
 
 import styled from 'styled-components';
 
@@ -30,6 +31,7 @@ const AnswerDetail = (props) => {
     return (
         <React.Fragment>
             <Grid>
+                <Header />
                 <AnswerContent {...answer} videoRef={videoRef} />
                 {answer.requestWriterId === Number(getUserId()) &&
                 <RateBox answerId={answerId} />}
@@ -44,13 +46,7 @@ const AnswerDetail = (props) => {
 }
 
 const Grid = styled.div`
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
-    overflow-Y: scroll;
-    &::-webkit-scrollbar {
-        display:none;
-    }
+    
 `;
 
 export default AnswerDetail;
