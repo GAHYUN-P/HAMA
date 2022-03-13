@@ -1,13 +1,21 @@
 const calcRem = (size) => `${size / 16}rem`;
 
 const fontSizes = {
-  small: calcRem(14),
-  base: calcRem(16),
-  lg: calcRem(18),
-  xl: calcRem(20),
-  xxl: calcRem(22),
-  xxxl: calcRem(24),
+  small: calcRem(12),
+  base: calcRem(14),
+  lg: calcRem(16),
+  xl: calcRem(18),
+  xxl: calcRem(20),
+  xxxl: calcRem(22),
   titleSize: calcRem(50),
+};
+
+const fontColors = {
+  black: "#000000",
+  white: "#FFFFFF",
+  gray: "#9E9E9E",
+  gray_2: "#767676",
+  green_1: "#3cb46e",
 };
 
 const paddings = {
@@ -17,7 +25,7 @@ const paddings = {
   xl: calcRem(14),
   xxl: calcRem(16),
   xxxl: calcRem(18),
-  xxxxl: calcRem(23),
+  default: calcRem(23),
 };
 
 const margins = {
@@ -51,7 +59,7 @@ const deviceSizes = {
 const colors = {
   black: "#000000",
   white: "#FFFFFF",
-  gray_1: "#222222",
+  gray_1: "#9E9E9E",
   gray_2: "#767676",
   green_1: "#3cb46e",
 };
@@ -73,6 +81,7 @@ const theme = {
   margins,
   interval,
   verticalInterval,
+  fontColors,
 };
 
 export default theme;
