@@ -9,6 +9,9 @@ import theme from './shared/theme';
 import { Provider } from 'react-redux';
 import store from './redux/configureStore';
 
+// 스크롤 css
+import './styles/scroll.css';
+
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
