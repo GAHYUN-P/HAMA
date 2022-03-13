@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import '../App.css';
 
 // Redux
 
@@ -85,8 +86,7 @@ const Container = styled.div`
   background: #d9e3ee;
   overflow: hidden;
   position: relative;
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto-Sans-KR';
   font-style: normal;
   font-weight: 400;
   #wrap {

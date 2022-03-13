@@ -1,26 +1,5 @@
 const calcRem = (size) => `${size / 16}rem`;
 
-const fonts = {
-  family: {
-    base: `'Noto Sans KR', sans-serif`,
-    title: `'Merriweather', serif`,
-  },
-  size: {
-    small: calcRem(14),
-    base: calcRem(16),
-    lg: calcRem(18),
-    xl: calcRem(20),
-    xxl: calcRem(22),
-    xxxl: calcRem(24),
-    titleSize: calcRem(50),
-  },
-  weight: {
-    light: 100,
-    normal: 400,
-    bold: 700,
-  },
-};
-
 const fontSizes = {
   small: calcRem(14),
   base: calcRem(16),
@@ -94,7 +73,6 @@ const theme = {
   margins,
   interval,
   verticalInterval,
-  fonts,
 };
 
 export default theme;
