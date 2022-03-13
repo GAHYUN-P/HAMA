@@ -4,6 +4,7 @@ import { alamAPI } from '../../shared/api';
 
 export const initialState = {
     alams:'',
+    notReadCount: 0,
 }
 
 // actions
@@ -12,6 +13,8 @@ const deleteAlam = createAction('alam/deleteAlam');
 const deleteAll = createAction('alam/deleteAlam');
 const readingCheck = createAction('alam/readingCheck');
 const getNewAlam = createAction('alam/getNewAlam');
+const setNotReadCount = createAction('alam/setNotReadCount');
+const addNotReadCount = createAction('alam/addNotReadCount')
 
 // reducer
 const alam = createReducer(initialState,{
@@ -29,11 +32,17 @@ const alam = createReducer(initialState,{
     },
     [readingCheck]:(state,action) => {
         state.alams = state.alams.map((a)=>{
-            if(a.id === action.payload){
+            if(a.reading === 'N'){
                 return {...a, reading:'Y'}
             }
             return a
         })
+    },
+    [setNotReadCount]:(state,action) => {
+        state.notReadCount = action.payload;
+    },
+    [addNotReadCount]:(state,action) => {
+        state.notReadCount = state.notReadCount + 1;
     },
 })
 
@@ -69,10 +78,10 @@ const deleteAllDB = () => async (dispatch,getState,{history}) => {
     })
 };
 
-const checkAlamDB = (alamId) => async (dispatch,getState,{history}) => {
-    alamAPI.checkAlam(alamId)
+const checkAlamDB = () => async (dispatch,getState,{history}) => {
+    alamAPI.checkAlam()
     .then(()=>{
-        dispatch(readingCheck(alamId));
+        dispatch(readingCheck());
         console.log('읽었습니다.');
     })
     .catch(err=>{
@@ -82,13 +91,24 @@ const checkAlamDB = (alamId) => async (dispatch,getState,{history}) => {
     })
 }
 
+const getNotReadCountDB = () => async (dispatch,getState,{history}) => {
+    alamAPI.notReadCount()
+    .then(res=>{
+        dispatch(setNotReadCount(res.data));
+    })
+    .catch(err=>{
+        console.log('error',err);
+    })
+}
 
 export const alamActions = {
     getAlamsDB,
     deleteAlamDB,
     deleteAllDB,
     checkAlamDB,
+    getNotReadCountDB,
     getNewAlam,
+    addNotReadCount,
 }
 
 export default alam

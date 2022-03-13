@@ -230,15 +230,18 @@ export const shortsAPI = {
 
 export const alamAPI = {
   getAlams: function () {
-    return axios.get(``,config)
+    return axios.get(``,config);
   },
   deleteOneAlam: function(alamId){
-    return axios.delete(``,config)
+    return axios.delete(``,config);
   },
   deleteAllAlam: function(){
-    return axios.delete(``,config)
+    return axios.delete(``,config);
   },
-  checkAlam: function(alamId){
-    return axios.post(``,config)
+  checkAlam: function(){
+    return axios.post(``,config);
   },
+  notReadCount: function(){
+    return axios.get(``,config);
+  }
 };
