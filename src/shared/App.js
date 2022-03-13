@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import '../App.css';
 
 // Redux
 
@@ -83,6 +84,9 @@ const Container = styled.div`
   background: #d9e3ee;  
   overflow: hidden;
   position: relative;
+  font-family: 'Noto-Sans-KR';
+  font-style: normal;
+  font-weight: 400;
   #wrap {
     width: 100%;
     max-width: 412px;
