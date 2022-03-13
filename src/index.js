@@ -11,11 +11,13 @@ import store from './redux/configureStore';
 
 // 스크롤 css
 import './styles/scroll.css';
+import GlobalStyles from './shared/GlobalStyles';
 
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <GlobalStyles/>
+        <App />
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')

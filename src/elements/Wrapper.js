@@ -6,7 +6,7 @@ const Wrapper = (props) => {
 };
 
 const Container = styled.div`
-  padding: ${({ theme }) => theme.paddings.xxxxl};
+  padding: ${({ theme }) => theme.paddings.default};
 `;
 
 export default Wrapper;
