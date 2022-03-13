@@ -6,6 +6,7 @@ import { rankActions } from '../redux/modules/rank';
 import { IoRefresh } from "react-icons/io5";
 
 import Rank from './Rank';
+import moment from 'moment';
 
 const RankList = (props) => {
 
@@ -19,8 +20,7 @@ const RankList = (props) => {
     }, []);
 
     const rankList = useSelector((state) => state.rank.data);
-    // console.log(rankList);
-    // console.log(rankList[0].rank);
+    const nowTime = moment().format('YYYY.MM.DD HH:mm');
 
     const updateRank = () => {
         dispatch(rankActions.getRankList());
@@ -31,8 +31,11 @@ const RankList = (props) => {
     <div>
         <TitleWrap>
           <div>유저 랭킹 TOP 5</div>
-          <IoRefresh onClick={updateRank}>refresh</IoRefresh>
+          <Icon>
+            <IoRefresh onClick={updateRank}/>
+          </Icon>
         </TitleWrap>
+        <Nowtime>{nowTime} 기준</Nowtime>
         {rankList.map((info, idx) => {
           return (
             <Rank
@@ -53,6 +56,18 @@ const TitleWrap = styled.div`
     display: flex;
     font-size: ${({ theme }) => theme.fontSizes.lg};
     font-weight: 600;
+`;
+
+const Icon = styled.div`
+    color: ${({ theme }) => theme.fontColors.gray};
+    margin-left: 5px;
+    padding-bottom: 1px;
+    transform: rotate(35deg);
+`;
+
+const Nowtime = styled.div`
+    color: ${({ theme }) => theme.fontColors.gray};
+    font-size: ${({ theme }) => theme.fontSizes.small};
 `;
 
 export default RankList;
