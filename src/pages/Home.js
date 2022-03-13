@@ -18,7 +18,7 @@ const Home = (props) => {
         <RankList/>
         <Category/>
         <PostList/>
-        <Footer/>
+        {/* <Footer/> */}
       </Wrapper>
     </div>
   );

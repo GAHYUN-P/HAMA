@@ -3,6 +3,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { pointActions } from '../redux/modules/point';
 import { rankActions } from '../redux/modules/rank';
+import { IoRefresh } from "react-icons/io5";
+
 import Rank from './Rank';
 
 const RankList = (props) => {
@@ -29,7 +31,7 @@ const RankList = (props) => {
     <div>
         <TitleWrap>
           <div>유저 랭킹 TOP 5</div>
-          <button onClick={updateRank}>refresh</button>
+          <IoRefresh onClick={updateRank}>refresh</IoRefresh>
         </TitleWrap>
         {rankList.map((info, idx) => {
           return (
