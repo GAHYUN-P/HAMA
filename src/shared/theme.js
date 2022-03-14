@@ -1,12 +1,15 @@
 const calcRem = (size) => `${size / 16}rem`;
 
 const fontSizes = {
+  xsmall: calcRem(10),
   small: calcRem(12),
   base: calcRem(14),
   lg: calcRem(16),
   xl: calcRem(18),
   xxl: calcRem(20),
   xxxl: calcRem(22),
+  xxxxl: calcRem(24),
+  xxxxxl: calcRem(28),
   titleSize: calcRem(50),
 };
 
@@ -35,6 +38,7 @@ const margins = {
   xl: calcRem(14),
   xxl: calcRem(16),
   xxxl: calcRem(18),
+  divGap: calcRem(34),
 };
 
 const interval = {
