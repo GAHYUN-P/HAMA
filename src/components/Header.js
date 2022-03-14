@@ -32,7 +32,7 @@ const Header = (props) => {
 
   if(getPage(pathname).type === 'basic'){
     return(
-      <Grid fSize='1rem' padding='1rem' is_flex justifyContent='space-around' >
+      <Grid >
         
         {pathname === '/' && 
         <div>
@@ -40,43 +40,45 @@ const Header = (props) => {
         </div>}
 
         { pathname !== '/' &&
-        <div onClick={()=>{history.goBack()}} >
+        <ChevronWrap onClick={()=>{history.goBack()}} >
           <FiChevronLeft />
-        </div>}
+        </ChevronWrap>}
 
         {!is_what &&
-        <PageTitle style={{fontWeight:'800',color:'#000',fontSize:'1.25rem'}} >
+        <PageTitle>
           {getPage(pathname).title}
         </PageTitle>}
         {is_what &&
-        <PageTitle style={{fontWeight:'800',color:'#000',fontSize:'1.25rem'}} >
+        <PageTitle>
           {is_what==='mypost' ? '내가 요청한 글':'내가 답변한 글'}
         </PageTitle>}
 
         <div style={{display:'flex'}} >
 
-          { pathname === '/home' &&
-          <div style={{padding:'0 1rem 0 0'}} >
+          { pathname === '/' &&
+          <IconWrap>
             <FiInfo />
-          </div>}
+          </IconWrap>}
 
           { NeedAlam(pathname) &&
-           <AlamBadge />}
+          <IconWrap>
+            <AlamBadge />
+          </IconWrap>}
 
           { NeedAlam(pathname) &&
-          <div style={{padding:'0 0 0 1rem'}} >
+          <IconWrap>
             <FiSearch onClick={()=>{history.push('/search')}} />
-          </div>}
+          </IconWrap>}
           
           {pathname === '/alam' && 
-          <div>
-            on/off
-          </div>}
+          <IconWrap>
+            <FiBell />
+          </IconWrap>}
 
           {pathname === '/mypage'  &&
-          <div  style={{padding:'0 0 0 1rem'}} >
+          <IconWrap>
             <FiMoreHorizontal />
-          </div>}
+          </IconWrap>}
 
         </div>
       </Grid>
@@ -88,17 +90,30 @@ const Header = (props) => {
 
 const Grid = styled.div`
   width: ${props => props.width ? props.width : '100%'};
-  font-size: ${props => props.fSize ? props.fSize : '2rem'};
-  color: ${props => props.color ? props.color : '#9e9e9e'};
-  padding: ${props => props.padding ? props.padding : '0.7rem 2rem'};
-  ${props => props.is_flex ? `display: flex;` : ''}
+  padding: ${({theme}) => theme.paddings.small} ${({theme}) => theme.paddings.xxl};
+  display: flex;
   justify-content: space-between; 
-  ${props => props.justifyContent ? `justify-content: ${props => props.justifyContent};` : ''}
   box-sizing: border-box;
 `;
 
+const ChevronWrap = styled.div`
+  width: ${({theme}) => theme.paddings.xxl};
+  height: ${({theme}) => theme.paddings.xxl};
+  font-size: ${({theme}) => theme.fontSizes.lg};
+  color: ${({theme}) => theme.colors.gray_1};
+`;
+
+const IconWrap = styled.div`
+  width: ${({theme}) => theme.paddings.xxl};
+  height: ${({theme}) => theme.paddings.xxl};
+  margin-left: ${({theme}) => theme.margins.lg};
+  font-size: ${({theme}) => theme.fontSizes.lg};
+  color: ${({theme}) => theme.colors.gray_1};
+  `;
+
 const PageTitle =styled.div`
-  font-size: ${({ theme })=>theme.fontSizes.titleSize};
+  font-size: ${({theme}) => theme.fontSizes.xl};
+  color: ${({theme}) => theme.colors.black};
 `;
 
 export default Header;

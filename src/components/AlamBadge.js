@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { alamActions } from '../redux/modules/alam';
+import { history } from '../redux/configureStore';
 
 import { FiBell } from 'react-icons/fi';
 
@@ -11,9 +12,9 @@ const AlamBadge = (props) => {
     const dispatch = useDispatch();
     const { notReadCount } = useSelector(state => state.alam);
 
-    React.useEffect(()=>{
-        dispatch(alamActions.getNotReadCountDB());
-    },[])
+    // React.useEffect(()=>{
+    //     dispatch(alamActions.getNotReadCountDB());
+    // },[])
 
     // const sock = new SockJS('규진님이 주실 주소');
     // const ws = Stomp.over(sock);
@@ -65,7 +66,7 @@ const AlamBadge = (props) => {
     if(notReadCount){
         return(
             <React.Fragment>
-                <Grid>
+                <Grid onClick={()=>{history.push('/alam')}} >
                     <FiBell />
                     <Count>{notReadCount}</Count>
                 </Grid>
@@ -75,7 +76,7 @@ const AlamBadge = (props) => {
 
     return(
         <React.Fragment>
-            <div>
+            <div onClick={()=>{history.push('/alam')}} >
                 <FiBell />
             </div>
         </React.Fragment>

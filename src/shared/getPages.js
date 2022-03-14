@@ -1,5 +1,5 @@
 const Basic =[
-    'home','request','requestedit','answer','answeredit','requestdetail','answerdetail',
+    '','request','requestedit','answer','answeredit','requestdetail','answerdetail',
     'comment','search','searchresult','shorts','alam','mypage','mypage_detail'
 ];
 const BasicName = [
@@ -17,14 +17,14 @@ export const getPage = (pathname) => {
     }
 
     const data ={
-        type: pathname !== '/' ? 'basic' : 'justX',
+        type: 'basic',
         title: BasicName[Basic.indexOf(name)] ? BasicName[Basic.indexOf(name)] : '' ,
     }
     return data
 };
 
 export const getFooter = (pathname) => {
-    const List = ['home','search','mypage'];
+    const List = ['','search','mypage'];
     let name = pathname.split('/')[1];
 
     return !List.includes(name)
