@@ -11,6 +11,10 @@ const AlamBadge = (props) => {
     const dispatch = useDispatch();
     const { notReadCount } = useSelector(state => state.alam);
 
+    React.useEffect(()=>{
+        dispatch(alamActions.getNotReadCountDB());
+    },[])
+
     // const sock = new SockJS('규진님이 주실 주소');
     // const ws = Stomp.over(sock);
     // const token = getToken();
@@ -58,17 +62,23 @@ const AlamBadge = (props) => {
     //     }
     //   }
 
+    if(notReadCount){
+        return(
+            <React.Fragment>
+                <Grid>
+                    <FiBell />
+                    <Count>{notReadCount}</Count>
+                </Grid>
+            </React.Fragment>
+        )
+    }
+
     return(
-        <React>
-            {!notReadCount &&
+        <React.Fragment>
             <div>
                 <FiBell />
-            </div>}
-            {notReadCount &&
-            <Grid>
-                <FiBell />
-            </Grid>}
-        </React>
+            </div>
+        </React.Fragment>
     )
 }
 
@@ -76,9 +86,12 @@ const Grid = styled.div`
     position: relative;
 `;
 
-const Count = styled.div`
+const Count = styled.p`
     position: absolute;
-    
+    color: coral;
+    font-size: ${({theme}) => theme.fontSizes.small};
+    left: 5px;
+    top: -3px;
 `;
 
 export default AlamBadge;
