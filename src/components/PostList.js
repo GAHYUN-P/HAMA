@@ -43,7 +43,8 @@ const PostList = (props) => {
             {post_list.map((info, idx) => {
                 return (
                 <PostEach
-                    key={info.postId}
+                    key={info.id}
+                    id={info.id}
                     title={info.title}
                     content={info.content}
                     modifiedAt={info.modifiedAt}

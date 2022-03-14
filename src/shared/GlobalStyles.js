@@ -16,9 +16,12 @@ const GlobalStyles = createGlobalStyle`
         color: #474D56;
         font-family: noto-sans-cjk-kr, sans-serif;
         font-size: 14px;
-        line-height: 17px;
+        line-height: 18px;
         background-color: rgba(var(--b3f,250,250,250),1);
         color: #000;
+    }
+    button {
+        border: none;
     }
     &::-webkit-scrollbar { display: none; };
     input[type="number"]::-webkit-inner-spin-button {

@@ -45,6 +45,7 @@ const RankList = (props) => {
               point={info.point}
               status={info.status}
               is_changed={info.is_changed}
+              hippoName={info.hippoName}
             />
           );
         })}
@@ -55,7 +56,8 @@ const RankList = (props) => {
 const TitleWrap = styled.div`
     display: flex;
     font-size: ${({ theme }) => theme.fontSizes.lg};
-    font-weight: 600;
+    font-family: Noto-Sans-KR-M;
+    margin-top: ${({ theme }) => theme.margins.xxl};;
 `;
 
 const Icon = styled.div`
