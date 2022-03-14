@@ -6,14 +6,20 @@ import styled from 'styled-components';
 const PostEach = (props) => {
 
     const titleOnClick = () => {
-        history.push(`/requestdetail/${props.postId}`);
+        history.push(`/requestdetail/${props.id}`);
     }
 
     return (
-        <div onClick = {titleOnClick}>
-        {props.title} | {props.content} | {props.modifiedAt} | {props.answerCount} | 좋아요{props.postLikeCount}
-        </div>
+        <TitleEach onClick = {titleOnClick}>
+        <div>{props.title}</div>
+        <div></div>
+         | {props.content} | {props.modifiedAt} | {props.answerCount} | 좋아요{props.postLikeCount}
+        </TitleEach>
     );
 };
+
+const TitleEach = styled.div`
+    font-size: ${({ theme }) => theme.fontSizes.base};
+`;
 
 export default PostEach;

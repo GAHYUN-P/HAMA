@@ -3,6 +3,12 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { postActions } from '../redux/modules/post';
 import { postAPI } from '../shared/api';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import tune from '../assets/tune.svg';
 
 const Category = (props) => {
     // 여기서 받은 리스트를 postList에 전달해주자
@@ -95,30 +101,80 @@ const Category = (props) => {
 
     return (
         <div>
-            <div>
-                <button onClick={(e) => { selectTag(e) }} value='all'>전체</button>
-                <button onClick={(e) => { selectTag(e) }} value='cook'>요리</button>
-                <button onClick={(e) => { selectTag(e) }} value='health'>운동</button>
-                <button onClick={(e) => { selectTag(e) }} value='knowledge'>지식</button>
-                <button onClick={(e) => { selectTag(e) }} value='create'>창작</button>
-                <button onClick={(e) => { selectTag(e) }} value='visit'>방문</button>
-                <button onClick={(e) => { selectTag(e) }} value='job'>직업</button>
-                <button onClick={(e) => { selectTag(e) }} value='pet'>반려동물</button>
-                <button onClick={(e) => { selectTag(e) }} value='fashion'>패션뷰티</button>
-                <button onClick={(e) => { selectTag(e) }} value='consult'>고민상담</button>
-                <button onClick={(e) => { selectTag(e) }} value='device'>가전</button>
-                <button onClick={(e) => { selectTag(e) }} value='life'>생활</button>
-                <button onClick={(e) => { selectTag(e) }} value='etc'>기타</button>
-            </div>
-            
+            <TitleWrap>
+                <div>카테고리</div>
+                <SelectWrap>
+                    <Box>
+                      <FormControl>
+                        <Select
+                          value={sort}
+                          onChange={(e) => { selectSort(e) }}
+                          style = {{height:'2rem'}}
+                        >
+                            <MenuItem value='latest'>최신순</MenuItem>
+                            <MenuItem value='time'>잔여시간순</MenuItem>
+                            <MenuItem value='like'>좋아요순</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box>
+                </SelectWrap>
+                <SelectIcon src={tune}/>
+            </TitleWrap>
 
             <div>
-                <button onClick={(e) => { selectSort(e) }} value='latest'>최신순</button>
-                <button onClick={(e) => { selectSort(e) }} value='time'>잔여시간</button>
-                <button onClick={(e) => { selectSort(e) }} value='like'>좋아요순</button>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='all'>전체보기</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='cook'>먹방/요리</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='health'>운동</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='knowledge'>지식</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='create'>창작</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='visit'>방문</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='job'>직업</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='pet'>반려동물</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='fashion'>패션/뷰티</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='consult'>고민상담</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='device'>가전</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='life'>생활</CategoryEach>
+                <CategoryEach onClick={(e) => { selectTag(e) }} value='etc'>기타</CategoryEach>
             </div>
         </div>
     );
 };
+
+const TitleWrap = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-family: Noto-Sans-KR-M;
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    padding-top: ${({ theme }) => theme.paddings.xxl};
+    margin-top: ${({ theme }) => theme.margins.divGap};
+    margin-bottom: ${({ theme }) => theme.margins.xxl};
+    position: relative;
+`;
+
+const CategoryEach = styled.button`
+    margin: 0px ${({ theme }) => theme.margins.base} ${({ theme }) => theme.margins.base} 0px;
+    padding: 0.3rem ${({ theme }) => theme.paddings.xl};
+    color: #666666;
+    font-weight: 500;
+    font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    border-radius: 26.5px;
+`;
+
+const SelectWrap = styled.div`
+    position: absolute;
+    left: 88%;
+    bottom: 0px;
+    opacity: 0;
+    z-index: 1;
+`;
+
+const SelectIcon = styled.img`
+    height: 1.5rem; 
+    width: 1.5rem;
+    position: absolute;
+    left: 93%;
+    bottom: -3px;
+`;
+
 
 export default Category;
