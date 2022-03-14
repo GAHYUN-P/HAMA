@@ -12,7 +12,15 @@ const Header = (props) => {
   const pathname = window.location.pathname;
   const {is_what} =props; 
 
-  if(pathname === '/'){
+  if(pathname === '/login/kakao'){
+    return(
+      <Grid onClick={()=>{history.goBack()}} >
+        x
+      </Grid>
+    )
+  }
+
+  if(pathname === '/login/kakao'){
     return(
       <Grid onClick={()=>{history.goBack()}} >
         x
@@ -24,12 +32,12 @@ const Header = (props) => {
     return(
       <Grid fSize='1rem' padding='1rem' is_flex justifyContent='space-around' >
         
-        {pathname === '/home' && 
+        {pathname === '/' && 
         <div>
           로고
         </div>}
 
-        { pathname !== '/home' &&
+        { pathname !== '/' &&
         <div onClick={()=>{history.goBack()}} >
           <FiChevronLeft />
         </div>}

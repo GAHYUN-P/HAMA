@@ -42,13 +42,9 @@ function App() {
       <Container>
         <div id="wrap">
             <Switch>
-              <Route path="/" exact component={Login} />
+              <Route path="/" exact component={Home} />
               <Route path="/login/kakao" exact component={Login} />
-              <Route path="/chat" exact component={Chatting} />
-              <Route path="/chatlist" exact component={ChatList} />
-              <Route path="/signup" exact component={Signup} />
               <Route path="/userInfo" exact component={UserInfo} />
-              <Route path="/findPassword" exact component={PasswordFind} />
               <Route path="/answer/:postId" exact component={Answer} />
               <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
               <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
@@ -56,12 +52,10 @@ function App() {
               <Route path="/request" exact component={Request} />
               <Route path="/request/:postId" exact component={RequestEdit} />
               <Route path="/requestdetail/:postId" exact component={RequestDetail} />
-              <Route path="/home" exact component={Home} />
               <Route path="/survey" exact component={Survey} />
               <Route path="/result" exact component={SurveyResult} />
               <Route path="/mypage" exact component={Mypage} />
               <Route path="/mypage_detail" exact component={MypageDetail} />
-              <Route path="/userinfo" exact component={UserInfo} />
               <Route path="/search" exact component={Search} />
               <Route path="/search/:keyword" exact component={SearchResult} />
               <Route path="/shorts" exact component={Shorts} />
