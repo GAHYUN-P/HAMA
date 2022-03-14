@@ -5,6 +5,8 @@ import { history } from '../redux/configureStore';
 
 import { getPage, NeedAlam } from '../shared/getPages';
 
+import AlamBadge from './AlamBadge';
+
 import { FiInfo, FiChevronLeft, FiSearch, FiBell, FiMoreHorizontal } from 'react-icons/fi';
 import styled from 'styled-components';
 
@@ -51,9 +53,7 @@ const Header = (props) => {
           </div>}
 
           { NeedAlam(pathname) &&
-          <div>
-            <FiBell onClick={()=>{history.push('/alam')}} />
-          </div>}
+           <AlamBadge />}
 
           { NeedAlam(pathname) &&
           <div style={{padding:'0 0 0 1rem'}} >
