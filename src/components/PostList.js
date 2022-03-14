@@ -40,9 +40,6 @@ const PostList = (props) => {
 
     return (
         <div>
-            {/* <button onClick={(e) => { selectTag(e) }} value='latest'>최신순</button>
-            <button onClick={(e) => { selectTag(e) }} value='time'>잔여시간</button>
-            <button onClick={(e) => { selectTag(e) }} value='like'>좋아요순</button> */}
             {post_list.map((info, idx) => {
                 return (
                 <PostEach
