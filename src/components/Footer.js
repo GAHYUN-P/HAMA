@@ -31,11 +31,11 @@ const Footer = (props) => {
       {/* 홈 */}
       <Btn 
       onClick={()=>{
-        if(getFixed(pathname)==='home'){return;}
-        history.push('/home')
+        if(pathname==='/'){return;}
+        history.push('/')
         console.log('작동')
       }}
-      basic={ getFixed(pathname) === 'home' ? home : home_n} hover={home} />
+      basic={ pathname === '/' ? home : home_n} hover={home} />
 
       {/* 작성 */}
       <Btn 
@@ -73,9 +73,9 @@ const Footer = (props) => {
 const Grid = styled.div`
   background-color: #f5f5f5;
   padding-bottom: 1rem;
-  width: 100%;
-  height: 3.5rem;
-  position: absolute;
+  width: 25.75rem;
+  height: 4.2rem;
+  position: fixed;
   bottom: 0;
 `;
 

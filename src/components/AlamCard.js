@@ -1,7 +1,27 @@
 import React from "react";
+import styled from "styled-components";
+
+import { setAlamContent } from "../shared/setAlamcontent";
+
+import { history } from "../redux/configureStore";
 
 const AlamCard = (props) => {
-    const { id, nickname, type, title, createdAt, reading } = props;
+    const { alamId ,id, nickname, type, title, createdAt, reading } = props;
+
+    const MoveTo = () => {
+        if(type === ('likeP'||'answer')){
+            history.push(`/requestdeatil/${id}`);
+        }
+        if(type === ('comment'||'rate'||'rated'||'likeA')){
+            history.push(`/answerdetail/${id}`);
+        }
+        if(type === 'child'){
+            history.push(`/comment/${id}`);
+        }
+        if(type === 'level'){
+            history.push('/mypage');
+        }
+    }
 
     return (
         <React.Fragment>
@@ -18,5 +38,13 @@ const AlamCard = (props) => {
         </React.Fragment>
     )
 }
+
+const ReadY = styled.div`
+    color: ${({theme})=> theme.colors.gray_1};
+`;
+
+const ReadN = styled.div`
+    color: ${({theme})=> theme.colors.black};
+`
 
 export default AlamCard;

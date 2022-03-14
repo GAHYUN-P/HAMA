@@ -38,6 +38,7 @@ const margins = {
 };
 
 const interval = {
+  title: calcRem(16),
   base: calcRem(50),
   lg: calcRem(100),
   xl: calcRem(150),
