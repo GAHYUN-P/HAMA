@@ -29,6 +29,7 @@ const getUserName = () => {
 // 유저 토큰 가져오기
 const getToken = () => {
   if(document.cookie){
+    console.log('getcookie');
     const token = document.cookie.split('=')[1].split(';')[0];
     return token;
   }
@@ -36,6 +37,7 @@ const getToken = () => {
 }
 
 const setCookie = (name, value, exp = 5) => {
+  console.log('setcookie');
   let date = new Date();
   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
   document.cookie = `${name}=${value}; expires=${date.toUTCString()}`;
