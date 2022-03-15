@@ -17,18 +17,21 @@ const Tag = (props) => {
 
     return(
         <Eltag onClick={_onClick} >
-            {children}
+            <div style={{fontWeight:'400'}} >
+                {children}
+            </div>
         </Eltag>
     )
 }
 
 const Eltag = styled.button`
-    min-width: 4.2rem;
+    min-width: 3.6rem;
+    width: auto;
     height: 1.7rem;
     color: #666;
     font-size: ${({theme})=>theme.fontSizes.small};
     width: auto;
-    padding: 5px ${({theme})=>theme.paddings.small};
+    padding: 5px 0.7rem;
     margin: 0 4px 12px;
     border: none;
     border-radius: 20px;
@@ -36,12 +39,13 @@ const Eltag = styled.button`
 `;
 
 const Selected = styled.button`
-    min-width: 4.2rem;
+    min-width: 3.6rem;
+    width: auto;
     height: 1.7rem;
     color: #fff;
     font-size: ${({theme})=>theme.fontSizes.small};
     width: auto;
-    padding: 5px ${({theme})=>theme.paddings.small};
+    padding: 5px 0.7rem;
     margin: 0 4px 12px;
     border: none;
     border-radius: 20px;

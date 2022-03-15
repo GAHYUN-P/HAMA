@@ -152,12 +152,31 @@ const TitleWrap = styled.div`
 `;
 
 const CategoryEach = styled.button`
-    margin: 0px ${({ theme }) => theme.margins.base} ${({ theme }) => theme.margins.base} 0px;
-    padding: 0.3rem ${({ theme }) => theme.paddings.xl};
-    color: #666666;
-    font-weight: 500;
-    font-size: ${({ theme }) => theme.fontSizes.xsmall};
-    border-radius: 26.5px;
+    min-width: 3.6rem;
+    width: auto;
+    height: 1.7rem;
+    color: #666;
+    font-size: ${({theme})=>theme.fontSizes.small};
+    width: auto;
+    padding: 5px 0.7rem;
+    margin: 0 4px 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #eee;
+`;
+
+const Selected = styled.button`
+    min-width: 3.6rem;
+    width: auto;
+    height: 1.7rem;
+    color: #fff;
+    font-size: ${({theme})=>theme.fontSizes.small};
+    width: auto;
+    padding: 5px 0.7rem;
+    margin: 0 4px 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ff7a7a;
 `;
 
 const SelectWrap = styled.div`
