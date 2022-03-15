@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from 'react-player';
 import { history } from "../redux/configureStore";
 import Header from "../components/Header";
-import { flexbox } from "@mui/system";
 import ProfileImg from "../elements/ProfileImg";
 
 const Shorts = (props) => {
@@ -122,19 +121,16 @@ const Shorts = (props) => {
 
 const Wrap = styled.div`
   background-color: black;
+  height: 100vh;
+  width: 100wh;
 `;
 
 const Container = styled.div`
-  /* background-color: purple; */
-  overflow:hidden;
-  position: relative;
+  /* position: relative; */
 `;
 
 const StyledSlider = styled(Slider)`
-    .slick-slide div{
-      /* background-color: red; */
-      outline: none;
-    }
+
 `;
 
 const TitleWrap = styled.div`
@@ -148,7 +144,9 @@ const Title = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  height: 37.5rem;
+  /* background-color: red; */
+  height: 80vh;
+  padding: 45% 0px;
 `;
   
 export default Shorts;
