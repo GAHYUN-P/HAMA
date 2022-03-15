@@ -2,6 +2,8 @@ import React from 'react';
 
 import { history } from '../redux/configureStore';
 
+import styled from 'styled-components';
+
 const AnswerCard = (props) => {
     const { answerWritter, modifiedAt, title, commentCount, answerId, imageCount, answerLikeCount } = props;
     console.log(props)
@@ -20,5 +22,7 @@ const AnswerCard = (props) => {
         </React.Fragment>
     )
 }
+
+
 
 export default AnswerCard;

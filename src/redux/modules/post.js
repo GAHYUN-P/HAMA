@@ -122,8 +122,9 @@ const makeRequest = (data) => async (dispatch, getState, {history}) => {
         }
 
         data = {...data,file:file };
-        console.log(data);
+        
         const res = await requestAPI.makeRequest(data);
+        console.log(res)
         
     } catch (error) {
         console.log(error);

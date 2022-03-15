@@ -12,9 +12,18 @@ const RequestAnswer = (props) => {
     const standard = ['최신순', '댓글순', '좋아요순'];
     const answerList = useSelector(state => state.post.answers);
 
+    if(answerList.length === 0){
+        return null
+        // (
+        //     <React.Fragment>
+        //     답변이 없습니다! 첫 번째 답변자가 되어주세요!!
+        //     </React.Fragment>
+        // )
+    }
+
     return (
         <React.Fragment>
-            <div style={{ width:'90%', margin:'10px auto 0' }}>
+            <div style={{width:'100%'}}>
                 <div>
                     {standard.map((s,i)=>{
                         return (<Tag 
