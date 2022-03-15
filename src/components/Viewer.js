@@ -32,7 +32,7 @@ const Viewer = (props) => {
     
     return (
         <React.Fragment>
-            <div style={{padding:'0 0 4px',width:'100%',margin:'0 auto 5px'}} >
+            <div style={{width:'100%'}} >
                 <MainContainer>
                     {video ?
                      <ReactPlayer ref={videoRef} controls={true} width='100%' height='90%' url={mainFile} /> 
@@ -64,18 +64,15 @@ const ViewContainer = styled.div`
     width: 100%;
     white-space: nowrap;
     overflow-x: scroll;
-    &::-webkit-scrollbar {
-        display:none;
-    }
 `;
 
 const ImgBox = styled.img`
     display: inline-block;
     width: 5rem;
     height: 5rem;
-    border: 1px solid #eee;
+    border-radius: 0.3rem;
     box-sizing: border-box;
-    margin: 0 4px;
+    margin-right: 0.18rem;
 `;
 
 export default Viewer;

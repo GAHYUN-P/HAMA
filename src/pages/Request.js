@@ -43,12 +43,12 @@ const Request = (props) => {
         const data = {
             title: title,
             content: content,
-            category: category,
+            category: engCategoies[categoies.indexOf(category)] ,
             level: level,
             timeSet: timeSet,
         }
         console.log(data)
-        // dispatch(postActions.makeRequest(data));
+        dispatch(postActions.makeRequest(data));
     }
 
     return(
@@ -90,9 +90,8 @@ const Request = (props) => {
                 {categoies.map((c,i)=>{
                     return (<Tag
                             key={i}
-                            tag={categoies}
-                            value={engCategoies[i]}
-                            _onClick={(e)=>{setCategory(e.target.value)}}
+                            tag={category}
+                            _onClick={(e)=>{setCategory(e.target.innerHTML)}}
                             >{c}</Tag>)
                 })}
             </div>
