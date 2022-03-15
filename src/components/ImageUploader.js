@@ -81,7 +81,7 @@ const ElLabel = styled.label`
 const WhiteSpace = styled.div`
     display: inline-block;
     width: 100%;
-    height: 7.7rem;
+    height: 7.8rem;
     white-space: nowrap;
     overflow-x: scroll;
     &::-webkit-scrollbar {
@@ -92,6 +92,7 @@ const WhiteSpace = styled.div`
 const Elpreview = styled.img`
     width: 7.5rem;
     height: 7.5rem;
+    border-radius: 0.3rem;
 `
 
 const Frame = styled.div`

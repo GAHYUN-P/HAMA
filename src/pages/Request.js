@@ -8,6 +8,7 @@ import Header from '../components/Header';
 
 import { useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
+import { history } from '../redux/configureStore';
 
 import styled from 'styled-components';
 
@@ -22,9 +23,13 @@ const Request = (props) => {
 
     // 카테고리와 레벨 배열
     const categoies = [
-        '먹방/요리','운동','지식','창작','방문','직업',
-        '반려동물','패션/뷰티','고민상담','가전','생활','기타'
+        '먹방/요리','운동','지식','창작','고민상담','방문',
+        '직업','반려동물','패션/뷰티','가전','생활','기타'
     ];
+    const engCategoies = [
+        'cook','health','knowledge','create','consult','visit',
+        'job','pet','fashion','device','life','etc'
+    ]
     const timeset = ['기한없음','3시간','6시간','12시간','24시간'];
 
     const posting = () => {
@@ -53,7 +58,7 @@ const Request = (props) => {
             <div style={{width:'100%', margin:'0 auto'}} >
                 {/* 제목 */}
                 <Titles>
-                    <h3>제목</h3>
+                    <div>제목</div>
                 </Titles>
                 <TitleInput 
                 ref={titleRef}
@@ -61,39 +66,40 @@ const Request = (props) => {
                 
                 {/* 내용 */}
                 <Contents>
-                    <h3>내용</h3>
+                    <div>내용</div>
                 </Contents>
                 <div style={{width:'100%'}} >
                     <ContentArea
                     ref={contentRef}
                     placeholder='요청할 내용을 작성해 주세요.'
-                    rows={25}/>
+                    rows={15}/>
                 </div>
             </div>
 
             {/* 이미지 업로드 */}
             <Selections>
-                <h3>사진등록</h3>
+                <div>사진등록</div>
             </Selections>
                 <ImageUploader />
 
             {/* 태그 */}
             <Selections>
-                <h3>카테고리</h3>
+                <div>카테고리</div>
             </Selections>
             <div style={{width:'100%', margin:'0.85rem auto 0'}} >
                 {categoies.map((c,i)=>{
                     return (<Tag
                             key={i}
-                            tag={category}
-                            _onClick={(e)=>{setCategory(e.target.innerHTML)}}
+                            tag={categoies}
+                            value={engCategoies[i]}
+                            _onClick={(e)=>{setCategory(e.target.value)}}
                             >{c}</Tag>)
                 })}
             </div>
             
             {/* 시간설정 */}
             <Selections>
-                <h3>시간설정</h3>
+                <div>시간설정</div>
             </Selections>
             <div style={{width:'100%', margin:'10px auto 0'}} >
                 <div>
@@ -110,16 +116,16 @@ const Request = (props) => {
             
             {/* 난이도 */}
             <Selections >
-                <h3>난이도</h3>
+                <div>난이도</div>
             </Selections>
-            <Level />
+            <Level level={level} setLevel={setLevel} />
             <div style={{fontSize:'0.72rem',color:'#ff5e5e',marginTop:'0.75rem',fontWeight:'100'}} >
                 ※요청을 등록한 이후에는 삭제할 수 없습니다.
             </div>
-            <div style={{display:'flex', justifyContent:'space-evenly', margin:'50px 0 0'}} >
-                <button onClick={()=>{}} style={{width:'80px', height:'30px',border:'none',}} >취소</button>
-                <button onClick={posting} style={{width:'80px', height:'30px',border:'none',}} >작성</button>
-            </div>
+            <BtnGrid>
+                <Btn onClick={()=>{history.goBack()}}>취소</Btn>
+                <Btn onClick={posting}>등록</Btn>
+            </BtnGrid>
         </Grid>
     </React.Fragment>
     )
@@ -131,17 +137,38 @@ const Grid = styled.div`
 
 const Titles = styled.div`
     margin: 1.4rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.2rem;
 `;
 const Contents = styled.div`
     margin: 1.5rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.2rem;
 `;
 
 const Selections = styled.div`
-margin: 3rem 0 ${({theme})=>theme.paddings.small};
+    margin: 3rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.15rem;
 `
+const BtnGrid = styled.div`
+    display: flex;
+    justify-content: right;
+    margin: 2.2rem 0 3.8rem;
+`;
+
+const Btn = styled.button`
+    border: none;
+    width: 3.8rem;
+    height: 2.3rem;
+    border-radius: .3rem;
+    margin-right: .4rem;
+    &:hover {
+        background-color: #ff7a7a;
+        color: #fff;
+    }
+`;
 
 const TitleInput = styled.input`
     width: 100%;
+    font-size: ${({theme}) => theme.fontSizes.base};
     border: none;
     outline: none;
     border-bottom: 1px solid #dcdcdc;
@@ -155,9 +182,10 @@ const TitleInput = styled.input`
 
 const ContentArea = styled.textarea`
     resize: none;
+    font-size: ${({theme}) => theme.fontSizes.base};
     width: 100%;
     border: none;
-    border-radius: .5rem;
+    border-radius: .3rem;
     outline: none;
     padding: ${({theme})=>theme.paddings.xxl};
     background-color: #f5f5f5;
