@@ -119,7 +119,7 @@ const fetchLogin = (data) => async (dispatch, getState, { history }) => {
     axios.defaults.headers.common['token'] = `${token}`;
 
     // 로그인 성공시 home으로 이동
-    // history.push('/home');
+    history.push('/home');
     
     dispatch(fetchUserProfile(1));
 
@@ -148,11 +148,13 @@ const loginByKakao = (data) => async (dispatch, getState, { history }) => {
     // 헤더에 토큰 저장
     axios.defaults.headers.common['token'] = `${token}`;
 
+    localStorage.setItem('access_token', token);
+
     // 토큰으로 유저정보 받아옴
     dispatch(fetchUserProfile(1));
 
     // 로그인 성공시 home으로 이동
-    // history.push('/home');
+    history.push('/');
 
   } catch (error) {
     console.error(error);
@@ -217,6 +219,7 @@ const fetchUserProfile = (type = 0) => async (
 
     // 첫 로그인시에 페이지이동 하기 위해 type으로 분기, type=0은 로그인 유지이므로 페이지이동 x
     if (type === 1) {
+      history.push('/');
     }
   } catch (error) {
     console.error(error);

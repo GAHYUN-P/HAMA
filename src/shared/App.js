@@ -32,7 +32,6 @@ import UserInfo from '../pages/UserInfo';
 import Survey from '../pages/Survey';
 import SurveyResult from '../pages/SurveyResult';
 import Mypage from '../pages/Mypage';
-import ChatList from '../components/ChatList';
 import MypageDetail from '../pages/MypageDetail';
 import Shorts from '../pages/Shorts';
 
@@ -43,7 +42,7 @@ function App() {
         <div id="wrap">
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/login/kakao" exact component={Login} />
+              <Route path="/login" exact component={Login} />
               <Route path="/userInfo" exact component={UserInfo} />
               <Route path="/answer/:postId" exact component={Answer} />
               <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
