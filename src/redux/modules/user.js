@@ -154,7 +154,7 @@ const loginByKakao = (data) => async (dispatch, getState, { history }) => {
     dispatch(fetchUserProfile(1));
 
     // 로그인 성공시 home으로 이동
-    history.push('/home');
+    history.push('/');
 
   } catch (error) {
     console.error(error);
