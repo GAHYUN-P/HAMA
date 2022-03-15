@@ -41,8 +41,8 @@ function App() {
       <Container>
         <div id="wrap">
             <Switch>
-              <Route path="/" exact component={Login} />
-              <Route path="/home" exact component={Home} />
+              <Route path="/" exact component={Home} />
+              <Route path="/login" exact component={Login} />
               <Route path="/userInfo" exact component={UserInfo} />
               <Route path="/answer/:postId" exact component={Answer} />
               <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
