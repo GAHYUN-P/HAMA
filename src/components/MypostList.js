@@ -17,24 +17,35 @@ const MypostList = (props) => {
     
     const mypost_list = useSelector((state) => state.mypage.mypost);
     const prev_list = mypost_list.slice(0,2);
+    console.log(prev_list);
     
     
 
     return (
         <div>
-            <div>내가 요청한 글</div>
+            <Title>내가 요청한 글</Title>
             {prev_list.map((info, idx) => {
                 return (
                 <MypageListEach
-                    key={info.requestId}
+                    key={idx}
+                    idx={idx}
+                    requestId={info.requestId}
                     title={info.title}
                     modifiedAt={info.modifiedAt}
-                    likeCount={info.postLikeCount}
+                    imgUrl={info.imgUrl}
+                    category={info.category}
+                    like={info.likes}
+                    contents={info.contents}
                     />
                 );
             })}
         </div>   
     );
 };
+
+const Title = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  margin: 0px 0px ${({ theme }) => theme.paddings.xxxl};
+`;
 
 export default MypostList;

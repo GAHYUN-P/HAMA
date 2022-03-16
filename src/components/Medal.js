@@ -8,20 +8,39 @@ const Medal = (props) => {
     // Mypage에서 Medal을 map을 돌려
     // value값에 따라서 return을 해줘 매달 색칠 아니면 색칠 ㄴㄴ로
     console.log(props);
+    const idx = props.idx;
+
+    const imgArr = [
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/medetail.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/satisfieddetail.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/inquiredetail.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/congratudetail.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/satisfieddetail.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/reactiondetail.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/searchdetail.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/moreeffortdetail.png',
+    ];
+    
   
   if(props.value === 0) {
     return (
-      <div>
-        <ProfileImg shape='circle' size='3rem' src='https://png.pngtree.com/thumb_back/fh260/background/20210207/pngtree-gray-simple-gradient-background-image_557031.jpg'/>
-      </div>
+      <Contain>
+        <ProfileImg shape='circle' size='3rem' bgColor='#EEEEEE'/>
+      </Contain>
     );
   }
 
   return (
-    <div>
-      <ProfileImg shape='circle' size='3rem' src='https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/me.png'/>
-    </div>
+    <Contain>
+      <ProfileImg shape='circle' size='3rem' src={imgArr[idx]}/>
+    </Contain>
   );
 };
+
+const Contain = styled.div`
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+`;
 
 export default Medal;
