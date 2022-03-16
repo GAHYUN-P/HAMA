@@ -61,6 +61,7 @@ const getAlamsDB = () => async (dispatch,getState,{history}) => {
 const deleteAlamDB = (alamId) => async (dispatch,getState,{history}) => {
     alamAPI.deleteOneAlam(alamId)
     .then(()=>{
+        console.log(alamId);
         dispatch(deleteAlam(alamId));
         console.log('삭제완료');
     })

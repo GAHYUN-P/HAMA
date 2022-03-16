@@ -79,6 +79,8 @@ const Grid = styled.div`
   bottom: 0;
 `;
 
+// 푸터 넓이는 100vw로 맞추면 된다!!
+
 const Btn = styled.div`
   display: inline-block;
   width: 20%;

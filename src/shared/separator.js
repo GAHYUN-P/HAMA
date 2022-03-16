@@ -34,3 +34,20 @@ export const getBtnString = (comment) => {
     comment = comment.split(':')[0] + ':' + comment.split(':')[1].slice(0,2);
     return comment;
 }
+
+export const getSearchContent = (content,keyword) => {
+    if(!content.includes(keyword)){
+        return null
+    }
+    if(!content.split(keyword)[0]){
+        content =  content.split(keyword)[1].substring(0,6);
+        return '/' + content;
+    }
+    if(content.split(keyword)[0]){
+        content = 
+        content.split(keyword)[0].slice(-5,-1)
+        + '/' + 
+        content.split(keyword)[1].substring(0,4);
+        return content
+    }
+}

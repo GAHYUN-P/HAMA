@@ -34,6 +34,7 @@ const SearchResult = (props) => {
             return
         }
         history.push(`/search/${word}`)
+        setPostType('request');
         dispatch(searchActions.getRequestResultDB(word));
     }
 
@@ -61,10 +62,10 @@ const SearchResult = (props) => {
                     <SearchInput 
                     value={word} 
                     onKeyPress={insertWord}
-                    onChange={(e)=>{setWord(e.target.value)}}
-                    style={{border:'none',width:'80%'}} />
+                    onChange={(e)=>{setWord(e.target.value)}}/>
                 </SearchBar>
             </Grid>
+
                 {/* 검색 결과 두 가지 버튼 */}
                 <div>
                     <div style={{display:'flex',width:'100%'}} >
@@ -82,17 +83,11 @@ const SearchResult = (props) => {
                         }} >답변 {answerCount}</TypeBtn>
                     </div>
                 </div>
+                {/* 답변 분기 */}
                 {is_request &&
-                <div>
-                    <Results list={requestResult} is_request={is_request} />
-                </div>
-                }
+                <Results list={requestResult} is_request={is_request} keyword={keyword} />}
                 {!is_request && 
-                <div>
-                    <Results list={answerResult} is_request={is_request} />
-                </div>
-                }
-           
+                <Results list={answerResult} is_request={is_request} keyword={keyword} />}
             <Footer />
         </React.Fragment>
     )
