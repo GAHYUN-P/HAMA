@@ -4,10 +4,10 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 민기님 서버
-axios.defaults.baseURL = 'http://3.36.53.246';
+// axios.defaults.baseURL = 'http://3.36.53.246';
 
 // 규진님 서버
-// axios.defaults.baseURL = 'http://dean900404.sh op';
+axios.defaults.baseURL = 'http://dean900404.shop/';
 
 // 재균님 서버
 // axios.defaults.baseURL = 'http://13.124.171.147';
@@ -155,10 +155,10 @@ export const answerAPI = {
     return axios.delete(`/api/comment/${commentId}`,config);
   },
   pushLike: function(answerId) {
-    return axios.post(`/api/answer/like/${answerId}`,config);
+    return axios.post(`/api/answer/like/${answerId}`,'',config);
   },
   rating: function(data) {
-    return axios.post(`/api/star/${data.answerId}`, {star:data.star}, config)
+    return axios.post(`/api/star/${data.answerId}`, {star:data.star}, config);
   }
 }
 
@@ -230,18 +230,18 @@ export const shortsAPI = {
 
 export const alamAPI = {
   getAlams: function () {
-    return axios.get(`/api/alam`,config);
+    return axios.get(`/api/alarm`,config);
   },
   deleteOneAlam: function(alamId){
-    return axios.delete(`/api/alam/${alamId}`,config);
+    return axios.delete(`/api/alarm/${alamId}`,config);
   },
   deleteAllAlam: function(){
-    return axios.delete(`/api/alam`,config);
+    return axios.delete(`/api/alarm`,config);
   },
   checkAlam: function(){
-    return axios.post(`/api/alam`,'',config);
+    return axios.post(`/api/alarm`,'',config);
   },
   notReadCount: function(){
-    return axios.get(`/api/alamCount`,config);
+    return axios.get(`/api/alarmCount`,config);
   }
 };

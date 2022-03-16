@@ -14,15 +14,7 @@ const Header = (props) => {
   const pathname = window.location.pathname;
   const {is_what} =props; 
 
-  if(pathname === '/login/kakao'){
-    return(
-      <Grid onClick={()=>{history.goBack()}} >
-        x
-      </Grid>
-    )
-  }
-
-  if(pathname === '/login/kakao'){
+  if(pathname === '/login'){
     return(
       <Grid onClick={()=>{history.goBack()}} >
         x

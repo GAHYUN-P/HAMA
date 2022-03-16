@@ -8,6 +8,8 @@ import Results from '../components/Results';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+import {IoSearchOutline} from 'react-icons/io5';
+
 import styled from 'styled-components';
 
 const SearchResult = (props) => {
@@ -50,16 +52,19 @@ const SearchResult = (props) => {
     return(
         <React.Fragment>
             <Header />
-            <div style={{width:'100%',height:'100%'}} >
+            <Grid>
                 {/* 검색창 */}
-                <div
-                style={{width:'90%',border:'1px solid #000', borderRadius:'1rem',padding:'0.5rem',margin:'15px auto'}} >
-                    <input 
+                <SearchBar>
+                    <Icon>
+                        <IoSearchOutline />
+                    </Icon>
+                    <SearchInput 
                     value={word} 
                     onKeyPress={insertWord}
                     onChange={(e)=>{setWord(e.target.value)}}
                     style={{border:'none',width:'80%'}} />
-                </div>
+                </SearchBar>
+            </Grid>
                 {/* 검색 결과 두 가지 버튼 */}
                 <div>
                     <div style={{display:'flex',width:'100%'}} >
@@ -68,16 +73,15 @@ const SearchResult = (props) => {
                         onClick={()=>{
                             if(is_request){return}
                             setPostType('request')}} 
-                        >요청{requestResult.length}</TypeBtn>
+                        >요청 {requestResult.length}</TypeBtn>
                         <TypeBtn 
                         line={is_request ? '#ccc' : 'coral'} 
                         onClick={()=>{
                             if(!is_request){return}
                             setPostType('answer')
-                        }} >답변{answerCount}</TypeBtn>
+                        }} >답변 {answerCount}</TypeBtn>
                     </div>
                 </div>
-                {!requestResult && <div>잠시 기다려주세요.</div>}
                 {is_request &&
                 <div>
                     <Results list={requestResult} is_request={is_request} />
@@ -88,18 +92,47 @@ const SearchResult = (props) => {
                     <Results list={answerResult} is_request={is_request} />
                 </div>
                 }
-            </div>
+           
             <Footer />
         </React.Fragment>
     )
 };
 
+const Grid = styled.div`
+    padding: ${({theme})=> theme.paddings.default};
+`;
+
 const TypeBtn = styled.div`
     width: 50%;
     border-bottom: 1px solid ${props => props.line};
+    color: ${props => props.line};
     text-align: center;
     padding: 0 0 4px;
     cursor: pointer;
+`;
+
+const SearchBar = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: ${({theme})=> theme.paddings.small};
+    border-radius: 1rem;
+    background-color: #f5f5f5;
+`;
+
+const SearchInput = styled.input`
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+`;
+
+const Icon = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: ${({theme})=> theme.fontSizes.lg};
+    color: #9e9e9e;
 `;
 
 export default SearchResult;

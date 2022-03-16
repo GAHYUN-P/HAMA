@@ -7,7 +7,7 @@ import { answerActions } from '../redux/modules/answer';
 
 import { getTimeStamp } from '../shared/separator';
 
-import PP from '../assets/Paper_Plane.svg'
+import PP from '../assets/Paper_Plane.svg';
 
 import styled from 'styled-components';
 
@@ -81,12 +81,6 @@ const CommentGrid = styled.div`
     padding: .9rem ${({theme})=> theme.paddings.default};
 `;
 
-const InputGrid = styled.div`
-    position: relative;
-    padding: ${({theme})=> theme.paddings.default};
-    background-color: #efefef;
-`;
-
 const PPHolder = styled.div`
     width: 1.35rem;
     height: 1.35rem;
@@ -95,6 +89,12 @@ const PPHolder = styled.div`
     position: absolute;
     right: 2.12rem;
     top: 2rem;
+`;
+
+const InputGrid = styled.div`
+    position: relative;
+    padding: ${({theme})=> theme.paddings.default};
+    background-color: #efefef;
 `;
 
 const ElInput = styled.input`

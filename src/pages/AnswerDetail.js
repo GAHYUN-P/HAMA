@@ -35,7 +35,6 @@ const AnswerDetail = (props) => {
             <Header />
             <Grid>
                 <AnswerContent {...answer} videoRef={videoRef} />
-                {/* */}
                 { answer.requestWriterId === Number(getUserId()) &&
                 <RateBox answerId={answerId} />}
             </Grid>
