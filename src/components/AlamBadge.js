@@ -12,9 +12,9 @@ const AlamBadge = (props) => {
     const dispatch = useDispatch();
     const { notReadCount } = useSelector(state => state.alam);
 
-    // React.useEffect(()=>{
-    //     dispatch(alamActions.getNotReadCountDB());
-    // },[])
+    React.useEffect(()=>{
+        // dispatch(alamActions.getNotReadCountDB());
+    },[])
 
     // const sock = new SockJS('규진님이 주실 주소');
     // const ws = Stomp.over(sock);

@@ -47,7 +47,7 @@ const Request = (props) => {
             level: level,
             timeSet: timeSet,
         }
-        console.log(data)
+
         dispatch(postActions.makeRequest(data));
     }
 
@@ -58,7 +58,7 @@ const Request = (props) => {
             <div style={{width:'100%', margin:'0 auto'}} >
                 {/* 제목 */}
                 <Titles>
-                    <div>제목</div>
+                    제목
                 </Titles>
                 <TitleInput 
                 ref={titleRef}
@@ -134,10 +134,6 @@ const Grid = styled.div`
     padding: 0 ${({theme})=> theme.paddings.default};
 `;
 
-const Titles = styled.div`
-    margin: 1.4rem 0 ${({theme})=>theme.paddings.small};
-    font-size: 1.2rem;
-`;
 const Contents = styled.div`
     margin: 1.5rem 0 ${({theme})=>theme.paddings.small};
     font-size: 1.2rem;
@@ -151,8 +147,8 @@ const BtnGrid = styled.div`
     display: flex;
     justify-content: right;
     margin: 2.2rem 0 3.8rem;
-`;
-
+    `;
+    
 const Btn = styled.button`
     border: none;
     width: 3.8rem;
@@ -165,6 +161,11 @@ const Btn = styled.button`
     }
 `;
 
+const Titles = styled.div`
+    margin: 1.4rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.2rem;
+`;
+    
 const TitleInput = styled.input`
     width: 100%;
     font-size: ${({theme}) => theme.fontSizes.base};

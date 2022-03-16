@@ -62,15 +62,24 @@ const ChildComment = (props) => {
             <Header />
             <div style={{width:'90%', margin:'0 auto',position:'relative'}} >
                 {/* 부모댓글 */}
-                <div style={{display:'flex', justifyContent:'space-between'}} >
-                    <div style={{display:'flex'}} > 
-                        <div>프로필</div>
-                        <div>{parent.commentWriter}</div>
+                <div style={{display:'flex'}} >
+                    <div>
+                        <ProHippo />
+                    </div>
+                    <div>
+                        <div style={{display:'flex'}} > 
+                            <div>{parent.commentWriter}</div>
+                        </div>
+                        <div>
+                            {parent.content}
+                        </div>
+                        <div>
+                            {parent.modifiedAt}
+                        </div>
                     </div>
                 </div>
-                <div>{parent.content}</div>
-                <div>{parent.modifiedAt}</div>
                 <hr/>
+
                 {/* 댓글 없을 때 */}
                 {childs.length === 0 &&
                 <div style={{
@@ -142,6 +151,14 @@ const Elinput = styled.input`
     border: none;
     outline: none;
     padding: 8px 4px;
+`;
+
+const ProHippo = styled.div`
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: .2rem .3rem 0 0;
+    border-radius: 1.6rem;
+    background-color: #dcdcdc;
 `;
 
 export default ChildComment;

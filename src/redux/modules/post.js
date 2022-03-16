@@ -124,7 +124,8 @@ const makeRequest = (data) => async (dispatch, getState, {history}) => {
         data = {...data,file:file };
         
         const res = await requestAPI.makeRequest(data);
-        console.log(res)
+        console.log(res.data)
+        history.replace(`/requestdetail/${res.data}`);
         
     } catch (error) {
         console.log(error);
@@ -139,7 +140,7 @@ const editRequestDB = (postId,content) => async (dispatch, getState, {history}) 
         const data = {file:file,content:content};
         console.log(data);
         const res = await requestAPI.editRequest(postId,data);
-
+        history.replace(`/requestdetail/${postId}`);
     }catch(error){
         console.log('error',error);
     }

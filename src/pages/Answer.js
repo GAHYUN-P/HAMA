@@ -2,10 +2,13 @@ import React, { useState, useRef } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { answerActions } from '../redux/modules/answer';
+import { history } from '../redux/configureStore';
 
 import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
 import Header from '../components/Header';
+
+import styled from 'styled-components';
 
 const Answer = (props) => {
     const dispatch = useDispatch(); 
@@ -26,32 +29,102 @@ const Answer = (props) => {
     return (
         <React.Fragment>
           <Header />
-            <div style={{width:'80%', margin: '16px auto', padding:'16px',}}>
+          <Grid >
+            {/* 제목 */}
+            <Titles>
+                제목
+            </Titles>
+            <TitleInput 
+            placeholder='제목을 입력해주세요.' 
+            ref={titleRef}/>
 
-              <div style={{margin:'5px 0'}} >
-                <h3>제목</h3>
-                <input placeholder='제목을 입력해주세요.' ref={titleRef}
-                style={{width:'100%',border:'none',outline:'none',borderBottom:'1px solid black', padding:'4px'}} />
-              </div>
+            {/* 내용 */}
+            <Contents>
+                  <div>내용</div>
+            </Contents>
+            <ContentArea placeholder='내용을 작성해 주세요.' rows={15} ref={contentRef}/>
+            
+            {/* 이미지 */}
+            <Selections>
+              사진등록
+            </Selections>
+            <ImageUploader />
 
-              <div style={{margin:'15px 0'}} >
-                <h3>내용</h3>
-                <textarea placeholder='내용을 작성해 주세요.' rows={5} ref={contentRef}
-                style={{ width:'100%',border:'none',outline:'none',
-                backgroundColor:'#eee',padding:'24px 8px',borderRadius:'8px' }} />
-              </div>
+            {/* 동영상 */}
+            <VideoUploader />
 
-              <div style={{margin:'10px 0'}} >
-                <h3>이미지</h3>
-                <ImageUploader />
-                <VideoUploader />
-              </div>
-              <div style={{display:'flex', justifyContent:'center', margin:'50px 0 0'}} >
-                <button onClick={answering} style={{width:'80px', height:'30px',border:'none',}} >작성</button>
-              </div>
-            </div>
+            <BtnGrid>
+                <Btn onClick={()=>{history.goBack()}}>취소</Btn>
+                <Btn onClick={answering}>등록</Btn>
+            </BtnGrid>
+          </Grid>
         </React.Fragment>
     )
 }
+
+const Grid = styled.div`
+    padding: 0 ${({theme})=> theme.paddings.default};
+`;
+
+const TitleInput = styled.input`
+    width: 100%;
+    font-size: ${({theme}) => theme.fontSizes.base};
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #dcdcdc;
+    box-sizing: border-box;
+    padding: ${({theme})=>theme.paddings.small} 0;
+    &::placeholder{
+        color: #dcdcdc;
+        font-size: ${({theme})=> theme.fontSizes.base};
+    }
+`;
+
+const ContentArea = styled.textarea`
+    resize: none;
+    font-size: ${({theme}) => theme.fontSizes.base};
+    width: 100%;
+    border: none;
+    border-radius: .3rem;
+    outline: none;
+    padding: ${({theme})=>theme.paddings.xxl};
+    background-color: #f5f5f5;
+    &::placeholder{
+        color: #dcdcdc;
+        font-size: ${({theme})=> theme.fontSizes.base};
+    }
+`;
+
+const Titles = styled.div`
+    margin: 1.4rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.2rem;
+`;
+
+const Contents = styled.div`
+    margin: 1.5rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.2rem;
+`;
+
+const Selections = styled.div`
+    margin: 3rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.15rem;
+`;
+const BtnGrid = styled.div`
+    display: flex;
+    justify-content: right;
+    margin: 2.2rem 0 3.8rem;
+`;
+
+const Btn = styled.button`
+    border: none;
+    width: 3.8rem;
+    height: 2.3rem;
+    border-radius: .3rem;
+    margin-right: .4rem;
+    &:hover {
+        background-color: #ff7a7a;
+        color: #fff;
+    }
+`;
 
 export default Answer;

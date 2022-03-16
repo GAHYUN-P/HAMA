@@ -18,8 +18,6 @@ const RequestContents = (props) => {
     const dispatch = useDispatch();
     const { category, title, level, content, fileList, nickname, modifiedAt,
             postId, timeSet, user_id } = props;
-    
-    console.log(props);
 
     const _conclusion = useSelector(state => state.post.request.status);
 
@@ -34,34 +32,32 @@ const RequestContents = (props) => {
     return(
         <React.Fragment>
             <div>
-                <CategoryTitle>{category}</CategoryTitle>
-                    {/* 상위 버튼들 */}
-                    <Buttons>
-                        <div style={{ display:'flex' }} >
-                            <TimeLimit>{timeSet}</TimeLimit>
-                            <LevelBox>
-                                <LevelImg url={fair_c} />
-                            </LevelBox>
-                        </div>
-                        {/* 해당 요청글을 작성한 사람만 볼 수 있는 조건식 
-                        _conclusion === 'true' && user_id === Number(getUserId()) && */}
-                        { 
-                        <div style={{ display:'flex' }} >
-                            <BtnPair onClick={conclusion} style={{marginRight:'0.4rem'}} >마감</BtnPair>
-                            <BtnPair onClick={()=>{history.push(`/request/${postId}`)}} >수정</BtnPair>
-                        </div>}
-                    </Buttons>  
-                    <ContentBox>
-                        <div>
-                            <ContentTitle>{title}</ContentTitle>
-                            <ContentText>{content}</ContentText>
-                            <ContentFrom>{nickname}  {modifiedAt}</ContentFrom>
-                        </div>
-                    </ContentBox>
-                    {fileList.length !== 0 &&
-                    <div style={{marginTop:'.7rem'}} >
-                        <Viewer fileList={fileList}/>
+                <CategoryTitle>
+                    {category}
+                </CategoryTitle>
+                {/* 상위 버튼들 */}
+                <Buttons>
+                    <div style={{ display:'flex' }} >
+                        <TimeLimit>{timeSet}</TimeLimit>
+                        <LevelBox>
+                            <LevelImg url={fair_c} />
+                        </LevelBox>
+                    </div>
+                    { _conclusion === 'opened' && user_id === Number(getUserId()) &&
+                    <div style={{ display:'flex' }} >
+                        <BtnPair onClick={conclusion} style={{marginRight:'0.4rem'}} >마감</BtnPair>
+                        <BtnPair onClick={()=>{history.push(`/request/${postId}`)}} >수정</BtnPair>
                     </div>}
+                </Buttons>  
+                <ContentBox>
+                        <ContentTitle>{title}</ContentTitle>
+                        <ContentText>{content}</ContentText>
+                        <ContentFrom>{nickname}  {modifiedAt}</ContentFrom>             
+                </ContentBox>
+                {fileList.length !== 0 &&
+                <div style={{marginTop:'.7rem'}} >
+                    <Viewer fileList={fileList}/>
+                </div>}
             </div>
         </React.Fragment>
     )
@@ -123,7 +119,7 @@ const ContentBox = styled.div`
     width: 100%;
     background-color: #f5f5f5;
     border-radius: 0.3rem;
-    padding: ${({theme})=> theme.paddings.default};
+    padding: ${({theme})=> theme.paddings.xxl} ${({theme})=> theme.paddings.default} ${({theme})=> theme.paddings.default};
 `;
 
 const ContentTitle = styled.div`

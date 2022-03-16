@@ -29,7 +29,6 @@ const getUserName = () => {
 // 유저 토큰 가져오기
 const getToken = () => {
   if(document.cookie){
-    console.log('getcookie');
     const token = document.cookie.split('=')[1].split(';')[0];
     return token;
   }

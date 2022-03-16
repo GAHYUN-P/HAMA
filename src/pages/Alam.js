@@ -20,6 +20,10 @@ const Alam = (props) => {
     // const token = getToken();
     // const userId = getUserId();
 
+    React.useEffect(()=>{
+        // dispatch(alamActions.getAlamsDB());
+    },[])
+
     // React.useEffect(()=>{
     //     wsConnectSubscribe()
     //     return () => {

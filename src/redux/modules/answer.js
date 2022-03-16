@@ -118,6 +118,7 @@ const editAnswerDB = (data,answerId) => async (dispatch, getState, { history }) 
         }
         console.log(data);
         const _edit = answerAPI.editAnswer(data,answerId);
+        history.replace(`/answerdetail/${answerId}`);
     }catch(error){
         console.log('error',error);
     }

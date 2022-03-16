@@ -6,6 +6,9 @@ import Header from '../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../redux/modules/post';
 import { imgActions } from '../redux/modules/image';
+import { history } from '../redux/configureStore';
+
+import styled from 'styled-components';
 
 const RequestEdit = (props) => {
     const dispatch = useDispatch();
@@ -38,39 +41,100 @@ const RequestEdit = (props) => {
     return(
         <React.Fragment>
         <Header />
-        <div style={{width:'90%',padding:'8px 4px'}} >
+        <Grid>
         {/* 제목과 내용 */}
-        <div style={{width:'90%', margin:'0 auto'}} >
-            <div style={{margin:'10px 0'}} >
-                <h3>제목</h3>
-                <p>{requestData.title}</p>
-            </div>
-            <h3>내용</h3>
-            <div style={{width:'100%'}} >
-                <textarea
-                value={content}
-                onChange={(e)=>{setContent(e.target.value)}}
-                placeholder='요청할 내용을 작성해 주세요.'
-                rows={5} 
-                style={{
-                    width:'100%', padding:'16px 12px', fontSize:'1.25rem',
-                    border:'none', outline:'none', backgroundColor:'#ddd',
-                    boxSizing:'border-box' }} />
-            </div>
-        </div>
+             
+            <Titles>
+                제목
+            </Titles>
+            <TitleInput value={requestData.title} disabled={true} />
+            {/* <p>{requestData.title}</p> */}
+               
+            <Contents>
+                내용
+            </Contents>
+            <ContentArea
+            value={content}
+            onChange={(e)=>{setContent(e.target.value)}}
+            placeholder='요청할 내용을 작성해 주세요.'
+            rows={15}/>
+   
 
-        {/* 이미지 업로드 */}
-        <div style={{width:'90%', margin:'0 auto'}} >
+
+            {/* 이미지 업로드 */}
             <h3>이미지</h3>
             <ImageUploader is_edit={true} />
-        </div>
-        {/* 작성버튼 */}
-        <div style={{display:'flex', justifyContent:'center', margin:'50px 0 0'}} >
-            <button onClick={editing} style={{width:'80px', height:'30px',border:'none',}} >완료</button>
-        </div>
-        </div>
+            
+            {/* 작성버튼 */}
+            <BtnGrid>
+                <Btn onClick={()=>{history.goBack()}}>취소</Btn>
+                <Btn onClick={editing}>등록</Btn>
+            </BtnGrid>
+        </Grid>
         </React.Fragment>
     )
 };
+
+const Grid = styled.div`
+    padding: 0 ${({theme})=> theme.paddings.default};
+`;
+
+const Titles = styled.div`
+    margin: 1.4rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.2rem;
+`;
+    
+const TitleInput = styled.input`
+width: 100%;
+font-size: ${({theme}) => theme.fontSizes.base};
+border: none;
+outline: none;
+border-bottom: 1px solid #dcdcdc;
+box-sizing: border-box;
+padding: ${({theme})=>theme.paddings.small} 0;
+&::placeholder{
+    color: #dcdcdc;
+    font-size: ${({theme})=> theme.fontSizes.base};
+}
+`;
+
+const Contents = styled.div`
+margin: 1.5rem 0 ${({theme})=>theme.paddings.small};
+font-size: 1.2rem;
+`;
+
+
+const ContentArea = styled.textarea`
+    resize: none;
+    font-size: ${({theme}) => theme.fontSizes.base};
+    width: 100%;
+    border: none;
+    border-radius: .3rem;
+    outline: none;
+    padding: ${({theme})=>theme.paddings.xxl};
+    background-color: #f5f5f5;
+    &::placeholder{
+        color: #dcdcdc;
+        font-size: ${({theme})=> theme.fontSizes.base};
+    }
+`;
+
+const BtnGrid = styled.div`
+    display: flex;
+    justify-content: right;
+    margin: 2.2rem 0 3.8rem;
+    `;
+    
+const Btn = styled.button`
+    border: none;
+    width: 3.8rem;
+    height: 2.3rem;
+    border-radius: .3rem;
+    margin-right: .4rem;
+    &:hover {
+        background-color: #ff7a7a;
+        color: #fff;
+    }
+`;
 
 export default RequestEdit;
