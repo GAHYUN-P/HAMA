@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import ProfileImg from '../elements/ProfileImg';
 
 const Medal = (props) => {
 
@@ -11,14 +12,14 @@ const Medal = (props) => {
   if(props.value === 0) {
     return (
       <div>
-        메달 업서~
+        <ProfileImg shape='circle' size='3rem' src='https://png.pngtree.com/thumb_back/fh260/background/20210207/pngtree-gray-simple-gradient-background-image_557031.jpg'/>
       </div>
     );
   }
 
   return (
     <div>
-      메달 잇서~
+      <ProfileImg shape='circle' size='3rem' src='https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/me.png'/>
     </div>
   );
 };

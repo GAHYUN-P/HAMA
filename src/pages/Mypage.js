@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { mypageActions } from '../redux/modules/mypage';
 import { useSelector,useDispatch } from 'react-redux';
 import Medal from '../components/Medal';
@@ -7,6 +8,10 @@ import MyanswerList from '../components/MyanswerList';
 import Header from '../components/Header';
 import { history } from '../redux/configureStore';
 import Footer from '../components/Footer';
+import colorBg from '../assets/colorBg.png';
+import ProfileImg from '../elements/ProfileImg';
+import SurveyWrite from '../assets/SurveyWrite.svg';
+import gotoTest from '../assets/gotoTest.svg';
 
 const Mypage = (props) => {
 
@@ -17,11 +22,10 @@ const Mypage = (props) => {
         dispatch(mypageActions.getUserInfo());
     }, []);
 
-    const nickname = useSelector((state) => state.mypage.list.nickname);
-    const email = useSelector((state) => state.mypage.list.email);
-    const hippoName = useSelector((state) => state.mypage.list.hippoName);
-    const point = useSelector((state) => state.mypage.list.point);
-    const hippolv = useSelector((state) => state.mypage.list.hippolv);
+    const list = useSelector((state) => state.mypage.list);
+    console.log(list.point);
+    const percent = list.point / 10;
+    console.log(percent);
 
     const achievement_list =  useSelector((state) => state.mypage.achievement);
     console.log(achievement_list);
@@ -37,24 +41,165 @@ const Mypage = (props) => {
     }
 
   return (
-    <div>
+    <Wrap>
       <Header />
-      <div>{nickname} | {email} | {hippoName} | {point} | {hippolv}</div>
+      <MyBanner>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+          <InfoWrap>
+            <Category>고민상담</Category>
+            <Nickname>{list.nickname}</Nickname>
+            <HippoName>{list.hippoName}</HippoName>
+            {/* <Email>{list.email}</Email> */}
+            <div>expert</div>
+          </InfoWrap>
+          <ProfileWrap>
+            <ProfileImg shape='circle' src={list.imgUrl} size='18vh' position='relative'/>
+            <SurveyIco/>
+            <DoTest/>
+          </ProfileWrap>
+        </div>
+        <div style={{paddingTop:'2vh'}}>
+          <Lv>{list.hippolv}LV</Lv>
+          <LvBg>
+            <LvGage percent={percent}/>
+          </LvBg>
+          <Point>{list.point}/1000 exp</Point>
+        </div>
+      </MyBanner>
+      <MyContents>
+      <MedalWrap>
       {achievement_list.map((info, idx) => {
                 return (
                   <Medal
                     value = {info}/>
                 );
             })}
-      <hr/>
+      </MedalWrap>
       <MypostList/>
       <button onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기</button>
       <hr/>
       <MyanswerList/>
       <button onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기</button>
+      </MyContents>
       <Footer />
-    </div>
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  height: 100vh;
+  width: 100wh;
+  position: relative;
+`;
+
+const MyBanner = styled.div`
+  height: 40%;
+  background-image: url(${colorBg});
+  background-size: cover;
+  padding: 1vh 4vh;
+`;
+
+const InfoWrap = styled.div`
+  margin: 5vh 0px;
+`;
+
+const Category = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  color: #fff;
+  background: rgba(255, 58, 58, 0.7);
+  border-radius: 4px;
+  display: inline;
+  padding: 1px 3px 1px 2px;
+`;
+
+const Nickname = styled.div`
+  padding: 2vh 0px 1.2vh;
+  font-size: ${({ theme }) => theme.fontSizes.xxxxl};
+  color: #fff;
+  font-weight: 600;
+`;
+
+const HippoName = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.xxl};
+  color: #fff;
+  padding: 0vh 0px 1.2vh;
+`;
+
+const Email = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  color: rgba(255, 255, 255, 1);
+  padding: 0vh 0px 1.2vh;
+  background-color: #FAA7A6;
+  border-radius: 40px;
+  padding: 2px 5px;
+`;
+
+const ProfileWrap = styled.div`
+  padding: 1vh 0px;
+  position: relative;
+  display: opacity;
+`;
+
+const SurveyIco = styled.div`
+  background-image: url(${SurveyWrite});
+  background-size: cover;
+  height: 5vh;
+  width: 5vh;
+  position: absolute;
+  bottom: 22%;
+  right: 2%;
+`;
+
+const DoTest = styled.div`
+  background-image: url(${gotoTest});
+  background-size: cover;
+  height: 23%;
+  width: 100%; 
+`;
+
+
+const Lv = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  color: #fff;
+  padding: 0px 5px 0px;
+`;
+
+const LvBg = styled.div`
+  width: 100%;
+  height: 1.5vh;
+  background: #EFEFEF;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 0.6%;
+`;
+
+const LvGage = styled.div`
+  width: ${props => props.percent}%;
+  height: 100%;
+  background: linear-gradient(270deg, #FE6462 0%, #FE8B8B 100%);
+  border-radius: 7px;
+`;
+
+const Point = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  color: #fff;
+  padding: 0px 5px 0px;
+  text-align: right;
+`;
+
+
+const MyContents = styled.div`
+  height: 60%;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background-color: #fff;
+  border-radius: 30px 30px 0px 0px;
+  padding: 7% ${({ theme }) => theme.paddings.default};
+`;
+
+const MedalWrap = styled.div`
+  display: flex;
+`;
 
 export default Mypage;
