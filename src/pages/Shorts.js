@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from 'react-player';
 import { history } from "../redux/configureStore";
 import Header from "../components/Header";
+import ProfileImg from "../elements/ProfileImg";
 
 const Shorts = (props) => {
     const dispatch = useDispatch();
@@ -74,9 +75,9 @@ const Shorts = (props) => {
     
     if(is_loading) {
       return (
-        <Container>
+        <Wrap>
           <Header />
-          <h2> Single Item</h2>
+          <Container>
           <StyledSlider {...settings} ref={slider}>
             {items.map((item, idx) => {
               return (
@@ -94,43 +95,58 @@ const Shorts = (props) => {
                             onEnded={handleVideo}
                             />
                     </ImageContainer>
-                    <div>
-                      <div onClick={() => history.push(`/answerdetail/${item.answerId}`)}>{item.title}</div> 
-                      <div>{item.profileUrl} | {item.nickname}</div> 
-                    </div>
+                    {lastpg && 
+                      <div>
+                        {/* 목록에 있는 영상을 다 보셨습니다 옆으로 넘기면 갱신됩니다! */}
+                      </div>
+                    }
+                <TitleWrap>
+                  <Title onClick={() => history.push(`/answerdetail/${item.answerId}`)}>{item.title}</Title> 
+                  <div style={{display: 'flex', paddingTop:'1rem'}}>
+                    <ProfileImg shape='circle' size='40' src='https://mblogthumb-phinf.pstatic.net/MjAxODAzMDNfMTc5/MDAxNTIwMDQxNzQwODYx.qQDg_PbRHclce0n3s-2DRePFQggeU6_0bEnxV8OY1yQg.4EZpKfKEOyW_PXOVvy7wloTrIUzb71HP8N2y-YFsBJcg.PNG.osy2201/1_%2835%ED%8D%BC%EC%84%BC%ED%8A%B8_%ED%9A%8C%EC%83%89%29_%ED%9A%8C%EC%83%89_%EB%8B%A8%EC%83%89_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_180303.png?type=w800'/>
+                    <div style={{ padding: '0.6rem 0.7rem'}}>{item.nickname}</div>
+                  </div>
+                </TitleWrap>
                 </div>
               );
             })} 
           </StyledSlider>
-          {lastpg && 
-            <div>
-              목록에 있는 영상을 다 보셨습니다 옆으로 넘기면 갱신됩니다!
-            </div>
-            }
         </Container>
+      </Wrap>
     );
     }
 
     return <></>;
 };
 
+const Wrap = styled.div`
+  background-color: black;
+  height: 100vh;
+  width: 100wh;
+`;
+
 const Container = styled.div`
-  overflow:hidden;
+  /* position: relative; */
 `;
 
 const StyledSlider = styled(Slider)`
-    .slick-slide div{
-      outline: none;
-    }
+
+`;
+
+const TitleWrap = styled.div`
+  margin: ${({ theme }) => theme.paddings.default};
+  color: #fff;
+`;
+
+const Title = styled.div`
+  font-family: 'Noto-Sans-KR-M';
+  font-size: ${({ theme }) => theme.fontSizes.lg};
 `;
 
 const ImageContainer = styled.div`
-  margin: 0 16px;
-`;
-
-const Image = styled.img`
-max-width:100%;
-max-height:100%;
+  /* background-color: red; */
+  height: 80vh;
+  padding: 45% 0px;
 `;
   
 export default Shorts;
