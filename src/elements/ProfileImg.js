@@ -6,7 +6,7 @@ const ProfileImg = (props) => {
   const { src } = props;
 
   //shape, size category
-  const { shape, size, width, height, margin, position } = props;
+  const { shape, size, width, height, margin, position, bgColor } = props;
 
   //event category
   const { _onClick } = props;
@@ -20,6 +20,7 @@ const ProfileImg = (props) => {
     height,
     margin,
     position,
+    bgColor,
   };
   if (shape === "imageBG") {
     return <ImageBG onClick={_onClick} {...styles}></ImageBG>;
@@ -78,6 +79,7 @@ const ImageCircle = styled.div`
   background-image: url("${(props) => props.src}");
   background-size: cover;
   position: ${(props) => props.position};
+  background-color: ${(props) => props.bgColor};
   /* margin: 4px; */
 `;
 const ImagePost = styled.div`

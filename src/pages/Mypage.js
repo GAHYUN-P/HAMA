@@ -12,6 +12,8 @@ import colorBg from '../assets/colorBg.png';
 import ProfileImg from '../elements/ProfileImg';
 import SurveyWrite from '../assets/SurveyWrite.svg';
 import gotoTest from '../assets/gotoTest.svg';
+import { IoIosArrowForward } from "react-icons/io";
+import { textAlign } from '@mui/system';
 
 const Mypage = (props) => {
 
@@ -24,7 +26,10 @@ const Mypage = (props) => {
 
     const list = useSelector((state) => state.mypage.list);
     console.log(list.point);
-    const percent = list.point / 10;
+    let percent = list.point / 10;
+    if(percent > 100) {
+      percent = 100;
+    }
     console.log(percent);
 
     const achievement_list =  useSelector((state) => state.mypage.achievement);
@@ -53,12 +58,12 @@ const Mypage = (props) => {
             <div>expert</div>
           </InfoWrap>
           <ProfileWrap>
-            <ProfileImg shape='circle' src={list.imgUrl} size='18vh' position='relative'/>
+            <ProfileImg shape='circle' src={list.imgUrl} size='17vh' position='relative'/>
             <SurveyIco/>
             <DoTest/>
           </ProfileWrap>
         </div>
-        <div style={{paddingTop:'2vh'}}>
+        <div style={{paddingTop:'2.5vh'}}>
           <Lv>{list.hippolv}LV</Lv>
           <LvBg>
             <LvGage percent={percent}/>
@@ -68,16 +73,19 @@ const Mypage = (props) => {
       </MyBanner>
       <MyContents>
       <MedalWrap>
-      {achievement_list.map((info, idx) => {
-                return (
-                  <Medal
-                    value = {info}/>
-                );
-            })}
+        <Title>나의 업적</Title>
+        {achievement_list.map((info, idx) => {
+                  return (
+                    <Medal
+                      value = {info}
+                      idx={idx}
+                      />
+                  );
+              })}
+          <GotoDetail>자세히 보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
       </MedalWrap>
       <MypostList/>
-      <button onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기</button>
-      <hr/>
+      <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
       <MyanswerList/>
       <button onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기</button>
       </MyContents>
@@ -88,7 +96,7 @@ const Mypage = (props) => {
 
 const Wrap = styled.div`
   height: 100vh;
-  width: 100wh;
+  width: 100vw;
   position: relative;
 `;
 
@@ -109,7 +117,7 @@ const Category = styled.div`
   background: rgba(255, 58, 58, 0.7);
   border-radius: 4px;
   display: inline;
-  padding: 1px 3px 1px 2px;
+  padding: 2px 4px 3px 3px;
 `;
 
 const Nickname = styled.div`
@@ -135,25 +143,25 @@ const Email = styled.div`
 `;
 
 const ProfileWrap = styled.div`
-  padding: 1vh 0px;
+  padding: 2vh 0px;
   position: relative;
-  display: opacity;
 `;
 
 const SurveyIco = styled.div`
   background-image: url(${SurveyWrite});
   background-size: cover;
-  height: 5vh;
-  width: 5vh;
+  height: 4.5vh;
+  width: 4.5vh;
   position: absolute;
-  bottom: 22%;
-  right: 2%;
+  bottom: 18%;
+  right: 0%;
 `;
 
 const DoTest = styled.div`
   background-image: url(${gotoTest});
   background-size: cover;
-  height: 23%;
+  margin-top: 0.5vh;
+  height: 25%;
   width: 100%; 
 `;
 
@@ -196,10 +204,32 @@ const MyContents = styled.div`
   background-color: #fff;
   border-radius: 30px 30px 0px 0px;
   padding: 7% ${({ theme }) => theme.paddings.default};
+  
 `;
 
 const MedalWrap = styled.div`
-  display: flex;
+  width: 100%;
+  height: 40%;
 `;
+
+const Title = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  margin: 0px 0px ${({ theme }) => theme.paddings.xxxl};
+`;
+
+const GotoDetail = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  text-align: right;
+  color: #6B6B6B;
+  display: flex;
+  justify-content: right;
+`;
+
+const IconWrap = styled.div` 
+    display:flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 
 export default Mypage;

@@ -21,6 +21,8 @@ const initialState = {
     nickname: '',
     imgUrl: 'https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/5xq2/image/0lp8RLaJ2IgctTWVl2nEa-JRCSc.jpg',
     category: '',
+    likes: null,
+    contents: '',
   }],
   myanswer: [{
     answerId: null,
@@ -29,6 +31,8 @@ const initialState = {
     nickname: '',
     imgUrl: 'http://san.chosun.com/site/data/img_dir/2019/04/24/2019042401956_0.jpg',
     category: '',
+    likes: null,
+    contents: '',
   }],
   category: '',
   is_what: '',
