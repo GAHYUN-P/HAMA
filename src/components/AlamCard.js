@@ -14,7 +14,7 @@ const AlamCard = (props) => {
 
     const MoveTo = () => {
         if(['likeP','answer'].includes(type)){
-            history.push(`/requestdeatil/${id}`);
+            history.push(`/requestdetail/${id}`);
         }
         if(['comment','rate','rated','likeA'].includes(type)){
             history.push(`/answerdetail/${id}`);
@@ -41,7 +41,7 @@ const AlamCard = (props) => {
                 </div>
                 <div onClick={MoveTo} style={{width:'70%'}}>
                     {senderNickName}님이 [{title}]글에 댓글을 남겼습니다.
-                    <span>      {modifiedAt}</span>
+                    <span>{modifiedAt}</span>
                 </div>
                 <div onClick={deletAlarm}
                  style={{width:'10%',display:'flex',justifyContent:'center',alignItems:'center'}}>X</div>
