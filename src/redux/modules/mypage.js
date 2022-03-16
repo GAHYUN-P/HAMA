@@ -9,6 +9,9 @@ const initialState = {
     hippoName:'일반 하마',
     point: 0,
     hippolv: 1,
+    category: "",
+    expert: [],
+    imgUrl:"",
   },
   achievement : [],
   mypost: [{
