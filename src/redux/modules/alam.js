@@ -10,7 +10,7 @@ export const initialState = {
 // actions
 const setAlam = createAction('alam/setAlam');
 const deleteAlam = createAction('alam/deleteAlam');
-const deleteAll = createAction('alam/deleteAlam');
+const deleteAll = createAction('alam/deleteAll');
 const readingCheck = createAction('alam/readingCheck');
 const getNewAlam = createAction('alam/getNewAlam');
 const setNotReadCount = createAction('alam/setNotReadCount');
@@ -25,7 +25,8 @@ const alam = createReducer(initialState,{
         state.alams = [...state.alams,action.payload];
     },
     [deleteAlam]:(state,action) => {
-       state.alams = state.alams.filter(a=>{return a.id !== action.payload })
+        console.log(action.payload);
+       state.alams = state.alams.filter(a => {return a.alarmId !== action.payload })
     },
     [deleteAll]:(state,action) => {
         state.alams = [];
@@ -81,7 +82,6 @@ const deleteAllDB = () => async (dispatch,getState,{history}) => {
 const checkAlamDB = () => async (dispatch,getState,{history}) => {
     alamAPI.checkAlam()
     .then(()=>{
-        dispatch(readingCheck());
         console.log('읽었습니다.');
     })
     .catch(err=>{
@@ -94,7 +94,7 @@ const checkAlamDB = () => async (dispatch,getState,{history}) => {
 const getNotReadCountDB = () => async (dispatch,getState,{history}) => {
     alamAPI.notReadCount()
     .then(res=>{
-        dispatch(setNotReadCount(res.data));
+        dispatch(setNotReadCount(res.data.alarmCount));
     })
     .catch(err=>{
         console.log('error',err);

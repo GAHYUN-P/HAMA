@@ -43,7 +43,7 @@ const child = createReducer(initialState,{
     [editComment]:(state,action) => {
         state.childComments = state.childComments.map((c)=>{
             if(c.commentId === action.payload.commentId){
-                return {...c,content:action.payload.content};
+                return {...c,content:action.payload.comment};
             }
             return c
         })
@@ -86,7 +86,7 @@ const addChildDB = (data) => async (dispatch,getState,{history}) => {
 };
 
 const editChildDB = (data) => async (dispatch,getState,{history}) => {
-    answerAPI.editComment(data.commentId,data.content)
+    answerAPI.editComment(data)
     .then(()=>{
         console.log('수정성공');
         dispatch(editComment(data));

@@ -1,18 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useDispatch } from "react-redux";
+import { alamActions } from "../redux/modules/alam";
+
 import { setAlamContent } from "../shared/setAlamcontent";
 
 import { history } from "../redux/configureStore";
 
 const AlamCard = (props) => {
-    const { alamId ,id, nickname, type, title, createdAt, reading } = props;
+    const dispatch = useDispatch();
+    const { alarmId ,id, senderNickName, type, title, modifiedAt, readingStatus } = props;
 
     const MoveTo = () => {
-        if(type === ('likeP'||'answer')){
+        if(['likeP','answer'].includes(type)){
             history.push(`/requestdeatil/${id}`);
         }
-        if(type === ('comment'||'rate'||'rated'||'likeA')){
+        if(['comment','rate','rated','likeA'].includes(type)){
             history.push(`/answerdetail/${id}`);
         }
         if(type === 'child'){
@@ -23,17 +27,24 @@ const AlamCard = (props) => {
         }
     }
 
+    console.log(readingStatus);
+
+    const deletAlarm = () => {
+        dispatch(alamActions.deleteAlamDB(alarmId));
+    }
+
     return (
         <React.Fragment>
             <div style={{display:'flex',padding:'1rem 0',borderBottom:'1px solid #ccc'}} >
                 <div style={{width:'20%',display:'flex',justifyContent:'center',alignItems:'center'}}>
                     {type}
                 </div>
-                <div style={{width:'70%'}}>
-                    {nickname}님이 [{title}]글에 댓글을 남겼습니다.
-                    <span>  {createdAt}</span>
+                <div onClick={MoveTo} style={{width:'70%'}}>
+                    {senderNickName}님이 [{title}]글에 댓글을 남겼습니다.
+                    <span>      {modifiedAt}</span>
                 </div>
-                <div style={{width:'10%',display:'flex',justifyContent:'center',alignItems:'center'}}>X</div>
+                <div onClick={deletAlarm}
+                 style={{width:'10%',display:'flex',justifyContent:'center',alignItems:'center'}}>X</div>
             </div>
         </React.Fragment>
     )

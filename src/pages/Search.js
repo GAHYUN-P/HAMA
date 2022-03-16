@@ -8,6 +8,10 @@ import RecentWord from '../components/RecentWord';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+import {IoSearchOutline} from 'react-icons/io5';
+
+import styled from 'styled-components';
+
 const Search = (props) => {
     const dispatch = useDispatch();
     const requestResult = useSelector(state => state.search.requestResult);
@@ -35,23 +39,49 @@ const Search = (props) => {
     return(
         <React.Fragment>
             <Header />
-            <div style={{width:'100%',height:'100%'}} >
+            <Grid>
                 {/* 검색창 */}
-                <div style={{width:'90%',border:'1px solid #000', borderRadius:'1rem',padding:'0.5rem 0.5rem',margin:'15px auto',display:'flex'}} >
-                    <input 
-                    ref={ref}
-                    onKeyPress={insertWord}
-                    placeholder='키워드 입력'
-                    style={{border:'none',width:'100%'}} />
-                </div>
-                {/* 최근 검색어: 로그인 시 보일 것 */}
-                <div style={{width:'90%',margin:'auto'}} >
-                    <RecentWord />
-                </div>
-            </div>
+                <SearchBar>
+                    <Icon>
+                        <IoSearchOutline />
+                    </Icon>
+                    <SearchInput ref={ref} onKeyPress={insertWord}/>
+                </SearchBar>
+
+                {/* 최근 검색어: 로그인 시 보일 것 */}        
+                <RecentWord />
+            </Grid>
             <Footer />
         </React.Fragment>
     )
 }
+
+const Grid = styled.div`
+    padding: ${({theme})=> theme.paddings.default};
+`;
+
+const SearchBar = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: ${({theme})=> theme.paddings.small};
+    border-radius: 1rem;
+    background-color: #f5f5f5;
+`;
+
+const SearchInput = styled.input`
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+`;
+
+const Icon = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: ${({theme})=> theme.fontSizes.lg};
+    color: #9e9e9e;
+`;
 
 export default Search;

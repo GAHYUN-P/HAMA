@@ -6,6 +6,9 @@ import { getUserId } from '../shared/cookie';
 
 import Header from '../components/Header';
 
+import PP from '../assets/Paper_Plane.svg';
+import {BiSubdirectoryRight} from 'react-icons/bi';
+
 import styled from 'styled-components';
 
 const ChildComment = (props) => {
@@ -29,7 +32,7 @@ const ChildComment = (props) => {
         }
         if(commentRef.current.commentId !== undefined){
             const data = {
-                content: commentRef.current.value,
+                comment: commentRef.current.value,
                 commentId: commentRef.current.commentId
             }
             console.log(data);
@@ -44,113 +47,132 @@ const ChildComment = (props) => {
         }
         dispatch(childActions.addChildDB(data));
         cancel();
-    }
+    };
 
     const cancel = () => {
         commentRef.current.commentId = undefined;
-        commentRef.current.value = '';
-    }
-
-    const del = (commentId) => {
-        if(window.confirm('댓글을 삭제하겠습니까?')){
-            dispatch(childActions.delChildDB(commentId))
-        }
+        setComment('');
     };
 
     return(
         <React.Fragment>
             <Header />
-            <div style={{width:'90%', margin:'0 auto',position:'relative'}} >
+            <WholeGrid>
                 {/* 부모댓글 */}
-                <div style={{display:'flex'}} >
+                <Grid>
                     <div>
                         <ProHippo />
                     </div>
-                    <div>
-                        <div style={{display:'flex'}} > 
-                            <div>{parent.commentWriter}</div>
-                        </div>
-                        <div>
+                    <div style={{width:'100%'}} >
+
+                        <CWrieter> 
+                            {parent.commentWriter}
+                        </CWrieter>
+
+                        <ContentDiv>
                             {parent.content}
-                        </div>
-                        <div>
+                        </ContentDiv>
+                        <TimeSet>
                             {parent.modifiedAt}
-                        </div>
+                        </TimeSet>
                     </div>
-                </div>
-                <hr/>
+                </Grid>
 
                 {/* 댓글 없을 때 */}
                 {childs.length === 0 &&
-                <div style={{
-                    width:'100%',display:'flex',justifyContent:'center',
-                    alignItems:'center',fontSize:'2rem'
-                }} >아직 대댓글이 없어요 
+                <div>아직 대댓글이 없어요 
                 첫 작성자가 되어주세요!!</div>
                 }
                 {/* 자식댓글 */}
                 {childs.length > 0 &&
                 childs.map((k,i)=>{
                     return (
-                    <div key={i} style={{width:'100%',display:'flex'}} >
-                        <div style={{width:'10%'}} >
-                            화살
-                        </div>
-                        <div style={{width:'90%'}} >
-                            <div style={{display:'flex', justifyContent:'space-between'}} >
-                                <div style={{display:'flex'}} > 
-                                    <div>프로필</div>
-                                    <div>{k.commentWriter}</div>
-                                </div>
-                                {k.commentWriterId === Number(getUserId())  &&
-                                <div style={{display:'flex'}} > 
-                                    <button
-                                    onClick={()=>{
-                                        commentRef.current.commentId = k.commentId;
-                                        commentRef.current.value = k.content;
-                                        commentRef.current.focus();
-                                    }}
-                                    style={{border:'none',margin:'0 0.5rem 0 0'}} >수정</button>
-                                    <button
-                                    onClick={()=>{
-                                        if(window.confirm('댓글을 삭제하겠습니까?')){
-                                            dispatch(childActions.delChildDB(k.commentId))
-                                        }
-                                    }}
-                                     style={{border:'none'}} >삭제</button>
-                                </div>}
+                    <Grid key={i} >
+                        <Icon>
+                            <BiSubdirectoryRight/>
+                        </Icon>
+
+                        <ChildGrid>
+                            <div> 
+                                <ProHippo />
                             </div>
-                            <div>{k.content}</div>
-                            <div>{k.modifiedAt}</div>
-                            <hr/>
-                        </div>
-                    </div>
+                            <div style={{width:'100%'}} >
+                                <UserGrid>
+                                    <CWrieter>
+                                        {k.commentWriter}
+                                    </CWrieter>
+                                    {k.commentWriterId === Number(getUserId())  &&
+                                    <div style={{display:'flex'}} > 
+                                        <PairBtn
+                                        onClick={()=>{
+                                            commentRef.current.commentId = k.commentId;
+                                            commentRef.current.value = k.content;
+                                            commentRef.current.focus();
+                                        }}
+                                        >수정</PairBtn>
+                                        <PairBtn
+                                        onClick={()=>{
+                                            if(window.confirm('댓글을 삭제하겠습니까?')){
+                                                dispatch(childActions.delChildDB(k.commentId))
+                                            }}} >삭제</PairBtn>
+                                    </div>}
+                                </UserGrid>
+                                <div>
+                                    <ContentDiv>
+                                        {k.content}
+                                    </ContentDiv>
+                                    <TimeSet>
+                                        {k.modifiedAt}
+                                    </TimeSet>
+                                </div>
+                            </div>
+                        </ChildGrid>
+                    </Grid>
                     )
                     })}
-                <div style={{
-                    width:'90%',border:'1px solid #ccc',borderRadius:'1rem',
-                    position:'fixed',bottom:'24px'
-                    }} >
-                    <Elinput ref={commentRef}
-                     type='text' placeholder='댓글을 작성해 주세요.' />
-                    <div style={{display:'inline-block',padding:'0 16px 0 0'}} >x</div>
-                    <button onClick={add} value={comment} onChange={(e)=>{setComment(e.target.value)}}
-                    style={{
-                        display:'inline-block',border:'none',backgroundColor:'#ccc',
-                        padding:'8px'
-                        }} >작성</button>
+                <div style={{position:'fixed',width:'23.2rem', bottom:'2rem' }} >        
+                    <InputGrid>
+                        <ElInput 
+                        ref={commentRef}
+                        value={comment} onChange={(e)=>{setComment(e.target.value)}}
+                        type='text'
+                        placeholder='댓글을 작성해 주세요.' />
+                        <PPHolder url={PP} onClick={add} />
+                    </InputGrid>
                 </div>
-            </div>
+            </WholeGrid>
         </React.Fragment>
     )
 };
 
-const Elinput = styled.input`
-    width: 80%;
-    display: inline-block;
-    border: none;
-    outline: none;
-    padding: 8px 4px;
+const WholeGrid = styled.div`
+    padding: 0 ${({theme})=> theme.paddings.default} 4.5rem;
+    position: relative;
+`;
+
+const Grid = styled.div`
+    display: flex;
+    padding: ${({theme})=> theme.paddings.xl} 0;
+    border-bottom: .1rem solid #f5f5f5;
+    box-sizing: border-box;
+`
+const Icon = styled.div`
+    font-size: 1.8rem;
+    color: #dcdcdc;
+`;
+
+const ChildGrid = styled.div`
+    display: flex;
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: .3rem;
+    padding: ${({theme})=> theme.paddings.small};
+`;
+
+const UserGrid = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding-top: ${({theme})=>theme.margins.small};
 `;
 
 const ProHippo = styled.div`
@@ -159,6 +181,55 @@ const ProHippo = styled.div`
     margin: .2rem .3rem 0 0;
     border-radius: 1.6rem;
     background-color: #dcdcdc;
+`;
+
+const PPHolder = styled.div`
+    width: 1.35rem;
+    height: 1.35rem;
+    background-image: url(${props => props.url});
+    background-size: cover;
+    position: absolute;
+    right: .7rem;
+    top: .7rem;
+`;
+
+const InputGrid = styled.div`
+    position: relative;
+`;
+
+const ElInput = styled.input`
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: ${({theme})=> theme.paddings.lg} .8rem ;
+    border-radius: .3rem;
+    box-shadow: 0 .15rem .4rem  #d5d5d5;
+    &::placeholder{
+        font-size: .7rem;
+        color:  #9e9e9e;
+    }
+`
+
+const CWrieter = styled.div`
+    font-size: ${({theme})=> theme.fontSizes.small};
+`;
+
+const ContentDiv = styled.div`
+    font-size: .7rem;
+    color: #666;
+`;
+
+const TimeSet = styled.div`
+    font-size: .7rem;
+    color: #9e9e9e;
+`;
+
+const PairBtn = styled.button`
+    font-size: .4rem;
+    padding: 0 .2rem;
+    color: #9e9e9e;
+    border: none;
+    background-color: #f5f5f5;
 `;
 
 export default ChildComment;
