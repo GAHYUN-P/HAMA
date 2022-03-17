@@ -39,6 +39,7 @@ const initialState = {
   userinfo: {
       nickname: '',
       hippoName: '',
+      hippoImage:'',
       postCount: null,
       answerCount: null,
   }

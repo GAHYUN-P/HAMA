@@ -37,6 +37,7 @@ const Mypage = (props) => {
 
     const onClickMypost = (e) => {
       dispatch(mypageActions.setDetail(e.target.value));
+      console.log(e.target.value);
       history.push('/mypage_detail');
     }
 
@@ -87,7 +88,8 @@ const Mypage = (props) => {
       <MypostList/>
       <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
       <MyanswerList/>
-      <button onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기</button>
+      <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+      <div style={{height:'10vh'}}/>
       </MyContents>
       <Footer />
     </Wrap>
@@ -98,6 +100,7 @@ const Wrap = styled.div`
   height: 100vh;
   width: 100vw;
   position: relative;
+  overflow: scroll;
 `;
 
 const MyBanner = styled.div`
@@ -204,7 +207,6 @@ const MyContents = styled.div`
   background-color: #fff;
   border-radius: 30px 30px 0px 0px;
   padding: 7% ${({ theme }) => theme.paddings.default};
-  
 `;
 
 const MedalWrap = styled.div`
@@ -214,15 +216,15 @@ const MedalWrap = styled.div`
 
 const Title = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.lg};
-  margin: 0px 0px ${({ theme }) => theme.paddings.xxxl};
+  margin: 0px 0px ${({ theme }) => theme.margins.xxxl};
 `;
 
-const GotoDetail = styled.div`
+const GotoDetail = styled.button`
+  background-color: #fff;
   font-size: ${({ theme }) => theme.fontSizes.small};
-  text-align: right;
   color: #6B6B6B;
   display: flex;
-  justify-content: right;
+  float: right;
 `;
 
 const IconWrap = styled.div` 

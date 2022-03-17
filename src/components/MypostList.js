@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MypageListEach from './MypageListEach';
 import { mypageActions } from '../redux/modules/mypage';
 import user from '../redux/modules/user';
+import { history } from '../redux/configureStore';
 
 const MypostList = (props) => {
 
@@ -19,7 +20,6 @@ const MypostList = (props) => {
     const prev_list = mypost_list.slice(0,2);
     console.log(prev_list);
     
-    
 
     return (
         <div>
@@ -29,7 +29,7 @@ const MypostList = (props) => {
                 <MypageListEach
                     key={idx}
                     idx={idx}
-                    requestId={info.requestId}
+                    Id={info.requestId}
                     title={info.title}
                     modifiedAt={info.modifiedAt}
                     imgUrl={info.imgUrl}
@@ -45,7 +45,7 @@ const MypostList = (props) => {
 
 const Title = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.lg};
-  margin: 0px 0px ${({ theme }) => theme.paddings.xxxl};
+  padding: ${({ theme }) => theme.paddings.xxxl} 0px;
 `;
 
 export default MypostList;

@@ -1,22 +1,25 @@
 import React, { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { categoryEncoder } from '../shared/categoryEncoder';
 
 const MypageListEach = (props) => {
 
     console.log(props);
     const idx = props.idx;
+
+
     
   return (
     <div>
       <Container>
-        <div>{props.category}</div>
+        <div>{categoryEncoder(props.category)}</div>
         <TitleWrap>
-          <Title>{props.title}</Title>
+          <Title onClick>{props.title}</Title>
           <Content>{props.contents}</Content>
         </TitleWrap>
         <div>{props.modifiedAt}</div>
-        <div>♡{props.like}</div>
+        <div>♡ {props.like}</div>
       </Container>
       {idx === 0 &&
         <hr/>
@@ -43,7 +46,6 @@ const Title = styled.div`
 
 const Content = styled.div`
   color: #666666;
-
 `;
 
 export default MypageListEach;

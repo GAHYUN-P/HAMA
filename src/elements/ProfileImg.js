@@ -22,8 +22,8 @@ const ProfileImg = (props) => {
     position,
     bgColor,
   };
-  if (shape === "imageBG") {
-    return <ImageBG onClick={_onClick} {...styles}></ImageBG>;
+  if (shape === "square") {
+    return <ImageSquare onClick={_onClick} {...styles}></ImageSquare>;
   }
   if (shape === "imagePost") {
     return <ImagePost onClick={_onClick} {...styles}></ImagePost>;
@@ -90,14 +90,14 @@ const ImagePost = styled.div`
   background-size: cover;
   background-position: center;
 `;
-const ImageBG = styled.div`
-  width: 222px;
-  height: 66px;
+const ImageSquare = styled.div`
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
   background-image: url("${(props) => props.src}");
   background-size: cover;
-  
   background-position: center;
   border: none;
+  border-radius: 10px;
 `;
 
 export default ProfileImg;
