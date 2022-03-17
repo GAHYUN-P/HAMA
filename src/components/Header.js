@@ -8,6 +8,7 @@ import { getPage, NeedAlam } from '../shared/getPages';
 import AlamBadge from './AlamBadge';
 
 import { FiInfo, FiChevronLeft, FiSearch, FiBell, FiMoreHorizontal } from 'react-icons/fi';
+import {BsX} from 'react-icons/bs';
 import styled from 'styled-components';
 
 const Header = (props) => {
@@ -25,7 +26,7 @@ const Header = (props) => {
   if(pathname === '/login'){
     return(
       <Grid onClick={GoBack} >
-        x
+        <BsX id='che' />
       </Grid>
     )
   }

@@ -4,16 +4,17 @@ import { history } from '../redux/configureStore';
 import styled from 'styled-components';
 
 const PostEach = (props) => {
-
+    const { title, content, modifiedAt, answerCount, postLikeCount, id } = props
+    
     const titleOnClick = () => {
-        history.push(`/requestdetail/${props.id}`);
+        history.push(`/requestdetail/${id}`);
     }
 
     return (
         <TitleEach onClick = {titleOnClick}>
-        <div>{props.title}</div>
+        <div>{title}</div>
         <div></div>
-         | {props.content} | {props.modifiedAt} | {props.answerCount} | 좋아요{props.postLikeCount}
+         | {content} | {modifiedAt} | {answerCount} | 좋아요{postLikeCount}
         </TitleEach>
     );
 };
