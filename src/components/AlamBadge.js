@@ -21,16 +21,16 @@ const AlamBadge = (props) => {
         dispatch(alamActions.getNotReadCountDB());
     },[])
 
-    const sock = new SockJS('http://dean900404.shop/ws-stomp');
+    const sock = new SockJS('http://15.165.18.176/ws-stomp');
     const ws = Stomp.over(sock);
     const token = getToken();
     const userId = getUserId();
 
     React.useEffect(()=>{
-        // wsConnectSubscribe()
-        // return () => {
-        //     wsDisConnectUnsubscribe()
-        // }
+        wsConnectSubscribe()
+        return () => {
+            wsDisConnectUnsubscribe()
+        }
     },[]);
 
     function wsConnectSubscribe() {
@@ -41,11 +41,12 @@ const AlamBadge = (props) => {
             },
             () => {
               ws.subscribe(
-                `http://dean900404.shop/${userId}`,
+                `/sub/alarm/user/${userId}`,
                 (data) => {
                   const newMessage = JSON.parse(data.body);
-                  console.log(newMessage);
                   dispatch(alamActions.addNotReadCount());
+                  console.log(data.body);
+                  console.log(newMessage);
                 },
                 { token: token }
               );

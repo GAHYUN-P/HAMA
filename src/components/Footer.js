@@ -33,7 +33,6 @@ const Footer = (props) => {
       onClick={()=>{
         if(pathname==='/'){return;}
         history.push('/')
-        console.log('작동')
       }}
       basic={ pathname === '/' ? home : home_n} hover={home} />
 
@@ -41,7 +40,6 @@ const Footer = (props) => {
       <Btn 
       onClick={()=>{
         history.push('/request')
-        console.log('작동')
       }}
       basic={write_n} hover={write} />
 
@@ -49,7 +47,6 @@ const Footer = (props) => {
       <Btn 
       onClick={()=>{
         history.push('/shorts')
-        console.log('작동')
       }}
       basic={shorts_n} hover={shorts} />
 
@@ -63,7 +60,6 @@ const Footer = (props) => {
       onClick={()=>{
         if(getFixed(pathname)==='mypage'){return;}
         history.push('/mypage')
-        console.log('작동')
       }}
       basic={getFixed(pathname) === 'mypage' ? mypage : mypage_n } hover={mypage} />
     </Grid>
@@ -74,7 +70,7 @@ const Grid = styled.div`
   background-color: #f5f5f5;
   padding-bottom: 1rem;
   width: 25.75rem;
-  height: 4.2rem;
+  height: 4.8rem;
   position: fixed;
   bottom: 0;
 `;

@@ -49,102 +49,112 @@ const Login = ({ history, match }) => {
   };
 
   return (
-    <Container>
-      <Header />
-      {username && (
-        <Wrapper is_column>
-          {username}님 환영합니다
-          <Wrapper margin="1rem 0">
-            <Button _onClick={() => history.push('/chat')}>
-              채팅방으로 입장
-            </Button>
-          </Wrapper>
-        </Wrapper>
-      )}
-      {!username && (
-        <Wrapper is_column>
-          <Title>로그인</Title>
-          {/* <Wrapper margin="0.5rem 0">
-            <Input
-              _onChange={onChangeEmail}
-              placeholder="이메일을 입력해주세요"
-            ></Input>
-          </Wrapper>
-          <Input
-            type="password"
-            value={password}
-            is_submit
-            onSubmit={onLogin}
-            _onChange={onChangePassword}
-            placeholder="비밀번호를 입력해주세요"
-          ></Input>
-          <Wrapper margin="0.5rem 0">
-            <SearchPassword onClick={() => history.push('/findPassword')}>
-              비밀번호 찾기
-            </SearchPassword>
-          </Wrapper>
-          <Wrapper margin="0.5rem 0">
-            <ErrorMsg valid={loginError}>{loginError}</ErrorMsg>
-          </Wrapper> */}
-          <Wrapper>
-            <KaKaoLogin
-              //styled component 통해 style을 입혀 줄 예정
-              token={KAKAO_JS_ID}
-              //카카오에서 할당받은 jsKey를 입력
-              render={(props) => (
-                <KakaoButton onClick={props.onClick}></KakaoButton>
-              )}
-              //로그인 버튼의 text를 입력
-              onSuccess={kakaoLoginSuccessHandler}
-              //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
-              getProfile={true}
-            ></KaKaoLogin>
-          </Wrapper>
-
-          {/* <Wrapper margin="0.5rem 0">
-            <Button disabled={!email || !password} _onClick={onLogin}>
-              로그인
-            </Button>
-          </Wrapper>
-          <Wrapper>
-            <Button _onClick={() => history.push('/signup')}>회원가입</Button>
-          </Wrapper> */}
-        </Wrapper>
-      )}
-    </Container>
+    <>
+    <Header />
+    <Grid>
+{/* 3 */}
+{/* 1 */}  
+      <KaKaoLogin token={KAKAO_JS_ID}
+        //카카오에서 할당받은 jsKey를 입력
+        render={(props) => (<KakaoButton onClick={props.onClick} />)}
+        //로그인 버튼의 text를 입력
+        onSuccess={kakaoLoginSuccessHandler}
+        //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
+        getProfile={true}/>
+{/* 2 */}
+    </Grid>
+    </>
   );
 };
 
-const Container = styled.div`
-  width: 300px;
-  height: 100%;
-  ${(props) => props.theme.flex_column};
+const Grid = styled.div`
+  padding: 22rem ${({theme})=> theme.paddings.default} 0;
+  display:flex;
   justify-content: center;
-`;
-const Title = styled.span`
-  margin: 2rem;
-  font-weight: 800;
-  font-size: 1.5rem;
-`;
-const SearchPassword = styled.span`
-  margin: 0.5rem 0;
-  cursor: pointer;
-  width: 100%;
-  text-align: right;
-  padding-right: 0.5rem;
-  color: gray;
-  font-size: 0.75rem;
+  align-items: center;
 `;
 
 const KakaoButton = styled.div`
   cursor: pointer;
   width: 100%;
-  height: 45px;
+  height: 3.5rem;
   background-color: #ffeb00;
   color: #000000;
-  border-radius: 12px;
+  border-radius: .5rem;
   background-image: url('kakao_login_large_wide.png');
   background-size: cover;
 `;
 
 export default Login;
+
+// const Title = styled.div`
+//   display: flex;
+//   padding: 15rem ${({theme})=> theme.paddings.default} 5rem;
+//   justify-content: center;
+//   font-weight: 800;
+//   font-size: 1.5rem;
+// `;
+
+// const SearchPassword = styled.span`
+//   margin: 0.5rem 0;
+//   cursor: pointer;
+//   width: 100%;
+//   text-align: right;
+//   padding-right: 0.5rem;
+//   color: gray;
+//   font-size: 0.75rem;
+// `;
+
+// const Container = styled.div`
+//   width: 300px;
+//   height: 100%;
+//   ${(props) => props.theme.flex_column};
+//   justify-content: center;
+// `;
+
+
+//  1
+// {/* <Wrapper margin="0.5rem 0">
+// <Input
+//   _onChange={onChangeEmail}
+//   placeholder="이메일을 입력해주세요"
+// ></Input>
+// </Wrapper>
+// <Input
+// type="password"
+// value={password}
+// is_submit
+// onSubmit={onLogin}
+// _onChange={onChangePassword}
+// placeholder="비밀번호를 입력해주세요"
+// ></Input>
+// <Wrapper margin="0.5rem 0">
+// <SearchPassword onClick={() => history.push('/findPassword')}>
+//   비밀번호 찾기
+// </SearchPassword>
+// </Wrapper>
+// <Wrapper margin="0.5rem 0">
+// <ErrorMsg valid={loginError}>{loginError}</ErrorMsg>
+// </Wrapper> */}
+
+//  2
+// {/* <Wrapper margin="0.5rem 0">
+//             <Button disabled={!email || !password} _onClick={onLogin}>
+//               로그인
+//             </Button>
+//           </Wrapper>
+//           <Wrapper>
+//             <Button _onClick={() => history.push('/signup')}>회원가입</Button>
+//           </Wrapper> */}
+
+// 3
+// {/* {username && (
+//         <Wrapper is_column>
+//           {username}님 환영합니다
+//           <Wrapper margin="1rem 0">
+//             <Button _onClick={() => history.push('/chat')}>
+//               채팅방으로 입장
+//             </Button>
+//           </Wrapper>
+//         </Wrapper>
+//       )} */}

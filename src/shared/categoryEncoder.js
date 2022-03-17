@@ -3,4 +3,11 @@ export const categoryEncoder = (category) => {
     const eng = ['cook','health','knowledge','create','visit','job','pet','fashion','consult','device','life','etc']
     
     return  kr[eng.indexOf(category)];
+};
+
+export const typeEncoder = (type) => {
+    const kr= ['댓글','대댓글','답변','평가','평가','레벨','좋아요','좋아요'];
+    const eng = ['comment','child','answer','rate','rated','level','likeA','likeP'];
+
+    return kr[eng.indexOf(type)];
 }

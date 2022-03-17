@@ -7,6 +7,7 @@ import { postActions } from "../redux/modules/post";
 import { getUserId } from "../shared/cookie";
 
 import Viewer from "./Viewer";
+import { categoryEncoder } from '../shared/categoryEncoder';
 
 import styled from "styled-components";
 
@@ -33,7 +34,7 @@ const RequestContents = (props) => {
         <React.Fragment>
             <div>
                 <CategoryTitle>
-                    {category}
+                    {categoryEncoder(category)}
                 </CategoryTitle>
                 {/* 상위 버튼들 */}
                 <Buttons>

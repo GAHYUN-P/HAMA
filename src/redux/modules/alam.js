@@ -1,9 +1,17 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
 
 import { alamAPI } from '../../shared/api';
-
+// alarmId ,id, senderNickName, type, title, modifiedAt, readingStatus
 export const initialState = {
-    alams:'',
+    alams:[{
+        alarmId: 0,
+        id: 0,
+        senderNickName:'mango',
+        type: 'answer',
+        title:'춘식이가 고구마 먹어주세요!!',
+        modifiedAt:'47분전',
+        readingStatus:'Y',
+    }],
     notReadCount: 0,
 }
 
@@ -22,7 +30,7 @@ const alam = createReducer(initialState,{
         state.alams = action.payload;
     },
     [getNewAlam]:(state,action) => {
-        state.alams = [...state.alams,action.payload];
+        state.alams = [action.payload,...state.alams];
     },
     [deleteAlam]:(state,action) => {
         console.log(action.payload);

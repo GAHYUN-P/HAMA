@@ -48,8 +48,8 @@ const Mypage = (props) => {
 
   return (
     <Wrap>
-      <Header />
       <MyBanner>
+      <Header />
         <div style={{display:'flex', justifyContent:'space-between'}}>
           <InfoWrap>
             <Category>고민상담</Category>

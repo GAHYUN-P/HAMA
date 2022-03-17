@@ -5,8 +5,9 @@ import { getToken } from './cookie';
 
 // 민기님 서버
 // axios.defaults.baseURL = 'http://3.36.53.246';
-axios.defaults.baseURL = 'http://15.165.18.176';
 
+// 민기님 서버2
+axios.defaults.baseURL = 'http://15.165.18.176'; 
 
 // 규진님 서버
 // axios.defaults.baseURL = 'http://dean900404.shop/';

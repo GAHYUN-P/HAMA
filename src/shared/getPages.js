@@ -3,7 +3,7 @@ const Basic =[
     'comment','search','searchresult','shorts','alam','mypage','mypage_detail'
 ];
 const BasicName = [
-    '','요청 작성','요청 수정','답변 작성','답변수정','게시판','게시판',
+    '','요청 작성','요청 수정','답변 작성','답변 수정','게시판','게시판',
     '답글','검색하기','검색결과','숏츠','알림','마이페이지','내가 작성한 글'
 ];
 
@@ -15,12 +15,9 @@ export const getPage = (pathname) => {
     if(name === 'search' && pathname.split('/').length > 2){
         name = 'searchresult';
     }
-
-    const data ={
-        type: 'basic',
-        title: BasicName[Basic.indexOf(name)] ? BasicName[Basic.indexOf(name)] : '' ,
-    }
-    return data
+    let title = BasicName[Basic.indexOf(name)];
+    
+    return title
 };
 
 export const getFooter = (pathname) => {
