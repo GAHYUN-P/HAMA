@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 import { alamActions } from "../redux/modules/alam";
 
 import { setAlamContent } from "../shared/setAlamcontent";
+import { typeEncoder } from "../shared/categoryEncoder";
+
+import {BsX} from 'react-icons/bs';
 
 import { history } from "../redux/configureStore";
 
@@ -35,27 +38,53 @@ const AlamCard = (props) => {
 
     return (
         <React.Fragment>
-            <div style={{display:'flex',padding:'1rem 0',borderBottom:'1px solid #ccc'}} >
-                <div style={{width:'20%',display:'flex',justifyContent:'center',alignItems:'center'}}>
-                    {type}
-                </div>
+            <Grid color={ readingStatus === 'N' ? '#000' : '#9e9e9e'} >
+                <BtnGrid>
+                    <TypeBtn>   
+                        {typeEncoder(type)}
+                    </TypeBtn>
+                </BtnGrid>
                 <div onClick={MoveTo} style={{width:'70%'}}>
-                    {senderNickName}님이 [{title}]글에 댓글을 남겼습니다.
-                    <span>{modifiedAt}</span>
+                    {setAlamContent(type,title,senderNickName,modifiedAt)}
                 </div>
-                <div onClick={deletAlarm}
-                 style={{width:'10%',display:'flex',justifyContent:'center',alignItems:'center'}}>X</div>
-            </div>
+                <ExBox onClick={deletAlarm}>
+                    <BsX />
+                </ExBox>
+            </Grid>
         </React.Fragment>
     )
 }
 
-const ReadY = styled.div`
-    color: ${({theme})=> theme.colors.gray_1};
+const Grid = styled.div`
+    color: ${props => props.color};
+    display: flex;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ccc;
 `;
 
-const ReadN = styled.div`
-    color: ${({theme})=> theme.colors.black};
-`
+const BtnGrid = styled.div`
+    width: 20%;
+    display: flex;
+    justify-content: left;
+    align-items: start;
+`;
+
+const TypeBtn = styled.div`
+    color: #9e9e9e;
+    padding: .15rem ${({theme})=> theme.paddings.small};
+    border: .1rem solid #e4e4e4;
+    border-radius: .8rem;
+`;
+
+const ExBox = styled.div`
+    font-size: ${({theme})=> theme.fontSizes.xxxxl};
+    color: #747474;
+    width: 10%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+`;
+
+
 
 export default AlamCard;

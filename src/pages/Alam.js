@@ -11,11 +11,13 @@ import SockJS from 'sockjs-client';
 
 import { getToken, getUserId } from "../shared/cookie";
 
+import styled from "styled-components";
+
 const Alam = (props) => {
     const dispatch = useDispatch();
     const { alams } = useSelector(state => state.alam);
 
-    const sock = new SockJS('http://dean900404.shop/ws-stomp');
+    const sock = new SockJS('http://15.165.18.176/ws-stomp');
     const ws = Stomp.over(sock);
     const token = getToken();
     const userId = getUserId();
@@ -26,10 +28,10 @@ const Alam = (props) => {
     },[])
 
     React.useEffect(()=>{
-        // wsConnectSubscribe()
-        // return () => {
-        //     wsDisConnectUnsubscribe()
-        // }
+        wsConnectSubscribe()
+        return () => {
+            wsDisConnectUnsubscribe()
+        }
     },[]);
 
     function wsConnectSubscribe() {
@@ -40,7 +42,7 @@ const Alam = (props) => {
             },
             () => {
               ws.subscribe(
-                `http://dean900404.shop/${userId}`,
+                `/sub/alarm/user/${userId}`,
                 (data) => {
                   const newMessage = JSON.parse(data.body);
                   dispatch(alamActions.getNewAlam(newMessage));
@@ -71,48 +73,58 @@ const Alam = (props) => {
         dispatch(alamActions.deleteAllDB());
     }
 
-    if(!alams){
+    if(!alams || alams.length === 0){
         return (
             <React.Fragment>
                 <Header />
                 <div>
-                    잠시만 기다려주세요.
+                   아직 알람이 없습니다.
                 </div>
             </React.Fragment>
         )
     }
 
     return(
-        <React.Fragment>
-            <Header />
-            <div style={{width:'90%',height:'100%',margin:'auto',padding:'1rem 0'}} >
-               
-                <div style={{width:'100%', margin:'0 0 2rem'}} >
-                    {/* 삭제 버튼 */}
-                    <div style={{display:'flex',justifyContent:'space-between'}} >
-                        <div></div>
-                        {alams.length !==0 && 
-                        <button onClick={delAll} style={{border:'none',backgroundColor:'#fff'}} >전체삭제</button>}
-                    </div>
-
-                    {/* 알림 들어가는 곳 */}
-                    {alams.length !==0 && 
-                    <div>
-                        {alams.map((a,i)=>{
-                            return <AlamCard key={i} {...a} />
-                        })}
-                    </div>}
-
-                    {/* 알람이 없을 때 */}
-                    {alams.length === 0 && 
-                    <div>
-                        알람이 없습니다.
-                    </div> }
-                </div>
-
-            </div>
-        </React.Fragment>
+          <React.Fragment>
+              <Header />
+              <GreyBar />
+              <Grid>
+              {/* 삭제 버튼 */}
+              <BtnGrid style={{display:'flex',justifyContent:'right'}} >
+                  {alams.length !==0 && 
+                  <DelBtn onClick={delAll}>
+                    전체삭제
+                  </DelBtn>}
+              </BtnGrid>
+              <div>
+                  {alams.map((a,i)=>{
+                      return <AlamCard key={i} {...a} />
+                  })}
+              </div>
+              </Grid>
+          </React.Fragment>
     )
 }
+
+const Grid = styled.div`
+  padding: 0 ${({theme})=> theme.paddings.default} 0;
+`;
+
+const GreyBar = styled.div`
+  height: .7rem;
+  background-color: #f7f7f7;
+`
+
+const BtnGrid = styled.div`
+  display: flex;
+  justify-content: right;
+  padding: ${({theme})=> theme.paddings.default} 0 .2rem;
+`;
+
+const DelBtn = styled.button`
+  border: none;
+  color: #666;
+  background-color: #fff;
+`;
 
 export default Alam;

@@ -6,7 +6,9 @@ import { answerActions } from "../redux/modules/answer";
 
 import WriteUser from "./WriteUser";
 import Viewer from '../components/Viewer'
+
 import { getUserId } from "../shared/cookie";
+import { categoryEncoder } from "../shared/categoryEncoder";
 
 import { FiHeart } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
@@ -42,7 +44,7 @@ const AnswerContent = (props) => {
                 <div style={{display:'flex',justifyContent:'space-between'}} >
                     <div>
                         <CategoryTitle>
-                            {props.category}
+                            {categoryEncoder(props.category)}
                         </CategoryTitle>
                         <ContentTitle>
                             {props.title}
