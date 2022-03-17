@@ -19,18 +19,28 @@ const MyanswerList = (props) => {
 
     return (
         <div>
-            <div>내가 답변한 글</div>
+            <Title>내가 답변한 글</Title>
             {prev_list.map((info, idx) => {
                 return (
                 <MypageListEach
-                    key={info.answerId}
+                    key={idx}
+                    idx={idx}
                     title={info.title}
+                    Id={info.answerId}
                     modifiedAt={info.modifiedAt}
+                    category={info.category}
+                    like={info.likes}
+                    contents={info.contents}
                     />
                 );
             })}
         </div>   
     );
 };
+
+const Title = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  padding: ${({ theme }) => theme.paddings.xxxl} 0px;
+`;
 
 export default MyanswerList;
