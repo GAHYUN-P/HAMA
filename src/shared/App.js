@@ -34,6 +34,7 @@ import SurveyResult from '../pages/SurveyResult';
 import Mypage from '../pages/Mypage';
 import MypageDetail from '../pages/MypageDetail';
 import Shorts from '../pages/Shorts';
+import MypageAch from '../pages/MypageAch';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
               <Route path="/result" exact component={SurveyResult} />
               <Route path="/mypage" exact component={Mypage} />
               <Route path="/mypage_detail" exact component={MypageDetail} />
+              <Route path="/mypage_achievement" exact component={MypageAch} />
               <Route path="/search" exact component={Search} />
               <Route path="/search/:keyword" exact component={SearchResult} />
               <Route path="/shorts" exact component={Shorts} />
