@@ -11,6 +11,9 @@ import { getToken, getUserId } from '../shared/cookie';
 
 import { FiBell } from 'react-icons/fi';
 
+import live_on from '../assets/live_alarm_on.svg';
+import live_off from '../assets/live_alarm_off.svg';
+
 import styled from 'styled-components';
 
 const AlamBadge = (props) => {
@@ -74,7 +77,7 @@ const AlamBadge = (props) => {
         return(
             <React.Fragment>
                 <Grid onClick={()=>{history.push('/alam')}} >
-                    <FiBell />
+                    <LiveOff src={live_off} />
                     <Count>{notReadCount}</Count>
                 </Grid>
             </React.Fragment>
@@ -84,7 +87,7 @@ const AlamBadge = (props) => {
     return(
         <React.Fragment>
             <div onClick={()=>{history.push('/alam')}} >
-                <FiBell />
+                <LiveOff src={live_off} />
             </div>
         </React.Fragment>
     )
@@ -94,12 +97,19 @@ const Grid = styled.div`
     position: relative;
 `;
 
-const Count = styled.p`
-    position: absolute;
-    color: coral;
-    font-size: ${({theme}) => theme.fontSizes.small};
-    left: 5px;
-    top: -3px;
+const LiveOff = styled.img`
+  width: 1.2rem;
+`;
+
+const Count = styled.div`
+  width: 1rem;
+  height: 1rem;
+  font-size: ${({theme}) => theme.fontSizes.small};
+  color: #fff;
+  background-color: #f55;
+  position: absolute;
+  left: 5px;
+  top: -3px;
 `;
 
 export default AlamBadge;
