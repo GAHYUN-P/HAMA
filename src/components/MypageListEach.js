@@ -13,7 +13,7 @@ const MypageListEach = (props) => {
   return (
     <div>
       <Container>
-        <div>{categoryEncoder(props.category)}</div>
+        <Category>{categoryEncoder(props.category)}</Category>
         <TitleWrap>
           <Title onClick>{props.title}</Title>
           <Content>{props.contents}</Content>
@@ -22,7 +22,7 @@ const MypageListEach = (props) => {
         <div>♡ {props.like}</div>
       </Container>
       {idx === 0 &&
-        <hr/>
+        <hr style={{border: '0.1px solid #E6E6E6'}}/>
       }
     </div>
   );
@@ -36,8 +36,12 @@ const Container = styled.div`
   margin: ${({ theme }) => theme.margins.base} 0px;
 `;
 
+const Category = styled.div`
+  width: 20%;
+`;
+
 const TitleWrap = styled.div`
-  width: 40%;
+  width: 45%;
 `;
 
 const Title = styled.div`
