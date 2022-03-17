@@ -7,6 +7,8 @@ import { getPage, NeedAlam } from '../shared/getPages';
 
 import AlamBadge from './AlamBadge';
 
+import logo from '../assets/log0.svg';
+
 import { FiInfo, FiChevronLeft, FiSearch, FiBell, FiMoreHorizontal } from 'react-icons/fi';
 import {BsX} from 'react-icons/bs';
 import styled from 'styled-components';
@@ -44,7 +46,7 @@ const Header = (props) => {
   if(pathname === '/'){
     return(
       <Grid>
-        <div id='logo' >로고</div>
+        <img id='logo' src={logo} />
         <FiInfo id='info' />
         <div id='bell'><AlamBadge/></div>
         <FiSearch id='search' onClick={GoSearch} />
@@ -123,9 +125,10 @@ const Grid = styled.div`
     color: ${props => props.color ? '#fff' : '#212121'}; 
     background-color: transparent;
     #logo{
+      width: 2.3rem;
       position: absolute;
-      left: 1rem;
-      bottom: 1rem;
+      left: .8rem;
+      bottom: .7rem;
     }
     #che{
       color: ${props => props.color ? '#fff' : '#7b7b7b'};

@@ -10,6 +10,8 @@ import ErrorMsg from '../elements/ErrorMsg';
 import { userActions } from '../redux/modules/user';
 import { KAKAO_JS_ID } from '../shared/common';
 
+import kakao_login from '../assets/kakao_login.svg';
+
 import useInput from '../shared/useInput';
 import KaKaoLogin from 'react-kakao-login';
 
@@ -56,7 +58,7 @@ const Login = ({ history, match }) => {
 {/* 1 */}  
       <KaKaoLogin token={KAKAO_JS_ID}
         //카카오에서 할당받은 jsKey를 입력
-        render={(props) => (<KakaoButton onClick={props.onClick} />)}
+        render={(props) => (<KakaoButton url={kakao_login} onClick={props.onClick} />)}
         //로그인 버튼의 text를 입력
         onSuccess={kakaoLoginSuccessHandler}
         //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
@@ -78,10 +80,9 @@ const KakaoButton = styled.div`
   cursor: pointer;
   width: 100%;
   height: 3.5rem;
-  background-color: #ffeb00;
   color: #000000;
   border-radius: .5rem;
-  background-image: url('kakao_login_large_wide.png');
+  background-image: url(${props => props.url});
   background-size: cover;
 `;
 

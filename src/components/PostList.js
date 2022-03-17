@@ -39,12 +39,16 @@ const PostList = (props) => {
     }
 
     return (
-        <div>
+        <Grid>
             {post_list.map((info, idx) => {
                 return (<PostEach key={info.id} {...info}/>);
             })}
-        </div>   
+        </Grid>   
     );
 };
+
+const Grid = styled.div`
+    padding-bottom: 3.5rem;
+`;
 
 export default PostList;
