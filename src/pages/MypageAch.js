@@ -14,15 +14,10 @@ import SurveyWrite from '../assets/SurveyWrite.svg';
 import gotoTest from '../assets/gotoTest.svg';
 import { IoIosArrowForward } from "react-icons/io";
 import { textAlign } from '@mui/system';
+import MedalDetail from '../components/MedalDetail';
 
-const Mypage = (props) => {
+const MypageAch = (props) => {
 
-    const dispatch = useDispatch();
-    React.useEffect(() => {
-        dispatch(mypageActions.getBanner());
-        dispatch(mypageActions.getAchievement());
-        dispatch(mypageActions.getUserInfo());
-    }, []);
 
     const list = useSelector((state) => state.mypage.list);
     console.log(list.point);
@@ -35,16 +30,6 @@ const Mypage = (props) => {
     const achievement_list =  useSelector((state) => state.mypage.achievement);
     console.log(achievement_list);
 
-    const onClickMypost = (e) => {
-      dispatch(mypageActions.setDetail(e.target.value));
-      console.log(e.target.value);
-      history.push('/mypage_detail');
-    }
-
-    const onClickMyanswer = (e) => {
-      dispatch(mypageActions.setDetail(e.target.value));
-      history.push('/mypage_detail');
-    }
 
   return (
     <Wrap>
@@ -64,7 +49,7 @@ const Mypage = (props) => {
             <DoTest/>
           </ProfileWrap>
         </div>
-        <div style={{paddingTop:'1.8vh'}}>
+        <div style={{paddingTop:'2.5vh'}}>
           <Lv>{list.hippolv}LV</Lv>
           <LvBg>
             <LvGage percent={percent}/>
@@ -77,21 +62,15 @@ const Mypage = (props) => {
         <Title>나의 업적</Title>
         {achievement_list.map((info, idx) => {
                   return (
-                    <Medal
+                    <MedalDetail
                       value = {info}
                       idx={idx}
                       />
                   );
               })}
-        <GotoDetail onClick={()=>history.push('/mypage_achievement')}>자세히 보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
       </MedalWrap>
-      <MypostList/>
-      <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
-      <MyanswerList/>
-      <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
-      <div style={{height:'10vh'}}/>
       </MyContents>
-      <Footer />
+      <Footer/>
     </Wrap>
   );
 };
@@ -199,7 +178,6 @@ const Point = styled.div`
   text-align: right;
 `;
 
-
 const MyContents = styled.div`
   height: 60%;
   width: 100%;
@@ -219,19 +197,5 @@ const Title = styled.div`
   margin: 0px 0px ${({ theme }) => theme.margins.xxxl};
 `;
 
-const GotoDetail = styled.button`
-  background-color: #fff;
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  color: #6B6B6B;
-  display: flex;
-  float: right;
-`;
 
-const IconWrap = styled.div` 
-    display:flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-
-export default Mypage;
+export default MypageAch;
