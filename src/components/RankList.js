@@ -37,17 +37,7 @@ const RankList = (props) => {
         </TitleWrap>
         <Nowtime>{nowTime} 기준</Nowtime>
         {rankList.map((info, idx) => {
-          return (
-            <Rank
-              key={idx}
-              rank={info.rank}
-              nickname={info.nickname}
-              point={info.point}
-              status={info.status}
-              is_changed={info.is_changed}
-              hippoName={info.hippoName}
-            />
-          );
+          return (<Rank key={idx}{...info}/>);
         })}
     </div>
     );

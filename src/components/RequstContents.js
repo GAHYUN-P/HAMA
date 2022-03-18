@@ -28,7 +28,7 @@ const RequestContents = (props) => {
             return;
         };
         console.log('마감이 취소되었습니다.');
-    }
+    };
 
     return(
         <React.Fragment>
@@ -41,7 +41,9 @@ const RequestContents = (props) => {
                     <div style={{ display:'flex' }} >
                         <TimeLimit>{timeSet}</TimeLimit>
                         <LevelBox>
-                            <LevelImg url={fair_c} />
+                            {level === '상' && <LevelImg url={good_c} /> }
+                            {level === '중' && <LevelImg url={fair_c} /> }
+                            {level === '하' && <LevelImg url={poor_c} /> }
                         </LevelBox>
                     </div>
                     { _conclusion === 'opened' && user_id === Number(getUserId()) &&

@@ -80,8 +80,9 @@ export const setAlamContent = (type,title,nickname,time)=> {
 
 const Crid = styled.div`
     position: relative;
-    line-height: 1.3rem;
     display: inline-block;
+    line-height: 1.3rem;
+    height: 2.5rem;
 `;
 
 const Nick = styled.div`

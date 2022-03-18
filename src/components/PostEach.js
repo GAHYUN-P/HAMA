@@ -11,9 +11,7 @@ import styled from 'styled-components';
 const PostEach = (props) => {
     const { title, content, modifiedAt, answerCount, postLikeCount, id,
         imgUrl, timeSet, writer, status } = props;
-
-    console.log(props);
-
+        
     const titleOnClick = () => {
         history.push(`/requestdetail/${id}`);
     }
@@ -76,7 +74,7 @@ const Icon = styled.div`
 
 const ConclusionBox = styled.div`
     display: flex;
-    padding: .5rem;
+    padding: .5rem 0;
     width: 3.5rem;
     margin: ${({theme})=> theme.paddings.base} 0;
     height: 2.7rem;
