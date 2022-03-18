@@ -15,7 +15,7 @@ import No_5 from '../assets/5.svg';
 import { statusColor } from '../shared/categoryEncoder';
 
 const Rank = (props) => {
-    let { rank, nickname, hippoName, imgUrl, status } =props;
+    let { rank, nickname, hippoName, imgUrl, status, point } =props;
     const rankArr = [No_1,No_2,No_3,No_4,No_5]; 
     imgUrl = imgUrl.split('circle')[0] + imgUrl.split('circle')[1];
 
@@ -28,7 +28,7 @@ const Rank = (props) => {
         </div>
         <UserGrid>
             <div id='nick' >{nickname}</div>
-            <div id='hippo' >{hippoName}</div>
+            <div id='hippo' >{point} exp</div>
         </UserGrid>
         <Status color={statusColor(status)} >{status.toUpperCase()}</Status>
     </RankBox>
