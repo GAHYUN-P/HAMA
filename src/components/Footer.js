@@ -69,7 +69,7 @@ const Footer = (props) => {
 const Grid = styled.div`
   background-color: #f5f5f5;
   padding-bottom: 1rem;
-  width: 25.75rem;
+  width: 100vw;
   height: 4.8rem;
   position: fixed;
   bottom: 0;

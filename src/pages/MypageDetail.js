@@ -25,8 +25,9 @@ const MypageDetail = (props) => {
     
     if(is_what === 'mypost') {
         return (
+            <>
+            <Header is_what={is_what} />
             <Wrap>
-                <Header is_what={is_what} />
                 <UserinfoWrap>
                     <ProfileImg shape='circle' src={userInfo.hippoImage} size='5rem'/>
                     <WrapName>
@@ -58,13 +59,15 @@ const MypageDetail = (props) => {
                 );
                 })}
             </Wrap>
+            </>
         );
     }
 
     if(is_what === 'myanswer') {
         return (
+            <>
+            <Header is_what={is_what} />
             <Wrap>
-                <Header is_what={is_what} />
                 <UserinfoWrap>
                     <ProfileImg shape='circle' src={userInfo.hippoImage} size='5rem'/>
                     <WrapName>
@@ -96,6 +99,7 @@ const MypageDetail = (props) => {
                 );
                 })}
             </Wrap>
+            </>
         );
     }
 

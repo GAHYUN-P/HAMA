@@ -33,14 +33,27 @@ const Header = (props) => {
     )
   }
 
-  if(pathname === '/mypage'){
+  if(pathname === '/mypage' || pathname === '/mypage_achievement'){
     return(
       <MGrid>
         <FiChevronLeft onClick={GoBack} id='che'/>
-        마이페이지
+        { pathname === '/mypage' ? '마이페이지' : '나의 업적' }
         <FiMoreHorizontal id='hor'/>
       </MGrid>
     )
+  }
+
+  if(is_what){
+    return(
+      <Grid>
+          <FiChevronLeft onClick={GoBack} id='che'/>
+          {is_what === 'mypost' ? '내가 요청한 글' : '내가 답변한 글'}
+          <div id='bell' >
+            <AlamBadge/>
+          </div>
+          <FiSearch id='search' onClick={GoSearch} />
+      </Grid>
+  )
   }
 
   if(pathname === '/'){
