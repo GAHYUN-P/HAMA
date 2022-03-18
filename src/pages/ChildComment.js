@@ -198,7 +198,7 @@ const InputGrid = styled.div`
 `;
 
 const ElInput = styled.input`
-    width: 100%;
+    width: 100vw;
     border: none;
     outline: none;
     padding: ${({theme})=> theme.paddings.lg} .8rem ;
