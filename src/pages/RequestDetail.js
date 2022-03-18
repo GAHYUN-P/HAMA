@@ -18,10 +18,11 @@ const RequestDetail = (props) => {
     const postId = props.match.params.postId;
     
     const { request, likeUserIdList, answers } = useSelector(state => state.post);
-    console.log(request);
-    console.log(props);
 
-    const can_write = request.status === 'opened' && request.user_id === getUserId() ? true : false;
+    const can_write = (request.status === 'opened') && request.user_id === getUserId() ? true : false;
+    
+    console.log(request.status,request.user_id,getUserId());
+    
     React.useEffect(()=>{
         dispatch(postActions.getOneRequest(postId));
     },[])
@@ -33,7 +34,7 @@ const RequestDetail = (props) => {
                 <RequestContents {...request}/>
                 <RequestCenter request={request} like={likeUserIdList} />
                 <RequestAnswer answers = {answers} />
-                { can_write &&
+                {!can_write &&
                 <AnswerWriteBtn postId={postId} />}
             </DetailContainer>
         </React.Fragment>
