@@ -21,7 +21,7 @@ const RequestDetail = (props) => {
     console.log(request);
     console.log(props);
 
-    const can_write = request.status === 'true' && request.user_id === getUserId() ? true : false;
+    const can_write = request.status === 'opened' && request.user_id === getUserId() ? true : false;
     React.useEffect(()=>{
         dispatch(postActions.getOneRequest(postId));
     },[])
