@@ -4,10 +4,10 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 민기님 서버
-// axios.defaults.baseURL = 'http://3.36.53.246';
+axios.defaults.baseURL = 'http://3.36.53.246';
 
 // 민기님 서버2
-axios.defaults.baseURL = 'http://15.165.18.176';
+// axios.defaults.baseURL = 'http://15.165.18.176';
 
 // 규진님 서버
 // axios.defaults.baseURL = 'http://dean900404.shop/';
