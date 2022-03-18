@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useSelector,useDispatch } from 'react-redux';
+import { userActions } from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 
 import { getPage, NeedAlam } from '../shared/getPages';
@@ -14,6 +15,7 @@ import {BsX} from 'react-icons/bs';
 import styled from 'styled-components';
 
 const Header = (props) => {
+  const dispatch = useDispatch();
   const pathname = window.location.pathname;
   const { is_what } =props;
 
@@ -24,6 +26,10 @@ const Header = (props) => {
   const GoSearch = () => {
     history.push('/search');
   }
+
+  const LogOut = () => {
+    dispatch(userActions.logout());
+  };
 
   if(pathname === '/login'){
     return(
@@ -38,7 +44,7 @@ const Header = (props) => {
       <MGrid>
         <FiChevronLeft onClick={GoBack} id='che'/>
         { pathname === '/mypage' ? '마이페이지' : '나의 업적' }
-        <FiMoreHorizontal id='hor'/>
+        <FiMoreHorizontal onClick={LogOut} id='hor'/>
       </MGrid>
     )
   }

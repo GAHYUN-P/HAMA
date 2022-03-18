@@ -70,7 +70,7 @@ const Grid = styled.div`
   background-color: #f5f5f5;
   padding-bottom: 1rem;
   width: 100vw;
-  height: 4.8rem;
+  height: 4.5rem;
   position: fixed;
   bottom: 0;
 `;

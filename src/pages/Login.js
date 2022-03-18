@@ -56,9 +56,10 @@ const Login = ({ history, match }) => {
     <Grid>
 {/* 3 */}
 {/* 1 */}  
+      <LoginPic />
       <KaKaoLogin token={KAKAO_JS_ID}
         //카카오에서 할당받은 jsKey를 입력
-        render={(props) => (<KakaoButton url={kakao_login} onClick={props.onClick} />)}
+        render={(props) => (<KakaoButton src={kakao_login} onClick={props.onClick} />)}
         //로그인 버튼의 text를 입력
         onSuccess={kakaoLoginSuccessHandler}
         //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
@@ -70,20 +71,21 @@ const Login = ({ history, match }) => {
 };
 
 const Grid = styled.div`
-  padding: 22rem ${({theme})=> theme.paddings.default} 0;
-  display:flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0 ${({theme})=> theme.paddings.default} 0;
+
 `;
 
-const KakaoButton = styled.div`
+const LoginPic = styled.img`
+  width: 100%;
+  mar
+  height: 30rem;
+  background-color: #c4c4c4;
+`;
+
+const KakaoButton = styled.img`
   cursor: pointer;
   width: 100%;
   height: 3.5rem;
-  color: #000000;
-  border-radius: .5rem;
-  background-image: url(${props => props.url});
-  background-size: cover;
 `;
 
 export default Login;
