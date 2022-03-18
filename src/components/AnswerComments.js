@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const AnswerComments = (props) => {
     const dispatch = useDispatch();
-    const {videoRef,timestamp,content} = props;
+    const { videoRef,timestamp,content, imgUrl } = props;
     // 댓글 삭제 요청
     const delcom = () => {
         const data = {
@@ -35,7 +35,7 @@ const AnswerComments = (props) => {
         <React.Fragment>
             <Grid>
                 <div>
-                    <ProHippo />
+                    <ProHippo src={imgUrl} />
                 </div>
 
                 <div style={{width:'100%'}} >
@@ -97,7 +97,7 @@ const UserGrid = styled.div`
     padding-top: ${({theme})=>theme.margins.small};
 `;
 
-const ProHippo = styled.div`
+const ProHippo = styled.img`
     width: 1.6rem;
     height: 1.6rem;
     margin: .2rem .3rem 0 0;

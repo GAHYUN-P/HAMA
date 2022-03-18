@@ -7,14 +7,16 @@ import { FiMessageSquare, FiHeart, FiImage } from 'react-icons/fi'
 import styled from 'styled-components';
 
 const AnswerCard = (props) => {
-    const { answerWriter, modifiedAt, title, commentCount, answerId, imageCount, answerLikeCount } = props;
+    const { answerWriter, modifiedAt, title,
+         commentCount, answerId, imageCount,
+         answerLikeCount, imgUrl } = props;
 
     return(
         <React.Fragment>
             <CardContainer>
                 {/* 프로필 사진 공간 */}
                 <HippoContainer>
-                    <ProHippo />
+                    <ProHippo src={imgUrl} />
                 </HippoContainer>
 
                 {/* 카드 내용들 */}
@@ -62,11 +64,9 @@ const HippoContainer = styled.div`
    
 `;
 
-const ProHippo = styled.div`
+const ProHippo = styled.img`
     width: 3rem;
     height: 3rem;
-    border-radius: 3rem;
-    background-color: #dcdcdc;
 `;
 
 const TitleDiv = styled.div`

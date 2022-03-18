@@ -33,8 +33,8 @@ const Header = (props) => {
 
   if(pathname === '/login'){
     return(
-      <Grid onClick={GoBack} >
-        <BsX id='che' />
+      <Grid bc>
+        <BsX onClick={GoBack} id='che' />
       </Grid>
     )
   }
@@ -150,7 +150,7 @@ const Grid = styled.div`
     height: 3rem;
     font-size: ${({theme})=> theme.fontSizes.xl};
     color: ${props => props.color ? '#fff' : '#212121'}; 
-    background-color: transparent;
+    background-color: ${props=>props.bc ? '#4e4e4e':'transparent'};
     #logo{
       width: 2.3rem;
       position: absolute;

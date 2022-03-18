@@ -14,11 +14,6 @@ const RequestAnswer = (props) => {
 
     if(answerList.length === 0){
         return null
-        // (
-        //     <React.Fragment>
-        //     답변이 없습니다! 첫 번째 답변자가 되어주세요!!
-        //     </React.Fragment>
-        // )
     }
 
     return (
