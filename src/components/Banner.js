@@ -28,16 +28,16 @@ const Banner = (props) => {
 		<style>{cssstyle}</style>
 		<StyledSlider {...settings}>
 			<div>
-				<BannerBox id='banner_box' src={ban_1} />
+				<img id='banner_box' src={ban_1} />
 			</div>
 			<div>
-				<BannerBox id='banner_box' src={ban_2} />
+				<img id='banner_box' src={ban_2} />
 			</div>
 			<div>
-				<BannerBox id='banner_box' src={ban_3} />
+				<img id='banner_box' src={ban_3} />
 			</div>
 			<div>
-				<BannerBox id='banner_box' src={ban_4} />
+				<img id='banner_box' src={ban_4} />
 			</div>
 		</StyledSlider>
 		<Shade src={vector9}/>
@@ -82,8 +82,7 @@ const cssstyle = `
 `;
 
 
-const BannerBox = styled.img`
-`;
+
 
 const Shade = styled.img`
 	position: absolute;
