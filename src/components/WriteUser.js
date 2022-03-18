@@ -9,7 +9,7 @@ const WriteUser = (props) => {
         <React.Fragment>
             <Grid>
                 <div>
-                    <ProHippo />
+                    <ProHippo src={profile} />
                 </div>
 
                 <div>
@@ -31,12 +31,12 @@ const Grid = styled.div`
     justify-content: space-between;
 `;
 
-const ProHippo = styled.div`
+const ProHippo = styled.img`
     width: 1.6rem;
     height: 1.6rem;
     margin: .2rem .3rem 0 0;
     border-radius: 1.6rem;
-    background-color: #dcdcdc;
+
 `;
 
 const Writer = styled.div`

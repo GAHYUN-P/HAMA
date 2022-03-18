@@ -61,7 +61,7 @@ const ChildComment = (props) => {
                 {/* 부모댓글 */}
                 <Grid>
                     <div>
-                        <ProHippo />
+                        <ProHippo src={parent.imgUrl} />
                     </div>
                     <div style={{width:'100%'}} >
 
@@ -94,7 +94,7 @@ const ChildComment = (props) => {
 
                         <ChildGrid>
                             <div> 
-                                <ProHippo />
+                                <ProHippo src={k.imgUrl} />
                             </div>
                             <div style={{width:'100%'}} >
                                 <UserGrid>
@@ -175,12 +175,11 @@ const UserGrid = styled.div`
     padding-top: ${({theme})=>theme.margins.small};
 `;
 
-const ProHippo = styled.div`
+const ProHippo = styled.img`
     width: 1.6rem;
     height: 1.6rem;
     margin: .2rem .3rem 0 0;
     border-radius: 1.6rem;
-    background-color: #dcdcdc;
 `;
 
 const PPHolder = styled.div`

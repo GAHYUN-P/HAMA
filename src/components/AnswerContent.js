@@ -18,9 +18,9 @@ import styled from "styled-components";
 const AnswerContent = (props) => {
     const dispatch = useDispatch();
     // 이미지 리스트
-    const { videoRef, fileList, videoUrl, answerId, answerWriterId } = props;
+    const { videoRef, fileList, videoUrl, answerId, 
+        answerWriterId, imgUrl } = props;
 
-    console.log(props);
     // 좋아요 작용
     const likeList = useSelector(state => state.answer.answer.likeUserList);
     const likeColor = likeList.includes(Number(getUserId())) ? true : false;
@@ -61,7 +61,7 @@ const AnswerContent = (props) => {
 
                 {/* 중단 */}
                 <CenterGrid>
-                    <WriteUser profile={props.profile} writer={props.answerWriter} modifiedAt={props.modifiedAt} />
+                    <WriteUser profile={imgUrl} writer={props.answerWriter} modifiedAt={props.modifiedAt} />
                     { answerWriterId === getUserId() &&
                     <div>
                         <BtnPair style={{marginRight:'0.4rem'}} onClick={()=>{history.push(`/answeredit/${props.answerId}`)}} >수정</BtnPair>

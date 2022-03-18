@@ -10,7 +10,7 @@ import { getToken } from './cookie';
 // axios.defaults.baseURL = 'http://15.165.18.176';
 
 // 민기님 서버 3
-axios.defaults.baseURL = 'http://3.36.54.191';
+// axios.defaults.baseURL = 'http://3.36.54.191';
 
 // 규진님 서버
 // axios.defaults.baseURL = 'http://dean900404.shop/';
