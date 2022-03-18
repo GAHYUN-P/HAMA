@@ -7,6 +7,7 @@ const MypageListEach = (props) => {
 
     console.log(props);
     const idx = props.idx;
+    const contents = props.contents.slice(0,10);
 
 
     
@@ -16,7 +17,7 @@ const MypageListEach = (props) => {
         <Category>{categoryEncoder(props.category)}</Category>
         <TitleWrap>
           <Title onClick>{props.title}</Title>
-          <Content>{props.contents}</Content>
+          {/* <Content>{contents}</Content> */}
         </TitleWrap>
         <Time>{props.modifiedAt}</Time>
         <Likes>♡ {props.like}</Likes>
