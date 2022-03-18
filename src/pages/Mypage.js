@@ -73,7 +73,12 @@ const Mypage = (props) => {
             </ExpertWrap>
           </InfoWrap>
           <ProfileWrap>
-            <ProfileImg shape='circle' src={list.imgUrl} size='17vh' position='relative'/>
+            {list.imgUrl &&
+              <ProfileImg shape='circle' src={list.imgUrl} size='17vh' position='relative'/>
+            }
+            {!list.imgUrl &&
+              <ProfileImg shape='circle' src='https://mblogthumb-phinf.pstatic.net/MjAxODAzMDNfMTc5/MDAxNTIwMDQxNzQwODYx.qQDg_PbRHclce0n3s-2DRePFQggeU6_0bEnxV8OY1yQg.4EZpKfKEOyW_PXOVvy7wloTrIUzb71HP8N2y-YFsBJcg.PNG.osy2201/1_%2835%ED%8D%BC%EC%84%BC%ED%8A%B8_%ED%9A%8C%EC%83%89%29_%ED%9A%8C%EC%83%89_%EB%8B%A8%EC%83%89_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_180303.png?type=w800' size='17vh' position='relative'/>
+            }
             <SurveyIco onClick={()=>history.push('/survey')}/>
             <DoTest/>
           </ProfileWrap>
