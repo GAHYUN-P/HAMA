@@ -45,7 +45,7 @@ const MypageAch = (props) => {
           </InfoWrap>
           <ProfileWrap>
             <ProfileImg shape='circle' src={list.imgUrl} size='17vh' position='relative'/>
-            <SurveyIco/>
+            <SurveyIco onClick={()=>history.push('/survey')}/>
             <DoTest/>
           </ProfileWrap>
         </div>
