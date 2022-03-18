@@ -14,6 +14,7 @@ import SurveyWrite from '../assets/SurveyWrite.svg';
 import gotoTest from '../assets/gotoTest.svg';
 import { IoIosArrowForward } from "react-icons/io";
 import { textAlign } from '@mui/system';
+import Expert from '../components/Expert';
 
 const Mypage = (props) => {
 
@@ -30,10 +31,13 @@ const Mypage = (props) => {
     if(percent > 100) {
       percent = 100;
     }
-    console.log(percent);
+    // console.log(percent);
 
     const achievement_list =  useSelector((state) => state.mypage.achievement);
-    console.log(achievement_list);
+    // console.log(achievement_list);
+
+    const expert_list = useSelector((state) => state.mypage.list.expert);
+    console.log(expert_list);
 
     const onClickMypost = (e) => {
       dispatch(mypageActions.setDetail(e.target.value));
@@ -56,15 +60,25 @@ const Mypage = (props) => {
             <Nickname>{list.nickname}</Nickname>
             <HippoName>{list.hippoName}</HippoName>
             {/* <Email>{list.email}</Email> */}
-            <div>expert</div>
+            <ExpertWrap>
+            {expert_list.map((info, idx) => {
+                  return (
+                    <Expert
+                      key={idx}
+                      value = {info}
+                      idx={idx}
+                      />
+                  );
+              })}
+            </ExpertWrap>
           </InfoWrap>
           <ProfileWrap>
             <ProfileImg shape='circle' src={list.imgUrl} size='17vh' position='relative'/>
-            <SurveyIco/>
+            <SurveyIco onClick={()=>history.push('/survey')}/>
             <DoTest/>
           </ProfileWrap>
         </div>
-        <div style={{paddingTop:'1.8vh'}}>
+        <div style={{paddingTop:'1vh'}}>
           <Lv>{list.hippolv}LV</Lv>
           <LvBg>
             <LvGage percent={percent}/>
@@ -137,6 +151,12 @@ const HippoName = styled.div`
   padding: 0vh 0px 1.2vh;
 `;
 
+const ExpertWrap = styled.div`
+  overflow: scroll;
+  width: 80%;
+  display: flex;
+`;
+
 const Email = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: rgba(255, 255, 255, 1);
@@ -157,14 +177,14 @@ const SurveyIco = styled.div`
   height: 4.5vh;
   width: 4.5vh;
   position: absolute;
-  bottom: 18%;
+  bottom: 6.5vh;
   right: 0%;
 `;
 
 const DoTest = styled.div`
   background-image: url(${gotoTest});
-  background-size: cover;
-  margin-top: 0.5vh;
+  background-size: contain;
+  margin-top: 0.6vh;
   height: 25%;
   width: 100%; 
 `;

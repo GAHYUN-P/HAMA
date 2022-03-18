@@ -14,7 +14,7 @@ const MedalDetail = (props) => {
       'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/me.png',
       'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/satisfied.png',
       'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/inquire.png',
-      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/congratude.png',
+      'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/congratu.png',
       'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/analyze.png',
       'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/reaction.png',
       'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/search.png',
