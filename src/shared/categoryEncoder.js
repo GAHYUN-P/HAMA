@@ -10,4 +10,14 @@ export const typeEncoder = (type) => {
     const eng = ['comment','child','answer','rate','rated','level','likeA','likeP'];
 
     return kr[eng.indexOf(type)];
+};
+
+export const statusColor = (status) => {
+    let color = '#536b2c';
+    
+    if(status !== 'stay'){
+        color = status === 'up' ? '#ff7a7a' : '#6284fe';
+    }
+
+    return color;
 }

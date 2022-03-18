@@ -8,16 +8,16 @@ export const initialState = {
         answerId: 0,
         requestWriterId: 0,
         answerWriterId: 0,
-        title:'라면 무따 아이가',
-        content:'시원하고 얼큰하네예',
-        modifiedAt: '2020-10-10T11:27:39',
+        title:'',
+        content:'',
+        modifiedAt: '',
         star: 0,
-        category:'먹방/음식',
+        category:'',
         commentCount: 0,
         likeUserList: [],
         answerLikeCount: 0,
-        answerWriter:'라면무쨔',
-        fileList:['https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png'],
+        answerWriter:'',
+        fileList:[],
         videoUrl:'',
     },
     comments: [
@@ -103,7 +103,7 @@ const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
         }
 
         const res = await answerAPI.answering(data,postId);
-        
+        history.replace(res.data); 
     }catch(error){
         console.log('error',error);
     }

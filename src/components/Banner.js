@@ -5,6 +5,10 @@ import Slider from "react-slick";
 import bannerBackground from '../assets/bannerBackground.svg';
 import vector9 from '../assets/vector9.svg';
 
+import ban_1 from '../assets/banner_1.png';
+import ban_2 from '../assets/banner_2.png';
+import ban_3 from '../assets/banner_3.png';
+import ban_4 from '../assets/banner_4.png';
 
 const Banner = (props) => {
 
@@ -24,22 +28,16 @@ const Banner = (props) => {
 		<style>{cssstyle}</style>
 		<StyledSlider {...settings}>
 			<div>
-				<h3>1</h3>
+				<BannerBox id='banner_box' src={ban_1} />
 			</div>
 			<div>
-				<h3>2</h3>
+				<BannerBox id='banner_box' src={ban_2} />
 			</div>
 			<div>
-				<h3>3</h3>
+				<BannerBox id='banner_box' src={ban_3} />
 			</div>
 			<div>
-				<h3>4</h3>
-			</div>
-			<div>
-				<h3>5</h3>
-			</div>
-			<div>
-				<h3>6</h3>
+				<BannerBox id='banner_box' src={ban_4} />
 			</div>
 		</StyledSlider>
 		<Shade src={vector9}/>
@@ -56,8 +54,8 @@ const cssstyle = `
   background: linear-gradient(rgba(245, 245, 245, 1) 80%, #fff 10%);
   z-index: 0;
 }
-h3 {
-    background: #5f9ea0;
+#banner_box {
+	display: block;
     height: 13rem;
     width: 13rem;
     color: #fff;
@@ -72,15 +70,19 @@ h3 {
 .slick-next:before, .slick-prev:before {
     color: #000;
 }
-.center .slick-center h3 {
+.center .slick-center #banner_box {
     color: #e67e22;
     opacity: 1;
     -ms-transform: scale(1.2);
     transform: scale(1.2);
 }
-.center h3 {
+.center #banner_box {
     transition: all .3s ease;
 }
+`;
+
+
+const BannerBox = styled.img`
 `;
 
 const Shade = styled.img`

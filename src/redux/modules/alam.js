@@ -91,7 +91,7 @@ const deleteAllDB = () => async (dispatch,getState,{history}) => {
 const checkAlamDB = () => async (dispatch,getState,{history}) => {
     alamAPI.checkAlam()
     .then(()=>{
-        console.log('읽었습니다.');
+       dispatch(setNotReadCount(0))
     })
     .catch(err=>{
         console.log(err => {

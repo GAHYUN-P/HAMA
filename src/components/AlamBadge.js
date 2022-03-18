@@ -78,7 +78,7 @@ const AlamBadge = (props) => {
             <React.Fragment>
                 <Grid onClick={()=>{history.push('/alam')}} >
                     <LiveOff src={live_off} />
-                    <Count>{notReadCount}</Count>
+                    <Count>{notReadCount > 9 ? 9 : notReadCount}</Count>
                 </Grid>
             </React.Fragment>
         )
@@ -102,14 +102,18 @@ const LiveOff = styled.img`
 `;
 
 const Count = styled.div`
-  width: 1rem;
-  height: 1rem;
-  font-size: ${({theme}) => theme.fontSizes.small};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: .6rem;
+  height: .6rem;
+  font-size: 8px;
   color: #fff;
   background-color: #f55;
+  border-radius: .6rem;
   position: absolute;
-  left: 5px;
-  top: -3px;
+  right: 0;
+  top: 0;
 `;
 
 export default AlamBadge;

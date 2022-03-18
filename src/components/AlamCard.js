@@ -13,24 +13,24 @@ import { history } from "../redux/configureStore";
 
 const AlamCard = (props) => {
     const dispatch = useDispatch();
-    const { alarmId ,id, senderNickName, type, title, modifiedAt, readingStatus } = props;
+    const { alarmId ,id, senderNickName, alarmType, title, modifiedAt, readingStatus } = props;
 
     const MoveTo = () => {
-        if(['likeP','answer'].includes(type)){
+        if(['likeP','answer'].includes(alarmType)){
             history.push(`/requestdetail/${id}`);
         }
-        if(['comment','rate','rated','likeA'].includes(type)){
+        if(['comment','rate','rated','likeA'].includes(alarmType)){
             history.push(`/answerdetail/${id}`);
         }
-        if(type === 'child'){
+        if(alarmType === 'child'){
             history.push(`/comment/${id}`);
         }
-        if(type === 'level'){
+        if(alarmType === 'level'){
             history.push('/mypage');
         }
     }
 
-    console.log(readingStatus);
+    console.log(props);
 
     const deletAlarm = () => {
         dispatch(alamActions.deleteAlamDB(alarmId));
@@ -41,11 +41,11 @@ const AlamCard = (props) => {
             <Grid color={ readingStatus === 'N' ? '#000' : '#9e9e9e'} >
                 <BtnGrid>
                     <TypeBtn>   
-                        {typeEncoder(type)}
+                        {typeEncoder(alarmType)}
                     </TypeBtn>
                 </BtnGrid>
                 <div onClick={MoveTo} style={{width:'70%'}}>
-                    {setAlamContent(type,title,senderNickName,modifiedAt)}
+                    {setAlamContent(alarmType,title,senderNickName,modifiedAt)}
                 </div>
                 <ExBox onClick={deletAlarm}>
                     <BsX />

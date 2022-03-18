@@ -23,7 +23,6 @@ const PostList = (props) => {
 
     // postlist 리덕스로부터 가져오기
     const post_list = useSelector((state) => state.post.list);
-    console.log(post_list);
 
     const sort = useSelector((state) => state.post.sort);
 
