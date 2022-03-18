@@ -17,9 +17,7 @@ export const initialState = {
         answerLikeCount: 0,
         level: '중',
         category: '기타',
-        fileList: [
-            'https://miro.medium.com/max/1200/1*a2ykUZa-Ge5cMoNLea7Bbg.png',
-        ],
+        fileList: [],
         status: 'true',
         timeSet:'n시간 남았습니다.',
     },
