@@ -8,7 +8,7 @@ import { getPage, NeedAlam } from '../shared/getPages';
 
 import AlamBadge from './AlamBadge';
 
-import logo from '../assets/log0.svg';
+import logo from '../assets/logo_final.svg';
 
 import { FiInfo, FiChevronLeft, FiSearch, FiBell, FiMoreHorizontal } from 'react-icons/fi';
 import {BsX} from 'react-icons/bs';
@@ -66,7 +66,7 @@ const Header = (props) => {
     return(
       <Grid>
         <img id='logo' src={logo} />
-        <FiInfo id='info' />
+        <FiInfo onClick={()=>{history.push('/login')}} id='info' />
         <div id='bell'><AlamBadge/></div>
         <FiSearch id='search' onClick={GoSearch} />
       </Grid>

@@ -11,6 +11,8 @@ import { userActions } from '../redux/modules/user';
 import { KAKAO_JS_ID } from '../shared/common';
 
 import kakao_login from '../assets/kakao_login.svg';
+import hama from '../assets/rehama.png';
+import logoS from '../assets/logo_string.png';
 
 import useInput from '../shared/useInput';
 import KaKaoLogin from 'react-kakao-login';
@@ -56,7 +58,8 @@ const Login = ({ history, match }) => {
     <Grid>
 {/* 3 */}
 {/* 1 */}  
-      <LoginPic />
+      <LoginPic src={logoS} />
+      <LoginPic src={hama} />
       <KaKaoLogin token={KAKAO_JS_ID}
         //카카오에서 할당받은 jsKey를 입력
         render={(props) => (<KakaoButton src={kakao_login} onClick={props.onClick} />)}
@@ -76,10 +79,7 @@ const Grid = styled.div`
 `;
 
 const LoginPic = styled.img`
-  width: 100%;
-  mar
-  height: 30rem;
-  background-color: #c4c4c4;
+  width: 80%;
 `;
 
 const KakaoButton = styled.img`
