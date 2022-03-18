@@ -8,18 +8,18 @@ const Tag = (props) => {
     if(tag === children){
         return(
         <Selected onClick={_onClick} >
-            <div style={{fontWeight:'600'}} >
+           
                 {children}
-            </div>
+
         </Selected>
         )
     }
 
     return(
         <Eltag onClick={_onClick} >
-            <div style={{fontWeight:'400'}} >
+       
                 {children}
-            </div>
+          
         </Eltag>
     )
 }

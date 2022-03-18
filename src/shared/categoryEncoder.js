@@ -21,3 +21,5 @@ export const statusColor = (status) => {
 
     return color;
 }
+
+export const Categories = ['먹방/요리','운동','지식','창작','방문','직업','반려동물','패션/뷰티','고민상담','가전','생활','기타'];

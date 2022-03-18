@@ -84,6 +84,14 @@ const Header = (props) => {
     )
   }
 
+  if(pathname === '/userinfo'){
+    return(
+      <Grid>
+        <FiChevronLeft color onClick={GoBack} id='che'/>
+      </Grid>
+    )
+  }
+
   if(pathname === '/alam'){
     return(
       <Grid>
