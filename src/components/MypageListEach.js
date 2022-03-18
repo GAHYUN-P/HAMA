@@ -18,8 +18,8 @@ const MypageListEach = (props) => {
           <Title onClick>{props.title}</Title>
           <Content>{props.contents}</Content>
         </TitleWrap>
-        <div>{props.modifiedAt}</div>
-        <div>♡ {props.like}</div>
+        <Time>{props.modifiedAt}</Time>
+        <Likes>♡ {props.like}</Likes>
       </Container>
       {idx === 0 &&
         <hr style={{border: '0.1px solid #E6E6E6'}}/>
@@ -41,7 +41,7 @@ const Category = styled.div`
 `;
 
 const TitleWrap = styled.div`
-  width: 45%;
+  width: 40%;
 `;
 
 const Title = styled.div`
@@ -50,6 +50,14 @@ const Title = styled.div`
 
 const Content = styled.div`
   color: #666666;
+`;
+
+const Time = styled.div`
+  width: 18%;
+`;
+
+const Likes = styled.div`
+  width: 10%;
 `;
 
 export default MypageListEach;
