@@ -13,6 +13,7 @@ import { KAKAO_JS_ID } from '../shared/common';
 import kakao_login from '../assets/kakao_login.svg';
 import hama from '../assets/rehama.png';
 import logoS from '../assets/logo_string.png';
+import logoF from '../assets/logo_final.svg';
 
 import useInput from '../shared/useInput';
 import KaKaoLogin from 'react-kakao-login';
@@ -58,8 +59,12 @@ const Login = ({ history, match }) => {
     <Grid>
 {/* 3 */}
 {/* 1 */}  
-      <LoginPic src={logoS} />
-      <LoginPic src={hama} />
+
+      <LoginPic width='30%' src={logoF} />
+      <div style={{width:'100%',height:'1rem'}} />
+      <LoginPic width='50%' src={logoS} />
+      <div style={{width:'100%',height:'1rem'}} />
+      <LoginPic width='80%' src={hama} />
       <KaKaoLogin token={KAKAO_JS_ID}
         //카카오에서 할당받은 jsKey를 입력
         render={(props) => (<KakaoButton src={kakao_login} onClick={props.onClick} />)}
@@ -74,12 +79,16 @@ const Login = ({ history, match }) => {
 };
 
 const Grid = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 0 ${({theme})=> theme.paddings.default} 0;
 
 `;
 
 const LoginPic = styled.img`
-  width: 80%;
+  width: ${props => props.width};
 `;
 
 const KakaoButton = styled.img`
