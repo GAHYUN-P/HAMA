@@ -59,19 +59,27 @@ const Login = ({ history, match }) => {
     <Grid>
 {/* 3 */}
 {/* 1 */}  
-
-      <LoginPic width='30%' src={logoF} />
       <div style={{width:'100%',height:'1rem'}} />
-      <LoginPic width='50%' src={logoS} />
+      <MakeCenter>
+        <LoginPic width='30%' src={logoF} />
+      </MakeCenter>
       <div style={{width:'100%',height:'1rem'}} />
-      <LoginPic width='80%' src={hama} />
-      <KaKaoLogin token={KAKAO_JS_ID}
-        //카카오에서 할당받은 jsKey를 입력
-        render={(props) => (<KakaoButton src={kakao_login} onClick={props.onClick} />)}
-        //로그인 버튼의 text를 입력
-        onSuccess={kakaoLoginSuccessHandler}
-        //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
-        getProfile={true}/>
+      <MakeCenter>
+        <LoginPic width='50%' src={logoS} />
+      </MakeCenter>
+      <div style={{width:'100%',height:'2rem'}} />
+      <MakeCenter>
+        <KaKaoLogin token={KAKAO_JS_ID}
+          //카카오에서 할당받은 jsKey를 입력
+          render={(props) => (<KakaoButton src={kakao_login} onClick={props.onClick} />)}
+          //로그인 버튼의 text를 입력
+          onSuccess={kakaoLoginSuccessHandler}
+          //성공했을때 불러올 함수로서 fetch해서 localStorage에 저장할 함수를 여기로 저장
+          getProfile={true}/>
+      </MakeCenter>
+      <HamaCenter>
+        <LoginPic width='100%' src={hama} />
+      </HamaCenter>
 {/* 2 */}
     </Grid>
     </>
@@ -79,21 +87,31 @@ const Login = ({ history, match }) => {
 };
 
 const Grid = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 36.05rem;
   align-items: center;
   padding: 0 ${({theme})=> theme.paddings.default} 0;
-
+  background-color: #4e4e4e;
+  overflow: hidden;
 `;
 
 const LoginPic = styled.img`
   width: ${props => props.width};
 `;
 
+const MakeCenter = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const HamaCenter = styled.div`
+  display: flex;
+  justify-content: center;
+  transform: rotate(10deg);
+`;
+
 const KakaoButton = styled.img`
   cursor: pointer;
-  width: 100%;
+  width: 70%;
   height: 3.5rem;
 `;
 
