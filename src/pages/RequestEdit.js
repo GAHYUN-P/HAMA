@@ -26,8 +26,10 @@ const RequestEdit = (props) => {
     },[])
 
     React.useEffect(()=>{
-        setContent(requestData.content);
-        dispatch(imgActions.setEdit(requestData.fileList));
+        if(requestData.fileList){
+            setContent(requestData.content);
+            dispatch(imgActions.setEdit(requestData.fileList));
+        }
     },[requestData])
 
     const editing = () => {

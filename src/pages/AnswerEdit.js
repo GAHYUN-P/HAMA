@@ -9,6 +9,7 @@ import { history } from "../redux/configureStore";
 import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
 import Header from '../components/Header';
+import WaitForAMoment from '../components/WaitForAMoment';
 
 import styled from "styled-components";
 
@@ -38,6 +39,7 @@ const AnswerEdit = (props) => {
             file: answerData.fileList,
             video: answerData.videoUrl
         };
+        console.log(data);
         setTitle(answerData.title);
         setContent(answerData.content);
         dispatch(imgActions.editAnswer(data));
@@ -48,6 +50,10 @@ const AnswerEdit = (props) => {
             window.alert('빈칸이 있습니다.')
         }
         dispatch(answerActions.editAnswerDB({title:title,content:content},answerId));
+    }
+
+    if(!answerData){
+        return <WaitForAMoment />
     }
 
     return (

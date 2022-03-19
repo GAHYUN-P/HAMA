@@ -19,18 +19,17 @@ import styled from "styled-components";
 
 const RequestDetail = (props) => {
     const dispatch =useDispatch();
-    const postId = props.match.params.postId;
+    const postId = Number(props.match.params.postId);
     
     const { request, likeUserIdList, answers } = useSelector(state => state.post);
     
+    console.log(request);
+
     React.useEffect(()=>{
         dispatch(postActions.getOneRequest(postId));
-        return()=>{
-            dispatch(postActions.reset());
-        }
     },[])
 
-    if(!request){
+    if(request.postId !== postId){
         return(
            <WaitForAMoment />
         )
