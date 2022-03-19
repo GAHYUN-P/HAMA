@@ -9,8 +9,7 @@ import styled from "styled-components";
 const ImageUploader = (props) => {
     const dispatch = useDispatch();
     const inputRef = React.useRef();
-    const preview = useSelector(state => state.image.preview);
-    const uploading = useSelector(state => state.image.uploading);
+    const { preview, uploading } = useSelector(state => state.image);
     const is_edit = props.is_edit;
 
     const change = () => {
@@ -42,13 +41,19 @@ const ImageUploader = (props) => {
         }
         console.log('Not get')
     }
+    
+    React.useEffect(()=>{
+        return()=>{
+            dispatch(imgActions.reset());
+        }
+    },[])
 
     return (
         <React.Fragment>
             <div style={{padding:'8px 0', display:'flex'}} >
-                <ElLabel htmlFor='imgup' url={picture} />
+                <ElLabel htmlFor='imgup'><UpImg src={picture} /></ElLabel>
                 <input id='imgup' ref={inputRef} onChange={!is_edit ? change : edit}
-                type='file' accept='image/*' 
+                type='file' accept='image/*' multiple
                 disabled={uploading} style={{display:'none'}} />
                 <WhiteSpace>
                     {preview.map((p,i)=>{
@@ -56,8 +61,8 @@ const ImageUploader = (props) => {
                             <Frame key={i} >
                                 <Elpreview src={p}/>
                                 <Elex onClick={()=>{dispatch(imgActions.delImage(i))}} >
-                                    <SlashL />
-                                    <SlashR />
+                                    <SlashL/>
+                                    <SlashR/>
                                 </Elex>
                             </Frame>
                         )
@@ -70,12 +75,13 @@ const ImageUploader = (props) => {
 
 const ElLabel = styled.label`
     display: inline-block;
-    text-align: center;
-    line-height: 5rem;
     width: 10.3rem;
-    height: 7.5rem;
     background-image: url(${props => props.url});
     background-size: cover;
+`;
+
+const UpImg = styled.img`
+    width: 100%;
 `;
 
 const WhiteSpace = styled.div`

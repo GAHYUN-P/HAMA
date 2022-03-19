@@ -4,37 +4,14 @@ import { getUserId } from '../../shared/cookie';
 import { answerAPI, imgAPI } from '../../shared/api';
 
 export const initialState = {
-    answer: {
-        answerId: 0,
-        requestWriterId: 0,
-        answerWriterId: 0,
-        title:'',
-        content:'',
-        modifiedAt: '',
-        star: 0,
-        category:'',
-        commentCount: 0,
-        likeUserList: [],
-        answerLikeCount: 0,
-        answerWriter:'',
-        fileList:[],
-        videoUrl:'',
-    },
-    comments: [
-        {
-        answerId : 0,
-        commentId : 0,
-        commentWriterId : 0,
-        commentWriter : '라면 무따',
-        content : '개마싯게네요',
-        modifiedAt : '2020-10-10T11:27:39',
-    }
-    ,],
+    answer: '',
+    comments: [],
     childComment: []
 }
 
 //actions 
 const setAnswer = createAction('answer/setAnswer');
+const resetAnswer = createAction('answer/resetAnswer');
 const deleteComment = createAction('answer/deleteComment');
 const pushLike = createAction('answer/pushLike');
 const addComment = createAction('answer/addComment');
@@ -45,12 +22,12 @@ const rateStar = createAction('answer/rateStar');
 // reducer
 const answer = createReducer(initialState,{
     [setAnswer]: (state,action) => {
-        state.answer = action.payload.answer
-        state.comments = action.payload.comment
+        state.answer = action.payload.answer;
+        state.comments = action.payload.comment;
     },
     [deleteComment]: (state,action) => {
-        state.answer = action.payload.answer
-        state.comments = action.payload.comment
+        state.answer = action.payload.answer;
+        state.comments = action.payload.comment;
     },
     [pushLike]: (state,action) => {
         if(state.answer.likeUserList.includes(action.payload)){
@@ -81,6 +58,9 @@ const answer = createReducer(initialState,{
     },
     [rateStar]: (state,action) => {
         state.answer.star = Number(action.payload.star);
+    },
+    [resetAnswer]: (state,action) => {
+        state.answer = '';
     },
 })
 
@@ -208,7 +188,8 @@ export const answerActions = {
     deleteCommentDB,
     editCommentDB,
     pushLikeDB,
-    starDB
+    starDB,
+    resetAnswer
 }
 
 export default answer;

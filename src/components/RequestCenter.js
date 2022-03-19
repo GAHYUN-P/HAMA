@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
 import { getUserId, getToken } from '../shared/cookie';
+import { IsLike } from '../shared/conditions';
 
 import { FiHeart } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
@@ -20,12 +21,11 @@ const RequestCenter = (props) => {
         dispatch(postActions.pushLikeDB(props.request.postId));
     }
 
-    const is_like = props.like.includes(Number(getUserId())) ? true : false;
     return (
         <React.Fragment>
             <CenterContainer>
                 <div onClick={pushlike} >
-                    { is_like ? 
+                    { IsLike(props.like) ? 
                     <FaHeart style={{color:'#ff7a7a',fontSize:'1.05rem'}} />
                     :
                     <FiHeart style={{color:'#666',fontSize:'1.05rem'}} />  }  

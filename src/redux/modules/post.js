@@ -6,30 +6,9 @@ import { getUserId } from '../../shared/cookie';
 
 export const initialState = {
     list: [],
-    request:{
-        postId: 0,
-        requestWriter: 'requester',
-        title : '이러쿵 저러쿵 해주시라예',
-        content : '죠로쿵 요로콤 해주심 됨더',
-        modifiedAt : '2020-02-03T10:10:10',
-        answerCount : 0,
-        userId : 0,
-        answerLikeCount: 0,
-        level: '중',
-        category: '기타',
-        fileList: [],
-        status: 'true',
-        timeSet:'n시간 남았습니다.',
-    },
-    likeUserIdList:[1,2,3,4,5],
-    answers: [{
-        answerId: 0,
-        answerWritter: 'responser',
-        title:'responsetitle',
-        modifiedAt:'2020-02-03T20:20:20',
-        answerLikeCount: 1,
-        commentCount: 1,
-    },],
+    request:'',
+    likeUserIdList:[],
+    answers: [],
     basic:[{
         answerId: 0,
         answerWritter: 'responser',
@@ -50,6 +29,7 @@ const setTag = createAction('post/TAG');
 const setSort = createAction('post/SORT');
 const concluseRequest = createAction('post/concluseRequest');
 const sortAnswer = createAction('post/sortAnswer');
+const reset = createAction('post/reset');
 
 const post = createReducer(initialState, {
     [setList] : (state, action) => {
@@ -98,6 +78,9 @@ const post = createReducer(initialState, {
             state.answers = state.basic
             return
         }
+    },
+    [reset] : (state, action) => {
+        state.request = '';
     },
 });
 
@@ -213,6 +196,7 @@ export const postActions = {
     setSort,
     concluseRequest,
     sortAnswer,
+    reset,
 };
 
 export default post;

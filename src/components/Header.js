@@ -23,6 +23,10 @@ const Header = (props) => {
     history.goBack()
   }
 
+  const GoHome = () => {
+    history.push('/')
+  }
+
   const GoSearch = () => {
     history.push('/search');
   }
@@ -34,7 +38,7 @@ const Header = (props) => {
   if(pathname === '/login'){
     return(
       <Grid bc>
-        <BsX onClick={GoBack} id='che' />
+        <BsX onClick={GoBack} id='che'/>
       </Grid>
     )
   }
@@ -42,7 +46,7 @@ const Header = (props) => {
   if(pathname === '/mypage' || pathname === '/mypage_achievement'){
     return(
       <MGrid>
-        <FiChevronLeft onClick={GoBack} id='che'/>
+        <FiChevronLeft onClick={pathname === '/mypage' ? GoHome : GoBack} id='che'/>
         { pathname === '/mypage' ? '마이페이지' : '나의 업적' }
         <FiMoreHorizontal onClick={LogOut} id='hor'/>
       </MGrid>
