@@ -1,134 +1,186 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { history } from '../redux/configureStore';
-// 아이콘
-import {
-  IoChatboxOutline,
-  IoChatbox,
-  IoLogOutOutline,
-  IoPersonOutline,
-  IoPerson,
-  IoConstructOutline
-} from 'react-icons/io5';
-import { AiFillExclamationCircle } from "react-icons/ai";
-import { useDispatch, useSelector } from 'react-redux';
+
+import { useSelector,useDispatch } from 'react-redux';
 import { userActions } from '../redux/modules/user';
+import { history } from '../redux/configureStore';
 
-import { headerActions } from '../redux/modules/header';
+import { getPage, NeedAlam } from '../shared/getPages';
 
-import { chatActions } from '../redux/modules/chat';
+import AlamBadge from './AlamBadge';
 
-// 유저 정보 뜰 모달
-import UserList from './UserList';
+import logo from '../assets/logo_final.svg';
+
+import { FiInfo, FiChevronLeft, FiSearch, FiBell, FiMoreHorizontal } from 'react-icons/fi';
+import {BsX} from 'react-icons/bs';
+import styled from 'styled-components';
 
 const Header = (props) => {
-  // 각 메뉴의 활성화 상태
-  const { headerChat, headerInfo } = useSelector((state) => state.header);
   const dispatch = useDispatch();
+  const pathname = window.location.pathname;
+  const { is_what } =props;
 
-  // 로그아웃
-  // 로그인 페이지로 이동 및 페이지 리로드(disconnect 및 리덕스 초기화)
-  const logout = () => {
+  const GoBack = () => {
+    history.goBack()
+  }
+
+  const GoSearch = () => {
+    history.push('/search');
+  }
+
+  const LogOut = () => {
     dispatch(userActions.logout());
-    history.push('/');
-    window.location.reload();
   };
 
-  // 팝업창 키기/종료
-  //  false가 기본 상태
-  const [popupOpen, setPopupOpen] = React.useState(false);
+  if(pathname === '/login'){
+    return(
+      <Grid bc>
+        <BsX onClick={GoBack} id='che' />
+      </Grid>
+    )
+  }
 
-  // 팝업창 키기/끄기 함수
-  const openPopup = () => {
-    setPopupOpen(true);
-  };
-  const closePopup = () => {
-    setPopupOpen(false);
-  };
+  if(pathname === '/mypage' || pathname === '/mypage_achievement'){
+    return(
+      <MGrid>
+        <FiChevronLeft onClick={GoBack} id='che'/>
+        { pathname === '/mypage' ? '마이페이지' : '나의 업적' }
+        <FiMoreHorizontal onClick={LogOut} id='hor'/>
+      </MGrid>
+    )
+  }
+
+  if(is_what){
+    return(
+      <Grid>
+          <FiChevronLeft onClick={GoBack} id='che'/>
+          {is_what === 'mypost' ? '내가 요청한 글' : '내가 답변한 글'}
+          <div id='bell' >
+            <AlamBadge/>
+          </div>
+          <FiSearch id='search' onClick={GoSearch} />
+      </Grid>
+  )
+  }
+
+  if(pathname === '/'){
+    return(
+      <Grid>
+        <img id='logo' src={logo} />
+        <FiInfo onClick={()=>{history.push('/login')}} id='info' />
+        <div id='bell'><AlamBadge/></div>
+        <FiSearch id='search' onClick={GoSearch} />
+      </Grid>
+    )
+  }
+
+  if(pathname === '/shorts'){
+    return(
+      <Grid color >
+        <FiChevronLeft color onClick={GoBack} id='che'/>
+        {getPage(pathname)}
+        <div color id='bell'><AlamBadge/></div>
+        <FiSearch color id='search' onClick={GoSearch} />
+      </Grid>
+    )
+  }
+
+  if(pathname === '/userinfo'){
+    return(
+      <Grid>
+        <FiChevronLeft color onClick={GoBack} id='che'/>
+      </Grid>
+    )
+  }
+
+  if(pathname === '/alam'){
+    return(
+      <Grid>
+        <FiChevronLeft color onClick={GoBack} id='che'/>
+        {getPage(pathname)}
+        <FiBell id='search' />
+      </Grid>
+    )
+  }
 
   return (
-    <Container>
-      <IconWrap
-        onClick={openPopup}>
-        <AiFillExclamationCircle/>
-      </IconWrap>
-      {/* 유저 정보 보기 팝업 창 */}
-      {popupOpen && <UserList visible={popupOpen} closePopup={closePopup} />}
-
-      {/* 메뉴 활성화 상태에 따른 렌더링 */}
-      {headerChat ? (
-        <IconWrap>
-          <IoChatbox />
-        </IconWrap>
-      ) : (
-        <IconWrap
-          onClick={() => {
-            history.push('/chat');
-            dispatch(headerActions.activateChat());
-          }}
-        >
-          <IoChatboxOutline />
-        </IconWrap>
-      )}
-
-      {headerInfo ? (
-        <IconWrap>
-          <IoPerson />
-        </IconWrap>
-      ) : (
-        <IconWrap
-          onClick={() => {
-            history.push('/userInfo');
-            dispatch(headerActions.activateInfo());
-            dispatch(chatActions.clearMessages());
-            dispatch(chatActions.clearCurrentChat());
-          }}
-        >
-          <IoPersonOutline />
-        </IconWrap>
-      )}
-
-      <IconWrap
-        onClick={() => {
-          dispatch(headerActions.activateChat());
-          logout();
-        }}
-      >
-        <IoLogOutOutline />
-      </IconWrap>
-    </Container>
-  );
+    <Grid>
+      <FiChevronLeft onClick={GoBack} id='che'/>
+      {getPage(pathname)}
+      { pathname.split('search').length < 2  &&
+      <div id='bell' >
+        <AlamBadge/>
+      </div>}
+      { pathname.split('search').length < 2 &&
+      <FiSearch id='search' onClick={GoSearch} />}
+    </Grid>
+  )
 };
 
-const Container = styled.div`
-  background-color: ${(props) => props.theme.main_color};
-  ${(props) => props.theme.border_box};
-  width: 100%;
-  height: 10%;
-  padding: 1rem;
-
-  ${(props) => props.theme.flex_row};
+const MGrid = styled.div`
+  position: relative;
+  display: flex;
   justify-content: center;
-
-  @media ${(props) => props.theme.desktop} {
-    max-width: 100px;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    width: 10%;
-    height: 100%;
-  }
-  @media ${(props) => props.theme.mobile} {
-    height: 8%;
-  }
-`;
-
-const IconWrap = styled.div`
+  align-items: center;
   width: 100%;
-  margin: 1rem 0px;
-  text-align: center;
-  font-size: 2rem;
-  color: ${(props) => props.theme.theme_gray};
-  cursor: pointer;
+  height: 3rem;
+  font-size: ${({theme})=> theme.fontSizes.xl};
+  font-weight: lighter;
+  color: #fff; 
+  background-color: transparent;
+  #che{
+    font-size: ${({theme})=> theme.fontSizes.xxxxxl};
+    position: absolute;
+    left: -1rem;
+    bottom: .5rem;
+  }
+  #hor{
+    font-size: ${({theme})=> theme.fontSizes.xxxxxl};
+    position: absolute;
+    right: -1rem;
+    bottom: .5rem;
+  }
 `;
+
+const Grid = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    font-size: ${({theme})=> theme.fontSizes.xl};
+    color: ${props => props.color ? '#fff' : '#212121'}; 
+    background-color: ${props=>props.bc ? '#4e4e4e':'transparent'};
+    #logo{
+      width: 2.3rem;
+      position: absolute;
+      left: .8rem;
+      bottom: .7rem;
+    }
+    #che{
+      color: ${props => props.color ? '#fff' : '#7b7b7b'};
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+    }
+    #info{
+      color: #7b7b7b;
+      position: absolute;
+      right: 5rem;
+      bottom: 1rem;
+    }
+    #bell{
+      color: ${props => props.color ? '#fff' : '#7b7b7b'};
+      position: absolute;
+      right: 2.93rem;
+      bottom: .92rem;
+    }
+    #search{
+      color: ${props => props.color ? '#fff' : '#7b7b7b'};
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+    }
+`;
+
 export default Header;

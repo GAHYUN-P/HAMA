@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { getCookie } from '../shared/cookie';
+import { getCookie, getUserId } from '../shared/cookie';
 
 // 리덕스 접근
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,8 +16,9 @@ import { Spinner } from '@class101/ui';
 // 사용자 - 상대방의 메시지 내용을 출력할 말풍선 컴포넌트
 const Message = (props) => {
   // 사용자 아이디, 프로필 사진을 가져오기
-  let { id, profileUrl } = useSelector((state) => state.user.userInfo);
-
+  let id = useSelector((state) => state.user.userInfo);
+  console.log(id);
+  
   const { messageInfo } = props;
   React.useEffect(() => {
     // 로딩중
@@ -28,7 +29,6 @@ const Message = (props) => {
         </MessageWrap>
       )
     }
-
   }, [])
 
 
@@ -53,12 +53,6 @@ const Message = (props) => {
             {time}
           </SenderSpan>
         </SenderWrap>
-        <ImageWrap>
-          <Image
-            size="40px"
-            src={profileUrl}
-          />
-        </ImageWrap>
       </MessageWrap>
     )
   }

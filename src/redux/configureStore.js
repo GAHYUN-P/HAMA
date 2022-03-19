@@ -9,6 +9,17 @@ import User from './modules/user';
 import Chat from './modules/chat';
 import Header from './modules/header';
 import Util from './modules/util';
+import image from './modules/image';
+import Rank from './modules/rank';
+import Point from './modules/point';
+import Post from './modules/post';
+import Answer from './modules/answer';
+import Mypage from './modules/mypage';
+import Child from './modules/child';
+import Search from './modules/search';
+import Shorts from './modules/shorts';
+import Alam from './modules/alam';
+
 
 export const history = createBrowserHistory();
 
@@ -18,6 +29,16 @@ const rootReducer = combineReducers({
   chat: Chat,
   header: Header,
   util: Util,
+  image: image,
+  point: Point,
+  rank: Rank,
+  post: Post,
+  answer: Answer,
+  mypage: Mypage,
+  child: Child,
+  search: Search,
+  shorts: Shorts,
+  alam: Alam,
   router: connectRouter(history)
 });
 

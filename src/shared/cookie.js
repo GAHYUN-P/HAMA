@@ -7,10 +7,39 @@ const getCookie = (name) => {
   }
 };
 
+// 유저 고유 아이디 가져오기
+const getUserId = () => {
+  if(document.cookie){
+    let userId = document.cookie.split('userId=')[1];
+    userId = Number(userId);
+    return userId;
+  }
+  return null;
+}
+
+// 유저 닉네임 가져오기
+const getUserName = () => {
+  if(document.cookie){
+    const userName = document.cookie.split('username=')[1].split(';')[0];
+    return userName;
+  }
+  return null;
+}
+
+// 유저 토큰 가져오기
+const getToken = () => {
+  if(document.cookie){
+    const token = document.cookie.split('=')[1].split(';')[0];
+    return token;
+  }
+  return null;
+}
+
 const setCookie = (name, value, exp = 5) => {
+  console.log('setcookie');
   let date = new Date();
   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-  document.cookie = `${name}=${value}; expires=${date.toUTCString()}`;
+  document.cookie = `${name}=${value}; path=/; expires=${date.toUTCString()}`;
 };
 
 const deleteCookie = (name) => {
@@ -19,4 +48,4 @@ const deleteCookie = (name) => {
   document.cookie = `${name}=; expires=${date}`;
 };
 
-export { getCookie, setCookie, deleteCookie };
+export { getCookie, setCookie, deleteCookie, getUserId, getUserName, getToken };
