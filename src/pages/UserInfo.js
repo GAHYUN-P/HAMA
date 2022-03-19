@@ -41,8 +41,6 @@ const UserInfo = (props) => {
   <>
     <Header />
     <Grid>
-    {/* const [gender, setGender] = useState(); */}
-  {/* const [age, setAge] = useState(); */}
       <IndiviInfo>성별 및 나이</IndiviInfo>
         <GenderAndAge age={age} gender={gender} setGender={setGender} setAge={setAge} />
     </Grid>

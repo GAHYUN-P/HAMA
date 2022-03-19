@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
 import { history } from '../redux/configureStore';
 
+import { Categories, EngCategoryEncoder } from '../shared/categoryEncoder';
+
 import styled from 'styled-components';
 
 const Request = (props) => {
@@ -21,15 +23,6 @@ const Request = (props) => {
     const [level, setLevel] = useState('');
     const [time,setTime] = useState('기한없음');
 
-    // 카테고리와 레벨 배열
-    const categoies = [
-        '먹방/요리','운동','지식','창작','고민상담','방문',
-        '직업','반려동물','패션/뷰티','가전','생활','기타'
-    ];
-    const engCategoies = [
-        'cook','health','knowledge','create','consult','visit',
-        'job','pet','fashion','device','life','etc'
-    ]
     const timeset = ['기한없음','3시간','6시간','12시간','24시간'];
 
     const posting = () => {
@@ -43,11 +36,10 @@ const Request = (props) => {
         const data = {
             title: title,
             content: content,
-            category: engCategoies[categoies.indexOf(category)] ,
+            category: EngCategoryEncoder(category),
             level: level,
             timeSet: timeSet,
         }
-
         dispatch(postActions.makeRequest(data));
     }
 
@@ -87,7 +79,7 @@ const Request = (props) => {
                 <div>카테고리</div>
             </Selections>
             <div style={{width:'100%', margin:'0.85rem auto 0'}} >
-                {categoies.map((c,i)=>{
+                {Categories.map((c,i)=>{
                     return (<Tag
                             key={i}
                             tag={category}

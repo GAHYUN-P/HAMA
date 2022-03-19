@@ -3,6 +3,7 @@ import React, {useState,useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { answerActions } from '../redux/modules/answer';
 import { getUserId } from '../shared/cookie';
+import { canWrite } from '../shared/conditions'; 
 
 import AnswerContent from '../components/AnswerContent';
 import CommentList from '../components/CommentList';
@@ -28,14 +29,23 @@ const AnswerDetail = (props) => {
     // 응답글의 내용 서버에서 받아오기
     React.useEffect(()=>{
         dispatch(answerActions.getOneAnswer(answerId));
+        return()=>{
+            dispatch(answerActions.resetAnswer());
+        }
     },[])
+
+    if(!answer){
+        return(
+            <div>잠시만 기다려주시오</div>
+        )
+    }
 
     return (
         <React.Fragment>
             <Header />
             <Grid>
                 <AnswerContent {...answer} videoRef={videoRef} />
-                { answer.requestWriterId === Number(getUserId()) &&
+                { canWrite(answer.requestWriterId) &&
                 <RateBox answerId={answerId} />}
             </Grid>
             <CommentGrid>

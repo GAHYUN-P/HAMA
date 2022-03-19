@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 const VideoUploader = (props) => {
     const dispatch = useDispatch();
-    const preview = useSelector(state => state.image.videoPreview);
+    const videoPreview = useSelector(state => state.image.videoPreview);
     const videoRef = React.useRef();
     const is_edit = props.is_edit;
 
@@ -44,15 +44,15 @@ const VideoUploader = (props) => {
             <div>
                 <div style={{display:'flex', justifyContent:'space-between'}} >
                     <Selections>동영상 등록</Selections>
-                    {preview &&
+                    {videoPreview &&
                     <Ellabel htmlFor='videoupload' >변경</Ellabel>}
                     <input id='videoupload' type='file' ref={videoRef} accept='video/*' onChange={!is_edit ? change : edit} style={{display:'none'}}/>
                 </div>
                 <div style={{height:'11.3rem'}} >
-                    {!preview &&
-                    <ElLabel url={pre_video} htmlFor='videoupload'></ElLabel>}
-                    {preview &&
-                    <ReactPlayer url={preview} muted={true} playing={true} width='100%' height='100%' />}
+                    {!videoPreview &&
+                    <ElLabel htmlFor='videoupload'><UpImg src={pre_video} /></ElLabel>}
+                    {videoPreview &&
+                    <ReactPlayer url={videoPreview} muted={true} playing={true} width='100%' height='100%' />}
                 </div>
             </div>
         </React.Fragment>
@@ -70,11 +70,13 @@ const Ellabel = styled.label`
 
 const ElLabel = styled.label`
     display: block;
-    background-image: url(${props => props.url});
-    background-size: cover;
     border-radius: .3rem;
     width: 100%;
     height: 100%;
+`;
+
+const UpImg = styled.img`
+    width: 100%;
 `;
 
 const Selections = styled.div`

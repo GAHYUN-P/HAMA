@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { postActions } from '../redux/modules/post';
@@ -10,11 +10,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import tune from '../assets/tune.svg';
 
+import { CategoriesForMain } from '../shared/categoryEncoder'
+import Tag from '../elements/Tag';
+
 const Category = (props) => {
     // 여기서 받은 리스트를 postList에 전달해주자
     // onclick에서 밸류를 받아와서 api콜 (밸류) 넣어서 해주고
     // state에 넣어주기
-
+    const [ _tag, setTag ] = useState('전체보기');
 
     // 태그를 모듈화하기
     // state에 잘 담아가지고 그거 데이터 보내주기
@@ -29,6 +32,7 @@ const Category = (props) => {
     const sort = useSelector((state) => state.post.sort);
 
     const selectTag = async (e) => {
+        setTag(e.target.innerHTML);
         dispatch(postActions.setTag(e.target.value));
         console.log(tag);
         
@@ -122,19 +126,16 @@ const Category = (props) => {
             </TitleWrap>
 
             <div>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='all'>전체보기</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='cook'>먹방/요리</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='health'>운동</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='knowledge'>지식</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='create'>창작</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='visit'>방문</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='job'>직업</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='pet'>반려동물</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='fashion'>패션/뷰티</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='consult'>고민상담</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='device'>가전</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='life'>생활</CategoryEach>
-                <CategoryEach onClick={(e) => { selectTag(e) }} value='etc'>기타</CategoryEach>
+                {CategoriesForMain.map((m,i)=>{
+                    return (
+                    <Tag 
+                    _onClick={(e) => { selectTag(e) }} 
+                    value={m.value}
+                    tag={_tag}>
+                        {m.category}
+                    </Tag>
+                    )
+                })}
             </div>
         </div>
     );
@@ -149,34 +150,6 @@ const TitleWrap = styled.div`
     margin-top: ${({ theme }) => theme.margins.divGap};
     margin-bottom: ${({ theme }) => theme.margins.xxl};
     position: relative;
-`;
-
-const CategoryEach = styled.button`
-    min-width: 3.6rem;
-    width: auto;
-    height: 1.7rem;
-    color: #666;
-    font-size: ${({theme})=>theme.fontSizes.small};
-    width: auto;
-    padding: 5px 0.7rem;
-    margin: 0 4px 12px;
-    border: none;
-    border-radius: 20px;
-    background-color: #eee;
-`;
-
-const Selected = styled.button`
-    min-width: 3.6rem;
-    width: auto;
-    height: 1.7rem;
-    color: #fff;
-    font-size: ${({theme})=>theme.fontSizes.small};
-    width: auto;
-    padding: 5px 0.7rem;
-    margin: 0 4px 12px;
-    border: none;
-    border-radius: 20px;
-    background-color: #ff7a7a;
 `;
 
 const SelectWrap = styled.div`

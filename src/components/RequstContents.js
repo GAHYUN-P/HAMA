@@ -7,6 +7,7 @@ import { postActions } from "../redux/modules/post";
 import { getUserId } from "../shared/cookie";
 
 import Viewer from "./Viewer";
+import { requestCanEdit } from "../shared/conditions";  
 import { categoryEncoder } from '../shared/categoryEncoder';
 
 import styled from "styled-components";
@@ -46,7 +47,7 @@ const RequestContents = (props) => {
                             {level === '하' && <LevelImg url={poor_c} /> }
                         </LevelBox>
                     </div>
-                    { _conclusion === 'opened' && user_id === Number(getUserId()) &&
+                    {requestCanEdit(_conclusion,user_id) &&
                     <div style={{ display:'flex' }} >
                         <BtnPair onClick={conclusion} style={{marginRight:'0.4rem'}} >마감</BtnPair>
                         <BtnPair onClick={()=>{history.push(`/request/${postId}`)}} >수정</BtnPair>
@@ -75,7 +76,7 @@ const Buttons = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: ${({theme})=>theme.margins.xxxl} 0 ${({theme})=>theme.margins.base} ;
+    margin: ${({theme})=>theme.margins.xxxl} 0 ${({theme})=>theme.margins.base};
 `;
 
 const TimeLimit = styled.button`

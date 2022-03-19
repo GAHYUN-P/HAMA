@@ -8,6 +8,7 @@ import WriteUser from "./WriteUser";
 import Viewer from '../components/Viewer'
 
 import { getUserId } from "../shared/cookie";
+import { IsLike, requestCanEdit } from "../shared/conditions";
 import { categoryEncoder } from "../shared/categoryEncoder";
 
 import { FiHeart } from 'react-icons/fi';
@@ -18,17 +19,15 @@ import styled from "styled-components";
 const AnswerContent = (props) => {
     const dispatch = useDispatch();
     // 이미지 리스트
-    const { videoRef, fileList, videoUrl, answerId, 
-        answerWriterId, imgUrl } = props;
+    const { videoRef, fileList, videoUrl, answerId, answerWriterId, imgUrl } = props;
 
     // 좋아요 작용
     const likeList = useSelector(state => state.answer.answer.likeUserList);
-    const likeColor = likeList.includes(Number(getUserId())) ? true : false;
-    
+
     const push = () => {
         const data = {
             answerId: props.answerId,
-            userId: Number(getUserId()),
+            userId: getUserId(),
         }
         dispatch(answerActions.pushLikeDB(data));
     }
@@ -52,9 +51,9 @@ const AnswerContent = (props) => {
                     </div>
 
                     <Likebtn onClick={push}
-                    bg={likeColor ? '#efefef' : '#fff'}
-                    fc={likeColor ? '#ff7a7a' : '#9e9e9e'}>
-                        {likeColor ?<FaHeart /> : <FiHeart />}
+                    bg={IsLike(likeList) ? '#efefef' : '#fff'}
+                    fc={IsLike(likeList) ? '#ff7a7a' : '#9e9e9e'}>
+                        {IsLike(likeList) ?<FaHeart /> : <FiHeart />}
                     </Likebtn>
                     
                 </div>
@@ -62,7 +61,7 @@ const AnswerContent = (props) => {
                 {/* 중단 */}
                 <CenterGrid>
                     <WriteUser profile={imgUrl} writer={props.answerWriter} modifiedAt={props.modifiedAt} />
-                    { answerWriterId === getUserId() &&
+                    { requestCanEdit('opened',answerWriterId) &&
                     <div>
                         <BtnPair style={{marginRight:'0.4rem'}} onClick={()=>{history.push(`/answeredit/${props.answerId}`)}} >수정</BtnPair>
                         <BtnPair onClick={delAnswer} >삭제</BtnPair>

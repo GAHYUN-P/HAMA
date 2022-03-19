@@ -16,6 +16,7 @@ const setEdit = createAction('image/SET_EDIT');
 const setVideo = createAction('image/SET_VIDEO');
 const delImage = createAction('image/DEL_IMAGE');
 const editAnswer = createAction('image/EDIT_ANSWER');
+const reset = createAction('image/reset');
 
 // reducer
 const image = createReducer(initialState,{
@@ -56,6 +57,13 @@ const image = createReducer(initialState,{
   [uploading]: (state,action) => {
     state.uploading = !state.uploading
   },
+  [reset]: (state,action) => {
+    state.preview = [];
+    state.files = [];
+    state.videoPreview = '';
+    state.videoFile = '';
+    state.uploading = false;
+  },
 });
 
 // middlewares
@@ -95,6 +103,7 @@ export const imgActions = {
   delImage,
   setEdit,
   editAnswer,
+  reset
 }
 
 export default image;

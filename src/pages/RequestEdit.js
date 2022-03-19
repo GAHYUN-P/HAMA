@@ -48,7 +48,6 @@ const RequestEdit = (props) => {
                 제목
             </Titles>
             <TitleInput value={requestData.title} disabled={true} />
-            {/* <p>{requestData.title}</p> */}
                
             <Contents>
                 내용
@@ -59,8 +58,6 @@ const RequestEdit = (props) => {
             placeholder='요청할 내용을 작성해 주세요.'
             rows={15}/>
    
-
-
             {/* 이미지 업로드 */}
             <h3>이미지</h3>
             <ImageUploader is_edit={true} />
@@ -85,22 +82,22 @@ const Titles = styled.div`
 `;
     
 const TitleInput = styled.input`
-width: 100%;
-font-size: ${({theme}) => theme.fontSizes.base};
-border: none;
-outline: none;
-border-bottom: 1px solid #dcdcdc;
-box-sizing: border-box;
-padding: ${({theme})=>theme.paddings.small} 0;
-&::placeholder{
-    color: #dcdcdc;
-    font-size: ${({theme})=> theme.fontSizes.base};
-}
+    width: 100%;
+    font-size: ${({theme}) => theme.fontSizes.base};
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #dcdcdc;
+    box-sizing: border-box;
+    padding: ${({theme})=>theme.paddings.small} 0;
+    &::placeholder{
+        color: #dcdcdc;
+        font-size: ${({theme})=> theme.fontSizes.base};
+    }
 `;
 
 const Contents = styled.div`
-margin: 1.5rem 0 ${({theme})=>theme.paddings.small};
-font-size: 1.2rem;
+    margin: 1.5rem 0 ${({theme})=>theme.paddings.small};
+    font-size: 1.2rem;
 `;
 
 
