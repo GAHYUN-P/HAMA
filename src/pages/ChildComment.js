@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { childActions } from '../redux/modules/child';
-import { getUserId } from '../shared/cookie';
+import { getUserId, getToken } from '../shared/cookie';
 
 import Header from '../components/Header';
 
@@ -80,9 +80,12 @@ const ChildComment = (props) => {
 
                 {/* 댓글 없을 때 */}
                 {childs.length === 0 &&
-                <div>아직 대댓글이 없어요 
-                첫 작성자가 되어주세요!!</div>
+                <div>
+                아직 대댓글이 없어요 
+                첫 작성자가 되어주세요!!
+                </div>
                 }
+
                 {/* 자식댓글 */}
                 {childs.length > 0 &&
                 childs.map((k,i)=>{
@@ -130,7 +133,8 @@ const ChildComment = (props) => {
                     </Grid>
                     )
                     })}
-                <div style={{position:'fixed',width:'23.2rem', bottom:'2rem' }} >        
+                { getToken() &&
+                <div style={{position:'fixed',width:'100vw', bottom:'2rem' }} >        
                     <InputGrid>
                         <ElInput 
                         ref={commentRef}
@@ -139,7 +143,7 @@ const ChildComment = (props) => {
                         placeholder='댓글을 작성해 주세요.' />
                         <PPHolder url={PP} onClick={add} />
                     </InputGrid>
-                </div>
+                </div>}
             </WholeGrid>
         </React.Fragment>
     )
@@ -155,7 +159,8 @@ const Grid = styled.div`
     padding: ${({theme})=> theme.paddings.xl} 0;
     border-bottom: .1rem solid #f5f5f5;
     box-sizing: border-box;
-`
+`;
+
 const Icon = styled.div`
     font-size: 1.8rem;
     color: #dcdcdc;
@@ -193,11 +198,12 @@ const PPHolder = styled.div`
 `;
 
 const InputGrid = styled.div`
+    width: 90%;
     position: relative;
 `;
 
 const ElInput = styled.input`
-    width: 100vw;
+    width: 100%;
     border: none;
     outline: none;
     padding: ${({theme})=> theme.paddings.lg} .8rem ;

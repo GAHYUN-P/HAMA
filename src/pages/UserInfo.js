@@ -21,6 +21,18 @@ const UserInfo = (props) => {
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
   const [interest, setInterest] = useState('');  
+  
+  const sameCheck = () => {
+    if(!nickname){
+      window.alert('닉네임을 제대로 작성해주세요.')
+      return
+    }
+    userAPI.sameCheck(nickname)
+    .then(res=>{
+      console.group(res.data);
+    })
+    .catch(err=>{console.log(err)});
+  }
 
   const onClickSubmit = async () => {
     const data = {
@@ -45,7 +57,7 @@ const UserInfo = (props) => {
         <GenderAndAge age={age} gender={gender} setGender={setGender} setAge={setAge} />
     </Grid>
       <IndiviInfo>닉네임 설정</IndiviInfo>
-        <NickMaking nickname={nickname} setNickname={setNickname} />
+        <NickMaking nickname={nickname} sameCheck={sameCheck} setNickname={setNickname} />
     <Grid>
       <IndiviInfo>관심사 설정</IndiviInfo>
       <SmallAlert>{SAlert}</SmallAlert>
@@ -76,7 +88,7 @@ const SmallAlert = styled.div`
   aling-items: center;
   font-size: ${({theme}) => theme.fontSizes.small};
   color: #9e9e9e;
-  `;
+`;
 
 const SubmitBtn = styled.button`
   margin-top: 8rem;

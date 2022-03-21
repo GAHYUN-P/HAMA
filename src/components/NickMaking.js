@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 
 const NickMaking = (props) => {
-    const { nickname, setNickname } = props;
+    const { nickname, setNickname, sameCheck } = props;
 
     return(
         <Grid>
@@ -12,7 +12,7 @@ const NickMaking = (props) => {
                 <InvidPart>닉네임</InvidPart>
                 <NickInput value={nickname} onChange={(e)=>{setNickname(e.target.value)}} type='text' placeholder='3~8자리의 숫자,영어,한글만 가능합니다.' />
             </div>
-            <Btn>중복확인</Btn>
+            <Btn onClick={sameCheck} >중복확인</Btn>
         </Grid>
     )
 }
