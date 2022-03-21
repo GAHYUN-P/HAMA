@@ -137,18 +137,16 @@ const loginByKakao = (data) => async (dispatch, getState, { history }) => {
     console.log(res);
 
     const token = res.data.token;
-    const username = res.data.nickname;
+    const userStatus = res.data.userStatus;
     const userId = res.data.userId;
 
     // 받아온정보 쿠키저장
     setCookie('access-token', token);
-    setCookie('username', username);
+    setCookie('userStatus', userStatus);
     setCookie('userId', userId);
 
     // 헤더에 토큰 저장
     axios.defaults.headers.common['token'] = `${token}`;
-
-    localStorage.setItem('access_token', token);
 
     // 토큰으로 유저정보 받아옴
     dispatch(fetchUserProfile(1));

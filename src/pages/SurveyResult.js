@@ -32,7 +32,7 @@ const SurveyResult = (props) => {
       <ContentGrid>
         <div id='res' >나의 결과는?</div>
         <div id='hame' >{hippoName}</div>
-        <div id='img' src={imgUrl} />
+        <img id='img' src={surveyResult} />
         {/* {surveyResult} */}
         <div id='con' >{내용}</div>
       </ContentGrid>

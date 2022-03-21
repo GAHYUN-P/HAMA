@@ -35,6 +35,16 @@ const getToken = () => {
   return null;
 }
 
+const getStatus = () => {
+  if(document.cookie){
+    let status = document.cookie.split('userStatus=')[1].split(';')[0];
+    console.log(status)
+    status = status === 'true' ? true : false
+    return status;
+  }
+  return null;
+}
+
 const setCookie = (name, value, exp = 5) => {
   console.log('setcookie');
   let date = new Date();
@@ -48,4 +58,4 @@ const deleteCookie = (name) => {
   document.cookie = `${name}=; expires=${date}`;
 };
 
-export { getCookie, setCookie, deleteCookie, getUserId, getUserName, getToken };
+export { getCookie, setCookie, deleteCookie, getUserId, getUserName, getToken, getStatus };

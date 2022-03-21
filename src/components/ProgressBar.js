@@ -7,7 +7,7 @@ import { FiChevronLeft } from 'react-icons/fi';
 import styled from 'styled-components';
 
 const ProgressBar = (props) => {
-    const progress = (props.q / 9 * 22.85) + 'rem';
+    const progress = ((props.q + 1) * 10) + '%';
 
     return(
         <Grid>
@@ -58,7 +58,7 @@ const Count = styled.div`
 `;
 
 const GreyBar = styled.div`
-    width: 22.85rem;
+    width: 100%;
     height: .5rem;
     border-radius: .3rem;
     background-color: #efefef;

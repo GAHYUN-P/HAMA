@@ -11,12 +11,14 @@ import { getToken, getUserId } from '../shared/cookie';
 import { plzLogin } from '../shared/getPages';
 
 import live_off from '../assets/live_alarm_off.svg';
+import white_bell from '../assets/white_bell.svg';
 
 import styled from 'styled-components';
 
 const AlamBadge = (props) => {
     const dispatch = useDispatch();
     const { notReadCount } = useSelector(state => state.alam);
+    const pathname = window.location.pathname;
 
     React.useEffect(()=>{
         if(getToken()){
@@ -79,7 +81,7 @@ const AlamBadge = (props) => {
         return(
             <React.Fragment>
                 <Grid onClick={()=>{history.push('/alam')}} >
-                    <LiveOff src={live_off} />
+                    <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
                     <Count>{notReadCount > 9 ? 9 : notReadCount}</Count>
                 </Grid>
             </React.Fragment>
@@ -88,15 +90,17 @@ const AlamBadge = (props) => {
 
     return(
         <React.Fragment>
-            <div onClick={()=>{if(plzLogin()){return};history.push('/alam')}} >
-                <LiveOff src={live_off} />
-            </div>
+            <Grid onClick={()=>{if(plzLogin()){return};history.push('/alam')}} >
+                <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
+            </Grid>
         </React.Fragment>
     )
 }
 
 const Grid = styled.div`
     position: relative;
+    display: flex;
+    align-items: center;
 `;
 
 const LiveOff = styled.img`
