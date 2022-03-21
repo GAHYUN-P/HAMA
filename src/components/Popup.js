@@ -2,50 +2,26 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-// elements
-import { Input, Button } from '../elements';
-
-// 방 생성 API
-import chat, { chatActions } from '../redux/modules/chat';
-
-// 유틸
-import { utilActions } from '../redux/modules/util';
 
 // 리덕스
 import { useDispatch, useSelector } from 'react-redux';
-
-import Upload from '../components/Upload';
-
-// select
-import { Select } from '@class101/ui';
 
 // 채팅방 생성 창
 const Popup = (props) => {
   const { closePopup, visible } = props;
   const dispatch = useDispatch();
-  // 프리뷰 가져오기
-  const preview = useSelector((state) => state.util.preview);
-  // 채팅방 이름
-  const [chatRoomName, setRoomName] = React.useState();
-  // 사용자가 고른 카테고리(태그) 가져오기
-  const Tags = useSelector((state) => state.chat.selectedCategory);
-
-  // 방 이름 입력받기
-  const onChangeRoomName = (e) => {
-    setRoomName(e.target.value);
-  }
 
   // 방 생성하기
-  const onClickCreateRoom = () => {
+  // const onClickCreateRoom = () => {
 
-    const data = {
-      chatRoomImg: preview,
-      chatRoomName: chatRoomName,
-      category: Tags,
-    }
-    dispatch(utilActions.setPreview(null));
-    dispatch(chatActions.createRoom(data, closePopup));
-  }
+  //   const data = {
+  //     chatRoomImg: preview,
+  //     chatRoomName: chatRoomName,
+  //     category: Tags,
+  //   }
+  //   dispatch(utilActions.setPreview(null));
+  //   dispatch(chatActions.createRoom(data, closePopup));
+  // }
 
   const popupInside = React.useRef();
   //  바깥 클릭시 팝업 끄기
@@ -53,21 +29,6 @@ const Popup = (props) => {
     if (!popupInside.current.contains(target)) {
       closePopup()
     }
-  }
-
-  // 카테고리 선택
-  const selectCategory = (e) => {
-    // 같은 카테고리가 있으면 선택하지 못하게 하기
-    if (Tags.includes(e.target.value)) {
-      window.alert('중복해서 고를 수 없습니다.');
-      return
-    }
-    dispatch(chatActions.setCategory(e.target.value));
-  }
-
-  // 태그 삭제
-  const deleteCategory = (value) => {
-    dispatch(chatActions.deleteCategory(value));
   }
 
   React.useEffect(() => {
@@ -81,59 +42,9 @@ const Popup = (props) => {
 
     <PopupOverlay>
       <PopupInner ref={popupInside}>
-        <InputWrap>
-          <Input
-            _onChange={onChangeRoomName}
-            placeholder='채팅방 제목을 입력해주세요.'
-          ></Input>
-        </InputWrap>
-        <InputWrap>
-          <Select
-            value=""
-            placeholder="채팅방 카테고리를 골라주세요"
-            options={['REACT', 'SPRING', 'RN', 'NODEJS']}
-            onChange={(e) => { selectCategory(e) }}
-          />
-        </InputWrap>
-        <InputWrap>
-          {Tags.map((t, idx) => {
-            return (
-              <TagWrap key={idx}>
-                {t}
-                <span onClick={
-                  (e) => {
-                    deleteCategory(t)
-                    e.stopPropagation();
-                  }}
-                >
-                  X
-                </span>
-              </TagWrap>
-            )
-          })}
-        </InputWrap>
-        <Upload />
-        <PopupButtons>
-          <Button
-            width="40%"
-            _onClick={(e) => {
-              onClickCreateRoom();
-              e.stopPropagation();
-            }
-            }
-          >생성</Button>
-          <Button
-            width="40%"
-            _onClick={(e) => {
-              setRoomName('');
-              dispatch(chatActions.clearCategory());
-              dispatch(utilActions.setPreview(null));
-              closePopup();
-              e.stopPropagation();
-            }
-            }
-          >취소</Button>
-        </PopupButtons>
+        <button>공지사항</button>
+        <button>개발자 정보</button>
+        <button>로그아웃</button>
       </PopupInner>
     </PopupOverlay >
   )
