@@ -24,7 +24,7 @@ const AlamBadge = (props) => {
         dispatch(alamActions.getNotReadCountDB());
     },[])
 
-    const sock = new SockJS('http://52.79.68.84/ws-stomp');
+    const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
     const ws = Stomp.over(sock);
     const token = getToken();
     const userId = getUserId();
