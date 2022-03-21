@@ -4,7 +4,7 @@ import { userActions } from '../redux/modules/user';
 import { userAPI } from '../shared/api';
 import { history } from '../redux/configureStore';
 
-import { getStatus } from '../shared/cookie';
+import { getStatus, setFalse } from '../shared/cookie';
 import { Categories, EngCategoryEncoder } from '../shared/categoryEncoder';
 import { infoCheck } from '../shared/conditions';
 
@@ -61,6 +61,7 @@ const UserInfo = (props) => {
 
     userAPI.userInfo(data)
     .then(()=>{
+      setFalse()
       history.replace('/')
     })
     .catch(err=>{console.log(err)})

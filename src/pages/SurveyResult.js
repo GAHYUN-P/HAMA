@@ -20,8 +20,9 @@ const SurveyResult = (props) => {
     }, []);
 
     const { hippoName, imgUrl, surveyResult } = useSelector((state)=>state.util.result);
+    const recommend = useSelector((state)=>state.util.recommend);
 
-    const 내용 = '큰 걱정없이 언제나 모든일을 해결하는 당신은 세상 시원시원한 하마 당신이 곁에만 있다면 언제나 답을 찾아줄 것을 알기에 도움이 필요한 이들의 구세주!!'
+    console.log(recommend);
 
   return (
     <Grid>
@@ -32,17 +33,17 @@ const SurveyResult = (props) => {
       <ContentGrid>
         <div id='res' >나의 결과는?</div>
         <div id='hame' >{hippoName}</div>
-        <img id='img' src={surveyResult} />
+        <img id='img' src={imgUrl} />
         {/* {surveyResult} */}
-        <div id='con' >{내용}</div>
+        <div id='con' >{surveyResult}</div>
       </ContentGrid>
       {/* 추천 */}
       <Recomment>
         <div id='exp' >이런 도움이 적합한 하마입니다!</div>
-        {[1,2].map((n,i)=>{return(<RecommendCard {...n} />)})}
+        {recommend.map((r,i)=>{return(<RecommendCard key={i} {...r} />)})}
       </Recomment>
       {/* 버튼들 */}
-      <ResultBtns />
+      <ResultBtns imgUrl={imgUrl} hippoName={hippoName} surveyResult={surveyResult} />
     </Grid>
   );
 };

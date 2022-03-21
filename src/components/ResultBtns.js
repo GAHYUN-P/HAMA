@@ -6,14 +6,48 @@ import share from '../assets/share_button.svg'
 import styled from "styled-components";
 
 const ResultBtns = (props) => {
+      const { imgUrl, hippoName, surveyResult } = props;
+      const url = window.location.href.split('result')[0];
+
+      React.useEffect(()=>{
+        if(!window.Kakao.isInitialized()){
+          window.Kakao.init('e3318b36c5ba53a829554c965958bdb9');
+        }
+      },[]);
+
+      const shareKakao = () => {
+        window.Kakao.Link.sendDefault({ 
+          objectType: 'feed',
+          content: {
+            title: hippoName,
+            description: surveyResult,
+            imageUrl: imgUrl,
+            link: {
+              mobileWebUrl: url,
+              webUrl: url,
+            },
+          },
+          buttons: [
+            {
+              title: '웹으로 보기',
+              link: {
+                mobileWebUrl: url,
+                webUrl: url,
+              },
+            }
+          ],
+        }
     
+    )
+      }   
+
     return (
       <Grid>
         <BtnGrid>
           <ReDo onClick={()=>{history.replace('/survey')}} >다시하기</ReDo>
           <Set onClick={()=>{history.replace('/mypage')}} >등록하기</Set>
         </BtnGrid>
-        <Share src={share} />
+        <Share onClick={shareKakao} src={share} />
       </Grid>
     );
 }

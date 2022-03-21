@@ -135,14 +135,14 @@ const ChildComment = (props) => {
                     )
                     })}
             </WholeGrid>
-            { 
+            { getToken() &&
             <CommentInput
                  add={add}
                  commentRef={commentRef} 
                  comment={comment}
                  setComment={setComment}
                  type='text' 
-                 placeholder='댓글을 작성해 주세요.'/>}
+                 placeholder='댓글을 작성해 주세요.'/> }
         </React.Fragment>
     )
 };

@@ -52,7 +52,6 @@ const AlamBadge = (props) => {
                 (data) => {
                   const newMessage = JSON.parse(data.body);
                   dispatch(alamActions.addNotReadCount());
-                  console.log(data.body);
                   console.log(newMessage);
                 },
                 { token: token }

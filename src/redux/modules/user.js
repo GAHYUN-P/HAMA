@@ -36,7 +36,7 @@ const user = createReducer(initialState, {
   [logout]: (state, { payload }) => {
     // 로그인시 쿠키에 저장한 정보 삭제
     deleteCookie('access-token');
-    deleteCookie('username');
+    deleteCookie('userStatus');
     deleteCookie('userId');
 
     // 헤더에서 토큰삭제
@@ -150,9 +150,14 @@ const loginByKakao = (data) => async (dispatch, getState, { history }) => {
 
     // 토큰으로 유저정보 받아옴
     dispatch(fetchUserProfile(1));
-
-    // 로그인 성공시 home으로 이동
-    window.location.href='/';
+    if(userStatus === 'true'){
+      // 유저정보가 없을 시 유저인포 페이지 이동
+      window.location.href='/userinfo';
+    }
+    if(userStatus === 'false'){
+      // 로그인 성공시 home으로 이동
+      window.location.href='/';
+    }
 
   } catch (error) {
     console.error(error);
