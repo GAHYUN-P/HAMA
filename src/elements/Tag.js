@@ -3,23 +3,19 @@ import styled from "styled-components";
 
 
 const Tag = (props) => {
-    const { children, _onClick, tag } = props
+    const { children, _onClick, tag, value } = props
 
     if(tag === children){
         return(
-        <Selected onClick={_onClick} >
-           
+        <Selected onClick={_onClick} value={value} >
                 {children}
-
         </Selected>
         )
     }
 
     return(
-        <Eltag onClick={_onClick} >
-       
+        <Eltag onClick={_onClick} value={value} >
                 {children}
-          
         </Eltag>
     )
 }

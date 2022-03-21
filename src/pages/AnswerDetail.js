@@ -3,11 +3,13 @@ import React, {useState,useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { answerActions } from '../redux/modules/answer';
 import { getUserId } from '../shared/cookie';
+import { canWrite } from '../shared/conditions'; 
 
 import AnswerContent from '../components/AnswerContent';
 import CommentList from '../components/CommentList';
 import RateBox from '../components/RateBox';
 import Header from '../components/Header';
+import WaitForAMoment from '../components/WaitForAMoment';
 
 import {FiChevronRight} from 'react-icons/fi';
 
@@ -22,7 +24,7 @@ const AnswerDetail = (props) => {
     const videoRef = useRef();
 
     // 해당 응답글의 아이디, 내용
-    const answerId = props.match.params.answerId;
+    const answerId = Number(props.match.params.answerId);
     const answer = useSelector(state => state.answer.answer);
 
     // 응답글의 내용 서버에서 받아오기
@@ -30,12 +32,18 @@ const AnswerDetail = (props) => {
         dispatch(answerActions.getOneAnswer(answerId));
     },[])
 
+    if(answer.answerId !== answerId){
+        return(
+            <WaitForAMoment />
+        )
+    }
+
     return (
         <React.Fragment>
             <Header />
             <Grid>
                 <AnswerContent {...answer} videoRef={videoRef} />
-                { answer.requestWriterId === Number(getUserId()) &&
+                { canWrite(answer.requestWriterId) &&
                 <RateBox answerId={answerId} />}
             </Grid>
             <CommentGrid>

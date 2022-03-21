@@ -1,3 +1,6 @@
+import { history } from "../redux/configureStore";
+import { getToken } from "./cookie";
+
 const Basic =[
     '','request','requestedit','answer','answeredit','requestdetail','answerdetail',
     'comment','search','searchresult','shorts','alam','mypage','mypage_detail'
@@ -39,3 +42,13 @@ export const NeedAlam = (pathname) => {
     
     return !list.includes(name);
 };
+
+export const plzLogin = () => {
+    if(!getToken()){
+        if(window.confirm('로그인이 필요한 기능입니다 로그인 하시겠습니까?')){
+            history.push('/login')
+          }
+          return true
+    }
+    return false
+} 

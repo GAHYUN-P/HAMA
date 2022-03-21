@@ -7,15 +7,18 @@ export const initialState = {
   videoPreview:'',
   videoFile:'',
   uploading: false,
+  videouploading: true,
 };
 
 // actions
 const uploading = createAction('image/UPLOADING');
+const videoUploading = createAction('image/videoUploading');
 const setImage = createAction('image/SET_IMAGE');
 const setEdit = createAction('image/SET_EDIT');
 const setVideo = createAction('image/SET_VIDEO');
 const delImage = createAction('image/DEL_IMAGE');
 const editAnswer = createAction('image/EDIT_ANSWER');
+const reset = createAction('image/reset');
 
 // reducer
 const image = createReducer(initialState,{
@@ -36,10 +39,12 @@ const image = createReducer(initialState,{
   [setVideo]: (state,action) => {
     state.videoPreview = action.payload.prevideo;
     state.videoFile = action.payload.file;
+    state.videouploading = true;
   },
   [setEdit]: (state,action) => {
     state.preview = action.payload;
     state.files = action.payload;
+    console.log(action.payload);
     if(action.payload.length === 5){
       state.uploading = true;
     }
@@ -54,7 +59,17 @@ const image = createReducer(initialState,{
     }
   },
   [uploading]: (state,action) => {
-    state.uploading = !state.uploading
+    state.uploading = !state.uploading;
+  },
+  [videoUploading]: (state,action) => {
+    state.videouploading = !state.videouploading;
+  },
+  [reset]: (state,action) => {
+    state.preview = [];
+    state.files = [];
+    state.videoPreview = '';
+    state.videoFile = '';
+    state.uploading = false;
   },
 });
 
@@ -75,6 +90,7 @@ const uploadToDB = (data) => async (dispatch,getState,{history}) => {
 
 const uploadToVideo = (data) => async (dispatch,getState,{history}) => {
   try{
+    dispatch(videoUploading());
     const url = await imgAPI.fileUpload(data);
     console.log(url.data.video);
     const _data = {
@@ -95,6 +111,7 @@ export const imgActions = {
   delImage,
   setEdit,
   editAnswer,
+  reset
 }
 
 export default image;

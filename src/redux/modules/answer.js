@@ -4,53 +4,35 @@ import { getUserId } from '../../shared/cookie';
 import { answerAPI, imgAPI } from '../../shared/api';
 
 export const initialState = {
-    answer: {
-        answerId: 0,
-        requestWriterId: 0,
-        answerWriterId: 0,
-        title:'',
-        content:'',
-        modifiedAt: '',
-        star: 0,
-        category:'',
-        commentCount: 0,
-        likeUserList: [],
-        answerLikeCount: 0,
-        answerWriter:'',
-        fileList:[],
-        videoUrl:'',
-    },
-    comments: [
-        {
-        answerId : 0,
-        commentId : 0,
-        commentWriterId : 0,
-        commentWriter : '라면 무따',
-        content : '개마싯게네요',
-        modifiedAt : '2020-10-10T11:27:39',
-    }
-    ,],
-    childComment: []
+    answer: '',
+    comments: [],
+    childComment: [],
+    answerLoading: false
 }
 
 //actions 
 const setAnswer = createAction('answer/setAnswer');
+const resetAnswer = createAction('answer/resetAnswer');
 const deleteComment = createAction('answer/deleteComment');
 const pushLike = createAction('answer/pushLike');
 const addComment = createAction('answer/addComment');
 const editComment = createAction('answer/editComment');
 const delComment = createAction('answer/delComment');
 const rateStar = createAction('answer/rateStar');
+const setLoading = createAction('answer/setLoading');
 
 // reducer
 const answer = createReducer(initialState,{
     [setAnswer]: (state,action) => {
-        state.answer = action.payload.answer
-        state.comments = action.payload.comment
+        state.answer = action.payload.answer;
+        state.comments = action.payload.comment;
+    },
+    [setLoading]: (state,action) => {
+        state.answerLoading = !state.answerLoading;
     },
     [deleteComment]: (state,action) => {
-        state.answer = action.payload.answer
-        state.comments = action.payload.comment
+        state.answer = action.payload.answer;
+        state.comments = action.payload.comment;
     },
     [pushLike]: (state,action) => {
         if(state.answer.likeUserList.includes(action.payload)){
@@ -82,11 +64,15 @@ const answer = createReducer(initialState,{
     [rateStar]: (state,action) => {
         state.answer.star = Number(action.payload.star);
     },
+    [resetAnswer]: (state,action) => {
+        state.answer = '';
+    },
 })
 
 // middlewares
 const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
     try{
+        dispatch(setLoading());
         const formdata = new FormData();
 
         const image = getState().image.files;
@@ -103,7 +89,8 @@ const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
         }
 
         const res = await answerAPI.answering(data,postId);
-        history.replace(res.data); 
+        dispatch(setLoading());
+        history.replace(history.replace(`/answerdetail/${res.data}`)); 
     }catch(error){
         console.log('error',error);
     }
@@ -130,7 +117,7 @@ const deleteAnswerDB = (answerId) => async (dispatch, getState, { history }) => 
     answerAPI.deleteAnswer(answerId)
     .then(()=>{
         window.alert('삭제완료');
-        history.replace('/home');
+        history.replace('/');
     })
     .catch(err=>{
         console.log('error',err);
@@ -208,7 +195,8 @@ export const answerActions = {
     deleteCommentDB,
     editCommentDB,
     pushLikeDB,
-    starDB
+    starDB,
+    resetAnswer
 }
 
 export default answer;
