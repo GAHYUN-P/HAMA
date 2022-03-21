@@ -36,6 +36,7 @@ import MypageDetail from '../pages/MypageDetail';
 import Shorts from '../pages/Shorts';
 import MypageAch from '../pages/MypageAch';
 import Notice from '../pages/Notice';
+import DevInfo from '../pages/DevInfo';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
               <Route path="/login" exact component={Login} />
               <Route path="/userInfo" exact component={UserInfo} />
               <Route path="/notice" exact component={Notice} />
+              <Route path="/developer" exact component={DevInfo} />
               <Route path="/answer/:postId" exact component={Answer} />
               <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
               <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
@@ -64,8 +66,8 @@ function App() {
               <Route path="/search/:keyword" exact component={SearchResult} />
               <Route path="/shorts" exact component={Shorts} />
               <Route path="/alam" exact component={Alam} />
-              <Route path="*" exact component={NotFound} />
               </CardList>
+              <Route path="*" exact component={NotFound} />
             </Switch>
         </div>
       </Container>
