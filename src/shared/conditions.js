@@ -30,11 +30,35 @@ const canRate = (writerId) => {
     return true
 };
 
+const infoCheck = (data,same) => {
+    const { category, gender, age, nickname, phone } = data;
+    if(!category || !gender || !age || !nickname){
+        window.alert('빈 칸 또는 채우지않은 항목이 있습니다.');
+        return true;
+    }
+    if(same !== 'true'){
+        window.alert('닉네임 중복체크를 해주세요!');
+        return true;
+    }
+    if(phone){
+        let length = phone.split('-').length;
+        if(length !== 3 || 
+            phone.split('-')[0] !== '010' ||
+            phone.split('-')[1].length !== 4 || 
+            phone.split('-')[2].length !== 4 ||
+            !Number(phone.split('-')[0] + phone.split('-')[1] + phone.split('-')[2]) ){
+            window.alert('전화번호는 010-0000-0000로 맞춰주세요')
+            return true
+        }
+    }
+    return false;
+}
+
 export { 
     IsLogin, 
     canWrite, 
     requestCanEdit, 
     IsLike, 
     canRate,
-    
+    infoCheck,
 };

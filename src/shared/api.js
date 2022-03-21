@@ -4,10 +4,10 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 배포
-axios.defaults.baseURL = 'https://gongbuhyeyum.shop';
+// axios.defaults.baseURL = 'https://gongbuhyeyum.shop';
 
 // 로컬
-// axios.defaults.baseURL = 'http://52.79.68.84';
+axios.defaults.baseURL = 'http://52.79.68.84';
 
 
 
@@ -184,8 +184,11 @@ export const utilAPI = {
     return axios.post(`/api/survey`, data, config);
   },
   getSurveyResult: function () {
-    return axios.get(`/api/survey`, config);
+    return axios.get(`/api/survey`,config);
   },
+  getRecommend: function(hippoName){
+    return axios.get(`/api/survey/${hippoName}`,config)
+  }
 };
 
 export const mypageAPI = {

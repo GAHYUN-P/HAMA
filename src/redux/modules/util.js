@@ -14,6 +14,7 @@ const initialState = {
   result: {
     hippoName: "",
   },
+  recommend : [],
   mypost: [{
     requestId: null,
     title : "요청초기값",
@@ -36,12 +37,16 @@ const setSurveyResult = createAction('util/SET_SURVEY_RESULT');
 const setMypost = createAction('util/SET_MYPOST');
 const setMyanswer = createAction('util/SET_MYANSWER');
 const setCategory = createAction('util/SET_CATEGORY');
+const setRecommend = createAction('util/SET_RECOMMEND')
 
 
 // reducer
 const util = createReducer(initialState, {
   [setSurveyResult]: (state, action) => {
     state.result = action.payload;
+  },
+  [setRecommend]: (state, action) => {
+    state.recommend = action.payload;
   },
   [setBanner]: (state, action) => {
     state.list = action.payload;
@@ -63,9 +68,11 @@ const util = createReducer(initialState, {
 // middleware actions
 const getSurveyResult = () => async (dispatch, getState, { history }) => {
   try {
-    const res = await utilAPI.getSurveyResult();
-    console.log(res.data);
+    const res = await utilAPI.getSurveyResult();    
+    const _res = await utilAPI.getRecommend(res.data.hippoName);
+    
     dispatch(setSurveyResult(res.data));
+    dispatch(setRecommend(_res.data));
   }
   catch (error) {
     console.log(error);
