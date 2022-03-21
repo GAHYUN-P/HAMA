@@ -17,16 +17,8 @@ const Home = (props) => {
 
   const dispatch = useDispatch();
 
-  // 팝업창 키기/종료
-  // true가 기본 상태
-  // const [popupOpen, setPopupOpen] = React.useState(true);
-
   const popupOpen = useSelector((state) => state.util.popupOpen);
 
-  // 팝업창 키기/끄기 함수
-  // const openPopup = () => {
-  //   setPopupOpen(true);
-  // };
   const closePopup = () => {
     dispatch(utilActions.setPopupOpen(false));
   };
