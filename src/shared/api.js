@@ -3,11 +3,12 @@ import { getToken } from './cookie';
 
 //axios.defaults.withCredentials = true;
 
-// 민기님 서버
-// axios.defaults.baseURL = 'http://3.36.53.246';
+// 배포
+axios.defaults.baseURL = 'http://54.180.96.121';
 
-// 민기님 서버 2
-axios.defaults.baseURL = 'http://52.79.68.84';
+// 로컬
+// axios.defaults.baseURL = 'http://52.79.68.84';
+
 
 
 const config = {
