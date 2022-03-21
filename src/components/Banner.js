@@ -18,7 +18,9 @@ const Banner = (props) => {
 		infinite: true,
 		centerPadding: "80px",
 		slidesToShow: 1,
-		speed: 500
+		speed: 500,
+		autoplay: true,
+		autoplaySpeed: 10000,
   } 
 
   return (
