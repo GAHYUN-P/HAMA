@@ -12,6 +12,7 @@ import loading from '../assets/logo_final.svg';
 
 import styled, { keyframes } from 'styled-components';
 
+
 const Answer = (props) => {
     const dispatch = useDispatch();
     const { answerLoading } = useSelector(state=>state.answer);
@@ -36,6 +37,7 @@ const Answer = (props) => {
             <WaitGrid>
                 <Wait src={loading} />
             </WaitGrid>}
+
             <Grid >
                 {/* 제목 */}
                 <Titles>
