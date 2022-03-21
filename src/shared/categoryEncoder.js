@@ -9,8 +9,8 @@ export const EngCategoryEncoder = (category) => {
 };
 
 export const typeEncoder = (type) => {
-    const kr= ['댓글','대댓글','답변','평가','평가','레벨','좋아요','좋아요'];
-    const eng = ['comment','child','answer','rate','rated','level','likeA','likeP'];
+    const kr= ['댓글','대댓글','답변','평가','평가','레벨','좋아요','좋아요','경험치'];
+    const eng = ['comment','child','answer','rate','rated','level','likeA','likeP','point'];
     return kr[eng.indexOf(type)];
 };
 

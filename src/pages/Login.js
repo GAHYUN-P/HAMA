@@ -17,6 +17,7 @@ import logoF from '../assets/logo_final.svg';
 
 import useInput from '../shared/useInput';
 import KaKaoLogin from 'react-kakao-login';
+import { utilActions } from '../redux/modules/util';
 
 // 로그인 페이지 컴포넌트
 const Login = ({ history, match }) => {
@@ -51,6 +52,7 @@ const Login = ({ history, match }) => {
         kakaoToken: data.access_token
       })
     );
+    dispatch(utilActions.setPopupOpen(true));
   };
 
   return (

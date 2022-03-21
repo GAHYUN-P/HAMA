@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Wrapper } from '../elements';
 
+import Header from '../components/Header';
+
 import ina from '../assets/ina.svg';
 import gh from '../assets/gh.svg';
 import jg from '../assets/jg.svg';
@@ -17,6 +19,8 @@ const DevInfo = (props) => {
 
 
   return (
+    <React.Fragment>
+    <Header />
     <Wrapper>
         <Title>만든 사람들</Title>
         <Paragraph>
@@ -115,6 +119,7 @@ const DevInfo = (props) => {
         </Paragraph>
 
     </Wrapper>
+    </React.Fragment>
   );
 };
 

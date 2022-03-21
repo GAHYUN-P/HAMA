@@ -45,7 +45,7 @@ const AlamCard = (props) => {
                     </TypeBtn>
                 </BtnGrid>
                 <div onClick={MoveTo} style={{width:'70%'}}>
-                    {setAlamContent(alarmType,title,senderNickName,modifiedAt)}
+                    {setAlamContent(props)}
                 </div>
                 <ExBox onClick={deletAlarm}>
                     <BsX />
