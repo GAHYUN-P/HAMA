@@ -40,7 +40,7 @@ const MypageAch = (props) => {
       <Header />
         <div style={{display:'flex', justifyContent:'space-between'}}>
           <InfoWrap>
-            <Category>고민상담</Category>
+            <Category>{list.category}</Category>
             <Nickname>{list.nickname}</Nickname>
             <HippoName>{list.hippoName}</HippoName>
             {/* <Email>{list.email}</Email> */}
@@ -160,23 +160,25 @@ const SurveyIco = styled.div`
   height: 4.5vh;
   width: 4.5vh;
   position: absolute;
-  bottom: 6.5vh;
+  top: 14vh;
   right: 0%;
 `;
 
 const DoTest = styled.div`
+  position: absolute;
   background-image: url(${gotoTest});
   background-size: contain;
-  margin-top: 0.6vh;
+  margin-top: 0.5vh;
   height: 25%;
   width: 100%; 
+  top: 18vh;
 `;
 
 
 const Lv = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: #fff;
-  padding: 0px 5px 0px;
+  padding: 10px 5px 0px;
 `;
 
 const LvBg = styled.div`
