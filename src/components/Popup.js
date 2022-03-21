@@ -2,9 +2,10 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-
 // 리덕스
 import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../redux/modules/user';
+import { history } from '../redux/configureStore';
 
 // 채팅방 생성 창
 const Popup = (props) => {
@@ -26,7 +27,7 @@ const Popup = (props) => {
   const popupInside = React.useRef();
   //  바깥 클릭시 팝업 끄기
   const clickOutside = ({ target }) => {
-    if (!popupInside.current.contains(target)) {
+    if (!popupInside.current?.contains(target)) {
       closePopup()
     }
   }
@@ -39,12 +40,11 @@ const Popup = (props) => {
   }, []);
 
   return (
-
     <PopupOverlay>
       <PopupInner ref={popupInside}>
-        <button>공지사항</button>
-        <button>개발자 정보</button>
-        <button>로그아웃</button>
+        <Btn onClick={()=>{history.push('/notice')}} >공지사항</Btn>
+        <Btn onClick={()=>{history.push('/developer')}} >개발자들</Btn>
+        <Btn onClick={()=>{dispatch(userActions.logout())}} >로그아웃</Btn>
       </PopupInner>
     </PopupOverlay >
   )
@@ -53,65 +53,40 @@ const Popup = (props) => {
 
 
 const PopupOverlay = styled.div`
-  ${(props) => props.theme.border_box};
+  display: flex;
+  justify-content: right;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding-top: 3rem;
+  background-color: rgba(0, 0, 0, 0.2);
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.6);
   top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2;
-`
+`;
 
 const PopupInner = styled.div`
-  ${(props) => props.theme.border_box};
-  ${(props) => props.theme.flex_column};
-  position: relative;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-  width: 50%;
-  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: .5rem;
+  width: 16rem;
+  height: 16rem;
   background-color: whitesmoke;
-  border-radius: 10px;
-  top: 50%;
-  margin: 0 auto;
-  transform: translateY(-50%);
-  @media ${(props) => props.theme.mobile} {
-    width: 90%
-  }
+  border-radius: .8rem;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+`;
 
-`
-
-const PopupButtons = styled.div`
-${(props) => props.theme.flex_row}
-width: 80%;
-margin: 0px 0px 20px 0px;
-`
-
-const InputWrap = styled.div`
-${(props) => props.theme.flex_row}
-justify-content: center;
-  width: 80%;
-  margin: 10px 0px 10px 0px;
-`
-const TagWrap = styled.div`
-${(props) => props.theme.flex_row}
-margin: 0px 5px;
-  padding: 5px;
-  font-size: 1rem;
-  background-color: orange;
-  border-radius: 10px;
-  color: whitesmoke;
-  & span{
-    cursor: pointer;
-    font-size: 10px;
-    margin-left: 5px;
-  }
-  @media ${(props) => props.theme.mobile} {
-    font-size: 0.7rem;
-  }
-`
-
+const Btn = styled.button`
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-bottom: .1rem solid #dcdcdc;
+  border-radius: .8rem;
+  background-color: #transparent;
+  color: #ff7a7a;
+  font-size: ${({theme})=> theme.fontSizes.lg};
+  font-family: 'Noto-Sans-KR-M'
+`;
 
 export default Popup;
