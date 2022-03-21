@@ -1,6 +1,7 @@
 import React from "react";
 
 import MainHama from '../assets/rehama.png';
+import logo from '../assets/logo_final.svg';
 import loading from '../assets/loading_2.gif';
 
 import styled, { keyframes } from "styled-components";
@@ -11,7 +12,7 @@ const WaitForAMoment = (props) => {
     if(is_loading){
         return(
         <WaitGrid>
-            <HamaImg src={loading} />
+            <Wait src={logo} />
         </WaitGrid>
         )
     }

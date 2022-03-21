@@ -5,6 +5,7 @@ import { childActions } from '../redux/modules/child';
 import { getUserId, getToken } from '../shared/cookie';
 
 import Header from '../components/Header';
+import CommentInput from '../components/CommentInput';
 
 import PP from '../assets/Paper_Plane.svg';
 import {BiSubdirectoryRight} from 'react-icons/bi';
@@ -133,28 +134,27 @@ const ChildComment = (props) => {
                     </Grid>
                     )
                     })}
-                { getToken() &&
-                <div style={{position:'fixed',width:'100vw', bottom:'2rem' }} >        
-                    <InputGrid>
-                        <ElInput 
-                        ref={commentRef}
-                        value={comment} onChange={(e)=>{setComment(e.target.value)}}
-                        type='text'
-                        placeholder='댓글을 작성해 주세요.' />
-                        <PPHolder url={PP} onClick={add} />
-                    </InputGrid>
-                </div>}
             </WholeGrid>
+            { getToken() &&
+            <CommentInput
+                 add={add}
+                 commentRef={commentRef} 
+                 comment={comment}
+                 setComment={setComment}
+                 type='text' 
+                 placeholder='댓글을 작성해 주세요.'/> }
         </React.Fragment>
     )
 };
 
 const WholeGrid = styled.div`
+    width: 100%;
     padding: 0 ${({theme})=> theme.paddings.default} 4.5rem;
     position: relative;
 `;
 
 const Grid = styled.div`
+    width: 100%;
     display: flex;
     padding: ${({theme})=> theme.paddings.xl} 0;
     border-bottom: .1rem solid #f5f5f5;
@@ -193,17 +193,17 @@ const PPHolder = styled.div`
     background-image: url(${props => props.url});
     background-size: cover;
     position: absolute;
-    right: .7rem;
-    top: .7rem;
+    right: 5.8rem;
+    top: .5rem;
 `;
 
 const InputGrid = styled.div`
-    width: 90%;
+    width: 100vw;
     position: relative;
 `;
 
 const ElInput = styled.input`
-    width: 100%;
+    width: 90%;
     border: none;
     outline: none;
     padding: ${({theme})=> theme.paddings.lg} .8rem ;
@@ -213,7 +213,7 @@ const ElInput = styled.input`
         font-size: .7rem;
         color:  #9e9e9e;
     }
-`
+`;
 
 const CWrieter = styled.div`
     font-size: ${({theme})=> theme.fontSizes.small};

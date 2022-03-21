@@ -10,18 +10,9 @@ const getCookie = (name) => {
 // 유저 고유 아이디 가져오기
 const getUserId = () => {
   if(document.cookie){
-    let userId = document.cookie.split('userId=')[1];
-    userId = Number(userId);
-    return userId;
-  }
-  return null;
-}
+    let userId = document.cookie.split('userId=')[1].split(';')[0];
 
-// 유저 닉네임 가져오기
-const getUserName = () => {
-  if(document.cookie){
-    const userName = document.cookie.split('username=')[1].split(';')[0];
-    return userName;
+    return Number(userId);
   }
   return null;
 }
@@ -34,6 +25,27 @@ const getToken = () => {
   }
   return null;
 }
+
+const getStatus = () => {
+  if(document.cookie){
+    let status = document.cookie.split('userStatus=')[1].split(';')[0];
+    console.log(status)
+    status = status === 'true' ? true : false
+    return status;
+  }
+  return null;
+}
+
+const setFalse = (exp = 5) => {
+  let date = new Date('2020-01-01').toUTCString();
+  document.cookie = `userStatus=; expires=${date}`;
+  
+  let _date = new Date();
+  _date.setTime(_date.getTime() + exp * 24 * 60 * 60 * 1000);
+  document.cookie = `userStatus=false; path=/; expires=${_date.toUTCString()}`;
+  
+  return null
+};
 
 const setCookie = (name, value, exp = 5) => {
   console.log('setcookie');
@@ -48,4 +60,12 @@ const deleteCookie = (name) => {
   document.cookie = `${name}=; expires=${date}`;
 };
 
-export { getCookie, setCookie, deleteCookie, getUserId, getUserName, getToken };
+export { 
+  getCookie, 
+  setCookie, 
+  deleteCookie, 
+  getUserId, 
+  getToken, 
+  getStatus, 
+  setFalse,
+ };

@@ -7,6 +7,7 @@ import { history } from '../redux/configureStore';
 import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
 import Header from '../components/Header';
+import WaitForAMoment from '../components/WaitForAMoment';
 
 import loading from '../assets/logo_final.svg';
 
@@ -34,9 +35,7 @@ const Answer = (props) => {
         <React.Fragment>
             <Header />
             { answerLoading &&
-            <WaitGrid>
-                <Wait src={loading} />
-            </WaitGrid>}
+            <WaitForAMoment is_loading={true} />}
 
             <Grid >
                 {/* 제목 */}
@@ -61,11 +60,11 @@ const Answer = (props) => {
 
                 {/* 동영상 */}
                 <VideoUploader />
-                { !answerLoading && 
+                
                 <BtnGrid>
                     <Btn onClick={()=>{history.goBack()}}>취소</Btn>
                     <Btn onClick={answering}>등록</Btn>
-                </BtnGrid>}
+                </BtnGrid>
             </Grid>
         </React.Fragment>
     )

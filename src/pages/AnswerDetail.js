@@ -34,7 +34,9 @@ const AnswerDetail = (props) => {
 
     if(answer.answerId !== answerId){
         return(
-            <WaitForAMoment />
+            <div style={{width:'100%',height:'100vh',position:'relative'}} >
+                <WaitForAMoment is_loading />
+            </div>
         )
     }
 

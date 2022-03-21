@@ -1,18 +1,23 @@
 import React from "react";
 
+import { categoryEncoder } from '../shared/categoryEncoder';
+
 import styled from "styled-components";
 
 const RecommendCard = (props) => {
+    let { category, content, modifiedAt, postLikeCount, postid, title } = props;
+    content = content?.length > 15 ? (content.slice(0,14) + '...') : content;
+
 
     return(
         <Card>
-          <div id='cat' >카테/고리</div>
+          <div id='cat' >{categoryEncoder(category)}</div>
           <div id='con' >
-            <Title>빵을 야무지게 먹어보았습니다</Title>            
-            <Small>빵을 야무지게 먹어보았습니...</Small>            
+            <Title>{title}</Title>            
+            <Small>{content}</Small>            
           </div>
-          <div id='time' >21.07.10</div>
-          <div id='like' >♡ 20</div>
+          <div id='time' >{modifiedAt}</div>
+          <div id='like' >♡ {postLikeCount}</div>
         </Card>
     )
 }

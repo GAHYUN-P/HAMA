@@ -15,7 +15,7 @@ const GenderAndAge = (props) => {
           </div>
           <div>
             <InvidPart>나이</InvidPart>
-            <AgeInput value={age} onChange={(e)=>{setAge(e.target.value)}} type='text' placeholder='입력해주세요' />
+            <AgeInput value={age} onChange={(e)=>{setAge(e.target.value)}} type='number' placeholder='입력해주세요' />
           </div>
         </GandA>
     )

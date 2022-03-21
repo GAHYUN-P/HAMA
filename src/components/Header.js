@@ -33,6 +33,7 @@ const Header = (props) => {
 
   const LogOut = () => {
     dispatch(userActions.logout());
+    history.push('/');
   };
 
   if(pathname === '/login'){
