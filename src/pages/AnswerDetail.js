@@ -3,7 +3,7 @@ import React, {useState,useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { answerActions } from '../redux/modules/answer';
 import { getUserId } from '../shared/cookie';
-import { canWrite } from '../shared/conditions'; 
+import { canRate } from '../shared/conditions'; 
 
 import AnswerContent from '../components/AnswerContent';
 import CommentList from '../components/CommentList';
@@ -27,6 +27,8 @@ const AnswerDetail = (props) => {
     const answerId = Number(props.match.params.answerId);
     const answer = useSelector(state => state.answer.answer);
 
+    console.log(answer);
+
     // 응답글의 내용 서버에서 받아오기
     React.useEffect(()=>{
         dispatch(answerActions.getOneAnswer(answerId));
@@ -45,7 +47,7 @@ const AnswerDetail = (props) => {
             <Header />
             <Grid>
                 <AnswerContent {...answer} videoRef={videoRef} />
-                { canWrite(answer.requestWriterId) &&
+                { canRate(answer.requestWriterId) &&
                 <RateBox answerId={answerId} />}
             </Grid>
             <CommentGrid>
