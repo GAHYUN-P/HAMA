@@ -134,26 +134,15 @@ const ChildComment = (props) => {
                     </Grid>
                     )
                     })}
-                { getToken() &&
-                <CommentInput
+            </WholeGrid>
+            { 
+            <CommentInput
                  add={add}
                  commentRef={commentRef} 
                  comment={comment}
                  setComment={setComment}
                  type='text' 
-                 placeholder='댓글을 작성해 주세요.'/>
-                // <div style={{position:'fixed',width:'100vw', bottom:'2rem' }} >        
-                //     <InputGrid>
-                //         <ElInput 
-                //         ref={commentRef}
-                //         value={comment} onChange={(e)=>{setComment(e.target.value)}}
-                //         type='text'
-                //         placeholder='댓글을 작성해 주세요.'/>
-                //         <PPHolder url={PP} onClick={add} />
-                //     </InputGrid>
-                // </div>
-                }
-            </WholeGrid>
+                 placeholder='댓글을 작성해 주세요.'/>}
         </React.Fragment>
     )
 };
@@ -165,6 +154,7 @@ const WholeGrid = styled.div`
 `;
 
 const Grid = styled.div`
+    width: 100%;
     display: flex;
     padding: ${({theme})=> theme.paddings.xl} 0;
     border-bottom: .1rem solid #f5f5f5;

@@ -23,7 +23,8 @@ const CommentInput = (props) => {
 }
 
 const WholeGrid = styled.div`
-    width: 100%;
+    width: 100vw;
+    padding: 0 ${({theme})=> theme.paddings.default};
     position: fixed;
     bottom: 2rem;
 `;
@@ -31,7 +32,7 @@ const WholeGrid = styled.div`
 const Back = styled.div`
     width: 100%;
     height: 3rem;
-    padding: 0 ${({theme})=> theme.paddings.default};
+    padding: 0 ${({theme})=> theme.paddings.default} 0;
     display: flex;
     justify-content: space-between;
     border-radius: .3rem;
@@ -40,7 +41,7 @@ const Back = styled.div`
 `;
 
 const ElInput = styled.input`
-    width: 80%;
+    width: 100%;
     border: none;
     outline: none;
     background-color: transparent;
