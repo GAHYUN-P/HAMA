@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { history } from '../redux/configureStore';
 
 import { getToken } from '../shared/cookie';
-import { getFooter, getFixed } from '../shared/getPages';
+import { getFooter, getFixed, plzLogin } from '../shared/getPages';
 
 import home_n from '../assets/home_n.svg'
 import home from '../assets/home.svg'
@@ -39,6 +39,7 @@ const Footer = (props) => {
       {/* 작성 */}
       <Btn 
       onClick={()=>{
+        if(plzLogin()){return}
         history.push('/request')
       }}
       basic={write_n} hover={write} />
@@ -58,6 +59,7 @@ const Footer = (props) => {
       {/* 마이페이지 */}
       <Btn 
       onClick={()=>{
+        if(plzLogin()){return}
         if(getFixed(pathname)==='mypage'){return;}
         history.push('/mypage')
       }}

@@ -8,6 +8,7 @@ import WriteUser from "./WriteUser";
 import Viewer from '../components/Viewer'
 
 import { getUserId } from "../shared/cookie";
+import { plzLogin } from "../shared/getPages";
 import { IsLike, requestCanEdit } from "../shared/conditions";
 import { categoryEncoder } from "../shared/categoryEncoder";
 
@@ -25,6 +26,7 @@ const AnswerContent = (props) => {
     const likeList = useSelector(state => state.answer.answer.likeUserList);
 
     const push = () => {
+        if(plzLogin()){return}
         const data = {
             answerId: props.answerId,
             userId: getUserId(),

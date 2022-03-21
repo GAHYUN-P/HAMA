@@ -6,7 +6,8 @@ import { answerAPI, imgAPI } from '../../shared/api';
 export const initialState = {
     answer: '',
     comments: [],
-    childComment: []
+    childComment: [],
+    answerLoading: false
 }
 
 //actions 
@@ -18,12 +19,16 @@ const addComment = createAction('answer/addComment');
 const editComment = createAction('answer/editComment');
 const delComment = createAction('answer/delComment');
 const rateStar = createAction('answer/rateStar');
+const setLoading = createAction('answer/setLoading');
 
 // reducer
 const answer = createReducer(initialState,{
     [setAnswer]: (state,action) => {
         state.answer = action.payload.answer;
         state.comments = action.payload.comment;
+    },
+    [setLoading]: (state,action) => {
+        state.answerLoading = !state.answerLoading;
     },
     [deleteComment]: (state,action) => {
         state.answer = action.payload.answer;
@@ -67,6 +72,7 @@ const answer = createReducer(initialState,{
 // middlewares
 const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
     try{
+        dispatch(setLoading());
         const formdata = new FormData();
 
         const image = getState().image.files;
@@ -83,7 +89,8 @@ const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
         }
 
         const res = await answerAPI.answering(data,postId);
-        history.replace(res.data); 
+        dispatch(setLoading());
+        history.replace(history.replace(`/answerdetail/${res.data}`)); 
     }catch(error){
         console.log('error',error);
     }
@@ -110,7 +117,7 @@ const deleteAnswerDB = (answerId) => async (dispatch, getState, { history }) => 
     answerAPI.deleteAnswer(answerId)
     .then(()=>{
         window.alert('삭제완료');
-        history.replace('/home');
+        history.replace('/');
     })
     .catch(err=>{
         console.log('error',err);

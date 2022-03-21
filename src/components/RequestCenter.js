@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
 import { getUserId, getToken } from '../shared/cookie';
 import { IsLike } from '../shared/conditions';
+import { plzLogin } from '../shared/getPages';
 
 import { FiHeart } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
@@ -14,10 +15,7 @@ const RequestCenter = (props) => {
     const dispatch = useDispatch();
 
     const pushlike = () => {
-        if(!getToken()){
-            window.alert('로그인 후 시도해주세요.')
-            return
-        }
+        if(plzLogin()){return}
         dispatch(postActions.pushLikeDB(props.request.postId));
     }
 

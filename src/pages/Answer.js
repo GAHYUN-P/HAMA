@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { answerActions } from '../redux/modules/answer';
 import { history } from '../redux/configureStore';
 
@@ -8,10 +8,13 @@ import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
 import Header from '../components/Header';
 
+import loading from '../assets/loading_2.gif';
+
 import styled from 'styled-components';
 
 const Answer = (props) => {
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
+    const { answerLoading } = useSelector(state=>state.answer);
     const postId = props.match.params.postId
     const titleRef = React.useRef();
     const contentRef = React.useRef();
@@ -28,42 +31,46 @@ const Answer = (props) => {
 
     return (
         <React.Fragment>
-          <Header />
-          <Grid >
-            {/* 제목 */}
-            <Titles>
-                제목
-            </Titles>
-            <TitleInput 
-            placeholder='제목을 입력해주세요.' 
-            ref={titleRef}/>
+            <Header />
+            <Grid >
+                {/* 제목 */}
+                <Titles>
+                    제목
+                </Titles>
+                <TitleInput 
+                placeholder='제목을 입력해주세요.' 
+                ref={titleRef}/>
 
-            {/* 내용 */}
-            <Contents>
-                  <div>내용</div>
-            </Contents>
-            <ContentArea placeholder='내용을 작성해 주세요.' rows={15} ref={contentRef}/>
-            
-            {/* 이미지 */}
-            <Selections>
-              사진등록
-            </Selections>
-            <ImageUploader />
+                {/* 내용 */}
+                <Contents>
+                    <div>내용</div>
+                </Contents>
+                <ContentArea placeholder='내용을 작성해 주세요.' rows={15} ref={contentRef}/>
+                
+                {/* 이미지 */}
+                <Selections>
+                사진등록
+                </Selections>
+                <ImageUploader />
 
-            {/* 동영상 */}
-            <VideoUploader />
-
-            <BtnGrid>
-                <Btn onClick={()=>{history.goBack()}}>취소</Btn>
-                <Btn onClick={answering}>등록</Btn>
-            </BtnGrid>
-          </Grid>
+                {/* 동영상 */}
+                <VideoUploader />
+                { answerLoading && <Wait src={loading} />}
+                { !answerLoading && 
+                <BtnGrid>
+                    <Btn onClick={()=>{history.goBack()}}>취소</Btn>
+                    <Btn onClick={answering}>등록</Btn>
+                </BtnGrid>}
+            </Grid>
         </React.Fragment>
     )
 }
 
 const Grid = styled.div`
+    width: 100%;
+    height: 100%;
     padding: 0 ${({theme})=> theme.paddings.default};
+    position: relative;
 `;
 
 const TitleInput = styled.input`
@@ -125,6 +132,14 @@ const Btn = styled.button`
         background-color: #ff7a7a;
         color: #fff;
     }
+`;
+
+const Wait = styled.img`
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
 `;
 
 export default Answer;
