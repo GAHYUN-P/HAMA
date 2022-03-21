@@ -4,7 +4,7 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 배포
-axios.defaults.baseURL = 'http://54.180.96.121';
+axios.defaults.baseURL = 'https://gongbuhyeyum.shop';
 
 // 로컬
 // axios.defaults.baseURL = 'http://52.79.68.84';
