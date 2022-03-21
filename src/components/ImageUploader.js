@@ -48,6 +48,7 @@ const ImageUploader = (props) => {
         }
     },[])
 
+
     return (
         <React.Fragment>
             <div style={{padding:'8px 0', display:'flex'}} >
@@ -55,6 +56,7 @@ const ImageUploader = (props) => {
                 <input id='imgup' ref={inputRef} onChange={!is_edit ? change : edit}
                 type='file' accept='image/*' multiple
                 disabled={uploading} style={{display:'none'}} />
+                {preview &&
                 <WhiteSpace>
                     {preview.map((p,i)=>{
                         return (
@@ -67,7 +69,7 @@ const ImageUploader = (props) => {
                             </Frame>
                         )
                     })}
-                </WhiteSpace>
+                </WhiteSpace>}
             </div>
         </React.Fragment>
     )

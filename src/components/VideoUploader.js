@@ -4,16 +4,17 @@ import ReactPlayer from "react-player";
 import { imgActions } from "../redux/modules/image";
 import { useDispatch, useSelector } from "react-redux";
 
-import pre_video from '../assets/video.svg'
+import pre_video from '../assets/video.svg';
+import loading from '../assets/loading_2.gif';
 
 import styled from "styled-components";
 
 const VideoUploader = (props) => {
     const dispatch = useDispatch();
-    const videoPreview = useSelector(state => state.image.videoPreview);
+    const { videoPreview, videouploading } = useSelector(state => state.image);
     const videoRef = React.useRef();
     const is_edit = props.is_edit;
-
+    
     const change = () => {
         const file = videoRef.current.files[0];
         if(file){
@@ -24,7 +25,7 @@ const VideoUploader = (props) => {
             dispatch(imgActions.setVideo(data));
             return
         }
-        console.log('not get')
+        console.log('not get');
     }
 
     const edit = () => {
@@ -49,9 +50,13 @@ const VideoUploader = (props) => {
                     <input id='videoupload' type='file' ref={videoRef} accept='video/*' onChange={!is_edit ? change : edit} style={{display:'none'}}/>
                 </div>
                 <div style={{height:'11.3rem'}} >
-                    {!videoPreview &&
-                    <ElLabel htmlFor='videoupload'><UpImg src={pre_video} /></ElLabel>}
-                    {videoPreview &&
+                    {!videoPreview && videouploading &&
+                    <ElLabel htmlFor='videoupload'><UpImg width='100%' src={pre_video} /></ElLabel>}
+                    {!videouploading && 
+                    <div style={{display:'flex',justifyContent:'center'}} >
+                        <UpImg width='80%' src={loading} />
+                    </div>}
+                    {videoPreview && videouploading &&
                     <ReactPlayer url={videoPreview} muted={true} playing={true} width='100%' height='100%' />}
                 </div>
             </div>
@@ -76,7 +81,7 @@ const ElLabel = styled.label`
 `;
 
 const UpImg = styled.img`
-    width: 100%;
+    width: ${props => props.width};
 `;
 
 const Selections = styled.div`

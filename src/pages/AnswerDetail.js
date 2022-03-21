@@ -9,6 +9,7 @@ import AnswerContent from '../components/AnswerContent';
 import CommentList from '../components/CommentList';
 import RateBox from '../components/RateBox';
 import Header from '../components/Header';
+import WaitForAMoment from '../components/WaitForAMoment';
 
 import {FiChevronRight} from 'react-icons/fi';
 
@@ -23,20 +24,17 @@ const AnswerDetail = (props) => {
     const videoRef = useRef();
 
     // 해당 응답글의 아이디, 내용
-    const answerId = props.match.params.answerId;
+    const answerId = Number(props.match.params.answerId);
     const answer = useSelector(state => state.answer.answer);
 
     // 응답글의 내용 서버에서 받아오기
     React.useEffect(()=>{
         dispatch(answerActions.getOneAnswer(answerId));
-        return()=>{
-            dispatch(answerActions.resetAnswer());
-        }
     },[])
 
-    if(!answer){
+    if(answer.answerId !== answerId){
         return(
-            <div>잠시만 기다려주시오</div>
+            <WaitForAMoment />
         )
     }
 

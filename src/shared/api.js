@@ -62,6 +62,9 @@ export const userAPI = {
   userInfo : function (data) {
     return axios.post(`/api/userinfo`, data, config);
   },
+  sameCheck: function(nickname) {
+    return axios.post('/api/user/nickname',{nickname: nickname})
+  }
 };
 
 export const chatAPI = {

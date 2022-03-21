@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { answerActions } from '../redux/modules/answer';
 
 import { getTimeStamp } from '../shared/separator';
+import { getToken } from '../shared/cookie';
 
 import PP from '../assets/Paper_Plane.svg';
 
@@ -55,6 +56,7 @@ const CommentList = (props) => {
 
     return (
         <React.Fragment>
+            { getToken() &&
             <InputGrid>
                 <ElInput 
                 ref={commentRef}
@@ -63,7 +65,7 @@ const CommentList = (props) => {
                 type='text' 
                 placeholder={placeholder}/>
                 <PPHolder onClick={commenting} url={PP} />
-            </InputGrid>
+            </InputGrid>}
             
             <CommentGrid>
                 {commentArray.map((c,i)=>{

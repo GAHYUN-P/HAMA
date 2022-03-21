@@ -8,10 +8,8 @@ import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 
 import { getToken, getUserId } from '../shared/cookie';
+import { plzLogin } from '../shared/getPages';
 
-import { FiBell } from 'react-icons/fi';
-
-import live_on from '../assets/live_alarm_on.svg';
 import live_off from '../assets/live_alarm_off.svg';
 
 import styled from 'styled-components';
@@ -21,7 +19,9 @@ const AlamBadge = (props) => {
     const { notReadCount } = useSelector(state => state.alam);
 
     React.useEffect(()=>{
-        dispatch(alamActions.getNotReadCountDB());
+        if(getToken()){
+          dispatch(alamActions.getNotReadCountDB());
+        }
     },[])
 
     const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
@@ -30,7 +30,9 @@ const AlamBadge = (props) => {
     const userId = getUserId();
 
     React.useEffect(()=>{
-        wsConnectSubscribe()
+          if(getToken()){
+            wsConnectSubscribe()
+          }
         return () => {
             wsDisConnectUnsubscribe()
         }
@@ -86,7 +88,7 @@ const AlamBadge = (props) => {
 
     return(
         <React.Fragment>
-            <div onClick={()=>{history.push('/alam')}} >
+            <div onClick={()=>{if(plzLogin()){return};history.push('/alam')}} >
                 <LiveOff src={live_off} />
             </div>
         </React.Fragment>
