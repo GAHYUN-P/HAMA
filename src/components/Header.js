@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { useSelector,useDispatch } from 'react-redux';
 import { userActions } from '../redux/modules/user';
@@ -7,6 +7,7 @@ import { history } from '../redux/configureStore';
 import { getPage, NeedAlam } from '../shared/getPages';
 
 import AlamBadge from './AlamBadge';
+import Popup from './Popup';
 
 import logo from '../assets/logo_final.svg';
 
@@ -16,8 +17,9 @@ import styled from 'styled-components';
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const pathname = window.location.pathname;
   const { is_what } =props;
+  const [open,setOpen] = useState(false);
+  const pathname = window.location.pathname;
 
   const GoBack = () => {
     history.goBack()
@@ -44,12 +46,28 @@ const Header = (props) => {
     )
   }
 
+  console.log(pathname);
+
+  if(pathname === '/notice' || pathname === '/developer'){
+    return (
+    <Grid>
+        <FiChevronLeft color onClick={GoBack} id='che'/>
+        { pathname === '/notice' ? '공지사항' : '개발자들' }
+    </Grid>
+    )
+  }
+
+  const closePopup = () => {
+    setOpen(false);
+  };
+
   if(pathname === '/mypage' || pathname === '/mypage_achievement'){
     return(
       <MGrid>
         <FiChevronLeft onClick={pathname === '/mypage' ? GoHome : GoBack} id='che'/>
         { pathname === '/mypage' ? '마이페이지' : '나의 업적' }
-        <FiMoreHorizontal onClick={LogOut} id='hor'/>
+        <FiMoreHorizontal onClick={()=>{setOpen(true)}} id='hor'/>
+        { open && <Popup visible={open} closePopup={closePopup} />}
       </MGrid>
     )
   }
