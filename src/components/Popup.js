@@ -44,7 +44,10 @@ const Popup = (props) => {
       <PopupInner ref={popupInside}>
         <Btn onClick={()=>{history.push('/notice')}} >공지사항</Btn>
         <Btn onClick={()=>{history.push('/developer')}} >개발자들</Btn>
-        <Btn onClick={()=>{dispatch(userActions.logout())}} >로그아웃</Btn>
+        <Btn onClick={()=>{
+          dispatch(userActions.logout())
+          history.replace('/');
+          }} >로그아웃</Btn>
       </PopupInner>
     </PopupOverlay >
   )
