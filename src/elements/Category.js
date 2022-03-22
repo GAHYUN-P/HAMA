@@ -129,6 +129,7 @@ const Category = (props) => {
                 {CategoriesForMain.map((m,i)=>{
                     return (
                     <Tag 
+                    key={i}
                     _onClick={(e) => { selectTag(e) }} 
                     value={m.value}
                     tag={_tag}>
