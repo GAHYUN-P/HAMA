@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './shared/App';
 import { ThemeProvider } from 'styled-components';
 
+
 // styled-components 공통변수
 import theme from './shared/theme';
 // redux store

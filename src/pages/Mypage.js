@@ -119,10 +119,11 @@ const Mypage = (props) => {
 
 const Wrap = styled.div`
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   overflow: scroll;
   margin-bottom: 5vh;
+  /* padding: 1vh 4vh; */
 `;
 
 const MyBanner = styled.div`
@@ -201,8 +202,9 @@ const DoTest = styled.div`
 
 const LvWrap= styled.div`
   position: absolute;
-  width: 83%;
+  width: 85%;
   bottom: 12vh;
+  
   /* padding-top: 1vh; */
 `;
 
