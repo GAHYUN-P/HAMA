@@ -25,7 +25,7 @@ const Home = (props) => {
 
 
   return (
-    <div>
+    <React.Fragment>
       {popupOpen && <IntroPop visible={popupOpen} closePopup={closePopup} />}
       <Header/>
       <Banner/>
@@ -35,7 +35,7 @@ const Home = (props) => {
         <PostList/>
       </Wrapper>
       <Footer />
-    </div>
+    </React.Fragment>
   );
 };
 

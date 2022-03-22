@@ -1,28 +1,32 @@
 const kr = ['먹방/요리','운동','지식','창작','방문','직업','반려동물','패션/뷰티','고민상담','가전','생활','기타']
 const eng = ['cook','health','knowledge','create','visit','job','pet','fashion','consult','device','life','etc']
 
+// 한글 카테고리 영어로 바꿔줌
 export const categoryEncoder = (category) => {    
     return  kr[eng.indexOf(category)];
 };
+// 영어 카테고리 한글로 바꿔줌
 export const EngCategoryEncoder = (category) => {
     return  eng[kr.indexOf(category)];
 };
-
+// 알람 타입 영어에서 한글로 바꿔줌
 export const typeEncoder = (type) => {
-    const kr= ['댓글','대댓글','답변','평가','평가','레벨','좋아요','좋아요','경험치'];
-    const eng = ['comment','child','answer','rate','rated','level','likeA','likeP','point'];
+    const kr= ['댓글','대댓글','답변','평가','평가','레벨','좋아요','좋아요','경험치','경험치','경험치','경험치'];
+    const eng = [
+        'comment','child','answer','rate','rated','level','likeA','likeP',
+        'pointR','pointAL','pointPL','pointA'];
     return kr[eng.indexOf(type)];
 };
-
+// 랭크 상태에 따라 색깔 돌려줌
 export const statusColor = (status) => {
     let color = '#536b2c';
     if(status !== 'stay'){
         color = status === 'up' ? '#ff7a7a' : '#6284fe';
     }
     return color;
-}
+};
 
-export const Categories = ['먹방/요리','운동','지식','창작','방문','직업','반려동물','패션/뷰티','고민상담','가전','생활','기타'];
+export const Categories = kr;
 
 export const CategoriesForMain = [
     {category:'전체보기',value:'all'},

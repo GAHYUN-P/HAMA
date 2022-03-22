@@ -176,6 +176,9 @@ export const childAPI = {
 export const imgAPI = {
   fileUpload: function (data) {
     return axios.post('/api/upload',data,uploadconfig);
+  },
+  getFiles: function (data) {
+    return axios.get(`/api/image/${data.type}/${data.id}`);
   }
 }
 

@@ -2,6 +2,7 @@ import React,{ useState, useRef } from 'react';
 
 import Header from '../components/Header';
 import ImageDetail from '../components/ImageDetail';
+import WaitForAMoment from '../components/WaitForAMoment';
 
 import Slider from 'react-slick';
 
@@ -12,10 +13,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ImageViewer = (props) => {
     const dispatch = useDispatch();
+    const { viewerImages, idx } = useSelector((state)=>state.image)
+    const { type,id } = props.match.params;
+
+    React.useEffect(()=>{
+       if(!viewerImages){
+            dispatch(imgActions.getImagesDB({type,id}))
+        }
+        return()=>{
+            dispatch(imgActions.reset());
+        }
+    },[])
     
-    const url ='https://image.utoimage.com/preview/cp872655/2017/08/201708004472_500.jpg';
-
-
     const settings = {
         dots: false,
         infinite: true,
@@ -26,15 +35,20 @@ const ImageViewer = (props) => {
         }
     };
 
-    const index = useSelector((state)=>state.image.idx);
-    console.log(index);
+    if(!viewerImages){
+        return(
+            <WaitForAMoment is_loading />
+        )
+    }
+
+    console.log(idx);
 
     return(
         <React.Fragment>
-        <Header/>
+        <Header length={viewerImages.length} index={idx} />
 		<style>{cssstyle}</style>
             <Slider {...settings}>
-                {[url,url,url,url,url].map((u,i)=>{
+                {viewerImages.map((u,i)=>{
                     return (
                     <Grid key={i} >
                         <div>
@@ -56,10 +70,6 @@ const  Grid = styled.div`
     display: flex;
     width: 100%;
     height: 100vh;
-`;
-
-const Img = styled.img`
-
 `;
 
 const cssstyle = `

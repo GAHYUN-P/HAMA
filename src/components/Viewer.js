@@ -1,18 +1,32 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+import { imgActions } from "../redux/modules/image";
+import { history } from "../redux/configureStore";
+
 import ReactPlayer from "react-player";
 
 import styled from "styled-components";
 
 const Viewer = (props) => {
-    let { fileList, video, is_answer, videoRef } =props
+    let { fileList, video, is_answer, videoRef, type, id } =props
+    const dispatch = useDispatch();
+
+    console.log(type,id);
+
+    const ToViewer = (e) => {
+        const data ={type,id};
+        console.log(data);
+        history.push(`/images/${type}/${id}`);
+        // dispatch(imgActions.getImagesDB(data))
+    }
 
     // 요청글일 경우 보여주는 뷰어
     if(!is_answer){
         return(
             <ViewContainer>
                 {fileList.map((f,i)=>{
-                    return(<ImgBox src={f} key={i} />)
+                    return(<ImgBox onClick={ToViewer} src={f} key={i} />)
                 })}
             </ViewContainer>
         )
@@ -36,11 +50,11 @@ const Viewer = (props) => {
                 <MainContainer>
                     {video ?
                      <ReactPlayer ref={videoRef} controls={true} width='100%' height='90%' url={mainFile} /> 
-                    : <MainImg src={mainFile} />}
+                    : <MainImg onClick={ToViewer} src={mainFile} />}
                 </MainContainer>
                 <ViewContainer>
                     {fileList.map((f,i)=>{
-                        return(<ImgBox src={f} key={i} />)
+                        return(<ImgBox onClick={ToViewer} index={i} src={f} key={i} />)
                     })}
                 </ViewContainer>
             </div>

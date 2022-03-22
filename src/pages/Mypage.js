@@ -51,6 +51,7 @@ const Mypage = (props) => {
     }
 
   return (
+    <React.Fragment>
     <Wrap>
       <MyBanner>
       <Header />
@@ -110,8 +111,9 @@ const Mypage = (props) => {
       <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
       <div style={{height:'10vh'}}/>
       </MyContents>
-      <Footer />
     </Wrap>
+    <Footer />
+    </React.Fragment>
   );
 };
 

@@ -25,7 +25,7 @@ const Container = styled.div`
     /* background-color: black; */
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    background-color: white;
 `;
 
 const Image = styled.div`
@@ -36,7 +36,7 @@ const Image = styled.div`
     height: 100%;
     position: relative;
     top: 28%;
-    background-color: black;
+    background-color: white;
 `;
 
 
