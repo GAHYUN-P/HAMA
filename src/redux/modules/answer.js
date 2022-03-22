@@ -96,6 +96,24 @@ const answeringDB = (data,postId) => async (dispatch, getState, { history }) =>{
     }
 }
 
+const answeringDB2 = (data,postId) => async (dispatch, getState, { history }) => {
+    const formdata = new FormData();
+    const image = getState().image.files;
+    const video = getState().image.videoFile;
+    image ? (image.map(i=>{return formdata.append('file',i)})) : formdata.append('file',null);
+    video ? formdata.append('video',video) : formdata.append('video',null);
+
+    formdata.append('answer',new Blob([JSON.stringify(data)],{'type':'application/json'}));
+
+    try{
+        answerAPI.answering2(formdata);
+        window.alert('영상 크기에 따라 업로드 시간이 오래걸릴 수 있습니다. 글 업로드가 완료되면 알람에서 확인하실 수 있어요!')
+        history.replace(`/requestdetail/${postId}`);
+    }catch(error){
+        console.log(error);
+    }
+}
+
 const editAnswerDB = (data,answerId) => async (dispatch, getState, { history }) => {
     try{
         const file = getState().image.files
@@ -188,6 +206,7 @@ const starDB = (data) => async (dispatch, getState, {history}) => {
 
 export const answerActions = {
     answeringDB,
+    answeringDB2,
     editAnswerDB,
     deleteAnswerDB,
     getOneAnswer,

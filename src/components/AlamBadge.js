@@ -31,13 +31,18 @@ const AlamBadge = (props) => {
     const token = getToken();
     const userId = getUserId();
 
+    console.log(window);
+
     React.useEffect(()=>{
           if(getToken()){
             wsConnectSubscribe()
           }
-        return () => {
+          if(!getToken()){
             wsDisConnectUnsubscribe()
-        }
+          }
+
+        // return () => {
+        // }
     },[]);
 
     function wsConnectSubscribe() {
