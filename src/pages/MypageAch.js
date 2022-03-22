@@ -40,7 +40,7 @@ const MypageAch = (props) => {
       <Header />
         <div style={{display:'flex', justifyContent:'space-between'}}>
           <InfoWrap>
-            <Category>고민상담</Category>
+            <Category>{list.category}</Category>
             <Nickname>{list.nickname}</Nickname>
             <HippoName>{list.hippoName}</HippoName>
             {/* <Email>{list.email}</Email> */}
@@ -67,13 +67,13 @@ const MypageAch = (props) => {
             <DoTest/>
           </ProfileWrap>
         </div>
-        <div style={{paddingTop:'1vh'}}>
+        <LvWrap>
           <Lv>{list.hippolv}LV</Lv>
           <LvBg>
             <LvGage percent={percent}/>
           </LvBg>
           <Point>{list.point}/1000 exp</Point>
-        </div>
+        </LvWrap>
       </MyBanner>
       <MyContents>
       <MedalWrap>
@@ -106,6 +106,7 @@ const MyBanner = styled.div`
   background-image: url(${colorBg});
   background-size: cover;
   padding: 1vh 4vh;
+  position: relative;
 `;
 
 const InfoWrap = styled.div`
@@ -160,18 +161,26 @@ const SurveyIco = styled.div`
   height: 4.5vh;
   width: 4.5vh;
   position: absolute;
-  bottom: 6.5vh;
+  top: 14vh;
   right: 0%;
 `;
 
 const DoTest = styled.div`
+  position: absolute;
   background-image: url(${gotoTest});
   background-size: contain;
-  margin-top: 0.6vh;
-  height: 25%;
+  margin-top: 0.5vh;
+  height: 5vh;
   width: 100%; 
+  top: 18vh;
 `;
 
+const LvWrap= styled.div`
+  position: absolute;
+  width: 83%;
+  bottom: 12vh;
+  /* padding-top: 1vh; */
+`;
 
 const Lv = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};

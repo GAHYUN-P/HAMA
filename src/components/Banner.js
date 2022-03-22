@@ -3,6 +3,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Slider from "react-slick";
 import bannerBackground from '../assets/bannerBackground.svg';
+import { history } from '../redux/configureStore';
+
 import vector9 from '../assets/vector9.svg';
 
 import ban_1 from '../assets/banner_1.png';
@@ -30,16 +32,16 @@ const Banner = (props) => {
 		<style>{cssstyle}</style>
 		<StyledSlider {...settings}>
 			<div>
-				<img id='banner_box' src={ban_1} />
+				<img id='banner_box' src={ban_1} onClick={()=>history.push('/hm_posts')} />
 			</div>
 			<div>
-				<img id='banner_box' src={ban_2} />
+				<img id='banner_box' src={ban_2} onClick={()=>window.open('https://forms.gle/THNpyEqo8vUbc82m9')}/>
 			</div>
 			<div>
-				<img id='banner_box' src={ban_3} />
+				<img id='banner_box' src={ban_3} onClick={()=>history.push('/notice')}/>
 			</div>
 			<div>
-				<img id='banner_box' src={ban_4} />
+				<img id='banner_box' src={ban_4} onClick={()=>history.push('/notice')}/>
 			</div>
 		</StyledSlider>
 		<Shade src={vector9}/>

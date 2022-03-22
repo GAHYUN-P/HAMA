@@ -138,8 +138,8 @@ const Notice = (props) => {
 };
 
 const Paragraph = styled.div`
-    margin: 10px;
-    padding: 10px;
+    margin: 1.5rem 0px;
+    padding: 1rem;
     background-color: #EFEFEF;
     border-radius: 10px;
 `;
@@ -152,6 +152,7 @@ const Title = styled.div`
 
 const SemiTitle = styled.div`
     font-family: 'Noto-Sans-KR-M';
+    font-weight: 550;
 `;
 
 const Contents = styled.div`

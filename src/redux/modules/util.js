@@ -28,6 +28,7 @@ const initialState = {
     likeCount: null,
   }],
   category: '',
+  popupOpen: true,
 };
 
 // action
@@ -37,8 +38,8 @@ const setSurveyResult = createAction('util/SET_SURVEY_RESULT');
 const setMypost = createAction('util/SET_MYPOST');
 const setMyanswer = createAction('util/SET_MYANSWER');
 const setCategory = createAction('util/SET_CATEGORY');
-const setRecommend = createAction('util/SET_RECOMMEND')
-
+const setRecommend = createAction('util/SET_RECOMMEND');
+const setPopupOpen = createAction('util/POPUP_OPEN');
 
 // reducer
 const util = createReducer(initialState, {
@@ -62,6 +63,9 @@ const util = createReducer(initialState, {
   },
   [setCategory] : (state, action) => {
     state.category = action.payload;
+  },
+  [setPopupOpen] : (state, action) => {
+    state.popupOpen = action.payload;
   },
 });
 
@@ -132,6 +136,7 @@ export const utilActions = {
   getMypost,
   getMyanswer,
   setCategory,
+  setPopupOpen,
 };
 
 export default util;
