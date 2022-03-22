@@ -2,13 +2,12 @@ import styled from "styled-components";
 
 export const setAlamContent = (data)=> {
     let { alarmId ,id, senderNickName, alarmType, title, modifiedAt, readingStatus } = data;
-    let content = '';
+
     if(title.length > 10){
         title = title.slice(0,10) + '...';
     }
     // 답변글 작성됐을 때
     if(alarmType === 'answer'){
-        content = `${senderNickName}님이 [${title}] 글에 답변글을 남겼습니다.`
         return(
             <Crid>
                 <Nick>{senderNickName}</Nick>
@@ -19,7 +18,6 @@ export const setAlamContent = (data)=> {
     }
     // 댓글이 작성됐을 때
     if(alarmType === 'comment'){
-        content = `${senderNickName}님이 [${title}] 글에 댓글을 남겼습니다.`
         return(
             <Crid>
                 <Nick>{senderNickName}</Nick>
@@ -30,7 +28,6 @@ export const setAlamContent = (data)=> {
     }
     // 대댓글이 작성됐을 때
     if(alarmType === 'child'){
-        content = `${senderNickName}님이 [${title}] 댓글에 대댓글을 남겼습니다.`
         return(
             <Crid>
                 <Nick>{senderNickName}</Nick>
@@ -79,7 +76,11 @@ export const setAlamContent = (data)=> {
     }
     // 레벨이 올랐을 때
     if(alarmType === 'level'){
-        return
+        return (
+            <Crid>
+                <Time>{modifiedAt}</Time>
+            </Crid>
+        )
     }
     return null;
 }

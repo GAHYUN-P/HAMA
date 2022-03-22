@@ -24,6 +24,7 @@ import ChildComment from '../pages/ChildComment';
 import SearchResult from '../pages/SearchResult';
 import Search from '../pages/Search';
 import Alam from '../pages/Alam';
+import ImageViewer from '../pages/ImageViewer';
 
 // component
 import Home from '../pages/Home';
@@ -51,14 +52,15 @@ function App() {
               <Route path="/userInfo" exact component={UserInfo} />
               <Route path="/notice" exact component={Notice} />
               <Route path="/developer" exact component={DevInfo} />
+              <Route path="/request" exact component={Request} />
+              <Route path="/request/:postId" exact component={RequestEdit} />
+              <Route path="/requestdetail/:postId" exact component={RequestDetail} />
               <Route path="/hm_posts" exact component={HMpost} />
               <Route path="/answer/:postId" exact component={Answer} />
               <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
               <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
+              <Route path="/images" exact component={ImageViewer} />
               <Route path="/comment/:commentId" exact component={ChildComment} />
-              <Route path="/request" exact component={Request} />
-              <Route path="/request/:postId" exact component={RequestEdit} />
-              <Route path="/requestdetail/:postId" exact component={RequestDetail} />
               <Route path="/survey" exact component={Survey} />
               <Route path="/result" exact component={SurveyResult} />
               <Route path="/mypage" exact component={Mypage} />

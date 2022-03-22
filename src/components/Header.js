@@ -46,8 +46,6 @@ const Header = (props) => {
     )
   }
 
-  console.log(pathname);
-
   if(pathname === '/notice' || pathname === '/developer'){
     return (
     <Grid>
