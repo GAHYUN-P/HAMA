@@ -131,6 +131,9 @@ export const answerAPI = {
   answering: function(data,postId) {
     return axios.post(`/api/answer/${postId}`,data, config);
   },
+  answering2: function(data,postId) {
+    return axios.post(`/api/answer2/${postId}`,data, uploadconfig);
+  },
   editAnswer: function(data,answerId) {
     return axios.put(`/api/answer/${answerId}`,data, config);
   },

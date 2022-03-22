@@ -1,18 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 
 import MainHama from '../assets/rehama.png';
 import logo from '../assets/logo_final.svg';
 import loading from '../assets/loading_2.gif';
+import loading_5 from '../assets/loading_5.svg';
 
 import styled, { keyframes } from "styled-components";
 
 const WaitForAMoment = (props) => {
     const { is_loading } = props;
 
+    
+
     if(is_loading){
         return(
         <WaitGrid>
-            <Wait src={logo} />
+            <Wait src={loading_5} />
+            <Anounce color='#ffcd48' >
+                로딩중
+            </Anounce>
         </WaitGrid>
         )
     }
@@ -40,6 +46,7 @@ const WaitGrid =styled.div`
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1;
@@ -51,28 +58,51 @@ const WaitGrid =styled.div`
 
 const rotating = keyframes`
     0%{
-        transform:rotate(0deg)
+        transform: translate(-12rem,0) 
+    }
+    10%{
+        transform: translate(-10rem,-2)
     }
     20%{
-        transform:rotate(72deg)
+        transform: translate(-8rem,0)
+    }
+    30%{
+        transform: translate(-6rem,-1rem)
     }
     40%{
-        transform:rotate(144deg)
+        transform: translate(-4rem,0)
+    }
+    50%{
+        transform: translate(0,-.5rem)
     }
     60%{
-        transform:rotate(216deg)
+        transform: translate(4rem,0)
+    }
+    70%{
+        transform: translate(6rem,-1rem)
     }
     80%{
-        transform:rotate(288deg)
+        transform: translate(8rem,0)
+    }
+    90%{
+        transform: translate(10rem,-1.5rem)
     }
     100%{
-        transform:rotate(360deg)
+        transform: translate(12rem,0)
     }
 `;
 
 const Wait = styled.img`
     width: 30%;
     animation: ${rotating} 2s 1s infinite linear;
+`;
+
+const Anounce = styled.div`
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: ${props=> props.color};
 `;
 
 export default WaitForAMoment;

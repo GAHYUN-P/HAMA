@@ -53,7 +53,7 @@ const Footer = (props) => {
 
       {/* 평가하기 */}
       <Btn 
-      onClick={()=>{console.log('작동')}}
+      onClick={()=>{window.open('https://forms.gle/THNpyEqo8vUbc82m9')}}
       basic={estimate_n} hover={estimate} />
       
       {/* 마이페이지 */}

@@ -57,12 +57,14 @@ const Header = (props) => {
 
   if(pathname === '/mypage' || pathname === '/mypage_achievement'){
     return(
+      <React.Fragment>
       <MGrid>
         <FiChevronLeft onClick={pathname === '/mypage' ? GoHome : GoBack} id='che'/>
         { pathname === '/mypage' ? '마이페이지' : '나의 업적' }
         <FiMoreHorizontal onClick={()=>{setOpen(true)}} id='hor'/>
-        { open && <Popup visible={open} closePopup={closePopup} />}
       </MGrid>
+        {open && <Popup visible={open} closePopup={closePopup} />}
+      </React.Fragment>
     )
   }
 

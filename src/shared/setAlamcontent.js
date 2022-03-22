@@ -5,6 +5,9 @@ import { history } from "../redux/configureStore";
 const setAlamContent = (data)=> {
     let { senderNickName, alarmType, title, modifiedAt, point, receiverId } = data;
     const id = getUserId();
+    
+    if(title.length > 10){title = title.slice(0,10) + '...'};
+
     if(point){
         if(alarmType === 'pointR' && receiverId === id){
             return(
@@ -48,9 +51,15 @@ const setAlamContent = (data)=> {
         }
 
     }
-
-
-    if(title.length > 10){title = title.slice(0,10) + '...'};
+    
+    if(alarmType === 'answerC'){
+        return(
+            <Crid>
+                [{title}] 글이 작성이 완료됐습니다.
+                <Time>{modifiedAt}</Time>
+            </Crid>
+        )
+    }
     // 답변글 작성됐을 때
     if(alarmType === 'answer'){
         return(
@@ -152,7 +161,7 @@ const MoveTo = (alarmType,id) => {
     if(['likeP','answer','pointPL'].includes(alarmType)){
         history.push(`/requestdetail/${id}`);
     }
-    if(['comment','rate','rated','likeA','pointAL','pointR','pointA'].includes(alarmType)){
+    if(['answerC','comment','rate','rated','likeA','pointAL','pointR','pointA'].includes(alarmType)){
         history.push(`/answerdetail/${id}`);
     }
     if(alarmType === 'child'){
