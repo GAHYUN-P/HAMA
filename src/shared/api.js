@@ -101,6 +101,9 @@ export const postAPI = {
   selectPostSort: function (tag, sort) {
     return axios.get(`/api/post/category/${tag}/${sort}`);
   },
+  getHMPostList: function () {
+    return axios.get(`/api/post/admin`);
+  },
 };
 
 export const requestAPI = {
@@ -127,6 +130,9 @@ export const requestAPI = {
 export const answerAPI = {
   answering: function(data,postId) {
     return axios.post(`/api/answer/${postId}`,data, config);
+  },
+  answering2: function(data,postId) {
+    return axios.post(`/api/answer2/${postId}`,data, uploadconfig);
   },
   editAnswer: function(data,answerId) {
     return axios.put(`/api/answer/${answerId}`,data, config);
@@ -173,6 +179,9 @@ export const childAPI = {
 export const imgAPI = {
   fileUpload: function (data) {
     return axios.post('/api/upload',data,uploadconfig);
+  },
+  getFiles: function (data) {
+    return axios.get(`/api/image/${data.type}/${data.id}`);
   }
 }
 

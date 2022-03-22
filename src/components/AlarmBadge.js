@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { alamActions } from '../redux/modules/alam';
+import { alarmActions } from '../redux/modules/alarm';
 import { history } from '../redux/configureStore';
 
 import Stomp from 'stompjs';
@@ -15,14 +15,14 @@ import white_bell from '../assets/white_bell.svg';
 
 import styled from 'styled-components';
 
-const AlamBadge = (props) => {
+const AlarmBadge = (props) => {
     const dispatch = useDispatch();
-    const { notReadCount } = useSelector(state => state.alam);
+    const { notReadCount } = useSelector(state => state.alarm);
     const pathname = window.location.pathname;
 
     React.useEffect(()=>{
         if(getToken()){
-          dispatch(alamActions.getNotReadCountDB());
+          dispatch(alarmActions.getNotReadCountDB());
         }
     },[])
 
@@ -31,13 +31,18 @@ const AlamBadge = (props) => {
     const token = getToken();
     const userId = getUserId();
 
+    console.log(window);
+
     React.useEffect(()=>{
           if(getToken()){
             wsConnectSubscribe()
           }
-        return () => {
+          if(!getToken()){
             wsDisConnectUnsubscribe()
-        }
+          }
+
+        // return () => {
+        // }
     },[]);
 
     function wsConnectSubscribe() {
@@ -51,7 +56,7 @@ const AlamBadge = (props) => {
                 `/sub/alarm/user/${userId}`,
                 (data) => {
                   const newMessage = JSON.parse(data.body);
-                  dispatch(alamActions.addNotReadCount());
+                  dispatch(alarmActions.addNotReadCount());
                   console.log(newMessage);
                 },
                 { token: token }
@@ -79,7 +84,7 @@ const AlamBadge = (props) => {
     if(notReadCount){
         return(
             <React.Fragment>
-                <Grid onClick={()=>{history.push('/alam')}} >
+                <Grid onClick={()=>{history.push('/alarm')}} >
                     <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
                     <Count>{notReadCount > 9 ? 9 : notReadCount}</Count>
                 </Grid>
@@ -89,7 +94,7 @@ const AlamBadge = (props) => {
 
     return(
         <React.Fragment>
-            <Grid onClick={()=>{if(plzLogin()){return};history.push('/alam')}} >
+            <Grid onClick={()=>{if(plzLogin()){return};history.push('/alarm')}} >
                 <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
             </Grid>
         </React.Fragment>
@@ -121,4 +126,4 @@ const Count = styled.div`
   top: 0;
 `;
 
-export default AlamBadge;
+export default AlarmBadge;

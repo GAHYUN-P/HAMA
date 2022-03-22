@@ -60,7 +60,7 @@ const RequestContents = (props) => {
                 </ContentBox>
                 {fileList.length !== 0 &&
                 <div style={{marginTop:'.7rem'}} >
-                    <Viewer fileList={fileList}/>
+                    <Viewer type='post' id={postId} fileList={fileList}/>
                 </div>}
             </div>
         </React.Fragment>

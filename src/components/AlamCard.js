@@ -2,38 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
-import { alamActions } from "../redux/modules/alam";
+import { alarmActions } from "../redux/modules/alarm";
 
-import { setAlamContent } from "../shared/setAlamcontent";
+import { setAlamContent, MoveTo } from "../shared/setAlamcontent";
 import { typeEncoder } from "../shared/categoryEncoder";
 
 import {BsX} from 'react-icons/bs';
 
-import { history } from "../redux/configureStore";
-
 const AlamCard = (props) => {
     const dispatch = useDispatch();
-    const { alarmId ,id, senderNickName, alarmType, title, modifiedAt, readingStatus } = props;
+    const { alarmId ,id, alarmType, readingStatus } = props;
 
-    const MoveTo = () => {
-        if(['likeP','answer'].includes(alarmType)){
-            history.push(`/requestdetail/${id}`);
-        }
-        if(['comment','rate','rated','likeA'].includes(alarmType)){
-            history.push(`/answerdetail/${id}`);
-        }
-        if(alarmType === 'child'){
-            history.push(`/comment/${id}`);
-        }
-        if(alarmType === 'level'){
-            history.push('/mypage');
-        }
-    }
-
-    console.log(props);
+    const Move=()=>{MoveTo(alarmType,id);}
 
     const deletAlarm = () => {
-        dispatch(alamActions.deleteAlamDB(alarmId));
+        dispatch(alarmActions.deleteAlarmDB(alarmId));
     }
 
     return (
@@ -44,7 +27,7 @@ const AlamCard = (props) => {
                         {typeEncoder(alarmType)}
                     </TypeBtn>
                 </BtnGrid>
-                <div onClick={MoveTo} style={{width:'70%'}}>
+                <div onClick={Move} style={{width:'70%'}}>
                     {setAlamContent(props)}
                 </div>
                 <ExBox onClick={deletAlarm}>

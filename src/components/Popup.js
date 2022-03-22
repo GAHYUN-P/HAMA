@@ -12,18 +12,6 @@ const Popup = (props) => {
   const { closePopup, visible } = props;
   const dispatch = useDispatch();
 
-  // 방 생성하기
-  // const onClickCreateRoom = () => {
-
-  //   const data = {
-  //     chatRoomImg: preview,
-  //     chatRoomName: chatRoomName,
-  //     category: Tags,
-  //   }
-  //   dispatch(utilActions.setPreview(null));
-  //   dispatch(chatActions.createRoom(data, closePopup));
-  // }
-
   const popupInside = React.useRef();
   //  바깥 클릭시 팝업 끄기
   const clickOutside = ({ target }) => {
@@ -44,7 +32,10 @@ const Popup = (props) => {
       <PopupInner ref={popupInside}>
         <Btn onClick={()=>{history.push('/notice')}} >공지사항</Btn>
         <Btn onClick={()=>{history.push('/developer')}} >개발자들</Btn>
-        <Btn onClick={()=>{dispatch(userActions.logout())}} >로그아웃</Btn>
+        <Btn onClick={()=>{
+          dispatch(userActions.logout())
+          history.replace('/');
+          }} >로그아웃</Btn>
       </PopupInner>
     </PopupOverlay >
   )
@@ -57,11 +48,12 @@ const PopupOverlay = styled.div`
   justify-content: right;
   z-index: 1;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding-top: 3rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  position: fixed;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
   top: 0;
+  left: 0;
 `;
 
 const PopupInner = styled.div`
@@ -70,9 +62,9 @@ const PopupInner = styled.div`
   justify-content: center;
   align-items: center;
   margin: .5rem;
-  width: 16rem;
-  height: 16rem;
-  background-color: whitesmoke;
+  width: 11rem;
+  height: 14rem;
+  background-color: #fff;
   border-radius: .8rem;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
 `;
@@ -83,10 +75,14 @@ const Btn = styled.button`
   border: none;
   border-bottom: .1rem solid #dcdcdc;
   border-radius: .8rem;
-  background-color: #transparent;
+  background-color: #fff;
   color: #ff7a7a;
   font-size: ${({theme})=> theme.fontSizes.lg};
   font-family: 'Noto-Sans-KR-M'
+  &:active {
+    color: #fff;
+    background-color: #ff7a7a;
+  }
 `;
 
 export default Popup;

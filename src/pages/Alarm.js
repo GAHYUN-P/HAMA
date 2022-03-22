@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import alam, { alamActions } from "../redux/modules/alam";
+import { alarmActions } from "../redux/modules/alarm";
 
 import AlamCard from "../components/AlamCard";
 import Header from '../components/Header';
@@ -13,9 +13,9 @@ import { getToken, getUserId } from "../shared/cookie";
 
 import styled from "styled-components";
 
-const Alam = (props) => {
+const Alarm = (props) => {
     const dispatch = useDispatch();
-    const { alams } = useSelector(state => state.alam);
+    const { alams } = useSelector(state => state.alarm);
 
     const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
     const ws = Stomp.over(sock);
@@ -23,8 +23,8 @@ const Alam = (props) => {
     const userId = getUserId();
 
     React.useEffect(()=>{
-        dispatch(alamActions.getAlamsDB());
-        dispatch(alamActions.checkAlamDB());
+        dispatch(alarmActions.getAlarmsDB());
+        dispatch(alarmActions.checkAlarmDB());
     },[])
 
     React.useEffect(()=>{
@@ -45,7 +45,7 @@ const Alam = (props) => {
                 `/sub/alarm/user/${userId}`,
                 (data) => {
                   const newMessage = JSON.parse(data.body);
-                  dispatch(alamActions.getNewAlam(newMessage));
+                  dispatch(alarmActions.getNewAlarm(newMessage));
                 },
                 { token: token }
               );
@@ -70,16 +70,16 @@ const Alam = (props) => {
       }
 
     const delAll = () => {
-        dispatch(alamActions.deleteAllDB());
+        dispatch(alarmActions.deleteAllDB());
     }
 
     if(!alams || alams.length === 0){
         return (
             <React.Fragment>
                 <Header />
-                <div>
+                <NoAlarm>
                    아직 알람이 없습니다.
-                </div>
+                </NoAlarm>
             </React.Fragment>
         )
     }
@@ -127,4 +127,10 @@ const DelBtn = styled.button`
   background-color: #fff;
 `;
 
-export default Alam;
+const NoAlarm = styled.div`
+  color: #666666;
+  margin-top: 20vh;
+  text-align: center;
+`;
+
+export default Alarm;

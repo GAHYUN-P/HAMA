@@ -6,6 +6,7 @@ import { getUserId } from '../../shared/cookie';
 
 export const initialState = {
     list: [],
+    HMlist: [],
     request:'',
     likeUserIdList:[],
     answers: [],
@@ -22,6 +23,7 @@ export const initialState = {
 };
 
 const setList = createAction('post/SETLIST');
+const setHMList = createAction('post/SETHMLIST');
 const setRequest = createAction('post/setRequest');
 const setAnswer = createAction('post/setAnswer');
 const pushLike = createAction('post/pushLike');
@@ -34,6 +36,9 @@ const reset = createAction('post/reset');
 const post = createReducer(initialState, {
     [setList] : (state, action) => {
         state.list = action.payload;
+    },
+    [setHMList] : (state, action) => {
+        state.HMlist = action.payload;
     },
     [setRequest] : (state, action) => {
         state.request = action.payload.request;
@@ -162,7 +167,17 @@ const getPostList = () => async (dispatch, getState, { history }) => {
     catch (error) {
       console.log(error);
     }
-  };
+};
+
+const getHMPostList = () => async (dispatch, getState, { history }) => {
+    try {
+      const res = await postAPI.getHMPostList();
+      dispatch(setHMList(res.data));
+    }
+    catch (error) {
+      console.log(error);
+    }
+};
 
 const pushLikeDB = (postId) => async (dispatch, getState, {history}) => {
     try{
@@ -197,6 +212,7 @@ export const postActions = {
     concluseRequest,
     sortAnswer,
     reset,
+    getHMPostList,
 };
 
 export default post;

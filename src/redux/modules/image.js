@@ -8,6 +8,8 @@ export const initialState = {
   videoFile:'',
   uploading: false,
   videouploading: true,
+  viewerImages:'',
+  idx: 0,
 };
 
 // actions
@@ -19,6 +21,8 @@ const setVideo = createAction('image/SET_VIDEO');
 const delImage = createAction('image/DEL_IMAGE');
 const editAnswer = createAction('image/EDIT_ANSWER');
 const reset = createAction('image/reset');
+const setIdx = createAction('image/SET_IDX');
+const setView = createAction('image/setView');
 
 // reducer
 const image = createReducer(initialState,{
@@ -69,7 +73,15 @@ const image = createReducer(initialState,{
     state.files = [];
     state.videoPreview = '';
     state.videoFile = '';
+    state.viewerImages = '';
     state.uploading = false;
+  },
+  [setIdx]: (state,action) => {
+    console.log(action.payload);
+    state.idx = action.payload;
+  },
+  [setView]: (state,action) => {
+    state.viewerImages = action.payload;
   },
 });
 
@@ -103,15 +115,31 @@ const uploadToVideo = (data) => async (dispatch,getState,{history}) => {
   }
 }
 
+const getImagesDB = (data) => async (dispatch, getState, {history}) => {
+  const pathname = window.location.pathname.split('/')[1];
+  console.log(pathname);
+
+  imgAPI.getFiles(data)
+  .then(res => {
+    console.log(res.data);
+    dispatch(setView(res.data.imageUrl));
+    if(pathname !== 'images'){history.push(`/images/${data.type}/${data.id}`)}
+  })
+  .catch(err=>console.log(err))
+
+}
+
 export const imgActions = {
   uploadToDB,
+  getImagesDB,
   uploadToVideo,
   setImage,
   setVideo,
   delImage,
   setEdit,
   editAnswer,
-  reset
+  reset,
+  setIdx,
 }
 
 export default image;

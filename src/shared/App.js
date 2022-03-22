@@ -23,7 +23,8 @@ import RequestDetail from '../pages/RequestDetail';
 import ChildComment from '../pages/ChildComment';
 import SearchResult from '../pages/SearchResult';
 import Search from '../pages/Search';
-import Alam from '../pages/Alam';
+import Alarm from '../pages/Alarm';
+import ImageViewer from '../pages/ImageViewer';
 
 // component
 import Home from '../pages/Home';
@@ -37,6 +38,7 @@ import Shorts from '../pages/Shorts';
 import MypageAch from '../pages/MypageAch';
 import Notice from '../pages/Notice';
 import DevInfo from '../pages/DevInfo';
+import HMpost from '../pages/HMpost';
 
 function App() {
   return (
@@ -50,13 +52,15 @@ function App() {
               <Route path="/userInfo" exact component={UserInfo} />
               <Route path="/notice" exact component={Notice} />
               <Route path="/developer" exact component={DevInfo} />
-              <Route path="/answer/:postId" exact component={Answer} />
-              <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
-              <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
-              <Route path="/comment/:commentId" exact component={ChildComment} />
               <Route path="/request" exact component={Request} />
               <Route path="/request/:postId" exact component={RequestEdit} />
               <Route path="/requestdetail/:postId" exact component={RequestDetail} />
+              <Route path="/hm_posts" exact component={HMpost} />
+              <Route path="/answer/:postId" exact component={Answer} />
+              <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
+              <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
+              <Route path="/images/:type/:id" exact component={ImageViewer} />
+              <Route path="/comment/:commentId" exact component={ChildComment} />
               <Route path="/survey" exact component={Survey} />
               <Route path="/result" exact component={SurveyResult} />
               <Route path="/mypage" exact component={Mypage} />
@@ -65,7 +69,7 @@ function App() {
               <Route path="/search" exact component={Search} />
               <Route path="/search/:keyword" exact component={SearchResult} />
               <Route path="/shorts" exact component={Shorts} />
-              <Route path="/alam" exact component={Alam} />
+              <Route path="/alarm" exact component={Alarm} />
               </CardList>
               <Route path="*" exact component={NotFound} />
             </Switch>

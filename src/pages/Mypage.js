@@ -51,6 +51,7 @@ const Mypage = (props) => {
     }
 
   return (
+    <React.Fragment>
     <Wrap>
       <MyBanner>
       <Header />
@@ -83,13 +84,13 @@ const Mypage = (props) => {
             <DoTest/>
           </ProfileWrap>
         </div>
-        <div style={{paddingTop:'1vh'}}>
+        <LvWrap>
           <Lv>{list.hippolv}LV</Lv>
           <LvBg>
             <LvGage percent={percent}/>
           </LvBg>
           <Point>{list.point}/1000 exp</Point>
-        </div>
+        </LvWrap>
       </MyBanner>
       <MyContents>
       <MedalWrap>
@@ -110,17 +111,19 @@ const Mypage = (props) => {
       <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
       <div style={{height:'10vh'}}/>
       </MyContents>
-      <Footer />
     </Wrap>
+    <Footer />
+    </React.Fragment>
   );
 };
 
 const Wrap = styled.div`
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   overflow: scroll;
   margin-bottom: 5vh;
+  /* padding: 1vh 4vh; */
 `;
 
 const MyBanner = styled.div`
@@ -128,6 +131,7 @@ const MyBanner = styled.div`
   background-image: url(${colorBg});
   background-size: cover;
   padding: 1vh 4vh;
+  position: relative;
 `;
 
 const InfoWrap = styled.div`
@@ -191,16 +195,23 @@ const DoTest = styled.div`
   background-image: url(${gotoTest});
   background-size: contain;
   margin-top: 0.5vh;
-  height: 25%;
+  height: 5vh;
   width: 100%; 
   top: 18vh;
 `;
 
+const LvWrap= styled.div`
+  position: absolute;
+  width: 85%;
+  bottom: 12vh;
+  
+  /* padding-top: 1vh; */
+`;
 
 const Lv = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: #fff;
-  padding: 10px 5px 0px;
+  padding: 0px 5px 0px;
 `;
 
 const LvBg = styled.div`
@@ -222,7 +233,7 @@ const LvGage = styled.div`
 const Point = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: #fff;
-  padding: 0px 5px 0px;
+  padding: 3px 5px 0px;
   text-align: right;
 `;
 

@@ -4,9 +4,9 @@ import { useSelector,useDispatch } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 
-import { getPage, NeedAlam } from '../shared/getPages';
+import { getPage, NeedAlarm } from '../shared/getPages';
 
-import AlamBadge from './AlamBadge';
+import AlarmBadge from './AlarmBadge';
 import Popup from './Popup';
 
 import logo from '../assets/logo_final.svg';
@@ -17,26 +17,22 @@ import styled from 'styled-components';
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const { is_what } =props;
+  const { is_what, length, index } =props;
   const [open,setOpen] = useState(false);
   const pathname = window.location.pathname;
 
   const GoBack = () => {
     history.goBack()
-  }
+  };
 
   const GoHome = () => {
     history.push('/')
-  }
+  };
 
   const GoSearch = () => {
     history.push('/search');
-  }
-
-  const LogOut = () => {
-    dispatch(userActions.logout());
-    history.push('/');
   };
+
 
   if(pathname === '/login'){
     return(
@@ -45,8 +41,6 @@ const Header = (props) => {
       </Grid>
     )
   }
-
-  console.log(pathname);
 
   if(pathname === '/notice' || pathname === '/developer'){
     return (
@@ -63,12 +57,14 @@ const Header = (props) => {
 
   if(pathname === '/mypage' || pathname === '/mypage_achievement'){
     return(
+      <React.Fragment>
       <MGrid>
         <FiChevronLeft onClick={pathname === '/mypage' ? GoHome : GoBack} id='che'/>
         { pathname === '/mypage' ? '마이페이지' : '나의 업적' }
         <FiMoreHorizontal onClick={()=>{setOpen(true)}} id='hor'/>
-        { open && <Popup visible={open} closePopup={closePopup} />}
       </MGrid>
+        {open && <Popup visible={open} closePopup={closePopup} />}
+      </React.Fragment>
     )
   }
 
@@ -78,7 +74,7 @@ const Header = (props) => {
           <FiChevronLeft onClick={GoBack} id='che'/>
           {is_what === 'mypost' ? '내가 요청한 글' : '내가 답변한 글'}
           <div id='bell' >
-            <AlamBadge/>
+            <AlarmBadge/>
           </div>
           <FiSearch id='search' onClick={GoSearch} />
       </Grid>
@@ -90,7 +86,7 @@ const Header = (props) => {
       <Grid>
         <img id='logo' src={logo} />
         <FiInfo onClick={()=>{history.push('/login')}} id='info' />
-        <div id='bell'><AlamBadge/></div>
+        <div id='bell'><AlarmBadge/></div>
         <FiSearch id='search' onClick={GoSearch} />
       </Grid>
     )
@@ -101,7 +97,7 @@ const Header = (props) => {
       <Grid color >
         <FiChevronLeft color onClick={GoBack} id='che'/>
         {getPage(pathname)}
-        <div color id='bell'><AlamBadge/></div>
+        <div color id='bell'><AlarmBadge/></div>
         <FiSearch color id='search' onClick={GoSearch} />
       </Grid>
     )
@@ -115,12 +111,21 @@ const Header = (props) => {
     )
   }
 
-  if(pathname === '/alam'){
+  if(pathname === '/alarm'){
     return(
       <Grid>
         <FiChevronLeft color onClick={GoBack} id='che'/>
         {getPage(pathname)}
         <FiBell id='search' />
+      </Grid>
+    )
+  }
+
+  if(pathname.split('/')[1] === 'images'){
+    return (
+      <Grid>
+        <BsX onClick={GoBack} id='che'/>
+        {(index + 1)}/{length}
       </Grid>
     )
   }
@@ -131,7 +136,7 @@ const Header = (props) => {
       {getPage(pathname)}
       { pathname.split('search').length < 2  &&
       <div id='bell' >
-        <AlamBadge/>
+        <AlarmBadge/>
       </div>}
       { pathname.split('search').length < 2 &&
       <FiSearch id='search' onClick={GoSearch} />}

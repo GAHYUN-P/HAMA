@@ -34,9 +34,10 @@ const PostEach = (props) => {
             </ContentGrid>
             {/* 마감시간 */}
             <ConclusionBox>
-                {timeSet !== '마감' &&
-                <div>마감</div>}
-                <div>{timeSet}</div>
+                {status === 'closed'
+                    ? <div style={{fontWeight: 'bold'}}>답변 마감</div>
+                    : <div>{timeSet}</div>            
+                }
             </ConclusionBox>
         </TitleEach>
     );
@@ -85,6 +86,10 @@ const ConclusionBox = styled.div`
     color: #ff7a7a;
     border-radius: .3rem;
     background-color: #f5f5f5;
+`;
+
+const Close = styled.div`
+    font-weight: bold;
 `;
 
 const ProHippo = styled.img`

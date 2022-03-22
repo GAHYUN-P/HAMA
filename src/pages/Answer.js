@@ -16,7 +16,6 @@ import styled, { keyframes } from 'styled-components';
 
 const Answer = (props) => {
     const dispatch = useDispatch();
-    const { answerLoading } = useSelector(state=>state.answer);
     const postId = props.match.params.postId
     const titleRef = React.useRef();
     const contentRef = React.useRef();
@@ -28,15 +27,14 @@ const Answer = (props) => {
         title:title,
         content:content
       }
-      dispatch(answerActions.answeringDB(data,postId))
+      console.log(data,postId);
+      dispatch(answerActions.answeringDB2(data,postId))
+    //   dispatch(answerActions.answeringDB(data,postId))
     }
 
     return (
         <React.Fragment>
             <Header />
-            { answerLoading &&
-            <WaitForAMoment is_loading={true} />}
-
             <Grid >
                 {/* 제목 */}
                 <Titles>

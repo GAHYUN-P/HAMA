@@ -53,7 +53,7 @@ const Footer = (props) => {
 
       {/* 평가하기 */}
       <Btn 
-      onClick={()=>{console.log('작동')}}
+      onClick={()=>{window.open('https://forms.gle/THNpyEqo8vUbc82m9')}}
       basic={estimate_n} hover={estimate} />
       
       {/* 마이페이지 */}
@@ -71,13 +71,11 @@ const Footer = (props) => {
 const Grid = styled.div`
   background-color: #f5f5f5;
   padding-bottom: 1rem;
-  width: 100vw;
+  width: 100%;
   height: 4.5rem;
-  position: fixed;
+  position: absolute;
   bottom: 0;
 `;
-
-// 푸터 넓이는 100vw로 맞추면 된다!!
 
 const Btn = styled.div`
   display: inline-block;

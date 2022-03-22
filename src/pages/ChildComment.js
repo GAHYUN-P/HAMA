@@ -51,8 +51,8 @@ const ChildComment = (props) => {
     };
 
     const cancel = () => {
-        commentRef.current.commentId = undefined;
         setComment('');
+        commentRef.current.commentId = undefined;
     };
 
     return(
@@ -137,12 +137,13 @@ const ChildComment = (props) => {
             </WholeGrid>
             { getToken() &&
             <CommentInput
-                 add={add}
-                 commentRef={commentRef} 
-                 comment={comment}
-                 setComment={setComment}
-                 type='text' 
-                 placeholder='댓글을 작성해 주세요.'/> }
+                is_child
+                add={add}
+                commentRef={commentRef} 
+                comment={comment}
+                setComment={setComment}
+                type='text' 
+                placeholder='댓글을 작성해 주세요.'/> }
         </React.Fragment>
     )
 };
@@ -185,34 +186,6 @@ const ProHippo = styled.img`
     height: 1.6rem;
     margin: .2rem .3rem 0 0;
     border-radius: 1.6rem;
-`;
-
-const PPHolder = styled.div`
-    width: 1.35rem;
-    height: 1.35rem;
-    background-image: url(${props => props.url});
-    background-size: cover;
-    position: absolute;
-    right: 5.8rem;
-    top: .5rem;
-`;
-
-const InputGrid = styled.div`
-    width: 100vw;
-    position: relative;
-`;
-
-const ElInput = styled.input`
-    width: 90%;
-    border: none;
-    outline: none;
-    padding: ${({theme})=> theme.paddings.lg} .8rem ;
-    border-radius: .3rem;
-    box-shadow: 0 .15rem .4rem  #d5d5d5;
-    &::placeholder{
-        font-size: .7rem;
-        color:  #9e9e9e;
-    }
 `;
 
 const CWrieter = styled.div`

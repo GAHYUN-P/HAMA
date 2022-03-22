@@ -27,12 +27,12 @@ const Banner = (props) => {
 
   return (
     <div className="container">
-		<link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+		<link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 		<style>{cssstyle}</style>
 		<StyledSlider {...settings}>
 			<div>
-				<img id='banner_box' src={ban_1} onClick={()=>history.push('/notice')} />
+				<img id='banner_box' src={ban_1} onClick={()=>history.push('/hm_posts')} />
 			</div>
 			<div>
 				<img id='banner_box' src={ban_2} onClick={()=>window.open('https://forms.gle/THNpyEqo8vUbc82m9')}/>
