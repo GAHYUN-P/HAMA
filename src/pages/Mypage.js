@@ -121,6 +121,7 @@ const Wrap = styled.div`
   position: relative;
   overflow: scroll;
   margin-bottom: 5vh;
+  /* padding: 1vh 4vh; */
 `;
 
 const MyBanner = styled.div`
@@ -199,8 +200,9 @@ const DoTest = styled.div`
 
 const LvWrap= styled.div`
   position: absolute;
-  width: 83%;
+  width: 85%;
   bottom: 12vh;
+  
   /* padding-top: 1vh; */
 `;
 
