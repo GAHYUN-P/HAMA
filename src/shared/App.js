@@ -37,6 +37,7 @@ import Shorts from '../pages/Shorts';
 import MypageAch from '../pages/MypageAch';
 import Notice from '../pages/Notice';
 import DevInfo from '../pages/DevInfo';
+import HMpost from '../pages/HMpost';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
               <Route path="/userInfo" exact component={UserInfo} />
               <Route path="/notice" exact component={Notice} />
               <Route path="/developer" exact component={DevInfo} />
+              <Route path="/hm_posts" exact component={HMpost} />
               <Route path="/answer/:postId" exact component={Answer} />
               <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
               <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />

@@ -53,7 +53,8 @@ const ResultBtns = (props) => {
 }
 
 const Grid = styled.div`
-    padding: 3rem 3rem 5rem;
+    margin: 3rem auto 5rem;
+    width: 80%;
 `;
 
 const BtnGrid = styled.div`
@@ -62,7 +63,7 @@ const BtnGrid = styled.div`
 `;
 
 const ReDo = styled.button`
-    width: 8rem;
+    width: 48%;
     padding: .85rem 0;
     font-size: ${({theme})=> theme.fontSizes.small};
     color: #fff;
@@ -71,7 +72,7 @@ const ReDo = styled.button`
 `;
 
 const Set = styled.button`
-    width: 8rem;
+    width: 48%;
     padding: .85rem 0;
     font-size: ${({theme})=> theme.fontSizes.small};
     color: #fff;

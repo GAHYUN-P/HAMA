@@ -32,7 +32,7 @@ const Banner = (props) => {
 		<style>{cssstyle}</style>
 		<StyledSlider {...settings}>
 			<div>
-				<img id='banner_box' src={ban_1} onClick={()=>history.push('/notice')} />
+				<img id='banner_box' src={ban_1} onClick={()=>history.push('/hm_posts')} />
 			</div>
 			<div>
 				<img id='banner_box' src={ban_2} onClick={()=>window.open('https://forms.gle/THNpyEqo8vUbc82m9')}/>
