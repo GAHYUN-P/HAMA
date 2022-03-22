@@ -117,7 +117,7 @@ const Mypage = (props) => {
 
 const Wrap = styled.div`
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   overflow: scroll;
   margin-bottom: 5vh;
