@@ -101,6 +101,9 @@ export const postAPI = {
   selectPostSort: function (tag, sort) {
     return axios.get(`/api/post/category/${tag}/${sort}`);
   },
+  getHMPostList: function () {
+    return axios.get(`/api/post/admin`);
+  },
 };
 
 export const requestAPI = {

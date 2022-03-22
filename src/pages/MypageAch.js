@@ -67,13 +67,13 @@ const MypageAch = (props) => {
             <DoTest/>
           </ProfileWrap>
         </div>
-        <div style={{paddingTop:'1vh'}}>
+        <LvWrap>
           <Lv>{list.hippolv}LV</Lv>
           <LvBg>
             <LvGage percent={percent}/>
           </LvBg>
           <Point>{list.point}/1000 exp</Point>
-        </div>
+        </LvWrap>
       </MyBanner>
       <MyContents>
       <MedalWrap>
@@ -106,6 +106,7 @@ const MyBanner = styled.div`
   background-image: url(${colorBg});
   background-size: cover;
   padding: 1vh 4vh;
+  position: relative;
 `;
 
 const InfoWrap = styled.div`
@@ -169,16 +170,22 @@ const DoTest = styled.div`
   background-image: url(${gotoTest});
   background-size: contain;
   margin-top: 0.5vh;
-  height: 25%;
+  height: 5vh;
   width: 100%; 
   top: 18vh;
 `;
 
+const LvWrap= styled.div`
+  position: absolute;
+  width: 83%;
+  bottom: 12vh;
+  /* padding-top: 1vh; */
+`;
 
 const Lv = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: #fff;
-  padding: 10px 5px 0px;
+  padding: 0px 5px 0px;
 `;
 
 const LvBg = styled.div`
