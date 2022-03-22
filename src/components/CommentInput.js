@@ -5,7 +5,34 @@ import PP from '../assets/Paper_Plane.svg';
 import styled from 'styled-components';
 
 const CommentInput = (props) => {
-    const { commentRef, comment, setComment, type, placeholder, add } = props;
+    const { commentRef, comment, setComment, type, placeholder, add, is_child } = props;
+
+    const Cancel = () => {
+        if(!comment){return}; 
+        if(window.confirm('댓글 작성을 그만두시겠습니까?')){
+            setComment('')
+            commentRef.current.commentId = undefined;
+            return
+        };
+        commentRef.current.focus();
+    }
+
+    if(!is_child){
+        return(
+            <InputGrid>
+                <Back>
+                    <ElInput 
+                    ref={commentRef} 
+                    value={comment}
+                    onChange={(e)=>{setComment(e.target.value)}}
+                    onBlur={Cancel}
+                    type={type}
+                    placeholder={placeholder}/>
+                    <PPImg width='1.6rem' onClick={add} src={PP} />
+                </Back>
+            </InputGrid>
+        )
+    }
 
     return(
         <WholeGrid>
@@ -14,9 +41,10 @@ const CommentInput = (props) => {
                 ref={commentRef} 
                 value={comment}
                 onChange={(e)=>{setComment(e.target.value)}}
+                onBlur={Cancel}
                 type={type}
                 placeholder={placeholder}/>
-                <PPImg onClick={add} src={PP} />
+                <PPImg width='1.6rem' onClick={add} src={PP} />
             </Back>
         </WholeGrid>
     )
@@ -32,7 +60,7 @@ const WholeGrid = styled.div`
 const Back = styled.div`
     width: 100%;
     height: 3rem;
-    padding: 0 ${({theme})=> theme.paddings.default} 0;
+    padding: 0 ${({theme})=> theme.paddings.xl} 0;
     display: flex;
     justify-content: space-between;
     border-radius: .3rem;
@@ -52,7 +80,13 @@ const ElInput = styled.input`
 `;
 
 const PPImg = styled.img`
-    width: 2rem;
+    width: ${props=>props.width};
+`;
+
+const InputGrid = styled.div`
+    position: relative;
+    padding: ${({theme})=> theme.paddings.default};
+    background-color: #efefef;
 `;
 
 export default CommentInput; 
