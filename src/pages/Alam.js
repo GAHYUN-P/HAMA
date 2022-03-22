@@ -77,9 +77,9 @@ const Alam = (props) => {
         return (
             <React.Fragment>
                 <Header />
-                <div>
+                <NoAlarm>
                    아직 알람이 없습니다.
-                </div>
+                </NoAlarm>
             </React.Fragment>
         )
     }
@@ -125,6 +125,12 @@ const DelBtn = styled.button`
   border: none;
   color: #666;
   background-color: #fff;
+`;
+
+const NoAlarm = styled.div`
+  color: #666666;
+  margin-top: 20vh;
+  text-align: center;
 `;
 
 export default Alam;
