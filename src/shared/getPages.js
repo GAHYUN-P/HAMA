@@ -36,7 +36,7 @@ export const getFixed = (pathname) => {
     return name
 }
 
-export const NeedAlam = (pathname) => {
+export const NeedAlarm = (pathname) => {
     const list = ['mypage','mypage_detail','alam','search'];
     let name = pathname.split('/')[1];
     
