@@ -18,7 +18,7 @@ import Mypage from './modules/mypage';
 import Child from './modules/child';
 import Search from './modules/search';
 import Shorts from './modules/shorts';
-import Alam from './modules/alam';
+import Alarm from './modules/alarm';
 
 
 export const history = createBrowserHistory();
@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
   child: Child,
   search: Search,
   shorts: Shorts,
-  alam: Alam,
+  alarm: Alarm,
   router: connectRouter(history)
 });
 

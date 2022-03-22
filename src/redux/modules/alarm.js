@@ -16,23 +16,23 @@ export const initialState = {
 }
 
 // actions
-const setAlam = createAction('alam/setAlam');
-const deleteAlam = createAction('alam/deleteAlam');
+const setAlarm = createAction('alam/setAlam');
+const deleteAlarm = createAction('alam/deleteAlam');
 const deleteAll = createAction('alam/deleteAll');
 const readingCheck = createAction('alam/readingCheck');
-const getNewAlam = createAction('alam/getNewAlam');
+const getNewAlarm = createAction('alam/getNewAlam');
 const setNotReadCount = createAction('alam/setNotReadCount');
 const addNotReadCount = createAction('alam/addNotReadCount')
 
 // reducer
-const alam = createReducer(initialState,{
-    [setAlam]:(state,action) => {
+const alarm = createReducer(initialState,{
+    [setAlarm]:(state,action) => {
         state.alams = action.payload;
     },
-    [getNewAlam]:(state,action) => {
+    [getNewAlarm]:(state,action) => {
         state.alams = [action.payload,...state.alams];
     },
-    [deleteAlam]:(state,action) => {
+    [deleteAlarm]:(state,action) => {
         console.log(action.payload);
        state.alams = state.alams.filter(a => {return a.alarmId !== action.payload })
     },
@@ -55,22 +55,22 @@ const alam = createReducer(initialState,{
     },
 })
 
-const getAlamsDB = () => async (dispatch,getState,{history}) => {
+const getAlarmsDB = () => async (dispatch,getState,{history}) => {
     alamAPI.getAlams()
     .then(res => {
         console.log(res.data)
-        dispatch(setAlam(res.data));
+        dispatch(setAlarm(res.data));
     })
     .catch(err=>{
         console.log('error',err)
     })
 };
 
-const deleteAlamDB = (alamId) => async (dispatch,getState,{history}) => {
+const deleteAlarmDB = (alamId) => async (dispatch,getState,{history}) => {
     alamAPI.deleteOneAlam(alamId)
     .then(()=>{
         console.log(alamId);
-        dispatch(deleteAlam(alamId));
+        dispatch(deleteAlarm(alamId));
         console.log('삭제완료');
     })
     .catch(err=>{
@@ -88,7 +88,7 @@ const deleteAllDB = () => async (dispatch,getState,{history}) => {
     })
 };
 
-const checkAlamDB = () => async (dispatch,getState,{history}) => {
+const checkAlarmDB = () => async (dispatch,getState,{history}) => {
     alamAPI.checkAlam()
     .then(()=>{
        dispatch(setNotReadCount(0))
@@ -110,14 +110,14 @@ const getNotReadCountDB = () => async (dispatch,getState,{history}) => {
     })
 }
 
-export const alamActions = {
-    getAlamsDB,
-    deleteAlamDB,
+export const alarmActions = {
+    getAlarmsDB,
+    deleteAlarmDB,
     deleteAllDB,
-    checkAlamDB,
+    checkAlarmDB,
     getNotReadCountDB,
-    getNewAlam,
+    getNewAlarm,
     addNotReadCount,
 }
 
-export default alam
+export default alarm;

@@ -4,9 +4,9 @@ import { useSelector,useDispatch } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 
-import { getPage, NeedAlam } from '../shared/getPages';
+import { getPage, NeedAlarm } from '../shared/getPages';
 
-import AlamBadge from './AlamBadge';
+import AlarmBadge from './AlarmBadge';
 import Popup from './Popup';
 
 import logo from '../assets/logo_final.svg';
@@ -74,7 +74,7 @@ const Header = (props) => {
           <FiChevronLeft onClick={GoBack} id='che'/>
           {is_what === 'mypost' ? '내가 요청한 글' : '내가 답변한 글'}
           <div id='bell' >
-            <AlamBadge/>
+            <AlarmBadge/>
           </div>
           <FiSearch id='search' onClick={GoSearch} />
       </Grid>
@@ -86,7 +86,7 @@ const Header = (props) => {
       <Grid>
         <img id='logo' src={logo} />
         <FiInfo onClick={()=>{history.push('/login')}} id='info' />
-        <div id='bell'><AlamBadge/></div>
+        <div id='bell'><AlarmBadge/></div>
         <FiSearch id='search' onClick={GoSearch} />
       </Grid>
     )
@@ -97,7 +97,7 @@ const Header = (props) => {
       <Grid color >
         <FiChevronLeft color onClick={GoBack} id='che'/>
         {getPage(pathname)}
-        <div color id='bell'><AlamBadge/></div>
+        <div color id='bell'><AlarmBadge/></div>
         <FiSearch color id='search' onClick={GoSearch} />
       </Grid>
     )
@@ -111,7 +111,7 @@ const Header = (props) => {
     )
   }
 
-  if(pathname === '/alam'){
+  if(pathname === '/alarm'){
     return(
       <Grid>
         <FiChevronLeft color onClick={GoBack} id='che'/>
@@ -136,7 +136,7 @@ const Header = (props) => {
       {getPage(pathname)}
       { pathname.split('search').length < 2  &&
       <div id='bell' >
-        <AlamBadge/>
+        <AlarmBadge/>
       </div>}
       { pathname.split('search').length < 2 &&
       <FiSearch id='search' onClick={GoSearch} />}

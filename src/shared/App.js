@@ -23,7 +23,7 @@ import RequestDetail from '../pages/RequestDetail';
 import ChildComment from '../pages/ChildComment';
 import SearchResult from '../pages/SearchResult';
 import Search from '../pages/Search';
-import Alam from '../pages/Alam';
+import Alarm from '../pages/Alarm';
 import ImageViewer from '../pages/ImageViewer';
 
 // component
@@ -69,7 +69,7 @@ function App() {
               <Route path="/search" exact component={Search} />
               <Route path="/search/:keyword" exact component={SearchResult} />
               <Route path="/shorts" exact component={Shorts} />
-              <Route path="/alam" exact component={Alam} />
+              <Route path="/alarm" exact component={Alarm} />
               </CardList>
               <Route path="*" exact component={NotFound} />
             </Switch>

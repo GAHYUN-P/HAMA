@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
-import { alamActions } from "../redux/modules/alam";
+import { alarmActions } from "../redux/modules/alarm";
 
 import { setAlamContent, MoveTo } from "../shared/setAlamcontent";
 import { typeEncoder } from "../shared/categoryEncoder";
@@ -16,7 +16,7 @@ const AlamCard = (props) => {
     const Move=()=>{MoveTo(alarmType,id);}
 
     const deletAlarm = () => {
-        dispatch(alamActions.deleteAlamDB(alarmId));
+        dispatch(alarmActions.deleteAlarmDB(alarmId));
     }
 
     return (

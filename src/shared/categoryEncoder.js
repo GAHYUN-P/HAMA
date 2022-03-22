@@ -11,10 +11,11 @@ export const EngCategoryEncoder = (category) => {
 };
 // 알람 타입 영어에서 한글로 바꿔줌
 export const typeEncoder = (type) => {
-    const kr= ['댓글','대댓글','답변','평가','평가','레벨','좋아요','좋아요','경험치','경험치','경험치','경험치'];
+    const kr= ['댓글','대댓글','답변','평가','평가','레벨','좋아요','좋아요','경험치','경험치','경험치','경험치','완료'];
     const eng = [
         'comment','child','answer','rate','rated','level','likeA','likeP',
-        'pointR','pointAL','pointPL','pointA'];
+        'pointR','pointAL','pointPL','pointA','answerC'
+    ];
     return kr[eng.indexOf(type)];
 };
 // 랭크 상태에 따라 색깔 돌려줌

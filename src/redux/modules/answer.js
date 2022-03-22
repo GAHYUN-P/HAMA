@@ -106,7 +106,7 @@ const answeringDB2 = (data,postId) => async (dispatch, getState, { history }) =>
     formdata.append('answer',new Blob([JSON.stringify(data)],{'type':'application/json'}));
 
     try{
-        answerAPI.answering2(formdata);
+        const peanutBurger = answerAPI.answering2(formdata,postId);
         window.alert('영상 크기에 따라 업로드 시간이 오래걸릴 수 있습니다. 글 업로드가 완료되면 알람에서 확인하실 수 있어요!')
         history.replace(`/requestdetail/${postId}`);
     }catch(error){

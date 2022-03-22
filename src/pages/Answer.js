@@ -27,7 +27,8 @@ const Answer = (props) => {
         title:title,
         content:content
       }
-      dispatch(answerActions.answeringDB(data,postId))
+      console.log(data,postId);
+      dispatch(answerActions.answeringDB2(data,postId))
     //   dispatch(answerActions.answeringDB(data,postId))
     }
 
