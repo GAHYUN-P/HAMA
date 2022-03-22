@@ -99,6 +99,7 @@ const Wrap = styled.div`
   position: relative;
   overflow: scroll;
   margin-bottom: 5vh;
+  /* padding: 1vh 4vh; */
 `;
 
 const MyBanner = styled.div`
@@ -177,8 +178,9 @@ const DoTest = styled.div`
 
 const LvWrap= styled.div`
   position: absolute;
-  width: 83%;
+  width: 85%;
   bottom: 12vh;
+  
   /* padding-top: 1vh; */
 `;
 
@@ -207,7 +209,7 @@ const LvGage = styled.div`
 const Point = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: #fff;
-  padding: 0px 5px 0px;
+  padding: 3px 5px 0px;
   text-align: right;
 `;
 

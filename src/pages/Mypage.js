@@ -233,7 +233,7 @@ const LvGage = styled.div`
 const Point = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: #fff;
-  padding: 0px 5px 0px;
+  padding: 3px 5px 0px;
   text-align: right;
 `;
 
