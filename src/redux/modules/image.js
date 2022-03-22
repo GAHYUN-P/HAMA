@@ -8,6 +8,7 @@ export const initialState = {
   videoFile:'',
   uploading: false,
   videouploading: true,
+  idx: 0,
 };
 
 // actions
@@ -19,6 +20,7 @@ const setVideo = createAction('image/SET_VIDEO');
 const delImage = createAction('image/DEL_IMAGE');
 const editAnswer = createAction('image/EDIT_ANSWER');
 const reset = createAction('image/reset');
+const setIdx = createAction('image/SET_IDX');
 
 // reducer
 const image = createReducer(initialState,{
@@ -71,6 +73,10 @@ const image = createReducer(initialState,{
     state.videoFile = '';
     state.uploading = false;
   },
+  [setIdx]: (state,action) => {
+    console.log(action.payload);
+    state.idx = action.payload;
+  },
 });
 
 // middlewares
@@ -111,7 +117,8 @@ export const imgActions = {
   delImage,
   setEdit,
   editAnswer,
-  reset
+  reset,
+  setIdx,
 }
 
 export default image;

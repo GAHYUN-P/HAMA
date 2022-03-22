@@ -1,29 +1,48 @@
 import React,{ useState, useRef } from 'react';
 
 import Header from '../components/Header';
+import ImageDetail from '../components/ImageDetail';
 
 import Slider from 'react-slick';
 
 import styled from 'styled-components';
 
+import { imgActions } from '../redux/modules/image';
+import { useDispatch, useSelector } from 'react-redux';
+
 const ImageViewer = (props) => {
-    const ref= useRef();
-    const [num,setNum] = ('1');
+    const dispatch = useDispatch();
+    
     const url ='https://image.utoimage.com/preview/cp872655/2017/08/201708004472_500.jpg';
 
-    const change = () => {
-        
-    }
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        beforeChange: (current, next) => {
+            dispatch(imgActions.setIdx(next));
+        }
+    };
+
+    const index = useSelector((state)=>state.image.idx);
+    console.log(index);
 
     return(
         <React.Fragment>
-        <Header  />
+        <Header/>
 		<style>{cssstyle}</style>
-            <Slider >
+            <Slider {...settings}>
                 {[url,url,url,url,url].map((u,i)=>{
                     return (
                     <Grid key={i} >
-                        <Img ref={ref} src={url} idx={i} id='box'/>
+                        <div>
+                            <ImageDetail
+                                idx={i} 
+                                src={u}
+                                />
+                        </div>
                     </Grid>
                     )
                 })
