@@ -12,18 +12,6 @@ const Popup = (props) => {
   const { closePopup, visible } = props;
   const dispatch = useDispatch();
 
-  // 방 생성하기
-  // const onClickCreateRoom = () => {
-
-  //   const data = {
-  //     chatRoomImg: preview,
-  //     chatRoomName: chatRoomName,
-  //     category: Tags,
-  //   }
-  //   dispatch(utilActions.setPreview(null));
-  //   dispatch(chatActions.createRoom(data, closePopup));
-  // }
-
   const popupInside = React.useRef();
   //  바깥 클릭시 팝업 끄기
   const clickOutside = ({ target }) => {

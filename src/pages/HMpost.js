@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PostEach from '../components/PostEach';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { Wrapper } from '../elements';
 import { postActions } from '../redux/modules/post';
 
@@ -24,6 +26,7 @@ const HMpost = (props) => {
 
     return (
         <div>
+            <Header />
             <Wrapper>
                 <Grid>
                     {post_list.map((info, idx) => {
@@ -31,6 +34,7 @@ const HMpost = (props) => {
                     })}
                 </Grid> 
             </Wrapper>
+            <Footer />
         </div>
     );
 };

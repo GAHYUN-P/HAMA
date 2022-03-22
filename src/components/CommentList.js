@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react';
 
+import CommentInput from './CommentInput';
 import AnswerComments from './AnswerComments';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,12 +19,12 @@ const CommentList = (props) => {
     const commentArray = useSelector(state => state.answer.comments);
     const {videoUrl} = useSelector(state => state.answer.answer);
 
-    const [content,setContent] = useState('');
+    const [comment,setComment] = useState('');
     const commentRef = useRef();
 
     const placeholder = videoUrl ? '00:00(타임 스탬프)댓글을 작성해 주세요.' : '댓글을 작성해주세요';
 
-    const commenting = () => {
+    const add = () => {
         if(!commentRef.current.value){return}
         
         const timeStamp = videoUrl ? getTimeStamp(commentRef.current.value) : null;
@@ -47,31 +48,29 @@ const CommentList = (props) => {
         };
         dispatch(answerActions.addCommentDB(data));
         cancel()
-    }
+    };
 
     const cancel = () => {
-        setContent('')
+        setComment('')
         commentRef.current.commentId = undefined;
-    }
+    };
 
     return (
         <React.Fragment>
             { getToken() &&
-            <InputGrid>
-                <ElInput 
-                ref={commentRef}
-                value={content}
-                onChange={(e)=>{setContent(e.target.value)}}
-                type='text' 
-                placeholder={placeholder}/>
-                <PPHolder onClick={commenting} url={PP} />
-            </InputGrid>}
-            
+            <CommentInput 
+            commentRef={commentRef}
+            comment={comment}
+            setComment={setComment}
+            type='text' 
+            add={add}
+            placeholder={placeholder}/>}
+
             <CommentGrid>
                 {commentArray.map((c,i)=>{
                     return(<AnswerComments
                          videoRef={videoUrl ? videoRef : null}
-                         setContent={setContent} 
+                         setContent={setComment} 
                          commentRef={commentRef} key={i} {...c} />)
                 })}
             </CommentGrid>

@@ -3,11 +3,11 @@ import { getToken } from "./cookie";
 
 const Basic =[
     '','request','requestedit','answer','answeredit','requestdetail','answerdetail',
-    'comment','search','searchresult','shorts','alam','mypage','mypage_detail'
+    'comment','search','searchresult','shorts','alam','mypage','mypage_detail','hm_posts'
 ];
 const BasicName = [
     '','요청 작성','요청 수정','답변 작성','답변 수정','게시판','게시판',
-    '답글','검색하기','검색결과','숏츠','알림','마이페이지','내가 작성한 글'
+    '답글','검색하기','검색결과','숏츠','알림','마이페이지','내가 작성한 글','HM이 부탁HAMA'
 ];
 
 export const getPage = (pathname) => {
@@ -24,7 +24,7 @@ export const getPage = (pathname) => {
 };
 
 export const getFooter = (pathname) => {
-    const List = ['','search','mypage'];
+    const List = ['','search','mypage','hm_posts'];
     let name = pathname.split('/')[1];
 
     return !List.includes(name)
