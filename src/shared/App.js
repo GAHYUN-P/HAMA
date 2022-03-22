@@ -59,7 +59,7 @@ function App() {
               <Route path="/answer/:postId" exact component={Answer} />
               <Route path="/answeredit/:answerId" exact component={AnswerEdit} />
               <Route path="/answerdetail/:answerId" exact component={AnswerDetail} />
-              <Route path="/images" exact component={ImageViewer} />
+              <Route path="/images/:type/:id" exact component={ImageViewer} />
               <Route path="/comment/:commentId" exact component={ChildComment} />
               <Route path="/survey" exact component={Survey} />
               <Route path="/result" exact component={SurveyResult} />

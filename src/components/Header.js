@@ -17,26 +17,22 @@ import styled from 'styled-components';
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const { is_what } =props;
+  const { is_what, length, index } =props;
   const [open,setOpen] = useState(false);
   const pathname = window.location.pathname;
 
   const GoBack = () => {
     history.goBack()
-  }
+  };
 
   const GoHome = () => {
     history.push('/')
-  }
+  };
 
   const GoSearch = () => {
     history.push('/search');
-  }
-
-  const LogOut = () => {
-    dispatch(userActions.logout());
-    history.push('/');
   };
+
 
   if(pathname === '/login'){
     return(
@@ -119,6 +115,15 @@ const Header = (props) => {
         <FiChevronLeft color onClick={GoBack} id='che'/>
         {getPage(pathname)}
         <FiBell id='search' />
+      </Grid>
+    )
+  }
+
+  if(pathname.split('/')[1] === 'images'){
+    return (
+      <Grid>
+        <BsX onClick={GoBack} id='che'/>
+        {(index + 1)}/{length}
       </Grid>
     )
   }

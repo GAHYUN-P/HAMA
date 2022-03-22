@@ -76,7 +76,7 @@ const AnswerContent = (props) => {
                         {props.content}
                     </ContentBox>
                     
-                    <Viewer videoRef={videoRef} fileList={fileList} video={videoUrl} is_answer  />
+                    <Viewer type='answer' id={answerId} videoRef={videoRef} fileList={fileList} video={videoUrl} is_answer/>
                 </div>
 
             </div>

@@ -1,11 +1,56 @@
 import styled from "styled-components";
+import { getUserId } from "./cookie";
+import { history } from "../redux/configureStore";
 
-export const setAlamContent = (data)=> {
-    let { alarmId ,id, senderNickName, alarmType, title, modifiedAt, readingStatus } = data;
+const setAlamContent = (data)=> {
+    let { senderNickName, alarmType, title, modifiedAt, point, receiverId } = data;
+    const id = getUserId();
+    if(point){
+        if(alarmType === 'pointR' && receiverId === id){
+            return(
+                <Crid>
+                    [{title}] 글을 평가하시고 {point}점을 받으셨습니다.
+                    <Time>{modifiedAt}</Time>
+                </Crid>
+            )
+        }
+        if(alarmType === 'pointR' && receiverId !== id){
+            return(
+                <Crid>
+                    [{title}] 글을 평가받으셔서 {point}점을 받으셨습니다.
+                    <Time>{modifiedAt}</Time>
+                </Crid>
+            )
+        }
+        if(alarmType === 'pointA'){
+            return(
+                <Crid>
+                    마감임박!! [{title}] 글에 답변을 쓰셔서 {point}점을 받으셨습니다.
+                    <Time>{modifiedAt}</Time>
+                </Crid>
+            )
+        }
+        if(alarmType === 'pointAL'){
+            return(
+                <Crid>
+                    [{title}] 글이 좋아요를 받아 {point}점을 받으셨습니다.
+                    <Time>{modifiedAt}</Time>
+                </Crid>
+            )
+        }
+        if(alarmType === 'pointPL'){
+            return(
+                <Crid>
+                    [{title}] 글이 좋아요를 받아 {point}점을 받으셨습니다.
+                    <Time>{modifiedAt}</Time>
+                </Crid>
+            )
+        }
 
-    if(title.length > 10){
-        title = title.slice(0,10) + '...';
     }
+
+
+    if(title.length > 10){title = title.slice(0,10) + '...'};
     // 답변글 작성됐을 때
     if(alarmType === 'answer'){
         return(
@@ -78,6 +123,7 @@ export const setAlamContent = (data)=> {
     if(alarmType === 'level'){
         return (
             <Crid>
+                축하합니다!! 레벨업 하셨습니다.
                 <Time>{modifiedAt}</Time>
             </Crid>
         )
@@ -100,3 +146,22 @@ const Time = styled.span`
     padding-left: .5rem;
     color: #9e9e9e;
 `;
+
+// 알람에 따라 이동하는 함수
+const MoveTo = (alarmType,id) => {
+    if(['likeP','answer','pointPL'].includes(alarmType)){
+        history.push(`/requestdetail/${id}`);
+    }
+    if(['comment','rate','rated','likeA','pointAL','pointR','pointA'].includes(alarmType)){
+        history.push(`/answerdetail/${id}`);
+    }
+    if(alarmType === 'child'){
+        history.push(`/comment/${id}`);
+    }
+    if(alarmType === 'level'){
+        history.push('/mypage');
+    }
+    return
+}
+
+export { setAlamContent, MoveTo }
