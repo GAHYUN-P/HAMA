@@ -24,6 +24,7 @@ const Banner = (props) => {
 		autoplay: true,
 		autoplaySpeed: 10000,
 		dots: false,
+		arrows: false,
   } 
 
   return (
