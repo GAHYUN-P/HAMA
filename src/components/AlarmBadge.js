@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { alarmActions } from '../redux/modules/alarm';
 import { history } from '../redux/configureStore';
 
-import Stomp from 'stompjs';
-import SockJS from 'sockjs-client';
-
-import { getToken, getUserId } from '../shared/cookie';
+import { wsAlarm } from '../shared/socket';
+import { getToken } from '../shared/cookie';
 import { plzLogin } from '../shared/getPages';
 
 import live_off from '../assets/live_alarm_off.svg';
@@ -24,52 +22,11 @@ const AlarmBadge = (props) => {
         if(getToken()){
           dispatch(alarmActions.getNotReadCountDB());
         }
-    },[])
-
-    const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
-    const ws = Stomp.over(sock);
-    const token = getToken();
-    const userId = getUserId();
-
-    React.useEffect(()=>{
-          if(getToken()&&!connected){
-            wsConnectSubscribe()
-            dispatch(alarmActions.setConnected());
-          }
-          // if(!getToken() && connected){
-          //   wsDisConnectUnsubscribe()
-          // }
-    },[]);
-
-    function wsConnectSubscribe() {
-        try {
-          ws.connect(
-            {token: token},
-            () => {
-              ws.subscribe(
-                `/sub/alarm/user/${userId}`,
-                (data) => {
-                  const newMessage = JSON.parse(data.body);
-                  dispatch(alarmActions.addNotReadCount());
-                  console.log(newMessage);
-                },
-                { token: token }
-                );
-            }
-          );
-        } catch (error) {
-          console.log(error);
+        if(getToken()&&!connected){
+          wsAlarm(dispatch)
+          dispatch(alarmActions.setConnected());
         }
-      };
-
-      // function wsDisConnectUnsubscribe() {
-      //   try {
-      //     ws.disconnect(() => {ws.unsubscribe('sub-0')},{ token: token });
-      //   } 
-      //   catch(error){
-      //     console.log(error);
-      //   }
-      // };
+    },[])
 
     if(notReadCount){
         return(

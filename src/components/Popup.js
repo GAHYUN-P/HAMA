@@ -1,8 +1,5 @@
 import React from 'react';
 
-import Stomp from 'stompjs';
-import SockJS from 'sockjs-client';
-
 import styled from 'styled-components';
 
 // 리덕스
@@ -10,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 
-import { getToken } from '../shared/cookie';
+import { wsDisConnect } from '../shared/socket';
 
 // 채팅방 생성 창
 const Popup = (props) => {
@@ -18,22 +15,9 @@ const Popup = (props) => {
   const { closePopup, visible } = props;
   const { connected } = useSelector(state => state.alarm)
 
-  const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
-  const ws = Stomp.over(sock);
-  const token = getToken();
-
-  function wsDisConnectUnsubscribe() {
-    try {
-      ws.disconnect(() => {ws.unsubscribe('sub-0')},{ token: token });
-    } 
-    catch(error){
-      console.log(error);
-    }
-  };
-
   const LogOut = () => {
     if(connected){
-      wsDisConnectUnsubscribe();
+      wsDisConnect();
     }
     dispatch(userActions.logout());
     history.replace('/');

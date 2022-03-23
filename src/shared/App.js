@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import '../App.css';
 
 // Redux
+import { useSelector } from 'react-redux';
 
 // Router
 import { Route, Switch } from 'react-router-dom';
@@ -41,6 +42,14 @@ import DevInfo from '../pages/DevInfo';
 import HMpost from '../pages/HMpost';
 
 function App() {
+  const { connected } = useSelector(state => state.alarm);
+
+  useEffect(()=>{
+    return()=>{
+
+    }
+  },[])
+
   return (
     <ConnectedRouter history={history}>
       <Container>
