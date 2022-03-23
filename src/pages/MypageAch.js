@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import { mypageActions } from '../redux/modules/mypage';
 import { useSelector,useDispatch } from 'react-redux';
 import Medal from '../components/Medal';
@@ -16,6 +16,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { textAlign } from '@mui/system';
 import MedalDetail from '../components/MedalDetail';
 import Expert from '../components/Expert';
+import { BsChevronDoubleRight } from "react-icons/bs";
+import { categoryEncoder } from '../shared/categoryEncoder';
 
 const MypageAch = (props) => {
 
@@ -40,21 +42,26 @@ const MypageAch = (props) => {
       <Header />
         <div style={{display:'flex', justifyContent:'space-between'}}>
           <InfoWrap>
-            <Category>{list.category}</Category>
+            <Category>{categoryEncoder(list.category)}</Category>
             <Nickname>{list.nickname}</Nickname>
             <HippoName>{list.hippoName}</HippoName>
             {/* <Email>{list.email}</Email> */}
-            <ExpertWrap>
-            {expert_list.map((info, idx) => {
-                  return (
-                    <Expert
-                      key={idx}
-                      value = {info}
-                      idx={idx}
-                      />
-                  );
-              })}
-            </ExpertWrap>
+            <WholeExpertWrap>
+              <ExpertWrap>
+                {expert_list.map((info, idx) => {
+                    return (
+                      <Expert
+                        key={idx}
+                        value = {info}
+                        idx={idx}
+                        />
+                    );
+                })}
+              </ExpertWrap>
+              {expert_list.length >= 3 &&
+                <EIconWrap><StyledIcon/></EIconWrap>
+              }
+            </WholeExpertWrap>
           </InfoWrap>
           <ProfileWrap>
             {list.imgUrl &&
@@ -139,10 +146,42 @@ const HippoName = styled.div`
   padding: 0vh 0px 1.2vh;
 `;
 
+const WholeExpertWrap = styled.div`
+  display: flex;
+`;
+
 const ExpertWrap = styled.div`
   overflow: scroll;
-  width: 80%;
+  width: 63%;
   display: flex;
+`;
+
+const move = keyframes`
+	0% {
+    left: 0px;
+    opacity: 0.5;
+  }
+  50% {
+    left: 3px;
+    opacity: 0.8;
+  }
+  100% {
+    left: 0px;
+    opacity: 0.5;
+  }
+`;
+
+const EIconWrap = styled.div`
+  overflow: hidden;
+`;
+
+const StyledIcon = styled(BsChevronDoubleRight)`
+  padding-left: 3px;
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  animation: ${move} 1s 1s infinite;
+  position: relative;
 `;
 
 const Email = styled.div`

@@ -14,7 +14,7 @@ const Expert = (props) => {
 
   return (
     <Contain>
-      <ProfileImg shape='square' size='2.5rem' src={img}/>
+      <ProfileImg shape='square' size='2.3rem' src={img}/>
     </Contain>
   );
 };
