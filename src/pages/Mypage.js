@@ -13,8 +13,8 @@ import ProfileImg from '../elements/ProfileImg';
 import SurveyWrite from '../assets/SurveyWrite.svg';
 import gotoTest from '../assets/gotoTest.svg';
 import { IoIosArrowForward } from "react-icons/io";
-import { textAlign } from '@mui/system';
 import Expert from '../components/Expert';
+import { categoryEncoder } from '../shared/categoryEncoder';
 
 const Mypage = (props) => {
 
@@ -39,17 +39,6 @@ const Mypage = (props) => {
     const expert_list = useSelector((state) => state.mypage.list.expert);
     console.log(expert_list);
 
-    const onClickMypost = (e) => {
-      dispatch(mypageActions.setDetail(e.target.value));
-      console.log(e.target.value);
-      history.push('/mypage_detail');
-    }
-
-    const onClickMyanswer = (e) => {
-      dispatch(mypageActions.setDetail(e.target.value));
-      history.push('/mypage_detail');
-    }
-
   return (
     <React.Fragment>
     <Wrap>
@@ -57,7 +46,7 @@ const Mypage = (props) => {
       <Header />
         <div style={{display:'flex', justifyContent:'space-between'}}>
           <InfoWrap>
-            <Category>{list.category}</Category>
+            <Category>{categoryEncoder(list.category)}</Category>
             <Nickname>{list.nickname}</Nickname>
             <HippoName>{list.hippoName}</HippoName>
             {/* <Email>{list.email}</Email> */}
@@ -94,7 +83,10 @@ const Mypage = (props) => {
       </MyBanner>
       <MyContents>
       <MedalWrap>
-        <Title>나의 업적</Title>
+        <TitleWrap>
+          <Title>나의 업적</Title>
+          <GotoDetail onClick={()=>history.push('/mypage_achievement')}>자세히 보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+        </TitleWrap>
         {achievement_list.map((info, idx) => {
                   return (
                     <Medal
@@ -103,12 +95,11 @@ const Mypage = (props) => {
                       />
                   );
               })}
-        <GotoDetail onClick={()=>history.push('/mypage_achievement')}>자세히 보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
       </MedalWrap>
       <MypostList/>
-      <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+      {/* <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail> */}
       <MyanswerList/>
-      <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+      {/* <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail> */}
       <div style={{height:'10vh'}}/>
       </MyContents>
     </Wrap>
@@ -250,6 +241,11 @@ const MyContents = styled.div`
 
 const MedalWrap = styled.div`
   width: 100%;
+`;
+
+const TitleWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Title = styled.div`
