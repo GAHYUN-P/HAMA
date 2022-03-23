@@ -134,7 +134,7 @@ const WrapNickname = styled.div`
 
 const Nickname = styled.div`
     font-family: 'Noto-Sans-KR-M';
-    font-size: ${({ theme }) => theme.fontSizes.xxl};
+    font-size: ${({ theme }) => theme.fontSizes.xl};
     margin: 0px 2px 2px 0px;
     padding: 0px 0px 2px 0px;
 `;
