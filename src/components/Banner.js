@@ -23,6 +23,7 @@ const Banner = (props) => {
 		speed: 500,
 		autoplay: true,
 		autoplaySpeed: 10000,
+		dots: false,
   } 
 
   return (
@@ -65,7 +66,7 @@ const cssstyle = `
     color: #fff;
     font-size: 36px;
     line-height: 100px;
-    margin: 3.5rem 10px 10px 10px;
+    margin: 3.5rem 10px 10px 0px;
     padding: 2%;
     position: relative;
     right: -1rem; 
