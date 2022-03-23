@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+
 import styled from 'styled-components';
 
 // 리덕스
@@ -7,10 +10,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 
+import { getToken } from '../shared/cookie';
+
 // 채팅방 생성 창
 const Popup = (props) => {
-  const { closePopup, visible } = props;
   const dispatch = useDispatch();
+  const { closePopup, visible } = props;
+  const { connected } = useSelector(state => state.alarm)
+
+  const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
+  const ws = Stomp.over(sock);
+  const token = getToken();
+
+  function wsDisConnectUnsubscribe() {
+    try {
+      ws.disconnect(() => {ws.unsubscribe('sub-0')},{ token: token });
+    } 
+    catch(error){
+      console.log(error);
+    }
+  };
+
+  const LogOut = () => {
+    if(connected){
+      wsDisConnectUnsubscribe();
+    }
+    dispatch(userActions.logout());
+    history.replace('/');
+  }
 
   const popupInside = React.useRef();
   //  바깥 클릭시 팝업 끄기
@@ -32,10 +59,7 @@ const Popup = (props) => {
       <PopupInner ref={popupInside}>
         <Btn onClick={()=>{history.push('/notice')}} >공지사항</Btn>
         <Btn onClick={()=>{history.push('/developer')}} >개발자들</Btn>
-        <Btn onClick={()=>{
-          dispatch(userActions.logout())
-          history.replace('/');
-          }} >로그아웃</Btn>
+        <Btn onClick={LogOut} >로그아웃</Btn>
       </PopupInner>
     </PopupOverlay >
   )

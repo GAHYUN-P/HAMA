@@ -69,12 +69,13 @@ const Footer = (props) => {
 };
 
 const Grid = styled.div`
+  z-index: 1;
   background-color: #f5f5f5;
   padding-bottom: 1rem;
   width: 100%;
   height: 4.5rem;
   position: absolute;
-  bottom: 0;
+  bottom: 2rem;
 `;
 
 const Btn = styled.div`

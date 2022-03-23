@@ -17,7 +17,7 @@ import styled from 'styled-components';
 
 const AlarmBadge = (props) => {
     const dispatch = useDispatch();
-    const { notReadCount } = useSelector(state => state.alarm);
+    const { notReadCount, connected } = useSelector(state => state.alarm);
     const pathname = window.location.pathname;
 
     React.useEffect(()=>{
@@ -31,26 +31,20 @@ const AlarmBadge = (props) => {
     const token = getToken();
     const userId = getUserId();
 
-    console.log(window);
-
     React.useEffect(()=>{
-          if(getToken()){
+          if(getToken()&&!connected){
             wsConnectSubscribe()
+            dispatch(alarmActions.setConnected());
           }
-          if(!getToken()){
-            wsDisConnectUnsubscribe()
-          }
-
-        // return () => {
-        // }
+          // if(!getToken() && connected){
+          //   wsDisConnectUnsubscribe()
+          // }
     },[]);
 
     function wsConnectSubscribe() {
         try {
           ws.connect(
-            {
-              token: token
-            },
+            {token: token},
             () => {
               ws.subscribe(
                 `/sub/alarm/user/${userId}`,
@@ -60,26 +54,22 @@ const AlarmBadge = (props) => {
                   console.log(newMessage);
                 },
                 { token: token }
-              );
+                );
             }
           );
         } catch (error) {
           console.log(error);
         }
-      }
+      };
 
-      function wsDisConnectUnsubscribe() {
-        try {
-          ws.disconnect(
-            () => {
-              ws.unsubscribe('sub-0');
-            },
-            { token: token }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      }
+      // function wsDisConnectUnsubscribe() {
+      //   try {
+      //     ws.disconnect(() => {ws.unsubscribe('sub-0')},{ token: token });
+      //   } 
+      //   catch(error){
+      //     console.log(error);
+      //   }
+      // };
 
     if(notReadCount){
         return(

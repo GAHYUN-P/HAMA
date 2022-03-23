@@ -22,8 +22,10 @@ const AnswerComments = (props) => {
 
     // 댓글 수정 준비
     const _setEdit = () => {
-        props.setContent(props.content);
+        console.log(props.content)
+        props.setComment(props.content);
         props.commentRef.current.commentId = props.commentId;
+        console.log(props.commentRef.current.commentId);
         props.commentRef.current.focus();
     };
 
@@ -46,7 +48,7 @@ const AnswerComments = (props) => {
                         </CWrieter>
                         {props.commentWriterId === Number(getUserId()) &&
                         <div style={{display:'flex'}} >
-                            <PairBtn style={{marginRight:'.4rem'}} onClick={_setEdit} >수정</PairBtn>
+                            <PairBtn id='edit' style={{marginRight:'.4rem'}} onClick={_setEdit} >수정</PairBtn>
                             <PairBtn onClick={delcom} >삭제</PairBtn>
                         </div>}
                     </UserGrid>
