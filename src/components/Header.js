@@ -22,6 +22,7 @@ const Header = (props) => {
   const pathname = window.location.pathname;
 
   const GoBack = () => {
+    if(pathname.split('/')[1] === 'answerdetail' || pathname.split('/')[1] === 'requestdetail' )
     history.goBack()
   };
 
