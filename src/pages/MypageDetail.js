@@ -43,7 +43,7 @@ const MypageDetail = (props) => {
                         <HippoName>답변한 글</HippoName>
                     </div>
                 </UserinfoWrap>
-                <Devision/>
+                <Division/>
                 {mypostList.map((info, idx) => {
                 return (
                 <MypageDetailEach
@@ -83,7 +83,7 @@ const MypageDetail = (props) => {
                         <HippoName>답변한 글</HippoName>
                     </div>
                 </UserinfoWrap>
-                <Devision/>
+                <Division/>
                 {myanswerList.map((info, idx) => {
                 return (
                 <MypageDetailEach
@@ -109,7 +109,7 @@ const MypageDetail = (props) => {
 
 const Wrap = styled.div`
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   overflow: scroll;
 `;
@@ -144,8 +144,9 @@ const HippoName = styled.div`
     color: #9E9E9E;
 `;
 
-const Devision = styled.hr`
+const Division = styled.hr`
     border: 0.5rem solid #E6E6E6;
+    background-color: #E6E6E6;
 `;
 
 export default MypageDetail;

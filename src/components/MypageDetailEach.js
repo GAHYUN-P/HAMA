@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import ProfileImg from '../elements/ProfileImg';
 import { history } from '../redux/configureStore';
+import { categoryEncoder } from '../shared/categoryEncoder';
 
 const MypageDetailEach = (props) => {
 
@@ -27,7 +28,7 @@ const MypageDetailEach = (props) => {
           <Title onClick={onClickhandler}>{props.title}</Title>
           <Minitext>
             <div>{props.nickname}</div>
-            <div>{props.category}</div>
+            <div>{categoryEncoder(props.category)}</div>
             <div>{props.modifiedAt}</div>
           </Minitext>
         </TitleWrap>
