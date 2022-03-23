@@ -27,7 +27,7 @@ const MyanswerList = (props) => {
     return (
         <div>
             <TitleWrap>
-                <Title>내가 요청한 글</Title>
+                <Title>내가 답변한 글</Title>
                 <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
             </TitleWrap>
             {prev_list.map((info, idx) => {
