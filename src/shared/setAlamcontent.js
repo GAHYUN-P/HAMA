@@ -104,8 +104,7 @@ const setAlamContent = (data)=> {
     if(alarmType === 'rate'){
         return(
             <Crid>
-                <Nick>{senderNickName}</Nick>
-                님이 [{title}] 글에 댓글을 남겼습니다.
+                [{title}] 글이 마감되었으니 평가해주세요.
                 <Time>{modifiedAt}</Time>
             </Crid>
         )
@@ -114,8 +113,7 @@ const setAlamContent = (data)=> {
     if(alarmType === 'rated'){
         return(
             <Crid>
-                <Nick>{senderNickName}</Nick>
-                님이 [{title}] 글에 댓글을 남겼습니다.
+                [{title}] 글이 평가를 받았습니다.
                 <Time>{modifiedAt}</Time>
             </Crid>
         )
@@ -158,10 +156,10 @@ const Time = styled.span`
 
 // 알람에 따라 이동하는 함수
 const MoveTo = (alarmType,id) => {
-    if(['likeP','answer','pointPL'].includes(alarmType)){
+    if(['likeP','answer','pointPL','rate'].includes(alarmType)){
         history.push(`/requestdetail/${id}`);
     }
-    if(['answerC','comment','rate','rated','likeA','pointAL','pointR','pointA'].includes(alarmType)){
+    if(['answerC','comment','rated','likeA','pointAL','pointR','pointA'].includes(alarmType)){
         history.push(`/answerdetail/${id}`);
     }
     if(alarmType === 'child'){

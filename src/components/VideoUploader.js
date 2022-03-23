@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 
 import { imgActions } from "../redux/modules/image";
+import { imgAPI } from "../shared/api";
 import { useDispatch, useSelector } from "react-redux";
 
 import pre_video from '../assets/video.svg';
 import loading from '../assets/loading_2.gif';
+import { fileSize } from '../shared/conditions'
 
 import styled from "styled-components";
 
@@ -17,11 +19,12 @@ const VideoUploader = (props) => {
     
     const change = () => {
         const file = videoRef.current.files[0];
+        
         if(file){
+            if(fileSize(file.size)){return}
+
             const prevideo = URL.createObjectURL(file);
-            const data = {
-                file,prevideo
-            }
+            const data = {file,prevideo}
             dispatch(imgActions.setVideo(data));
             return
         }

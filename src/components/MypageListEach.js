@@ -9,7 +9,7 @@ const MypageListEach = (props) => {
     const idx = props.idx;
     const contents = props.contents.slice(0,10);
 
-
+    
     
   return (
     <div>

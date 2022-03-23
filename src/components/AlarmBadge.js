@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { alarmActions } from '../redux/modules/alarm';
 import { history } from '../redux/configureStore';
 
-import Stomp from 'stompjs';
-import SockJS from 'sockjs-client';
-
-import { getToken, getUserId } from '../shared/cookie';
+import { wsAlarm } from '../shared/socket';
+import { getToken } from '../shared/cookie';
 import { plzLogin } from '../shared/getPages';
 
 import live_off from '../assets/live_alarm_off.svg';
@@ -17,69 +15,18 @@ import styled from 'styled-components';
 
 const AlarmBadge = (props) => {
     const dispatch = useDispatch();
-    const { notReadCount } = useSelector(state => state.alarm);
+    const { notReadCount, connected } = useSelector(state => state.alarm);
     const pathname = window.location.pathname;
 
     React.useEffect(()=>{
         if(getToken()){
           dispatch(alarmActions.getNotReadCountDB());
         }
+        if(getToken()&&!connected){
+          wsAlarm(dispatch)
+          dispatch(alarmActions.setConnected());
+        }
     },[])
-
-    const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
-    const ws = Stomp.over(sock);
-    const token = getToken();
-    const userId = getUserId();
-
-    console.log(window);
-
-    React.useEffect(()=>{
-          if(getToken()){
-            wsConnectSubscribe()
-          }
-          if(!getToken()){
-            wsDisConnectUnsubscribe()
-          }
-
-        // return () => {
-        // }
-    },[]);
-
-    function wsConnectSubscribe() {
-        try {
-          ws.connect(
-            {
-              token: token
-            },
-            () => {
-              ws.subscribe(
-                `/sub/alarm/user/${userId}`,
-                (data) => {
-                  const newMessage = JSON.parse(data.body);
-                  dispatch(alarmActions.addNotReadCount());
-                  console.log(newMessage);
-                },
-                { token: token }
-              );
-            }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
-      function wsDisConnectUnsubscribe() {
-        try {
-          ws.disconnect(
-            () => {
-              ws.unsubscribe('sub-0');
-            },
-            { token: token }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      }
 
     if(notReadCount){
         return(

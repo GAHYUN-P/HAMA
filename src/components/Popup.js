@@ -7,10 +7,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 
+import { wsDisConnect } from '../shared/socket';
+
 // 채팅방 생성 창
 const Popup = (props) => {
-  const { closePopup, visible } = props;
   const dispatch = useDispatch();
+  const { closePopup, visible } = props;
+  const { connected } = useSelector(state => state.alarm)
+
+  const LogOut = () => {
+    if(connected){
+      wsDisConnect();
+    }
+    dispatch(userActions.logout());
+    history.replace('/');
+  }
 
   const popupInside = React.useRef();
   //  바깥 클릭시 팝업 끄기
@@ -32,10 +43,7 @@ const Popup = (props) => {
       <PopupInner ref={popupInside}>
         <Btn onClick={()=>{history.push('/notice')}} >공지사항</Btn>
         <Btn onClick={()=>{history.push('/developer')}} >개발자들</Btn>
-        <Btn onClick={()=>{
-          dispatch(userActions.logout())
-          history.replace('/');
-          }} >로그아웃</Btn>
+        <Btn onClick={LogOut} >로그아웃</Btn>
       </PopupInner>
     </PopupOverlay >
   )

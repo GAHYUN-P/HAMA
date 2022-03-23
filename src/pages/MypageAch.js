@@ -77,7 +77,10 @@ const MypageAch = (props) => {
       </MyBanner>
       <MyContents>
       <MedalWrap>
-        <Title>나의 업적</Title>
+        <TitleWrap>
+          <Title>나의 업적</Title>
+          <GotoDetail onClick={()=>history.push('/mypage_achievement')}>자세히 보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+        </TitleWrap>
         {achievement_list.map((info, idx) => {
                   return (
                     <MedalDetail
@@ -228,10 +231,28 @@ const MedalWrap = styled.div`
   width: 100%;
 `;
 
+const TitleWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Title = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   margin: 0px 0px ${({ theme }) => theme.margins.xxxl};
 `;
 
+const GotoDetail = styled.button`
+  background-color: #fff;
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  color: #6B6B6B;
+  display: flex;
+  float: right;
+`;
+
+const IconWrap = styled.div` 
+    display:flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 export default MypageAch;

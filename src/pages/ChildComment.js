@@ -107,7 +107,7 @@ const ChildComment = (props) => {
                                     </CWrieter>
                                     {k.commentWriterId === Number(getUserId())  &&
                                     <div style={{display:'flex'}} > 
-                                        <PairBtn
+                                        <PairBtn id='edit'
                                         onClick={()=>{
                                             commentRef.current.commentId = k.commentId;
                                             commentRef.current.value = k.content;

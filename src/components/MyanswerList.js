@@ -3,6 +3,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import MypageListEach from './MypageListEach';
 import { mypageActions } from '../redux/modules/mypage';
+import { history } from '../redux/configureStore';
+import { IoIosArrowForward } from "react-icons/io";
 
 const MyanswerList = (props) => {
 
@@ -17,9 +19,17 @@ const MyanswerList = (props) => {
     const prev_list = myanswer_list.slice(0,2);
     console.log(myanswer_list);
 
+    const onClickMyanswer = (e) => {
+        dispatch(mypageActions.setDetail(e.target.value));
+        history.push('/mypage_detail');
+    }
+    
     return (
         <div>
-            <Title>내가 답변한 글</Title>
+            <TitleWrap>
+                <Title>내가 요청한 글</Title>
+                <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+            </TitleWrap>
             {prev_list.map((info, idx) => {
                 return (
                 <MypageListEach
@@ -38,9 +48,26 @@ const MyanswerList = (props) => {
     );
 };
 
+const TitleWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: ${({ theme }) => theme.paddings.xxxl} 0px;
+`;
+
 const Title = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.lg};
-  padding: ${({ theme }) => theme.paddings.xxxl} 0px;
+`;
+
+const GotoDetail = styled.button`
+  background-color: #fff;
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  color: #6B6B6B;
+  display: flex;
+`;
+
+const IconWrap = styled.div` 
+    justify-content: center;
+    align-items: center;
 `;
 
 export default MyanswerList;

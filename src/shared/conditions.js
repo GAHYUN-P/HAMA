@@ -30,6 +30,15 @@ const canRate = (writerId) => {
     return true
 };
 
+const fileSize = (size) => {
+    const fileSize = size / 1048576;
+    if(fileSize > 70){
+        window.alert('70MB 이하 크기의 영상만 업로드 가능합니다.')
+        return true
+    }
+    return false
+}
+
 const infoCheck = (data,same) => {
     const { category, gender, age, nickname, phone } = data;
     if(!category || !gender || !age || !nickname){
@@ -61,4 +70,5 @@ export {
     IsLike, 
     canRate,
     infoCheck,
+    fileSize,
 };
