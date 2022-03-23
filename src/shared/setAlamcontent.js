@@ -3,13 +3,13 @@ import { getUserId } from "./cookie";
 import { history } from "../redux/configureStore";
 
 const setAlamContent = (data)=> {
-    let { senderNickName, alarmType, title, modifiedAt, point, receiverId } = data;
+    let { senderNickName, alarmType, title, modifiedAt, point } = data;
     const id = getUserId();
     
     if(title.length > 10){title = title.slice(0,10) + '...'};
 
     if(point){
-        if(alarmType === 'pointR' && receiverId === id){
+        if(alarmType === 'pointR'){
             return(
                 <Crid>
                     [{title}] 글을 평가하시고 {point}점을 받으셨습니다.
@@ -17,7 +17,7 @@ const setAlamContent = (data)=> {
                 </Crid>
             )
         }
-        if(alarmType === 'pointRD' && receiverId !== id){
+        if(alarmType === 'pointRD'){
             return(
                 <Crid>
                     [{title}] 글이 평가 완료되어 {point}점을 받으셨습니다.
@@ -159,7 +159,7 @@ const MoveTo = (alarmType,id) => {
     if(['likeP','answer','pointPL','rate'].includes(alarmType)){
         history.push(`/requestdetail/${id}`);
     }
-    if(['answerC','comment','rated','likeA','pointAL','pointR','pointA'].includes(alarmType)){
+    if(['answerC','comment','rated','likeA','pointAL','pointRD','pointR','pointA'].includes(alarmType)){
         history.push(`/answerdetail/${id}`);
     }
     if(alarmType === 'child'){
