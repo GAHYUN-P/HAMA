@@ -13,19 +13,24 @@ export const initialState = {
         readingStatus:'Y',
     }],
     notReadCount: 0,
+    connected: false,
 }
 
 // actions
-const setAlarm = createAction('alam/setAlam');
-const deleteAlarm = createAction('alam/deleteAlam');
-const deleteAll = createAction('alam/deleteAll');
-const readingCheck = createAction('alam/readingCheck');
-const getNewAlarm = createAction('alam/getNewAlam');
-const setNotReadCount = createAction('alam/setNotReadCount');
-const addNotReadCount = createAction('alam/addNotReadCount')
+const setAlarm = createAction('alarm/setAlam');
+const deleteAlarm = createAction('alarm/deleteAlam');
+const deleteAll = createAction('alarm/deleteAll');
+const readingCheck = createAction('alarm/readingCheck');
+const getNewAlarm = createAction('alarm/getNewAlam');
+const setNotReadCount = createAction('alarm/setNotReadCount');
+const addNotReadCount = createAction('alarm/addNotReadCount');
+const setConnected  = createAction('alarm/setConnect')
 
 // reducer
 const alarm = createReducer(initialState,{
+    [setConnected]:(state,action) => {
+        state.connected = true;
+    },
     [setAlarm]:(state,action) => {
         state.alams = action.payload;
     },
@@ -118,6 +123,7 @@ export const alarmActions = {
     getNotReadCountDB,
     getNewAlarm,
     addNotReadCount,
+    setConnected,
 }
 
 export default alarm;

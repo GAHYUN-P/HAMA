@@ -52,6 +52,7 @@ const CommentList = (props) => {
 
     const cancel = () => {
         setComment('')
+        commentRef.current.value = '';
         commentRef.current.commentId = undefined;
     };
 
@@ -70,7 +71,7 @@ const CommentList = (props) => {
                 {commentArray.map((c,i)=>{
                     return(<AnswerComments
                          videoRef={videoUrl ? videoRef : null}
-                         setContent={setComment} 
+                         setComment={setComment}
                          commentRef={commentRef} key={i} {...c} />)
                 })}
             </CommentGrid>

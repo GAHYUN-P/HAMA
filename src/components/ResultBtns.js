@@ -7,11 +7,14 @@ import styled from "styled-components";
 
 const ResultBtns = (props) => {
       const { imgUrl, hippoName, surveyResult } = props;
+      const Kakao_key = process.env.REACT_APP_KAKAO_KEY;
       const url = window.location.href.split('result')[0];
+
+      console.log(Kakao_key);
 
       React.useEffect(()=>{
         if(!window.Kakao.isInitialized()){
-          window.Kakao.init('e3318b36c5ba53a829554c965958bdb9');
+          window.Kakao.init(Kakao_key);
         }
       },[]);
 

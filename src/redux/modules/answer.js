@@ -48,7 +48,6 @@ const answer = createReducer(initialState,{
     [editComment]: (state,action) => {
         const {comment,timestamp} = action.payload
         state.comments = state.comments.map((c)=>{
-            console.log(c)
             if(c.commentId === action.payload.commentId){
                 return c ={...c,content: comment,timestamp: timestamp}
             }

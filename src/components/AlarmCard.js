@@ -9,7 +9,7 @@ import { typeEncoder } from "../shared/categoryEncoder";
 
 import {BsX} from 'react-icons/bs';
 
-const AlamCard = (props) => {
+const AlarmCard = (props) => {
     const dispatch = useDispatch();
     const { alarmId ,id, alarmType, readingStatus } = props;
 
@@ -19,9 +19,11 @@ const AlamCard = (props) => {
         dispatch(alarmActions.deleteAlarmDB(alarmId));
     }
 
+    const color = (readingStatus === 'N' ? '#000' : '#9e9e9e');
+
     return (
         <React.Fragment>
-            <Grid color={ readingStatus === 'N' ? '#000' : '#9e9e9e'} >
+            <Grid color={color} >
                 <BtnGrid>
                     <TypeBtn>   
                         {typeEncoder(alarmType)}
@@ -70,4 +72,4 @@ const ExBox = styled.div`
 
 
 
-export default AlamCard;
+export default AlarmCard;

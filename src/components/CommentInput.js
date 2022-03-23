@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect, useRef, useState } from 'react';
 
 import PP from '../assets/Paper_Plane.svg';
 
@@ -6,26 +6,43 @@ import styled from 'styled-components';
 
 const CommentInput = (props) => {
     const { commentRef, comment, setComment, type, placeholder, add, is_child } = props;
+    const inputRef = useRef();
 
     const Cancel = () => {
-        if(!comment){return}; 
-        if(window.confirm('댓글 작성을 그만두시겠습니까?')){
-            setComment('')
-            commentRef.current.commentId = undefined;
-            return
-        };
-        commentRef.current.focus();
+            if(window.confirm('작성을 취소하시겠습니까?')){
+                setComment('')
+                commentRef.current.value = '';
+                commentRef.current.commentId = undefined;
+                return
+            }
+            commentRef.current.focus();
     }
+
+    const clickOutside = ({target}) => {
+        // 수정버튼을 눌렀을 경우는 예외처리
+        if(target?.id === 'edit'){return};
+        if(!inputRef.current?.contains(target)){
+            // 댓글 내용이 없거나 수정을 위한 아이디가 없을 때는 그냥 나가기
+            if(!commentRef.current?.value && !commentRef.current?.commentId){return}
+            Cancel()
+        }
+    }
+
+    React.useEffect(()=>{
+        window.addEventListener("click", clickOutside);
+        return () => {
+            window.removeEventListener("click", clickOutside);
+        };
+    },[]);
 
     if(!is_child){
         return(
-            <InputGrid>
+            <InputGrid ref={inputRef} >
                 <Back>
                     <ElInput 
                     ref={commentRef} 
                     value={comment}
                     onChange={(e)=>{setComment(e.target.value)}}
-                    onBlur={Cancel}
                     type={type}
                     placeholder={placeholder}/>
                     <PPImg width='1.6rem' onClick={add} src={PP} />
@@ -36,12 +53,11 @@ const CommentInput = (props) => {
 
     return(
         <WholeGrid>
-            <Back>
+            <Back ref={inputRef} >
                 <ElInput 
                 ref={commentRef} 
                 value={comment}
                 onChange={(e)=>{setComment(e.target.value)}}
-                onBlur={Cancel}
                 type={type}
                 placeholder={placeholder}/>
                 <PPImg width='1.6rem' onClick={add} src={PP} />
