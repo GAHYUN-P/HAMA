@@ -37,8 +37,8 @@ const InvidPart = styled.div`
 
 const NickInput = styled.input`
     display: block;
-    width: 16rem;
-    padding: .7rem .8rem;
+    width: 14rem;
+    padding: .7rem .4rem .7rem .4rem;
     border: 1px solid #dcdcdc;
     border-radius: .3rem;
     outline: none;

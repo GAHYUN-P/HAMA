@@ -20,7 +20,7 @@ const setAlamContent = (data)=> {
         if(alarmType === 'pointR' && receiverId !== id){
             return(
                 <Crid>
-                    [{title}] 글을 평가받으셔서 {point}점을 받으셨습니다.
+                    [{title}] 글이 평가 완료되어 {point}점을 받으셨습니다.
                     <Time>{modifiedAt}</Time>
                 </Crid>
             )

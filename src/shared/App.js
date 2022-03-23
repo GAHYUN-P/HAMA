@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import '../App.css';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { wsAlarm, wsDisConnect } from './socket';
+import { getToken } from './cookie'; 
 
 // Router
 import { Route, Switch } from 'react-router-dom';
@@ -42,11 +44,15 @@ import DevInfo from '../pages/DevInfo';
 import HMpost from '../pages/HMpost';
 
 function App() {
+  const dispatch = useDispatch();
   const { connected } = useSelector(state => state.alarm);
 
   useEffect(()=>{
+    if(getToken()&&!connected){
+      wsAlarm(dispatch);
+    }
     return()=>{
-
+      wsDisConnect();
     }
   },[])
 

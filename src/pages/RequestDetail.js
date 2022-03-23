@@ -43,7 +43,7 @@ const RequestDetail = (props) => {
             <DetailContainer>
                 <RequestContents {...request}/>
                 <RequestCenter request={request} like={likeUserIdList} />
-                <RequestAnswer answers = {answers} />
+                <RequestAnswer answers = {answers} requestWriterId={request.user_id} />
                 {canWrite(request.status,request.user_id) &&
                 <AnswerWriteBtn postId={postId} />}
             </DetailContainer>
