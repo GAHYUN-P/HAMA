@@ -9,7 +9,6 @@ import Header from '../components/Header';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 
-import { wsAlarmPage, wsDisConnect } from "../shared/socket";
 import { getToken, getUserId } from "../shared/cookie";
 
 import styled from "styled-components";
@@ -18,50 +17,12 @@ const Alarm = (props) => {
     const dispatch = useDispatch();
     const { alams } = useSelector(state => state.alarm);
 
-    const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
-    const ws = Stomp.over(sock);
-    const token = getToken();
-    const userId = getUserId();
-
     React.useEffect(()=>{
         dispatch(alarmActions.getAlarmsDB());
-        dispatch(alarmActions.checkAlarmDB());
+        return()=>{
+          dispatch(alarmActions.checkAlarmDB());  
+        }
     },[])
-
-    function wsConnectSubscribe() {
-        try {
-          ws.connect(
-            {
-              token: token
-            },
-            () => {
-              ws.subscribe(
-                `/sub/alarm/user/${userId}`,
-                (data) => {
-                  const newMessage = JSON.parse(data.body);
-                  dispatch(alarmActions.getNewAlarm(newMessage));
-                },
-                { token: token }
-              );
-            }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
-      function wsDisConnectUnsubscribe() {
-        try {
-          ws.disconnect(
-            () => {
-              ws.unsubscribe('sub-0');
-            },
-            { token: token }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      }
 
     const delAll = () => {
         dispatch(alarmActions.deleteAllDB());

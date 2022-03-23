@@ -32,10 +32,10 @@ const Results = (props) => {
                             </CategoryGrid>
 
                             {/* 제목,내용 */}
-                            <PostGrid onClick={()=>
-                            {if(is_request){history.push(`/requestdetail/${l.id}`)}
-                            if(!is_request){history.push(`/answerdetail/${l.id}`)}}} >
-                                
+                            <PostGrid onClick={()=>{
+                            if(is_request){history.push(`/requestdetail/${l.id}`)}
+                            if(!is_request){history.push(`/answerdetail/${l.id}`)}
+                            }} >
                                 <div>
                                     <TitleGrid>
                                         {l.title}
@@ -90,7 +90,7 @@ const ResultGrid = styled.div`
 `;
 
 const CategoryGrid = styled.div`
-    width: 4rem;
+    width: 6rem;
     color: #9e9e9e;
 `;
 

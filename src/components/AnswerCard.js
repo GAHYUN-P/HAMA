@@ -2,14 +2,16 @@ import React from 'react';
 
 import { history } from '../redux/configureStore';
 
+import { alreadyRated } from '../shared/conditions';
+
 import { FiMessageSquare, FiHeart, FiImage } from 'react-icons/fi'
 
 import styled from 'styled-components';
 
 const AnswerCard = (props) => {
-    const { answerWriter, modifiedAt, title,
-         commentCount, answerId, imageCount,
-         answerLikeCount, imgUrl } = props;
+    const { requestWriterId, answerWriter, modifiedAt, title, commentCount, answerId, imageCount, answerLikeCount, imgUrl, star } = props;
+
+
 
     return(
         <React.Fragment>
@@ -24,6 +26,8 @@ const AnswerCard = (props) => {
                  onClick={()=>{history.push(`/answerdetail/${answerId}`)}}>
                     <TitleDiv>
                         {title}
+                        { alreadyRated(requestWriterId, star) &&
+                        <Rated>평가완료</Rated>}
                     </TitleDiv>
 
                     <SubContainer>
@@ -70,9 +74,19 @@ const ProHippo = styled.img`
 `;
 
 const TitleDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
     font-size: ${({theme})=> theme.fontSizes.base};
     font-weight: 300;
     padding: .2rem 0 ${({theme}) => theme.paddings.small};
+`;
+
+const Rated = styled.button`
+    background-color: #fff;
+    border: 1px solid #ff7a7a;
+    border-radius: .15rem;
+    color: #ff7a7a;
+    font-size: ${({theme})=> theme.fontSizes.xsmall};
 `;
 
 const SubContainer = styled.div`

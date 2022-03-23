@@ -9,9 +9,8 @@ const sock = new SockJS('https://gongbuhyeyum.shop/ws-stomp');
 const ws = Stomp.over(sock);
 const token = getToken();
 const userId = getUserId();
-const pathname = window.location.pathname;
 
-const wsAlarm = (dispatch) => {
+const wsAlarm = (dispatch,path) => {
     try {
       ws.connect(
         {token: token},
@@ -21,12 +20,7 @@ const wsAlarm = (dispatch) => {
             (data) => {
               const newMessage = JSON.parse(data.body);
               console.log(newMessage);
-              if(pathname === '/alarm'){
                   dispatch(alarmActions.getNewAlarm(newMessage));
-              }
-              if(pathname !== '/alarm'){
-                  dispatch(alarmActions.addNotReadCount());
-              }
             },
             { token: token }
             );

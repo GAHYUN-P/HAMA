@@ -101,7 +101,7 @@ const Anounce = styled.div`
     width: 100%;
     text-align: center;
     font-size: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1.8rem;
     color: ${props=> props.color};
 `;
 

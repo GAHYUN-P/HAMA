@@ -85,7 +85,7 @@ const Header = (props) => {
     return(
       <Grid>
         <img id='logo' src={logo} />
-        <FiInfo onClick={()=>{history.push('/login')}} id='info' />
+        <FiInfo onClick={()=>{history.push('/notice')}} id='info' />
         <div id='bell'><AlarmBadge/></div>
         <FiSearch id='search' onClick={GoSearch} />
       </Grid>
@@ -114,7 +114,7 @@ const Header = (props) => {
   if(pathname === '/alarm'){
     return(
       <Grid>
-        <FiChevronLeft color onClick={GoBack} id='che'/>
+        <FiChevronLeft onClick={GoBack} id='che'/>
         {getPage(pathname)}
         <FiBell id='search' />
       </Grid>

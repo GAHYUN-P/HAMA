@@ -32,7 +32,7 @@ const RequestAnswer = (props) => {
                 </div>
                 <div>
                     {answerList.map((a,i)=>{
-                        return(<AnswerCard {...a} key={i} />)
+                        return(<AnswerCard {...a} key={i} requestWriterId={props.requestWriterId} />)
                     })}
                 </div>
             </div>
