@@ -22,21 +22,15 @@ const ImageDetail = (props) => {
 };
 
 const Container = styled.div`
-    /* background-color: black; */
-    width: 100vw;
-    height: 100vh;
     background-color: white;
+    display: relative;
 `;
 
-const Image = styled.div`
-    background-image: url("${(props) => props.src}");
-    background-size: contain;
-    background-repeat: no-repeat;
+const Image = styled.img`
     width: 100%;
-    height: 100%;
-    position: relative;
-    top: 28%;
     background-color: white;
+    display: inline-block;
+    padding: 20% 0px;
 `;
 
 
