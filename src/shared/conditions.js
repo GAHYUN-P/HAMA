@@ -33,7 +33,7 @@ const canRate = (writerId) => {
 const fileSize = (size) => {
     const fileSize = size / 1048576;
     if(fileSize > 70){
-        window.alert('영상이 너무커요 ㅠㅠ')
+        window.alert('70MB 이하 크기의 영상만 업로드 가능합니다.')
         return true
     }
     return false

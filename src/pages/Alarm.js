@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 
+import { wsAlarmPage, wsDisConnect } from "../shared/socket";
 import { getToken, getUserId } from "../shared/cookie";
 
 import styled from "styled-components";
@@ -26,13 +27,6 @@ const Alarm = (props) => {
         dispatch(alarmActions.getAlarmsDB());
         dispatch(alarmActions.checkAlarmDB());
     },[])
-
-    React.useEffect(()=>{
-        wsConnectSubscribe()
-        return () => {
-            wsDisConnectUnsubscribe()
-        }
-    },[]);
 
     function wsConnectSubscribe() {
         try {
