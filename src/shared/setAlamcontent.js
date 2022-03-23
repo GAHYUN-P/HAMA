@@ -17,7 +17,7 @@ const setAlamContent = (data)=> {
                 </Crid>
             )
         }
-        if(alarmType === 'pointR' && receiverId !== id){
+        if(alarmType === 'pointRD' && receiverId !== id){
             return(
                 <Crid>
                     [{title}] 글이 평가 완료되어 {point}점을 받으셨습니다.
