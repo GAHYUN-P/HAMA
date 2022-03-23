@@ -69,7 +69,7 @@ const UserInfo = (props) => {
 
   
   return (
-  <>
+  <React.Fragment>
     <Header />
     <Grid>
       <IndiviInfo>성별 및 나이</IndiviInfo>
@@ -86,8 +86,9 @@ const UserInfo = (props) => {
       <SmallAlert>*나의 전문으로 지정할 한 가지 분야를 선택해주세요.</SmallAlert>
       { Categories.map((c,i)=>{return(<Tag key={i} tag={interest} _onClick={(e)=>{setInterest(e.target.innerHTML)}}>{c}</Tag>)}) }
     </Grid>
+    <Fang />
     <SubmitBtn onClick={onClickSubmit} >다음</SubmitBtn>
-  </>
+  </React.Fragment>
   );
 };
 
@@ -123,47 +124,8 @@ const SubmitBtn = styled.button`
   background-color: #ff7a7a;
 `;
 
+const Fang = styled.div`
+  margin-top: 8rem;
+`;
+
 export default UserInfo;
-
-// {/* <div>
-// <div>성별 및 나이</div>
-//   <div>
-//     <div>
-//       <FormControl sx={{ m: 1, minWidth: 120 }}>
-//         <Select
-//           value={gender||''}
-//           onChange={(e) => { genderInput(e) }}
-//           displayEmpty
-//           inputProps={{ 'aria-label': 'Without label' }}
-//         >
-//           <MenuItem value="">
-//             선택해주세요
-//           </MenuItem>
-//           <MenuItem value={'남'}>남</MenuItem>
-//           <MenuItem value={'여'}>여</MenuItem>
-//         </Select>
-//       </FormControl>
-//     </div>
-//     <div>
-//       <input 
-//         onChange={ageInput}
-//         placeholder='입력해주세요'/>  
-//     </div>
-//   </div>
-// </div>
-
-// <div>
-// <div>닉네임 설정</div>
-// <div>
-//   <input onChange={nicknameInput}/>
-//   <button>중복확인</button>
-// </div>
-// </div>
-
-// <div>
-// <div>관심사 설정</div>
-// <div>*나의 최초 전문으로 지정할 한 가지 분야를 선택해주세요</div>
-// <div></div>
-// </div>
-
-// <button onClick={onClickSubmit}>submit</button> */}

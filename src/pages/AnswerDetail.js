@@ -2,13 +2,13 @@ import React, {useState,useRef} from 'react';
 
 import { useSelector, useDispatch } from 'react-redux'; 
 import { answerActions } from '../redux/modules/answer';
-import { getUserId } from '../shared/cookie';
 import { canRate } from '../shared/conditions'; 
 
 import AnswerContent from '../components/AnswerContent';
 import CommentList from '../components/CommentList';
 import RateBox from '../components/RateBox';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import WaitForAMoment from '../components/WaitForAMoment';
 
 import {FiChevronRight} from 'react-icons/fi';
@@ -65,7 +65,8 @@ const AnswerDetail = (props) => {
             </CommentGrid>
             {open &&    
             <CommentList answerId={answerId} videoRef={videoRef} />}
-            <div style={{height:'3rem',borderTop:'.08rem solid #efefef'}} ></div>
+            <div style={{height:'4.6rem',borderTop:'.08rem solid #efefef'}} ></div>
+            <Footer />
         </React.Fragment>
     )
 }

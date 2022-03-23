@@ -9,7 +9,7 @@ const CallNumber = (props) => {
         <Grid>
             <InvidPart>전화번호</InvidPart>
             <NickInput value={phone} onChange={(e)=>{setPhone(e.target.value)}} type='text' placeholder='010-0000-0000' />
-            <Inform>* 필수는 아니지만 이벤트 참여가 어려울 수 있습니다.</Inform>
+            <Inform>* 입력하지 않으시면 이벤트 응모에서 제외됩니다.</Inform>
         </Grid>
     )
 }

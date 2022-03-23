@@ -21,6 +21,7 @@ const Popup = (props) => {
     }
     dispatch(userActions.logout());
     history.replace('/');
+    window.location.href = '/';
   }
 
   const popupInside = React.useRef();

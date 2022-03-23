@@ -21,10 +21,6 @@ import styled from 'styled-components';
 
 const Footer = (props) => {
   const pathname = window.location.pathname;
-  
-  if(getFooter(pathname)){
-    return null
-  }
 
   return (
     <Grid>
@@ -75,7 +71,7 @@ const Grid = styled.div`
   width: 100%;
   height: 4.5rem;
   position: absolute;
-  bottom: 2rem;
+  bottom: 0;
 `;
 
 const Btn = styled.div`

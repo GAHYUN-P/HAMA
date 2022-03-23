@@ -39,7 +39,7 @@ const SurveyResult = (props) => {
       </ContentGrid>
       {/* 추천 */}
       <Recomment>
-        <div id='exp' >이런 도움이 적합한 하마입니다!</div>
+        <div id='exp' >{hippoName}에게 추천하는 요청입니다.</div>
         {recommend.map((r,i)=>{return(<RecommendCard key={i} {...r} />)})}
       </Recomment>
       {/* 버튼들 */}
