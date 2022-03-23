@@ -126,7 +126,6 @@ const getImagesDB = (data) => async (dispatch, getState, {history}) => {
     if(pathname !== 'images'){history.push(`/images/${data.type}/${data.id}`)}
   })
   .catch(err=>console.log(err))
-
 }
 
 export const imgActions = {
