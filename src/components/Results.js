@@ -91,6 +91,7 @@ const ResultGrid = styled.div`
 
 const CategoryGrid = styled.div`
     width: 6rem;
+    margin-right: .1rem;
     color: #9e9e9e;
 `;
 

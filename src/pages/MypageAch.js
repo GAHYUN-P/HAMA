@@ -37,6 +37,7 @@ const MypageAch = (props) => {
 
 
   return (
+    <React.Fragment>
     <Wrap>
       <MyBanner>
       <Header />
@@ -98,8 +99,9 @@ const MypageAch = (props) => {
               })}
       </MedalWrap>
       </MyContents>
-      <Footer/>
     </Wrap>
+      <Footer/>
+    </React.Fragment>
   );
 };
 
