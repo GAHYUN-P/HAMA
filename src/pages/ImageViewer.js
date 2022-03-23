@@ -75,9 +75,8 @@ const  Grid = styled.div`
 const cssstyle = `
 #box {
 	display: block;
-    height: 50%;
+    height: 100%;
     width: 100%;
-    margin-top: 4rem;
 }
 .slick-next:before, .slick-prev:before {
     color: #000;
@@ -90,7 +89,6 @@ const cssstyle = `
     opacity: 1;
 }
 .center #box {
-
 }
 `;
 
