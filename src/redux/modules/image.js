@@ -30,13 +30,15 @@ const image = createReducer(initialState,{
   [setImage]: (state,action) => {
     state.preview = [...state.preview,action.payload.preview];
     state.files = [...state.files,action.payload.file];
+    state.count = state.count - 1;
     if(state.preview.length === 5){
       state.uploading = true;
     }
   },
   [delImage]: (state,action) => {
-    state.preview = state.preview.filter((p,i) => { return i !== action.payload})
-    state.files = state.files.filter((p,i) => { return i !== action.payload})
+    state.preview = state.preview.filter((p,i) => { return i !== action.payload});
+    state.files = state.files.filter((p,i) => { return i !== action.payload});
+    state.count = state.count + 1;
     if(state.uploading){
       state.uploading = false;
     }
@@ -49,6 +51,7 @@ const image = createReducer(initialState,{
   [setEdit]: (state,action) => {
     state.preview = action.payload;
     state.files = action.payload;
+    state.count = state.count - action.payload.length;
     console.log(action.payload);
     if(action.payload.length === 5){
       state.uploading = true;
@@ -140,6 +143,7 @@ export const imgActions = {
   editAnswer,
   reset,
   setIdx,
+  uploading,
 }
 
 export default image;
