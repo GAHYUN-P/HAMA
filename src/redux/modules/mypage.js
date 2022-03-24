@@ -16,7 +16,7 @@ const initialState = {
   achievement : [],
   mypost: [{
     requestId: null,
-    title : "요청초기값",
+    title : "요청글이 없습니다.",
     modifiedAt: "",
     nickname: '',
     imgUrl: 'https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/5xq2/image/0lp8RLaJ2IgctTWVl2nEa-JRCSc.jpg',
@@ -26,7 +26,7 @@ const initialState = {
   }],
   myanswer: [{
     answerId: null,
-    title : "답변초기값",
+    title : "답변글이 없습니다.",
     modifiedAt: "",
     nickname: '',
     imgUrl: 'http://san.chosun.com/site/data/img_dir/2019/04/24/2019042401956_0.jpg',
