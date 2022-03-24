@@ -20,6 +20,7 @@ export const initialState = {
     },],
     tag: "all",
     sort: "",
+    loading: false,
 };
 
 const setList = createAction('post/SETLIST');
@@ -32,8 +33,12 @@ const setSort = createAction('post/SORT');
 const concluseRequest = createAction('post/concluseRequest');
 const sortAnswer = createAction('post/sortAnswer');
 const reset = createAction('post/reset');
+const setLoading = createAction('post/setLoading')
 
 const post = createReducer(initialState, {
+    [setLoading] : (state, action) => {
+        state.loading = !state.loading;
+    },
     [setList] : (state, action) => {
         state.list = action.payload;
     },
@@ -87,12 +92,14 @@ const post = createReducer(initialState, {
     [reset] : (state, action) => {
         state.request = '';
     },
+
 });
 
 // thunk
 
 const makeRequest = (data) => async (dispatch, getState, {history}) => {
     try{
+        dispatch(setLoading());
         let file = [];
         const files = getState().image.files;
         const formdata = new FormData();
@@ -112,7 +119,7 @@ const makeRequest = (data) => async (dispatch, getState, {history}) => {
         const res = await requestAPI.makeRequest(data);
         console.log(res.data)
         history.replace(`/requestdetail/${res.data}`);
-        
+        dispatch(setLoading());        
     } catch (error) {
         console.log(error);
         alert(error.response.data.errorMessage);

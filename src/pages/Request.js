@@ -5,8 +5,9 @@ import Tag from '../elements/Tag';
 import Level from '../elements/Level';
 import ImageUploader from '../components/ImageUploader';
 import Header from '../components/Header';
+import WaitForAMoment from '../components/WaitForAMoment';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../redux/modules/post';
 import { history } from '../redux/configureStore';
 
@@ -16,6 +17,7 @@ import styled from 'styled-components';
 
 const Request = (props) => {
     const dispatch = useDispatch();
+    const { loading } = useSelector(state=> state.post);
 
     const contentRef = React.useRef();
     const titleRef = React.useRef();
@@ -113,11 +115,13 @@ const Request = (props) => {
             <div style={{fontSize:'0.72rem',color:'#ff5e5e',marginTop:'0.75rem',fontWeight:'100'}} >
                 ※요청을 등록한 이후에는 삭제할 수 없습니다.
             </div>
+            { !loading && 
             <BtnGrid>
                 <Btn onClick={()=>{history.goBack()}}>취소</Btn>
                 <Btn onClick={posting}>등록</Btn>
-            </BtnGrid>
+            </BtnGrid>}
         </Grid>
+        { loading && <WaitForAMoment /> }
     </React.Fragment>
     )
 };

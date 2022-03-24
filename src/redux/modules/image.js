@@ -4,6 +4,7 @@ import { imgAPI } from '../../shared/api';
 export const initialState = {
   preview:[],
   files:[],
+  count: 5,
   videoPreview:'',
   videoFile:'',
   uploading: false,
