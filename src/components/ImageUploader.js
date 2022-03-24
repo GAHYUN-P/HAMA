@@ -9,10 +9,11 @@ import styled from "styled-components";
 const ImageUploader = (props) => {
     const dispatch = useDispatch();
     const inputRef = React.useRef();
-    const { preview, uploading } = useSelector(state => state.image);
+    const { preview, uploading, count } = useSelector(state => state.image);
     const is_edit = props.is_edit;
 
     const change = () => {
+        console.log(inputRef.current.files.length);
         const file = inputRef.current.files[0];
         const reader = new FileReader();
         if(file){
