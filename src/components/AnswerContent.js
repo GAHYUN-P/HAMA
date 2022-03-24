@@ -135,6 +135,7 @@ const ContentBox = styled.div`
     padding: ${({theme})=>theme.paddings.lg} 0;
     font-size: ${({theme})=>theme.fontSizes.small};
     color: #666;
+    white-space: pre-line:
 `;
 
 export default AnswerContent;
