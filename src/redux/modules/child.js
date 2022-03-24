@@ -62,12 +62,10 @@ const child = createReducer(initialState,{
 const getChildsDB = (commentId) => async (dispatch,getState,{history}) => {
     childAPI.getChilds(commentId)
     .then(res=>{
-        console.log(res.data);
         const data = {
             parentComment: res.data.parentComment,
             childComments: res.data.childComments
         }
-        console.log(data);
         dispatch(setComment(data));
     })
     .catch(err=>{
