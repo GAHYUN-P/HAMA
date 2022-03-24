@@ -10,7 +10,7 @@ const ws = Stomp.over(sock);
 const token = getToken();
 const userId = getUserId();
 
-const wsAlarm = (dispatch,path) => {
+const wsAlarm = (dispatch) => {
     try {
       ws.connect(
         {token: token},
@@ -44,4 +44,4 @@ const wsDisConnect = () => {
     }
   };
 
-export { wsAlarm, wsDisConnect }
+export { wsAlarm, wsDisConnect };
