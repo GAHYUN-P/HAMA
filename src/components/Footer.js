@@ -69,8 +69,9 @@ const Grid = styled.div`
   background-color: #f5f5f5;
   padding-bottom: 1rem;
   width: 100%;
+  max-width: 412px;
   height: 4.5rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 `;
 
