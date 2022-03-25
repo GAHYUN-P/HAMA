@@ -227,19 +227,20 @@ export const mypageAPI = {
 
 export const userpageAPI = {
   getuserAchievement: function (userid) {
-    return axios.get(`/api/userpage/achievement/${userid}`, config);
+    return axios.get(`/api/userpage/achievement/${userid}`);
   },
   getuserBannerInfo: function (userid) {
-    return axios.get(`/api/userpage/banner/${userid}`, config);
+    console.log(userid);
+    return axios.get(`/api/userpage/banner/${userid}`);
   },
   getuserpostList: function (userid) {
-    return axios.get(`/api/userpage/post/${userid}`, config);
+    return axios.get(`/api/userpage/post/${userid}`);
   },
   getuseranswerList: function (userid) {
-    return axios.get(`/api/userpage/answer/${userid}`, config);
+    return axios.get(`/api/userpage/answer/${userid}`);
   },
   getuserpageUserInfo: function (userid) {
-    return axios.get(`/api/userpage/mycount/${userid}`, config);
+    return axios.get(`/api/userpage/count/${userid}`);
   },
   getComments: function (userid) {
     return axios.get(`/api/userpage/comment/${userid}`);

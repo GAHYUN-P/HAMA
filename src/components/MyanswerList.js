@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import MypageListEach from './MypageListEach';
 import { mypageActions } from '../redux/modules/mypage';
+import { userpageActions } from '../redux/modules/userpage';
 import { history } from '../redux/configureStore';
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -12,12 +13,26 @@ const MyanswerList = (props) => {
 
     // 전체 리스트 불러오기
     React.useEffect(() => {
-        dispatch(mypageActions.getMyanswer());
+        if(props.userpage) {
+            dispatch(userpageActions.getMyanswer(props.id));
+        }
+        if(props.mypage) {
+            dispatch(mypageActions.getMypost());
+        }
     }, []);
 
+
     const myanswer_list = useSelector((state) => state.mypage.myanswer);
-    const prev_list = myanswer_list.slice(0,2);
-    console.log(myanswer_list);
+    const useranswer_list = useSelector((state) => state.userpage.myanswer);
+    
+    const prev_list = [];
+    if(props.mypage) {
+        prev_list.push(...myanswer_list.slice(0,2));
+    }
+    if(props.userpage) {
+        prev_list.push(...useranswer_list.slice(0,2));
+    }
+    console.log(prev_list);
 
     const onClickMyanswer = (e) => {
         dispatch(mypageActions.setDetail(e.target.value));
@@ -27,7 +42,12 @@ const MyanswerList = (props) => {
     return (
         <div>
             <TitleWrap>
-                <Title>내가 답변한 글</Title>
+                {props.mypage &&
+                    <Title>내가 답변한 글</Title>
+                }
+                {props.userpage &&
+                    <Title>{props.nickname}님이 답변한 글</Title>
+                }
                 <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
             </TitleWrap>
             {prev_list.map((info, idx) => {

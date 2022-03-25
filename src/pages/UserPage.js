@@ -22,7 +22,6 @@ import UserCommentList from '../components/UserCommentList';
 const UserPage = (props) => {
 
     const { id } = useParams();
-    console.log(id);
 
     const dispatch = useDispatch();
     React.useEffect(() => {
@@ -39,11 +38,11 @@ const UserPage = (props) => {
     }
     // console.log(percent);
 
-    const achievement_list =  [0,0,0,0,0,0,0,0];
-    // const achievement_list =  useSelector((state) => state.userpage.achievement);
+    const achievement_list =  useSelector((state) => state.userpage.achievement);
     // console.log(achievement_list);
 
     const expert_list = useSelector((state) => state.userpage.list.expert);
+    const nickname = useSelector((state) => state.userpage.list.nickname);
     // console.log(expert_list);
 
   return (
@@ -56,7 +55,6 @@ const UserPage = (props) => {
             <Category>{categoryEncoder(list.category)}</Category>
             <Nickname>{list.nickname}</Nickname>
             <HippoName>{list.hippoName}</HippoName>
-            {/* <Email>{list.email}</Email> */}
             <WholeExpertWrap>
               <ExpertWrap>
                 {expert_list.map((info, idx) => {
@@ -94,8 +92,7 @@ const UserPage = (props) => {
       <MyContents>
       <MedalWrap>
         <TitleWrap>
-          <Title>나의 업적</Title>
-          <GotoDetail onClick={()=>history.push('/mypage_achievement')}>자세히 보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+          <Title>{nickname}님의 업적</Title>
         </TitleWrap>
         {achievement_list.map((info, idx) => {
                   return (
@@ -106,13 +103,11 @@ const UserPage = (props) => {
                   );
               })}
       </MedalWrap>
-      <MypostList id={id}/>
-      {/* <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail> */}
-      <MyanswerList id={id}/>
-      {/* <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail> */}
+      <MypostList userpage={true} id={id} nickname={nickname}/>
+      <MyanswerList userpage={true} id={id} nickname={nickname}/>
       <div style={{height:'10vh'}}/>
       </MyContents>
-      <UserCommentList />
+      {/* <UserCommentList /> */}
     </Wrap>
     <Footer />
     </React.Fragment>
