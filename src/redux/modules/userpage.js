@@ -44,7 +44,8 @@ const initialState = {
       hippoImage:'',
       postCount: null,
       answerCount: null,
-  }
+  },
+  comments: [],
 };
 
 // action

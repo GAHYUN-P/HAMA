@@ -17,7 +17,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import Expert from '../components/Expert';
 import { categoryEncoder } from '../shared/categoryEncoder';
 import { BsChevronDoubleRight } from "react-icons/bs";
-
+import UserCommentList from '../components/UserCommentList';
 
 const UserPage = (props) => {
 
@@ -112,6 +112,7 @@ const UserPage = (props) => {
       {/* <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail> */}
       <div style={{height:'10vh'}}/>
       </MyContents>
+      <UserCommentList />
     </Wrap>
     <Footer />
     </React.Fragment>
