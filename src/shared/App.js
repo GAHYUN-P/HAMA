@@ -42,6 +42,9 @@ import MypageAch from '../pages/MypageAch';
 import Notice from '../pages/Notice';
 import DevInfo from '../pages/DevInfo';
 import HMpost from '../pages/HMpost';
+import UserPage from '../pages/UserPage';
+import Test from '../pages/Test';
+import UserpageDetail from '../pages/UserpageDetail';
 
 function App() {
   const dispatch = useDispatch();
@@ -85,6 +88,8 @@ function App() {
               <Route path="/search/:keyword" exact component={SearchResult} />
               <Route path="/shorts" exact component={Shorts} />
               <Route path="/alarm" exact component={Alarm} />
+              <Route path="/userpage/:id" exact component={UserPage} />
+              <Route path="/userpage_detail/:id" exact component={UserpageDetail} />
               </CardList>
               <Route path="*" exact component={NotFound} />
             </Switch>
@@ -126,8 +131,8 @@ const Container = styled.div`
     }
   }
   @media screen and (min-width: 1200px) {
-    background: url('https://mblogthumb-phinf.pstatic.net/MjAxODAzMDNfMTc5/MDAxNTIwMDQxNzQwODYx.qQDg_PbRHclce0n3s-2DRePFQggeU6_0bEnxV8OY1yQg.4EZpKfKEOyW_PXOVvy7wloTrIUzb71HP8N2y-YFsBJcg.PNG.osy2201/1_%2835%ED%8D%BC%EC%84%BC%ED%8A%B8_%ED%9A%8C%EC%83%89%29_%ED%9A%8C%EC%83%89_%EB%8B%A8%EC%83%89_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_180303.png?type=w800') no-repeat;
-    background-size: 100% 100vh;
+    background: url('https://minki-bucket.s3.ap-northeast-2.amazonaws.com/page.svg') no-repeat;
+    background-size: cover;
   }
 `;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { answerActions } from '../redux/modules/answer';
 
 const ChildComment = (props) => {
@@ -14,7 +14,8 @@ const ChildComment = (props) => {
     const delcom = () => {
         const data = {
             commentId: props.commentId,
-            parentId: props.parentId
+            parentId: props.parentId,
+            cnt: 1
         }
         dispatch(answerActions.deleteCommentDB(data));
     }

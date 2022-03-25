@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
-import { mypageActions } from '../redux/modules/mypage';
+import { userpageActions } from '../redux/modules/userpage';
 import { useSelector,useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Medal from '../components/Medal';
 import MypostList from '../components/MypostList';
 import MyanswerList from '../components/MyanswerList';
@@ -16,15 +17,17 @@ import { IoIosArrowForward } from "react-icons/io";
 import Expert from '../components/Expert';
 import { categoryEncoder } from '../shared/categoryEncoder';
 import { BsChevronDoubleRight } from "react-icons/bs";
+import UserCommentList from '../components/UserCommentList';
 
+const UserPage = (props) => {
 
-const Mypage = (props) => {
+    const { id } = useParams();
 
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(mypageActions.getBanner());
-        dispatch(mypageActions.getAchievement());
-        dispatch(mypageActions.getUserInfo());
+        dispatch(userpageActions.getBanner(id));
+        dispatch(userpageActions.getAchievement(id));
+        dispatch(userpageActions.getUserInfo(id));
     }, []);
 
     const list = useSelector((state) => state.mypage.list);
@@ -35,31 +38,31 @@ const Mypage = (props) => {
     }
     // console.log(percent);
 
-    const achievement_list =  useSelector((state) => state.mypage.achievement);
+    const achievement_list =  useSelector((state) => state.userpage.achievement);
     // console.log(achievement_list);
 
-    const expert_list = useSelector((state) => state.mypage.list.expert);
-    console.log(expert_list);
+    const expert_list = useSelector((state) => state.userpage.list.expert);
+    const nickname = useSelector((state) => state.userpage.list.nickname);
+    // console.log(expert_list);
 
   return (
     <React.Fragment>
     <Wrap>
       <MyBanner>
-      <Header />
+      <Header/>
         <div style={{display:'flex', justifyContent:'space-between'}}>
           <InfoWrap>
             <Category>{categoryEncoder(list.category)}</Category>
             <Nickname>{list.nickname}</Nickname>
             <HippoName>{list.hippoName}</HippoName>
-            {/* <Email>{list.email}</Email> */}
             <WholeExpertWrap>
               <ExpertWrap>
                 {expert_list.map((info, idx) => {
                     return (
                       <Expert
-                        key={idx}
+                        key= {idx}
                         value = {info}
-                        idx={idx}
+                        idx= {idx}
                         />
                     );
                 })}
@@ -76,8 +79,6 @@ const Mypage = (props) => {
             {!list.imgUrl &&
               <ProfileImg shape='circle' src='https://mblogthumb-phinf.pstatic.net/MjAxODAzMDNfMTc5/MDAxNTIwMDQxNzQwODYx.qQDg_PbRHclce0n3s-2DRePFQggeU6_0bEnxV8OY1yQg.4EZpKfKEOyW_PXOVvy7wloTrIUzb71HP8N2y-YFsBJcg.PNG.osy2201/1_%2835%ED%8D%BC%EC%84%BC%ED%8A%B8_%ED%9A%8C%EC%83%89%29_%ED%9A%8C%EC%83%89_%EB%8B%A8%EC%83%89_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4_180303.png?type=w800' size='17vh' position='relative'/>
             }
-            <SurveyIco onClick={()=>history.push('/survey')}/>
-            <DoTest/>
           </ProfileWrap>
         </div>
         <LvWrap>
@@ -91,22 +92,22 @@ const Mypage = (props) => {
       <MyContents>
       <MedalWrap>
         <TitleWrap>
-          <Title>나의 업적</Title>
-          <GotoDetail onClick={()=>history.push('/mypage_achievement')}>자세히 보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
+          <Title>{nickname}님의 업적</Title>
         </TitleWrap>
         {achievement_list.map((info, idx) => {
                   return (
                     <Medal
                       value = {info}
-                      idx={idx}
+                      idx= {idx}
                       />
                   );
               })}
       </MedalWrap>
-      <MypostList mypage={true}/>
-      <MyanswerList mypage={true}/>
+      <MypostList userpage={true} id={id} nickname={nickname}/>
+      <MyanswerList userpage={true} id={id} nickname={nickname}/>
       <div style={{height:'10vh'}}/>
       </MyContents>
+      {/* <UserCommentList /> */}
     </Wrap>
     <Footer />
     </React.Fragment>
@@ -305,4 +306,4 @@ const IconWrap = styled.div`
 `;
 
 
-export default Mypage;
+export default UserPage;

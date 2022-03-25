@@ -1,42 +1,36 @@
-import React from 'react';
+import React from "react";
 
-import { useDispatch } from 'react-redux';
-import { answerActions } from '../redux/modules/answer';
-import { history } from '../redux/configureStore';
+import UserChild from "./UserChild";
 
-import { getUserId } from '../shared/cookie';
-import { getComment, getBtnString } from '../shared/separator';
+import { userpageActions } from "../redux/modules/userpage";
+import { useDispatch } from "react-redux";
 
-import styled from 'styled-components';
+import { getUserId } from "../shared/cookie";
 
-const AnswerComments = (props) => {
+import styled from "styled-components";
+
+const UserComment = (props) => {
+    const { commentWriterId, commentWriter, content, modifiedAt, imgUrl, set } = props;
     const dispatch = useDispatch();
-    const { videoRef,timestamp,content, imgUrl, childCnt } = props;
+
     // 댓글 삭제 요청
     const delcom = () => {
         const data = {
             commentId: props.commentId,
-            cnt: 1 + (childCnt ? childCnt : 0)
         }
-        dispatch(answerActions.deleteCommentDB(data));
-    }
+        dispatch();
+    };
 
     // 댓글 수정 준비
     const _setEdit = () => {
-        console.log(props.content)
-        props.setComment(props.content);
-        props.commentRef.current.commentId = props.commentId;
-        console.log(props.commentRef.current.commentId);
-        props.commentRef.current.focus();
+        set.setComment(props.content);
+        set.commentRef.current.commentId = props.commentId;
+        set.commentRef.current.focus();
     };
 
-    const pushStamp = () => {
-        videoRef.current.seekTo(timestamp);
-    }
-
-    return (
+    return(
         <React.Fragment>
-            <Grid>
+            <Grid flex >
                 <div>
                     <ProHippo src={imgUrl} />
                 </div>
@@ -45,53 +39,41 @@ const AnswerComments = (props) => {
                     {/* 상단부 */}
                     <UserGrid>
                         <CWrieter>
-                            {props.commentWriter}
+                            {commentWriter}
                         </CWrieter>
-                        {props.commentWriterId === Number(getUserId()) &&
+                        {commentWriterId === getUserId() &&
                         <div style={{display:'flex'}} >
                             <PairBtn id='edit' style={{marginRight:'.4rem'}} onClick={_setEdit} >수정</PairBtn>
                             <PairBtn onClick={delcom} >삭제</PairBtn>
                         </div>}
                     </UserGrid>
 
-                    {/* 타임스탬프가 있을 때 나올 댓글 */}
-                    {timestamp &&
                     <ContentDiv>
-                        <TimeStampBtn onClick={pushStamp}>{getBtnString(content)}</TimeStampBtn>
-                        {getComment(content)}
-                    </ContentDiv>}
-
-                    {/* 타임스탬프가 없을 때 나올 댓글 */}
-                    {!timestamp &&
-                    <ContentDiv>
-                        {content}
-                    </ContentDiv>}
+                       {content}
+                    </ContentDiv>
 
                     <TimeSet>
-                        {props.modifiedAt}
+                        {modifiedAt}
                     </TimeSet>
 
-                    <ChildOpen onClick={()=>{history.push(`/comment/${props.commentId}`)}} >
-                        답글{childCnt ? childCnt : ''}
+                    <ChildOpen onClick={()=>{}} >
+                        답글쓰기
                     </ChildOpen>
                 </div>
             </Grid>
+            <Grid>
+                {[1,2].map((c,i)=>{return <UserChild {...set} />})}
+            </Grid>
         </React.Fragment>
     )
-}
+};
 
 const Grid = styled.div`
-    display: flex;
-    padding: ${({theme})=> theme.paddings.xl} 0;
+    ${props => props.flex ? 'display: flex;' : ''}
+    padding: ${({theme})=> theme.paddings.xl} ${({theme})=> theme.paddings.default};
     border-bottom: .1rem solid #f5f5f5;
     box-sizing: border-box;
-`
-
-const TimeStampBtn = styled.button`
-    border: none;
-    border-radius: 0.4rem;
-    background-color: #f5f5f5;
-    color: #ff7a7a;
+    background-color: #fff;
 `;
 
 const UserGrid = styled.div`
@@ -140,4 +122,4 @@ const ChildOpen = styled.button`
     border-radius: .3rem;
 `;
 
-export default AnswerComments;
+export default UserComment;

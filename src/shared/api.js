@@ -4,16 +4,14 @@ import { getToken } from './cookie';
 //axios.defaults.withCredentials = true;
 
 // 배포
-axios.defaults.baseURL = 'https://jumong.xyz';
+// axios.defaults.baseURL = 'https://jumong.xyz';
 // axios.defaults.baseURL = 'https://gongbuhyeyum.shop';
-
-// axios.defaults.baseURL = 'http://13.125.218.107';
 
 // 로컬
 // axios.defaults.baseURL = 'http://52.79.68.84';
 
 // 재균
-// axios.defaults.baseURL = 'http://13.125.218.107';
+axios.defaults.baseURL = 'http://13.125.218.107';
 
 
 
@@ -224,6 +222,47 @@ export const mypageAPI = {
   },
   getMypageUserInfo: function () {
     return axios.get(`/api/mycount`, config);
+  },
+};
+
+export const userpageAPI = {
+  getuserAchievement: function (userid) {
+    return axios.get(`/api/userpage/achievement/${userid}`);
+  },
+  getuserBannerInfo: function (userid) {
+    console.log(userid);
+    return axios.get(`/api/userpage/banner/${userid}`);
+  },
+  getuserpostList: function (userid) {
+    return axios.get(`/api/userpage/post/${userid}`);
+  },
+  getuseranswerList: function (userid) {
+    return axios.get(`/api/userpage/answer/${userid}`);
+  },
+  getuserpageUserInfo: function (userid) {
+    return axios.get(`/api/userpage/count/${userid}`);
+  },
+  getComments: function (userid) {
+    return axios.get(`/api/userpage/comment/${userid}`);
+  },
+  addComments: function (data) {
+    return axios.post(`/api/userpage/comment/${data.userId}`,
+    {
+      content: data.content,
+      parentId: data.parentId
+    },
+    config);
+  },
+  editComments: function (data) {
+    return axios.put(`/api/userpage/comment/${data.commentId}`,
+    {
+      content: data.content,
+      parentId: data.parentId
+    }
+    ,config);
+  },
+  delComments: function (data) {
+    return axios.delete(`/api/userpage/comment/${data.commentId}`,config);
   },
 };
 

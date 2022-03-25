@@ -7,17 +7,13 @@ const MypageListEach = (props) => {
 
     console.log(props);
     const idx = props.idx;
-    const contents = props.contents.slice(0,10);
-
-    
     
   return (
     <div>
       <Container>
         <Category>{categoryEncoder(props.category)}</Category>
         <TitleWrap>
-          <Title onClick>{props.title}</Title>
-          {/* <Content>{contents}</Content> */}
+          <Title>{props.title}</Title>
         </TitleWrap>
         <Time>{props.modifiedAt}</Time>
         <Likes>♡ {props.like}</Likes>
