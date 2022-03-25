@@ -3,13 +3,13 @@ import { getUserId } from "./cookie";
 import { history } from "../redux/configureStore";
 
 const setAlamContent = (data)=> {
-    let { senderNickName, alarmType, title, modifiedAt, point, receiverId } = data;
+    let { senderNickName, alarmType, title, modifiedAt, point } = data;
     const id = getUserId();
     
     if(title.length > 10){title = title.slice(0,10) + '...'};
 
     if(point){
-        if(alarmType === 'pointR' && receiverId === id){
+        if(alarmType === 'pointR'){
             return(
                 <Crid>
                     [{title}] 글을 평가하시고 {point}점을 받으셨습니다.
@@ -17,7 +17,7 @@ const setAlamContent = (data)=> {
                 </Crid>
             )
         }
-        if(alarmType === 'pointR' && receiverId !== id){
+        if(alarmType === 'pointRD'){
             return(
                 <Crid>
                     [{title}] 글이 평가 완료되어 {point}점을 받으셨습니다.
@@ -51,7 +51,16 @@ const setAlamContent = (data)=> {
         }
 
     }
-    
+    // 업적 달성 시
+    if(alarmType === 'achieve'){
+        return(
+            <Crid>
+                축하합니다~! [{title}] 업적을 달성하셨습니다!!
+                <Time>{modifiedAt}</Time>
+            </Crid>
+        )
+    }
+    // 답변작성 완료 시
     if(alarmType === 'answerC'){
         return(
             <Crid>
@@ -159,7 +168,7 @@ const MoveTo = (alarmType,id) => {
     if(['likeP','answer','pointPL','rate'].includes(alarmType)){
         history.push(`/requestdetail/${id}`);
     }
-    if(['answerC','comment','rated','likeA','pointAL','pointR','pointA'].includes(alarmType)){
+    if(['answerC','comment','rated','likeA','pointAL','pointRD','pointR','pointA'].includes(alarmType)){
         history.push(`/answerdetail/${id}`);
     }
     if(alarmType === 'child'){
@@ -167,6 +176,9 @@ const MoveTo = (alarmType,id) => {
     }
     if(alarmType === 'level'){
         history.push('/mypage');
+    }
+    if(alarmType === 'achieve'){
+        history.push('/mypage_achievement');
     }
     return
 }

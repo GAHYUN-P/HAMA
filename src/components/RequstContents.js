@@ -33,7 +33,7 @@ const RequestContents = (props) => {
 
     return(
         <React.Fragment>
-            <div>
+            <div style={{width:'100%'}} >
                 <CategoryTitle>
                     {categoryEncoder(category)}
                 </CategoryTitle>
@@ -132,10 +132,12 @@ const ContentTitle = styled.div`
 `;
 
 const ContentText = styled.div`
+    width: 100%;
     font-size: ${({theme})=> theme.fontSizes.small};
     color: #666;
     padding-top: ${({theme})=> theme.paddings.small};
     margin-bottom: ${({theme})=> theme.margins.divGap};
+    white-space: pre-line;
 `;
 
 const ContentFrom = styled.div`

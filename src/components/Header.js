@@ -4,7 +4,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { userActions } from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 
-import { getPage, NeedAlarm } from '../shared/getPages';
+import { getPage } from '../shared/getPages';
 
 import AlarmBadge from './AlarmBadge';
 import Popup from './Popup';
@@ -22,6 +22,10 @@ const Header = (props) => {
   const pathname = window.location.pathname;
 
   const GoBack = () => {
+    if(pathname.split('/')[1] === 'requestdetail' ){
+      history.push('/');
+      return
+    }
     history.goBack()
   };
 
@@ -176,7 +180,7 @@ const Grid = styled.div`
     align-items: center;
     width: 100%;
     height: 3rem;
-    font-size: ${({theme})=> theme.fontSizes.xl};
+    font-size: ${({theme})=> theme.fontSizes.xxxl};
     color: ${props => props.color ? '#fff' : '#212121'}; 
     background-color: ${props=>props.bc ? '#4e4e4e':'transparent'};
     #logo{
@@ -189,25 +193,25 @@ const Grid = styled.div`
       color: ${props => props.color ? '#fff' : '#7b7b7b'};
       position: absolute;
       left: 1rem;
-      bottom: 1rem;
+      bottom: .8rem;
     }
     #info{
       color: #7b7b7b;
       position: absolute;
-      right: 5rem;
-      bottom: 1rem;
+      right: 5.5rem;
+      bottom: .8rem;
     }
     #bell{
       color: ${props => props.color ? '#fff' : '#7b7b7b'};
       position: absolute;
-      right: 2.93rem;
-      bottom: .92rem;
+      right: 3.1rem;
+      bottom: .78rem;
     }
     #search{
       color: ${props => props.color ? '#fff' : '#7b7b7b'};
       position: absolute;
       right: 1rem;
-      bottom: 1rem;
+      bottom: .84rem;
     }
 `;
 

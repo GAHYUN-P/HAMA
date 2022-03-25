@@ -5,8 +5,9 @@ import Tag from '../elements/Tag';
 import Level from '../elements/Level';
 import ImageUploader from '../components/ImageUploader';
 import Header from '../components/Header';
+import WaitForAMoment from '../components/WaitForAMoment';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postActions } from '../redux/modules/post';
 import { history } from '../redux/configureStore';
 
@@ -16,6 +17,8 @@ import styled from 'styled-components';
 
 const Request = (props) => {
     const dispatch = useDispatch();
+    const { loading } = useSelector(state=> state.post);
+    const { files } = useSelector(state => state.image);
 
     const contentRef = React.useRef();
     const titleRef = React.useRef();
@@ -70,7 +73,7 @@ const Request = (props) => {
 
             {/* 이미지 업로드 */}
             <Selections>
-                <div>사진등록</div>
+                <div>사진등록<Explain>{files.length}/5</Explain></div>
             </Selections>
                 <ImageUploader />
 
@@ -90,7 +93,7 @@ const Request = (props) => {
             
             {/* 시간설정 */}
             <Selections>
-                <div>시간설정</div>
+                시간설정
             </Selections>
             <div style={{width:'100%', margin:'10px auto 0'}} >
                 <div>
@@ -113,11 +116,13 @@ const Request = (props) => {
             <div style={{fontSize:'0.72rem',color:'#ff5e5e',marginTop:'0.75rem',fontWeight:'100'}} >
                 ※요청을 등록한 이후에는 삭제할 수 없습니다.
             </div>
+            { !loading && 
             <BtnGrid>
                 <Btn onClick={()=>{history.goBack()}}>취소</Btn>
                 <Btn onClick={posting}>등록</Btn>
-            </BtnGrid>
+            </BtnGrid>}
         </Grid>
+        { loading && <WaitForAMoment /> }
     </React.Fragment>
     )
 };
@@ -158,6 +163,12 @@ const Titles = styled.div`
     font-size: 1.2rem;
 `;
     
+const Explain = styled.span`
+    font-size: ${({theme})=> theme.fontSizes.small};
+    margin-left: ${({theme})=> theme.margins.small};
+    color: #ff7a7a;
+`;
+
 const TitleInput = styled.input`
     width: 100%;
     font-size: ${({theme}) => theme.fontSizes.base};

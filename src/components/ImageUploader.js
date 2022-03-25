@@ -9,21 +9,32 @@ import styled from "styled-components";
 const ImageUploader = (props) => {
     const dispatch = useDispatch();
     const inputRef = React.useRef();
-    const { preview, uploading } = useSelector(state => state.image);
+    const { preview, uploading, count } = useSelector(state => state.image);
     const is_edit = props.is_edit;
 
     const change = () => {
-        const file = inputRef.current.files[0];
-        const reader = new FileReader();
+        // 사진 갯수제한 그 때 그 때 달라짐
+        if(inputRef.current.files.length > count){
+            window.alert(`현재 업로드 가능한 이미지는 ${count}장 입니다.`)
+            return
+        }
+        const file = [...inputRef.current.files];
+
         if(file){
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                const data = {
-                    file: file,
-                    preview: reader.result
+            dispatch(imgActions.uploading());
+            file.map( async (f) =>{
+                const reader = new FileReader();
+                reader.readAsDataURL(f);
+                reader.onloadend = () => {
+                    const data = {file: f,preview: reader.result}
+                    dispatch(imgActions.setImage(data)); 
                 }
-                dispatch(imgActions.setImage(data));
+                return f
+            })
+            if(count !== 0){
+                dispatch(imgActions.uploading());
             }
+            inputRef.current.value = '';
             return
         }
         console.log('Not get')
@@ -54,7 +65,7 @@ const ImageUploader = (props) => {
             <div style={{padding:'8px 0', display:'flex'}} >
                 <ElLabel htmlFor='imgup'><UpImg src={picture} /></ElLabel>
                 <input id='imgup' ref={inputRef} onChange={!is_edit ? change : edit}
-                type='file' accept='image/*' multiple
+                type='file' accept='image/*' multiple={!is_edit}
                 disabled={uploading} style={{display:'none'}} />
                 {preview &&
                 <WhiteSpace>

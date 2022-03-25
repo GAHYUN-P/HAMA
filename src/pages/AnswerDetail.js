@@ -7,6 +7,7 @@ import { canRate } from '../shared/conditions';
 import AnswerContent from '../components/AnswerContent';
 import CommentList from '../components/CommentList';
 import RateBox from '../components/RateBox';
+import SharedBtn from '../elements/SharedBtn';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WaitForAMoment from '../components/WaitForAMoment';
@@ -50,7 +51,7 @@ const AnswerDetail = (props) => {
                 { canRate(answer.requestWriterId) &&
                 <RateBox answerId={answerId} />}
             </Grid>
-            <CommentGrid>
+            {/* <CommentGrid2>
                 <OnOffBtn onClick={()=>{setOpen(!open)}} >
                     <Com>
                         댓글
@@ -62,9 +63,11 @@ const AnswerDetail = (props) => {
                         <FiChevronRight />
                     </Icon>
                 </OnOffBtn>
-            </CommentGrid>
-            {open &&    
-            <CommentList answerId={answerId} videoRef={videoRef} />}
+            </CommentGrid2> */}
+            <ShareGrid>
+                <SharedBtn {...answer} />
+            </ShareGrid>
+            <CommentList answerId={answerId} videoRef={videoRef} commentCount={answer.commentCount} />
             <div style={{height:'4.6rem',borderTop:'.08rem solid #efefef'}} ></div>
             <Footer />
         </React.Fragment>
@@ -75,30 +78,10 @@ const Grid = styled.div`
     padding: 0 ${({theme})=> theme.paddings.default};
 `;
 
-const CommentGrid = styled.div`
-    padding: 0 ${({theme})=> theme.paddings.default};
-    border-top: .08rem solid #efefef;
-`;
-
-const OnOffBtn = styled.div`
-    font-size: ${({theme})=> theme.fontSizes.small};
+const ShareGrid = styled.div`
+    padding: ${({theme})=> theme.paddings.base} ${({theme})=> theme.paddings.default};
     display: flex;
-    padding: .5rem 0;
+    justify-content: right;
 `;
-
-const Com = styled.div`
-    font-weight: 600;
-`;
-
-const Num = styled.div`
-    margin-left: .2rem;
-    color: #666;
-`;
-
-const Icon = styled.div`
-    font-size: ${({theme})=>theme.fontSizes.base};
-    color: #9e9e9e;
-    padding-top: .1rem;
-`
 
 export default AnswerDetail;

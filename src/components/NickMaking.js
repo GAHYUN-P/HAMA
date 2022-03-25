@@ -14,7 +14,7 @@ const NickMaking = (props) => {
                 <NickInput value={nickname} onChange={(e)=>{
                     setNickname(e.target.value)
                     setSame('needCheck')
-                    }} type='text' placeholder='3~8자리의 숫자,영어,한글만 가능합니다.' />
+                    }} type='text' placeholder='3~6자리의 숫자,영어,한글만 가능합니다.' />
                 {same === 'needCheck' && <SameMsg color='#212121' >* 중복체크를 해주세요.</SameMsg> }
                 {same === 'true' && <SameMsg color='#036635' >* 사용할 수 있는 닉네임입니다.</SameMsg> }
                 {same === 'false' && <SameMsg color='#ff7a7a' >* 사용할 수 없는 닉네임입니다.</SameMsg> }
@@ -44,7 +44,7 @@ const NickInput = styled.input`
     outline: none;
     &::placeholder{
         font-size: ${({theme}) => theme.fontSizes.small};
-        color: #dcdcdc;
+        color: #ff7a7a;
     }
 `;
 
