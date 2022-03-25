@@ -37,13 +37,13 @@ const Shorts = (props) => {
         slidesToScroll: 1,
         beforeChange: () => {
             console.log('바뀌기전~')
+            if(player.current.props.idx === 0) {
+              setFirstpg(false); 
+            }
         },
         afterChange: () => { 
             setPlay(true);
             console.log('바뀌고나서~');
-            if(player.current.props.idx !== 0) {
-              setFirstpg(false); 
-            }
           },
         onEdge: () => {
           window.location.reload();
@@ -98,9 +98,9 @@ const Shorts = (props) => {
                   </SlideGuide>
                 }
                 <CommentWrap>
-                  <Comment>
+                  <Comment onClick={() => history.push(`/answerdetail/${item.answerId}`)}>
                     <BiComment style={{fontSize: '1.5rem', display:'inline-block'}}/>
-                    <div style={{marginLeft: '3px'}}>5</div>
+                    <div style={{marginLeft: '3px'}}>{item.commentCnt}</div>
                   </Comment>
                 </CommentWrap>
                 <TitleWrap>
