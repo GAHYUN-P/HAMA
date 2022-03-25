@@ -9,7 +9,7 @@ import { answerActions } from '../redux/modules/answer';
 import { getTimeStamp } from '../shared/separator';
 import { getToken } from '../shared/cookie';
 
-import PP from '../assets/Paper_Plane.svg';
+import {FiChevronRight} from 'react-icons/fi';
 
 import styled from 'styled-components';
 
@@ -67,6 +67,20 @@ const CommentList = (props) => {
             add={add}
             placeholder={placeholder}/>}
 
+            <CommentGrid2>
+                <OnOffBtn>
+                    <Com>
+                        댓글
+                    </Com>
+                    <Num>
+                        {props.commentCount}
+                    </Num>
+                    <Icon>
+                        <FiChevronRight />
+                    </Icon>
+                </OnOffBtn>
+            </CommentGrid2>
+
             <CommentGrid>
                 {commentArray.map((c,i)=>{
                     return(<AnswerComments
@@ -83,33 +97,30 @@ const CommentGrid = styled.div`
     padding: .9rem ${({theme})=> theme.paddings.default};
 `;
 
-const PPHolder = styled.div`
-    width: 1.35rem;
-    height: 1.35rem;
-    background-image: url(${props => props.url});
-    background-size: cover;
-    position: absolute;
-    right: 2.12rem;
-    top: 2rem;
+const CommentGrid2 = styled.div`
+    padding: 0 ${({theme})=> theme.paddings.default};
+    border-bottom: .08rem solid #efefef;
 `;
 
-const InputGrid = styled.div`
-    position: relative;
-    padding: ${({theme})=> theme.paddings.default};
-    background-color: #efefef;
+const OnOffBtn = styled.div`
+    font-size: ${({theme})=> theme.fontSizes.small};
+    display: flex;
+    padding: .5rem 0;
 `;
 
-const ElInput = styled.input`
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: ${({theme})=> theme.paddings.lg} .8rem ;
-    border-radius: .3rem;
-    box-shadow: 0 .15rem .4rem  #d5d5d5;
-    &::placeholder{
-        font-size: .7rem;
-        color:  #9e9e9e;
-    }
-`
+const Com = styled.div`
+    font-weight: 600;
+`;
+
+const Num = styled.div`
+    margin-left: .2rem;
+    color: #666;
+`;
+
+const Icon = styled.div`
+    font-size: ${({theme})=>theme.fontSizes.base};
+    color: #9e9e9e;
+    padding-top: .1rem;
+`;
 
 export default CommentList;

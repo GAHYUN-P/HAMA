@@ -56,12 +56,12 @@ const Login = ({ history, match }) => {
   };
 
   return (
-    <>
+    <React.Fragment>
     <Header />
     <Grid>
 {/* 3 */}
 {/* 1 */}  
-      <div style={{width:'100%',height:'1rem'}} />
+      <div style={{width:'100%',height:'4rem'}} />
       <MakeCenter>
         <LoginPic width='30%' src={logoF} />
       </MakeCenter>
@@ -84,12 +84,13 @@ const Login = ({ history, match }) => {
       </HamaCenter>
 {/* 2 */}
     </Grid>
-    </>
+    </React.Fragment>
   );
 };
 
 const Grid = styled.div`
-  height: 36.05rem;
+  position: relative;
+  height: 100vh;
   align-items: center;
   padding: 0 ${({theme})=> theme.paddings.default} 0;
   background-color: #4e4e4e;

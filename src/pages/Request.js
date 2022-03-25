@@ -18,6 +18,7 @@ import styled from 'styled-components';
 const Request = (props) => {
     const dispatch = useDispatch();
     const { loading } = useSelector(state=> state.post);
+    const { files } = useSelector(state => state.image);
 
     const contentRef = React.useRef();
     const titleRef = React.useRef();
@@ -72,7 +73,7 @@ const Request = (props) => {
 
             {/* 이미지 업로드 */}
             <Selections>
-                <div>사진등록<Explain>이미지는 최대 5장입니다.</Explain></div>
+                <div>사진등록<Explain>{files.length}/5</Explain></div>
             </Selections>
                 <ImageUploader />
 
@@ -164,6 +165,8 @@ const Titles = styled.div`
     
 const Explain = styled.span`
     font-size: ${({theme})=> theme.fontSizes.small};
+    margin-left: ${({theme})=> theme.margins.small};
+    color: #ff7a7a;
 `;
 
 const TitleInput = styled.input`

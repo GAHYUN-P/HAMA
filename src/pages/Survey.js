@@ -98,7 +98,7 @@ const Btn = styled.button`
   border-radius: .3rem;
   color: #212121;
   font-size: ${({theme})=> theme.fontSizes.small};
-  &:hover{
+  &:active{
     background-color: #ff7a7a;
     color: #fff;
   }
