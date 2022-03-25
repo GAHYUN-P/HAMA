@@ -14,7 +14,8 @@ const ChildComment = (props) => {
     const delcom = () => {
         const data = {
             commentId: props.commentId,
-            parentId: props.parentId
+            parentId: props.parentId,
+            cnt: 1
         }
         dispatch(answerActions.deleteCommentDB(data));
     }

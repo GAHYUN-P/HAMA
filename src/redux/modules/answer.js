@@ -58,7 +58,7 @@ const answer = createReducer(initialState,{
         state.comments = state.comments.filter(c=>{
             return c.commentId !== action.payload.commentId
         })
-        state.answer.commentCount = state.answer.commentCount - 1; 
+        state.answer.commentCount = state.answer.commentCount - action.payload.cnt;
     },
     [rateStar]: (state,action) => {
         state.answer.star = Number(action.payload.star);
