@@ -14,6 +14,9 @@ import NickMaking from '../components/NickMaking';
 import Tag from '../elements/Tag';
 import CallNumber from '../components/CallNumber';
 
+import { FiInfo } from 'react-icons/fi';
+
+
 import styled from 'styled-components';
 
 const UserInfo = (props) => {
@@ -26,6 +29,8 @@ const UserInfo = (props) => {
   const [interest, setInterest] = useState('');
   const [phone, setPhone] = useState('');
   const [same, setSame] = useState('needCheck');
+  const [open,setOpen] = useState(false);
+  const [open2,setOpen2] = useState(false);
 
   React.useEffect(()=>{
     if(!getStatus()){
@@ -78,11 +83,28 @@ const UserInfo = (props) => {
       <IndiviInfo>닉네임 설정</IndiviInfo>
       <NickMaking nickname={nickname} same={same} setSame={setSame} sameCheck={sameCheck} setNickname={setNickname} />
     <Grid>
-      <IndiviInfo>전화번호</IndiviInfo>
+      <IndiviInfo>
+        전화번호
+        <Icon onMouseOver={()=>{setOpen2(true)}} onMouseLeave={()=>{setOpen2(false)}} >
+          <FiInfo />
+          { open2 &&
+          <Message>배달의 민족 상품권 및 인스타 인증 시 지급되는 아이스 아메리카노 등을 받으실 수 없게됩니다. 자세한것은 이벤트 페이지를 참고해주세요.</Message>}
+        </Icon>
+      </IndiviInfo>
       <CallNumber phone={phone} setPhone={setPhone} />
     </Grid>
     <Grid>
-      <IndiviInfo>관심사 설정</IndiviInfo>
+      <IndiviInfo>
+        관심사 설정
+        <Icon onMouseOver={()=>{setOpen(true)}} onMouseLeave={()=>{setOpen(false)}} >
+          <FiInfo />
+          { open &&
+          <Message>
+             관심사는 답변글 작성시 경험치를 추가로 얻을 수 있는 항목으로 1명당 1가지만 고를 수 있습니다.
+            <br/> 추후 한 분야에서 다섯개 이상의 답변을 남기면 숙련도 뱃지를 얻을 수 있습니다.
+          </Message>}
+        </Icon>
+      </IndiviInfo>
       <SmallAlert>*나의 전문으로 지정할 한 가지 분야를 선택해주세요.</SmallAlert>
       { Categories.map((c,i)=>{return(<Tag key={i} tag={interest} _onClick={(e)=>{setInterest(e.target.innerHTML)}}>{c}</Tag>)}) }
     </Grid>
@@ -104,6 +126,29 @@ const IndiviInfo = styled.div`
   font-size: ${({theme}) => theme.fontSizes.xxxl};
 `;
 
+const Icon = styled.div`
+  position: relative;
+  display: flex;
+  margin-left: ${({theme})=>theme.margins.small};
+  justify-content: center;
+  align-items: center;
+  color: #ff7a7a;
+  font-size: ${({theme})=>theme.fontSizes.lg};
+`;
+
+const Message = styled.div`
+  width: 12.5rem;
+  padding: 1rem;
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  font-size: ${({theme})=> theme.fontSizes.base};
+  background-color: rgba( 252,252,252,0.8 );
+  border: 1px solid #ff7a7a;
+  border-radius: .3rem;
+  box-sizing: border-box;
+`;
+
 const SmallAlert = styled.div`
   padding: 1rem 0 2rem;
   width: 100%;
@@ -112,6 +157,7 @@ const SmallAlert = styled.div`
   aling-items: center;
   font-size: ${({theme}) => theme.fontSizes.small};
   color: #9e9e9e;
+  white-space: pre-line;
 `;
 
 const SubmitBtn = styled.button`

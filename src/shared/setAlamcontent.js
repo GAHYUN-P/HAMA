@@ -51,7 +51,16 @@ const setAlamContent = (data)=> {
         }
 
     }
-    
+    // 업적 달성 시
+    if(alarmType === 'achieve'){
+        return(
+            <Crid>
+                축하합니다~! [{title}] 업적을 달성하셨습니다!!
+                <Time>{modifiedAt}</Time>
+            </Crid>
+        )
+    }
+    // 답변작성 완료 시
     if(alarmType === 'answerC'){
         return(
             <Crid>
@@ -167,6 +176,9 @@ const MoveTo = (alarmType,id) => {
     }
     if(alarmType === 'level'){
         history.push('/mypage');
+    }
+    if(alarmType === 'achieve'){
+        history.push('/mypage_achievement');
     }
     return
 }

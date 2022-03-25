@@ -67,9 +67,10 @@ const CommentInput = (props) => {
 }
 
 const WholeGrid = styled.div`
+    max-width: 412px;
     width: 100%;
     padding: 0 ${({theme})=> theme.paddings.default};
-    position: absolute;
+    position: fixed;
     bottom: 2rem;
 `;
 

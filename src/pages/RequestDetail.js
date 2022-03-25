@@ -42,10 +42,10 @@ const RequestDetail = (props) => {
             <Header />
             <DetailContainer>
                 <RequestContents {...request}/>
-                <RequestCenter request={request} like={likeUserIdList} />
+                <RequestCenter postId={postId} request={request} like={likeUserIdList} />
                 <RequestAnswer answers = {answers} requestWriterId={request.user_id} />
-                {canWrite(request.status,request.user_id) &&
-                <AnswerWriteBtn postId={postId} />}
+                {/* {canWrite(request.status,request.user_id) &&
+                <AnswerWriteBtn postId={postId} />} */}
             </DetailContainer>
         </React.Fragment>
     )

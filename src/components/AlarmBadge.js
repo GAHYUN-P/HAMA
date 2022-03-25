@@ -55,7 +55,7 @@ const Grid = styled.div`
 `;
 
 const LiveOff = styled.img`
-  width: 1.2rem;
+  width: 1.5rem;
 `;
 
 const Count = styled.div`
