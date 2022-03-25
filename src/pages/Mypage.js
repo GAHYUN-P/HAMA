@@ -103,10 +103,8 @@ const Mypage = (props) => {
                   );
               })}
       </MedalWrap>
-      <MypostList/>
-      {/* <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail> */}
-      <MyanswerList/>
-      {/* <GotoDetail onClick={(e)=>{onClickMyanswer(e)}} value='myanswer'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail> */}
+      <MypostList mypage={true}/>
+      <MyanswerList mypage={true}/>
       <div style={{height:'10vh'}}/>
       </MyContents>
     </Wrap>

@@ -1,5 +1,5 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
-import { mypageAPI, userpageAPI } from '../../shared/api';
+import { userpageAPI } from '../../shared/api';
 
 // initialState
 const initialState = {
@@ -18,7 +18,7 @@ const initialState = {
   ],
   mypost: [{
     requestId: null,
-    title : "요청글이 없습니다.",
+    title : "요청글이 없습니다!",
     modifiedAt: "",
     nickname: '',
     imgUrl: 'https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/5xq2/image/0lp8RLaJ2IgctTWVl2nEa-JRCSc.jpg',
@@ -28,7 +28,7 @@ const initialState = {
   }],
   myanswer: [{
     answerId: null,
-    title : "답변글이 없습니다.",
+    title : "답변글이 없습니다!",
     modifiedAt: "",
     nickname: '',
     imgUrl: 'http://san.chosun.com/site/data/img_dir/2019/04/24/2019042401956_0.jpg',
@@ -127,9 +127,9 @@ const userpage = createReducer(initialState, {
 
 // middleware actions
 
-const getBanner = () => async (dispatch, getState, { history }) => {
+const getBanner = (id) => async (dispatch, getState, { history }) => {
   try {
-    const res = await mypageAPI.getBannerInfo();
+    const res = await userpageAPI.getuserBannerInfo(id);
     console.log(res.data);
     dispatch(setBanner(res.data));
   }
@@ -138,9 +138,9 @@ const getBanner = () => async (dispatch, getState, { history }) => {
   }
 };
 
-const getAchievement = () => async (dispatch, getState, { history }) => {
+const getAchievement = (id) => async (dispatch, getState, { history }) => {
   try {
-    const res = await mypageAPI.getAchievement();
+    const res = await userpageAPI.getuserAchievement(id);
     console.log(res.data.achievement);
     dispatch(setAchievement(res.data.achievement));
   }
@@ -149,9 +149,9 @@ const getAchievement = () => async (dispatch, getState, { history }) => {
   }
 };
 
-const getMypost = () => async (dispatch, getState, { history }) => {
+const getMypost = (id) => async (dispatch, getState, { history }) => {
   try {
-    const res = await mypageAPI.getMypostList();
+    const res = await userpageAPI.getuserpostList(id);
     console.log(res.data);
     dispatch(setMypost(res.data));
   }
@@ -160,9 +160,9 @@ const getMypost = () => async (dispatch, getState, { history }) => {
   }
 };
 
-const getMyanswer = () => async (dispatch, getState, { history }) => {
+const getMyanswer = (id) => async (dispatch, getState, { history }) => {
   try {
-    const res = await mypageAPI.getMyanswerList();
+    const res = await userpageAPI.getuseranswerList(id);
     console.log(res.data);
     dispatch(setMyanswer(res.data));
   }
@@ -171,9 +171,9 @@ const getMyanswer = () => async (dispatch, getState, { history }) => {
   }
 };
 
-const getUserInfo = () => async (dispatch, getState, { history }) => {
+const getUserInfo = (id) => async (dispatch, getState, { history }) => {
     try {
-      const res = await mypageAPI.getMypageUserInfo();
+      const res = await userpageAPI.getuserpageUserInfo(id);
       console.log(res.data);
       dispatch(setUserInfo(res.data));
     }
