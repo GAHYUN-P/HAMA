@@ -16,6 +16,7 @@ import styled, { keyframes } from 'styled-components';
 
 const Answer = (props) => {
     const dispatch = useDispatch();
+    const { files } = useSelector(state => state.image);
     const postId = props.match.params.postId
     const titleRef = React.useRef();
     const contentRef = React.useRef();
@@ -52,7 +53,7 @@ const Answer = (props) => {
                 
                 {/* 이미지 */}
                 <Selections>
-                사진등록
+                사진등록<Explain>{files.length}/5</Explain>
                 </Selections>
                 <ImageUploader />
 
@@ -136,43 +137,10 @@ const Btn = styled.button`
     }
 `;
 
-const WaitGrid =styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.3);
-`;
-
-const rotating = keyframes`
-    0%{
-        transform:rotate(0deg)
-    }
-    20%{
-        transform:rotate(72deg)
-    }
-    40%{
-        transform:rotate(144deg)
-    }
-    60%{
-        transform:rotate(216deg)
-    }
-    80%{
-        transform:rotate(288deg)
-    }
-    100%{
-        transform:rotate(360deg)
-    }
-`;
-
-const Wait = styled.img`
-    width: 30%;
-    animation: ${rotating} 2s 1s infinite linear;
+const Explain = styled.span`
+    font-size: ${({theme})=> theme.fontSizes.small};
+    margin-left: ${({theme})=> theme.margins.small};
+    color: #ff7a7a;
 `;
 
 export default Answer;

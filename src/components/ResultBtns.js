@@ -3,46 +3,15 @@ import React from "react";
 import { history } from '../redux/configureStore';
 import share from '../assets/share_button.svg'
 
+import { initKakao, shareResultKakao } from "../shared/kakaoShare";
+
 import styled from "styled-components";
 
 const ResultBtns = (props) => {
-      const { imgUrl, hippoName, surveyResult } = props;
-      const Kakao_key = process.env.REACT_APP_KAKAO_KEY;
-      const url = window.location.href.split('result')[0];
-
-      console.log(Kakao_key);
 
       React.useEffect(()=>{
-        if(!window.Kakao.isInitialized()){
-          window.Kakao.init(Kakao_key);
-        }
+        initKakao();
       },[]);
-
-      const shareKakao = () => {
-        window.Kakao.Link.sendDefault({ 
-          objectType: 'feed',
-          content: {
-            title: hippoName,
-            description: surveyResult,
-            imageUrl: imgUrl,
-            link: {
-              mobileWebUrl: url,
-              webUrl: url,
-            },
-          },
-          buttons: [
-            {
-              title: '웹으로 보기',
-              link: {
-                mobileWebUrl: url,
-                webUrl: url,
-              },
-            }
-          ],
-        }
-    
-    )
-      }   
 
     return (
       <Grid>
@@ -50,7 +19,7 @@ const ResultBtns = (props) => {
           <ReDo onClick={()=>{history.replace('/survey')}} >다시하기</ReDo>
           <Set onClick={()=>{history.replace('/mypage')}} >등록하기</Set>
         </BtnGrid>
-        <Share onClick={shareKakao} src={share} />
+        <Share onClick={()=>{shareResultKakao(props)}} src={share} />
       </Grid>
     );
 }
