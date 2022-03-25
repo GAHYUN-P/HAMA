@@ -13,7 +13,9 @@ const initialState = {
     expert: [],
     imgUrl:"",
   },
-  achievement : [],
+  achievement : [
+      0,0,0,0,0,0,0,0
+  ],
   mypost: [{
     requestId: null,
     title : "요청글이 없습니다.",
