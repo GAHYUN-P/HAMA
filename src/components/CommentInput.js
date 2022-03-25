@@ -13,6 +13,7 @@ const CommentInput = (props) => {
                 setComment('')
                 commentRef.current.value = '';
                 commentRef.current.commentId = undefined;
+                commentRef.current.parentId = undefined;
                 return
             }
             commentRef.current.focus();
@@ -23,8 +24,8 @@ const CommentInput = (props) => {
         if(target?.id === 'edit'){return};
         if(!inputRef.current?.contains(target)){
             // 댓글 내용이 없거나 수정을 위한 아이디가 없을 때는 그냥 나가기
-            if(!commentRef.current?.value && !commentRef.current?.commentId){return}
-            Cancel()
+            if(!commentRef.current?.value && !commentRef.current?.commentId && !commentRef.current?.parentId){return}
+            Cancel();
         }
     }
 

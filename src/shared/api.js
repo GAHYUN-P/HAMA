@@ -241,6 +241,28 @@ export const userpageAPI = {
   getuserpageUserInfo: function (userid) {
     return axios.get(`/api/userpage/mycount/${userid}`, config);
   },
+  getComments: function (userid) {
+    return axios.get(`/api/userpage/comment/${userid}`);
+  },
+  addComments: function (data) {
+    return axios.post(`/api/userpage/comment/${data.userId}`,
+    {
+      content: data.content,
+      parentId: data.parentId
+    },
+    config);
+  },
+  editComments: function (data) {
+    return axios.put(`/api/userpage/comment/${data.commentId}`,
+    {
+      content: data.content,
+      parentId: data.parentId
+    }
+    ,config);
+  },
+  delComments: function (data) {
+    return axios.delete(`/api/userpage/comment/${data.commentId}`,config);
+  },
 };
 
 export const searchAPI = {
