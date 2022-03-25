@@ -226,19 +226,19 @@ export const mypageAPI = {
 };
 
 export const userpageAPI = {
-  getAchievement: function () {
-    return axios.get(`/api/achievement`, config);
+  getuserAchievement: function (userid) {
+    return axios.get(`/api/userpage/userachievement/${userid}`, config);
   },
-  getBannerInfo: function () {
-    return axios.get(`/api/mybanner`, config);
+  getuserBannerInfo: function (userid) {
+    return axios.get(`/api/userpage/userbanner/${userid}`, config);
   },
-  getMypostList: function () {
-    return axios.get(`/api/mypost`, config);
+  getuserpostList: function (userid) {
+    return axios.get(`/api/userpage/useranswer/${userid}`, config);
   },
-  getMyanswerList: function () {
-    return axios.get(`/api/myanswer`, config);
+  getuseranswerList: function (userid) {
+    return axios.get(`/api/userpage/useranswer/${userid}`, config);
   },
-  getMypageUserInfo: function () {
+  getMypageUserInfo: function (userid) {
     return axios.get(`/api/mycount`, config);
   },
 };
