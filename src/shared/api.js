@@ -225,6 +225,24 @@ export const mypageAPI = {
   },
 };
 
+export const userpageAPI = {
+  getAchievement: function () {
+    return axios.get(`/api/achievement`, config);
+  },
+  getBannerInfo: function () {
+    return axios.get(`/api/mybanner`, config);
+  },
+  getMypostList: function () {
+    return axios.get(`/api/mypost`, config);
+  },
+  getMyanswerList: function () {
+    return axios.get(`/api/myanswer`, config);
+  },
+  getMypageUserInfo: function () {
+    return axios.get(`/api/mycount`, config);
+  },
+};
+
 export const searchAPI = {
   getResultPost: function (searchWord) {
     return axios.get(`/api/postsearch/${searchWord}`, config);
