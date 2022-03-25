@@ -43,6 +43,7 @@ import Notice from '../pages/Notice';
 import DevInfo from '../pages/DevInfo';
 import HMpost from '../pages/HMpost';
 import UserPage from '../pages/UserPage';
+import Test from '../pages/Test';
 
 function App() {
   const dispatch = useDispatch();
@@ -87,6 +88,7 @@ function App() {
               <Route path="/shorts" exact component={Shorts} />
               <Route path="/alarm" exact component={Alarm} />
               <Route path="/userpage/:id" exact component={UserPage} />
+              <Route path="/test/:id" exact component={Test} />
               </CardList>
               <Route path="*" exact component={NotFound} />
             </Switch>
@@ -128,7 +130,7 @@ const Container = styled.div`
     }
   }
   @media screen and (min-width: 1200px) {
-    background: url('https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/service.svg') no-repeat;
+    background: url('https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/page.svg') no-repeat;
     background-size: cover;
   }
 `;
