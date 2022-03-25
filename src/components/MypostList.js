@@ -3,34 +3,64 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import MypageListEach from './MypageListEach';
 import { mypageActions } from '../redux/modules/mypage';
+import { userpageActions } from '../redux/modules/userpage';
 import user from '../redux/modules/user';
 import { history } from '../redux/configureStore';
 import { IoIosArrowForward } from "react-icons/io";
 
+
 const MypostList = (props) => {
+
+    console.log(props.userpage);
 
     const dispatch = useDispatch();
 
+
     // 전체 리스트 불러오기
     React.useEffect(() => {
-        dispatch(mypageActions.getMypost());
+        if(props.userpage) {
+            dispatch(userpageActions.getMypost(props.id));
+        }
+        if(props.mypage) {
+            dispatch(mypageActions.getMypost());
+        }
     }, []);
 
     
     const mypost_list = useSelector((state) => state.mypage.mypost);
-    const prev_list = mypost_list.slice(0,2);
+    const userpost_list = useSelector((state) => state.userpage.mypost);
+
+    const prev_list = [];
+    if(props.mypage) {
+        prev_list.push(...mypost_list.slice(0,2));
+    }
+    if(props.userpage) {
+        prev_list.push(...userpost_list.slice(0,2));
+    }
     console.log(prev_list);
     
     const onClickMypost = (e) => {
-        dispatch(mypageActions.setDetail(e.target.value));
-        console.log(e.target.value);
-        history.push('/mypage_detail');
+        if(props.mypage) {
+            dispatch(mypageActions.setDetail(e.target.value));
+            console.log(e.target.value);
+            history.push('/mypage_detail');
+        }
+        if(props.userpage) {
+            dispatch(userpageActions.setDetail(e.target.value));
+            console.log(e.target.value);
+            history.push(`/userpage_detail/${props.id}`);
+        }
     }
 
     return (
         <div>
             <TitleWrap>
-                <Title>내가 요청한 글</Title>
+                {props.mypage &&
+                    <Title>내가 요청한 글</Title>
+                }
+                {props.userpage &&
+                    <Title>{props.nickname}님이 요청한 글</Title>
+                }
                 <GotoDetail onClick={(e)=>{onClickMypost(e)}} value='mypost'>더보기<IconWrap><IoIosArrowForward/></IconWrap></GotoDetail>
             </TitleWrap>
             {prev_list.map((info, idx) => {

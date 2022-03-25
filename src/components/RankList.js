@@ -46,7 +46,7 @@ const RankList = (props) => {
 const TitleWrap = styled.div`
     display: flex;
     font-size: ${({ theme }) => theme.fontSizes.lg};
-    font-family: Noto-Sans-KR-M;
+    font-family: 'Noto-Sans-KR-M';
     margin-top: ${({ theme }) => theme.margins.xxl};;
 `;
 
