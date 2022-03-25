@@ -12,6 +12,7 @@ export const initialState = {
         profileUrl: "",
         answerId: null,
         // postId: null,
+        commentCnt: null,
       },
     ],
     shorts: {

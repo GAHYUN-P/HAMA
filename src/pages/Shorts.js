@@ -1,6 +1,6 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import React, { useRef } from "react";
 import Slider from "react-slick";
 import { shortsActions } from "../redux/modules/shorts";
@@ -9,6 +9,9 @@ import ReactPlayer from 'react-player';
 import { history } from "../redux/configureStore";
 import Header from "../components/Header";
 import ProfileImg from "../elements/ProfileImg";
+import { BiComment } from "react-icons/bi";
+import { AiOutlineDoubleRight as DoubleArrow } from "react-icons/ai";
+
 
 const Shorts = (props) => {
     const dispatch = useDispatch();
@@ -16,7 +19,7 @@ const Shorts = (props) => {
     const player = useRef();
 
     const [play, setPlay] = React.useState(false);
-    const [lastpg, setLastpg] = React.useState(false);
+    const [firstpg, setFirstpg] = React.useState(true);
 
     React.useEffect(() => {
         console.log('유즈이펙트');
@@ -34,18 +37,12 @@ const Shorts = (props) => {
         slidesToScroll: 1,
         beforeChange: () => {
             console.log('바뀌기전~')
-            if(player.current.props.idx < items.length - 1) {
-              setLastpg(false); 
-            }
         },
         afterChange: () => { 
             setPlay(true);
             console.log('바뀌고나서~');
-            if(player.current.props.idx === items.length - 1) {
-              setLastpg(true);
-            }
-            if(player.current.props.idx < items.length - 1) {
-              setLastpg(false); 
+            if(player.current.props.idx !== 0) {
+              setFirstpg(false); 
             }
           },
         onEdge: () => {
@@ -81,7 +78,7 @@ const Shorts = (props) => {
           <StyledSlider {...settings} ref={slider}>
             {items.map((item, idx) => {
               return (
-                <div key={idx}>
+                <Map key={idx}>
                     <ImageContainer>
                         <ReactPlayer 
                             ref={player}
@@ -95,19 +92,27 @@ const Shorts = (props) => {
                             onEnded={handleVideo}
                             />
                     </ImageContainer>
-                    {lastpg && 
-                      <div>
-                        {/* 목록에 있는 영상을 다 보셨습니다 옆으로 넘기면 갱신됩니다! */}
-                      </div>
-                    }
+                {firstpg && 
+                  <SlideGuide>
+                    다음 영상 <StyledArrow/><StyledArrow/><StyledArrow/>
+                  </SlideGuide>
+                }
+                <CommentWrap>
+                  <Comment>
+                    <BiComment style={{fontSize: '1.5rem', display:'inline-block'}}/>
+                    <div style={{marginLeft: '3px'}}>5</div>
+                  </Comment>
+                </CommentWrap>
                 <TitleWrap>
-                  <Title onClick={() => history.push(`/answerdetail/${item.answerId}`)}>{item.title}</Title> 
-                  <div style={{display: 'flex', paddingTop:'1rem'}}>
-                    <ProfileImg shape='circle' size='40px' src={item.imgUrl}/>
-                    <div style={{ padding: '0.6rem 0.7rem'}}>{item.nickname}</div>
-                  </div>
+                  <Title onClick={() => history.push(`/answerdetail/${item.answerId}`)}>{item.title}</Title>
+                  <NickWrap>
+                    <div style={{display: 'flex', paddingTop:'1rem'}}>
+                      <ProfileImg shape='circle' size='40px' src={item.imgUrl}/>
+                      <div style={{ padding: '0.6rem 0.7rem'}}>{item.nickname}</div>
+                    </div>
+                  </NickWrap> 
                 </TitleWrap>
-                </div>
+                </Map>
               );
             })} 
           </StyledSlider>
@@ -126,27 +131,95 @@ const Wrap = styled.div`
 `;
 
 const Container = styled.div`
-  /* position: relative; */
+
 `;
 
 const StyledSlider = styled(Slider)`
+`;
 
+const Map = styled.div`
+  position: relative;
+`;
+
+const SlideGuide = styled.div`
+  color: white;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+  top: 20%;
+  font-size: 2rem;
+  margin: ${({ theme }) => theme.paddings.default};
+`;
+
+const StyledArrow = styled(DoubleArrow)`
+  display: inline;
+  vertical-align: text-bottom;
+  margin-bottom: 5px;
+`;
+
+const CommentWrap = styled.div`
+  margin: ${({ theme }) => theme.paddings.default};
+  position: absolute;
+  right: 0px;
+  top: 0px;
+`;
+
+
+const Comment = styled.div`
+  color: white;
+  display: flex;
+  font-size: 1.5rem;
+  /* background-color: red; */
 `;
 
 const TitleWrap = styled.div`
   margin: ${({ theme }) => theme.paddings.default};
   color: #fff;
+  width: 100wh;
+`;
+
+const move = keyframes`
+	0% {
+    left: 0px;
+    opacity: 0.5;
+  }
+  50% {
+    left: 3px;
+    opacity: 1;
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+  }
+
+  70% {
+    left: 3px;
+    opacity: 0.8;
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+  }
+
+  100% {
+    left: 0px;
+    opacity: 0.5;
+  }
 `;
 
 const Title = styled.div`
   font-family: 'Noto-Sans-KR-M';
   font-size: ${({ theme }) => theme.fontSizes.lg};
+  animation: ${move} 1s 1s infinite;
 `;
+
+const NickWrap = styled.div`
+   display: flex;
+   justify-content : space-between;
+   height: 50px;
+   position: relative;
+`;
+
+
 
 const ImageContainer = styled.div`
   /* background-color: red; */
   height: 80vh;
-  padding: 45% 0px;
+  /* padding: 0% 0px; */
 `;
   
 export default Shorts;
