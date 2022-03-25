@@ -11,11 +11,12 @@ import styled from 'styled-components';
 
 const AnswerComments = (props) => {
     const dispatch = useDispatch();
-    const { videoRef,timestamp,content, imgUrl } = props;
+    const { videoRef,timestamp,content, imgUrl, childCnt } = props;
     // 댓글 삭제 요청
     const delcom = () => {
         const data = {
             commentId: props.commentId,
+            cnt: 1 + (childCnt ? childCnt : 0)
         }
         dispatch(answerActions.deleteCommentDB(data));
     }
@@ -71,7 +72,7 @@ const AnswerComments = (props) => {
                     </TimeSet>
 
                     <ChildOpen onClick={()=>{history.push(`/comment/${props.commentId}`)}} >
-                        답글
+                        답글{childCnt ? childCnt : ''}
                     </ChildOpen>
                 </div>
             </Grid>
