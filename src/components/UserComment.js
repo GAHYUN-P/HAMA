@@ -1,5 +1,7 @@
 import React from "react";
 
+import UserChild from "./UserChild";
+
 import { userpageActions } from "../redux/modules/userpage";
 import { useDispatch } from "react-redux";
 
@@ -8,7 +10,7 @@ import { getUserId } from "../shared/cookie";
 import styled from "styled-components";
 
 const UserComment = (props) => {
-    const { commentWriterId, commentWriter, content, modifiedAt, imgUrl } = props;
+    const { commentWriterId, commentWriter, content, modifiedAt, imgUrl, set } = props;
     const dispatch = useDispatch();
 
     // 댓글 삭제 요청
@@ -21,14 +23,14 @@ const UserComment = (props) => {
 
     // 댓글 수정 준비
     const _setEdit = () => {
-        props.setComment(props.content);
-        props.commentRef.current.commentId = props.commentId;
-        props.commentRef.current.focus();
+        set.setComment(props.content);
+        set.commentRef.current.commentId = props.commentId;
+        set.commentRef.current.focus();
     };
 
     return(
         <React.Fragment>
-            <Grid>
+            <Grid flex >
                 <div>
                     <ProHippo src={imgUrl} />
                 </div>
@@ -55,19 +57,23 @@ const UserComment = (props) => {
                     </TimeSet>
 
                     <ChildOpen onClick={()=>{}} >
-                        답글
+                        답글쓰기
                     </ChildOpen>
                 </div>
+            </Grid>
+            <Grid>
+                {[1,2].map((c,i)=>{return <UserChild {...set} />})}
             </Grid>
         </React.Fragment>
     )
 };
 
 const Grid = styled.div`
-    display: flex;
-    padding: ${({theme})=> theme.paddings.xl} 0;
+    ${props => props.flex ? 'display: flex;' : ''}
+    padding: ${({theme})=> theme.paddings.xl} ${({theme})=> theme.paddings.default};
     border-bottom: .1rem solid #f5f5f5;
     box-sizing: border-box;
+    background-color: #fff;
 `;
 
 const UserGrid = styled.div`
