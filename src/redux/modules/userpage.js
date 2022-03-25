@@ -56,7 +56,7 @@ const setUserInfo = createAction('mypage/SET_USERINFO');
 
 
 // reducer
-const mypage = createReducer(initialState, {
+const userpage = createReducer(initialState, {
   [setBanner]: (state, action) => {
     state.list = action.payload;
   },
@@ -139,7 +139,7 @@ const getUserInfo = () => async (dispatch, getState, { history }) => {
 
 
 // action creator export
-export const mypageActions = {
+export const userpageActions = {
   getBanner,
   getAchievement,
   getMypost,
@@ -149,4 +149,4 @@ export const mypageActions = {
   getUserInfo,
 };
 
-export default mypage;
+export default userpage;
