@@ -72,7 +72,7 @@ const Request = (props) => {
 
             {/* 이미지 업로드 */}
             <Selections>
-                <div>사진등록</div>
+                <div>사진등록<Explain>이미지는 최대 5장입니다.</Explain></div>
             </Selections>
                 <ImageUploader />
 
@@ -92,7 +92,7 @@ const Request = (props) => {
             
             {/* 시간설정 */}
             <Selections>
-                <div>시간설정</div>
+                시간설정
             </Selections>
             <div style={{width:'100%', margin:'10px auto 0'}} >
                 <div>
@@ -162,6 +162,10 @@ const Titles = styled.div`
     font-size: 1.2rem;
 `;
     
+const Explain = styled.span`
+    font-size: ${({theme})=> theme.fontSizes.small};
+`;
+
 const TitleInput = styled.input`
     width: 100%;
     font-size: ${({theme}) => theme.fontSizes.base};
