@@ -19,7 +19,6 @@ const wsAlarm = (dispatch) => {
             `/sub/alarm/user/${userId}`,
             (data) => {
               const newMessage = JSON.parse(data.body);
-              console.log(newMessage);
                   dispatch(alarmActions.getNewAlarm(newMessage));
             },
             { token: token }

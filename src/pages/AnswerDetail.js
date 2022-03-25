@@ -50,7 +50,7 @@ const AnswerDetail = (props) => {
                 { canRate(answer.requestWriterId) &&
                 <RateBox answerId={answerId} />}
             </Grid>
-            <CommentGrid>
+            {/* <CommentGrid>
                 <OnOffBtn onClick={()=>{setOpen(!open)}} >
                     <Com>
                         댓글
@@ -62,8 +62,8 @@ const AnswerDetail = (props) => {
                         <FiChevronRight />
                     </Icon>
                 </OnOffBtn>
-            </CommentGrid>
-            {open &&    
+            </CommentGrid> */}
+            { !open &&    
             <CommentList answerId={answerId} videoRef={videoRef} />}
             <div style={{height:'4.6rem',borderTop:'.08rem solid #efefef'}} ></div>
             <Footer />
