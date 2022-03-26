@@ -17,14 +17,15 @@ const MyanswerList = (props) => {
             dispatch(userpageActions.getMyanswer(props.id));
         }
         if(props.mypage) {
-            dispatch(mypageActions.getMypost());
+            dispatch(mypageActions.getMyanswer());
         }
     }, []);
 
 
     const myanswer_list = useSelector((state) => state.mypage.myanswer);
     const useranswer_list = useSelector((state) => state.userpage.myanswer);
-    
+    console.log(myanswer_list);
+
     const prev_list = [];
     if(props.mypage) {
         prev_list.push(...myanswer_list.slice(0,2));
