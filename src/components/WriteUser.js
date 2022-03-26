@@ -1,15 +1,20 @@
 import React from 'react';
 
 import styled from 'styled-components';
+import { history } from '../redux/configureStore';
 
 const WriteUser = (props) => {
-    const { writer, modifiedAt, profile } = props;
+    const { writer, modifiedAt, profile, answerWriterId } = props;
+
+    const profileOnClick = () => {
+        history.replace(`/userpage/${answerWriterId}`);
+    };
 
     return(
         <React.Fragment>
-            <Grid>
+            <Grid onClick={profileOnClick}>
                 <div>
-                    <ProHippo src={profile} />
+                    <ProHippo src={profile}/>
                 </div>
 
                 <div>

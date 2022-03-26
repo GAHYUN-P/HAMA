@@ -105,7 +105,7 @@ const Shorts = (props) => {
                 </CommentWrap>
                 <TitleWrap>
                   <Title onClick={() => history.push(`/answerdetail/${item.answerId}`)}>{item.title}</Title>
-                  <NickWrap>
+                  <NickWrap onClick={() => history.push(`/userpage/${item.userId}`)}>
                     <div style={{display: 'flex', paddingTop:'1rem'}}>
                       <ProfileImg shape='circle' size='40px' src={item.imgUrl}/>
                       <div style={{ padding: '0.6rem 0.7rem'}}>{item.nickname}</div>

@@ -62,7 +62,7 @@ const AnswerContent = (props) => {
 
                 {/* 중단 */}
                 <CenterGrid>
-                    <WriteUser profile={imgUrl} writer={props.answerWriter} modifiedAt={props.modifiedAt} />
+                    <WriteUser profile={imgUrl} writer={props.answerWriter} modifiedAt={props.modifiedAt} answerWriterId={props.answerWriterId}/>
                     { requestCanEdit('opened',answerWriterId) &&
                     <div>
                         <BtnPair style={{marginRight:'0.4rem'}} onClick={()=>{history.push(`/answeredit/${props.answerId}`)}} >수정</BtnPair>
