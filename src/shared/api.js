@@ -13,8 +13,6 @@ import { getToken } from './cookie';
 // 재균
 axios.defaults.baseURL = 'http://13.125.218.107';
 
-
-
 const config = {
   headers:{
       'token': getToken(),
