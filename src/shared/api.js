@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getToken } from './cookie';
 
+
 //axios.defaults.withCredentials = true;
 
 // 배포
@@ -12,6 +13,7 @@ axios.defaults.baseURL = 'https://jumong.xyz';
 
 // 재균
 // axios.defaults.baseURL = 'http://13.125.218.107';
+
 
 
 
@@ -27,6 +29,7 @@ const uploadconfig = {
     'Content-Type': 'multipart/form-data'
   }
 }
+
 
 /* const openApi = axios.create();
 openApi.defaults.withCredentials=false;
