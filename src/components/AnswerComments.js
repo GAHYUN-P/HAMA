@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const AnswerComments = (props) => {
     const dispatch = useDispatch();
-    const { videoRef,timestamp,content, imgUrl, childCnt } = props;
+    const { videoRef,timestamp,content, imgUrl, childCnt, commentWriterId } = props;
     // 댓글 삭제 요청
     const delcom = () => {
         const data = {
@@ -34,17 +34,21 @@ const AnswerComments = (props) => {
         videoRef.current.seekTo(timestamp);
     }
 
+    const profileOnClick = () => {
+        history.push(`/userpage/${commentWriterId}`)
+    }
+
     return (
         <React.Fragment>
             <Grid>
-                <div>
+                <div onClick={profileOnClick}>
                     <ProHippo src={imgUrl} />
                 </div>
 
                 <div style={{width:'100%'}} >
                     {/* 상단부 */}
                     <UserGrid>
-                        <CWrieter>
+                        <CWrieter onClick={profileOnClick}>
                             {props.commentWriter}
                         </CWrieter>
                         {props.commentWriterId === Number(getUserId()) &&

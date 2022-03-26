@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { pointActions } from '../redux/modules/point';
 import { rankActions } from '../redux/modules/rank';
+import { history } from '../redux/configureStore';
 
 import Profile from '../elements/ProfileImg';
 
@@ -15,14 +16,17 @@ import No_5 from '../assets/5.svg';
 import { statusColor } from '../shared/categoryEncoder';
 
 const Rank = (props) => {
-    let { rank, nickname, hippoName, imgUrl, status, point } =props;
+    let { rank, nickname, imgUrl, status, point, userId } =props;
     const rankArr = [No_1,No_2,No_3,No_4,No_5]; 
     imgUrl = imgUrl.split('circle')[0] + imgUrl.split('circle')[1];
 
+    const onClickHandler = () => {
+        history.push(`/userpage/${userId}`);
+    }
 
     return (
     <RankBox>
-        <div style={{position:'relative'}} >
+        <div style={{position:'relative'}} onClick={onClickHandler}>
             <RankImg src={rankArr[rank - 1]} />
             <Profile shape='square' src={imgUrl} size='3rem' />
         </div>

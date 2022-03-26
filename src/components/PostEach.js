@@ -9,20 +9,24 @@ import {GoNote} from 'react-icons/go';
 import styled from 'styled-components';
 
 const PostEach = (props) => {
-    const { title, content, modifiedAt, answerCount, postLikeCount, id,
+    const { title, content, modifiedAt, answerCount, postLikeCount, id, userId,
         imgUrl, timeSet, writer, status } = props;
         
     const titleOnClick = () => {
         history.push(`/requestdetail/${id}`);
-    }
+    };
+
+    const profileOnClick = () => {
+        history.push(`/userpage/${userId}`);
+    };
 
     return (
-        <TitleEach onClick = {titleOnClick}>
+        <TitleEach>
             {/* 프로필 */}
-            <ProHippo src={imgUrl} />
+            <ProHippo src={imgUrl} onClick = {profileOnClick}/>
             {/* 내용 */}
             <ContentGrid>
-                <Title>
+                <Title onClick = {titleOnClick}>
                     {title}
                 </Title>
                 <SubInfo pad={title.length > 23 ? '0' : '.3rem'} >

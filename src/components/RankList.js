@@ -20,6 +20,7 @@ const RankList = (props) => {
     }, []);
 
     const rankList = useSelector((state) => state.rank.data);
+    console.log(rankList);
     const nowTime = moment().format('YYYY.MM.DD HH:mm');
 
     const updateRank = () => {
