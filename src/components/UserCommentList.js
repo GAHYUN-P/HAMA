@@ -21,35 +21,37 @@ const UserCommentList = (props) => {
     const commentRef = useRef();
 
     React.useEffect(()=>{
-        // if(Id !== userId){
-        //     dispatch(userpageActions.getCommentsDB(Id));
-        // }
+        if(Id !== userId){
+            dispatch(userpageActions.getCommentsDB(Id));
+        }
     },[])
 
     const add = () => {
-        if(!commentRef.current.value){return};
-        if(commentRef.current.commentId !== undefined){
-            // 수정요청
-            const data = {
-                comment: commentRef.current.value,
-                commentId: commentRef.current.commentId
-            }
-            dispatch();
-            cancel()
-            return
-        }
-        // 작성요청
+        const commentId = commentRef.current.commentId;
+        const parentId = commentRef.current.parentId;
+        const content = commentRef.current.value;
+
         const data = {
-            comment: commentRef.current.value,
-            answerId: props.answerId
-        };
-        dispatch();
+            userId: Id,
+            commentId: commentId,
+            parentId: parentId,
+            content: content
+        }
+
+        console.log(data);
+
+        if(!content){window.alert('빈칸이 있으면 작성할 수 없습니다.'); return};
+        if(!commentId && !parentId){dispatch(userpageActions.addCommentsDB(data))}
+        if(commentId && !parentId){dispatch(userpageActions.editCommentsDB(data))}
+        if(!commentId && parentId){dispatch(userpageActions.addCommentsDB(data))}
+        if(commentId && parentId){dispatch(userpageActions.editCommentsDB(data))}
         cancel()
     };
 
     const cancel = () => {
         setComment('')
         commentRef.current.value = '';
+        commentRef.current.parentId = undefined;
         commentRef.current.commentId = undefined;
     };
 
@@ -66,10 +68,11 @@ const UserCommentList = (props) => {
                     Guest Book
                     <Icon onClick={()=>{setOpen(false)}} ><BsXCircle /></Icon>
                 </NavBar>
-                <CommentInput {...set} type='text' placeholder='댓글을 작성해주세요.' />
-                {[1,2,3,3,3,3,3,3].map((c,i)=>{
-                    return <UserComment {...c} set={set} commentRef={commentRef} />
+                <CommentInput {...set} type='text' placeholder='방명록을 작성해주세요.' />
+                {comments.map((c,i)=>{
+                    return <UserComment key={i} {...c} set={set} commentRef={commentRef} />
                     })}
+                <FootBar />
             </Wrap>}
         </React.Fragment>
     )
@@ -78,7 +81,7 @@ const UserCommentList = (props) => {
 const CommentBtn = styled.div`
     width: 100%;
     position: absolute;
-    bottom: -10vh;
+    bottom: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,6 +120,13 @@ const NavBar = styled.div`
     color: #ff7a7a;
     font-size: ${({theme})=> theme.fontSizes.xl};
     background-color: #fff;
+`;
+
+const FootBar = styled.div`
+    width: 100%;
+    height: 2.5rem;
+    background-color: #fff;
+    border-radius: 0 0 .8rem .8rem;
 `;
 
 const Icon = styled.div`

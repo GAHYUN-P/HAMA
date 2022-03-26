@@ -7,10 +7,17 @@ import { getUserId } from "../shared/cookie";
 import {BiSubdirectoryRight} from 'react-icons/bi';
 
 import styled from "styled-components";
+import { userpageActions } from "../redux/modules/userpage";
 
 const UserChild = (props) => {
     const dispatch = useDispatch();
-    const { comment, setComment, commentRef, imgUrl, commentWriterId, commentWriter, commentId, content, modifiedAt } = props
+    const { comment, setComment, commentRef,
+         imgUrl, commentWriterId, commentWriter, commentId, parentId, content, modifiedAt } = props
+        
+    const del = () => {
+        const data = {commentId: commentId, parentId: parentId}
+        dispatch(userpageActions.delCommentsDB(data))
+    }
 
     return(
         <React.Fragment>
@@ -33,6 +40,7 @@ const UserChild = (props) => {
                                         <PairBtn id='edit'
                                         onClick={()=>{
                                             commentRef.current.commentId = commentId;
+                                            commentRef.current.parentId = parentId;
                                             commentRef.current.value = content;
                                             commentRef.current.focus();
                                         }}
@@ -40,7 +48,7 @@ const UserChild = (props) => {
                                         <PairBtn
                                         onClick={()=>{
                                             if(window.confirm('댓글을 삭제하겠습니까?')){
-                                                dispatch()
+                                                del()
                                             }}} >삭제</PairBtn>
                                     </div>}
                                 </UserGrid>

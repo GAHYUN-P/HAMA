@@ -90,10 +90,12 @@ const userpage = createReducer(initialState, {
     state.userinfo = action.payload;
   },
   [setComments] : (state, action) => {
-    state.comments = action.payload;
+    console.log(action.payload);
+    state.comments = action.payload.comments;
+    state.userId = action.payload.userId;
   },
   [addComment] : (state, action) => {
-    state.comments = [action.payload,...state.comments];
+    state.comments = [...state.comments,action.payload];
   },
   [editComment] : (state, action) => {
     state.comments = state.comments.map((c)=>{
@@ -104,24 +106,36 @@ const userpage = createReducer(initialState, {
     })
   },
   [addChild] : (state, action) => {
-    const index = state.comments.indexOf(state.action.parentId);
-    state.comments[index] = [action.payload.child,...state.comments[index]];
-  },
-  [editChild] : (state, action) => {
-    const index = state.comments.indexOf(state.action.parentId);
-    state.comments[index] = state.comments[index].map((c)=>{
-      if(c.id === action.payload.commnetId){
-        return {...c, content: action.payload.content}
+    state.comments = state.comments.map((c)=>{
+      if(c.commentId === action.payload.parentId){
+        return {...c,childComments:[...c.childComments,action.payload.comment]}
       }
       return c
-    });
+    })
+  },
+  [editChild] : (state, action) => {
+    state.comments = state.comments.map((c)=>{
+      if(c.commentId === action.payload.parentId){
+        c.childComments = c.childComments.map((h)=>{
+          if(h.commentId === action.payload.commentId){
+            return {...h, content: action.payload.content}
+          }
+          return h
+        })
+      }
+      return c
+    })
   },
   [delComment] : (state, action) => {
-    state.comments = state.comments.filter((c)=>{return c.id !== action.payload.commnetId})
+    state.comments = state.comments.filter((c)=>{return c.commentId !== action.payload.commentId})
   },
   [delChild] : (state, action) => {
-    const index = state.comments.indexOf(state.action.parentId);
-    state.comments[index] = state.comments[index].filter((c)=>{return c.id !== action.payload.commnetId});
+    state.comments = state.comments.map((c)=>{
+      if(c.commentId === action.payload.parentId){
+        c.childComments = c.childComments.filter((h)=>{return h.commentId !== action.payload.commentId});
+      }
+      return c
+    })
   },
 });
 
@@ -184,15 +198,18 @@ const getUserInfo = (id) => async (dispatch, getState, { history }) => {
 
 const getCommentsDB = (userId) => async (dispatch, getState, {history}) => {
   userpageAPI.getComments(userId)
-  .then(res=>{dispatch(setComments(res.data))})
+  .then(res=>{
+    console.log(res.data);
+    dispatch(setComments(res.data));
+  })
   .catch(err=>{console.log(err)})
 };
 
 const addCommentsDB = (data) => async (dispatch, getState, {history}) => {
   userpageAPI.addComments(data)
-  .then(()=>{
-    if(!data.parentId){dispatch(addComment(data))};
-    if(data.parentId){dispatch(addChild(data))};
+  .then((res)=>{
+    if(!data.parentId){dispatch(addComment(res.data))};
+    if(data.parentId){dispatch(addChild({...data, comment: res.data}))};
   })
   .catch(err=>{console.log(err)})
 };
@@ -207,7 +224,8 @@ const editCommentsDB = (data) => async (dispatch, getState, {history}) => {
 };
 
 const delCommentsDB = (data) => async (dispatch, getState, {history}) => {
-  userpageAPI.delComments(data.commnetId)
+  console.log(data);
+  userpageAPI.delComments(data)
   .then(()=>{
     if(!data.parentId){dispatch(delComment(data))};
     if(data.parentId){dispatch(delChild(data))};

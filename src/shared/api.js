@@ -15,8 +15,6 @@ axios.defaults.baseURL = 'https://jumong.xyz';
 // axios.defaults.baseURL = 'http://13.125.218.107';
 
 
-
-
 const config = {
   headers:{
       'token': getToken(),

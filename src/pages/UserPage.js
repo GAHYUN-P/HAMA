@@ -107,7 +107,7 @@ const UserPage = (props) => {
       <MyanswerList userpage={true} id={id} nickname={nickname}/>
       <div style={{height:'10vh'}}/>
       </MyContents>
-      {/* <UserCommentList /> */}
+      <UserCommentList Id={id} />
     </Wrap>
     <Footer />
     </React.Fragment>
