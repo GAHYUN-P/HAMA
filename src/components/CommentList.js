@@ -17,6 +17,7 @@ const CommentList = (props) => {
     const dispatch = useDispatch();
     const { videoRef } =props;
     const commentArray = useSelector(state => state.answer.comments);
+    console.log(commentArray);
     const {videoUrl} = useSelector(state => state.answer.answer);
 
     const [comment,setComment] = useState('');

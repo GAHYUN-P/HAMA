@@ -11,13 +11,15 @@ import styled from 'styled-components';
 const AnswerCard = (props) => {
     const { requestWriterId, answerWriter, modifiedAt, title, commentCount, answerId, imageCount, answerLikeCount, imgUrl, star } = props;
 
-
+    const profileOnClick = () => {
+        history.replace(`/userpage/${requestWriterId}`);
+    };
 
     return(
         <React.Fragment>
             <CardContainer>
                 {/* 프로필 사진 공간 */}
-                <HippoContainer>
+                <HippoContainer onClick={profileOnClick}>
                     <ProHippo src={imgUrl} />
                 </HippoContainer>
 

@@ -3,6 +3,7 @@ import React,{ useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { childActions } from '../redux/modules/child';
 import { getUserId, getToken } from '../shared/cookie';
+import { history } from '../redux/configureStore';
 
 import Header from '../components/Header';
 import CommentInput from '../components/CommentInput';
@@ -18,7 +19,9 @@ const ChildComment = (props) => {
     const [comment,setComment] = useState('');
     const parentId = props.match.params.commentId;
     const parent = useSelector(state => state.child.parentComment);
+    console.log(parent);
     const childs = useSelector(state => state.child.childComments);
+    console.log(childs);
 
     React.useEffect(()=>{
         if(parentId !== parent.commentId){
@@ -55,18 +58,26 @@ const ChildComment = (props) => {
         commentRef.current.commentId = undefined;
     };
 
+    const profileOnClick = () => {
+        history.push(`/userpage/${parent.commentWriterId}`)
+    };
+
+    const childProfileOnClick = () => {
+        history.push(`/userpage/${childs.commentWriterId}`)
+    };
+
     return(
         <React.Fragment>
             <Header />
             <WholeGrid>
                 {/* 부모댓글 */}
                 <Grid>
-                    <div>
+                    <div onClick={profileOnClick}>
                         <ProHippo src={parent.imgUrl} />
                     </div>
                     <div style={{width:'100%'}} >
 
-                        <CWrieter> 
+                        <CWrieter onClick={profileOnClick}> 
                             {parent.commentWriter}
                         </CWrieter>
 
@@ -98,11 +109,11 @@ const ChildComment = (props) => {
 
                         <ChildGrid>
                             <div> 
-                                <ProHippo src={k.imgUrl} />
+                                <ProHippo src={k.imgUrl} onClick= {() => {history.push(`/userpage/${k.commentWriterId}`)}}/>
                             </div>
                             <div style={{width:'100%'}} >
                                 <UserGrid>
-                                    <CWrieter>
+                                    <CWrieter onClick= {() => {history.push(`/userpage/${k.commentWriterId}`)}}>
                                         {k.commentWriter}
                                     </CWrieter>
                                     {k.commentWriterId === Number(getUserId())  &&
