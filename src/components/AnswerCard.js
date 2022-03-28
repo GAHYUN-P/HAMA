@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 const AnswerCard = (props) => {
     const { requestWriterId, answerWriter, modifiedAt, title, commentCount, answerId, imageCount, answerLikeCount, imgUrl, star } = props;
-
+    
     const profileOnClick = () => {
         history.replace(`/userpage/${requestWriterId}`);
     };
@@ -28,6 +28,7 @@ const AnswerCard = (props) => {
                  onClick={()=>{history.push(`/answerdetail/${answerId}`)}}>
                     <TitleDiv>
                         {title}
+                        {/* 평가 완료가 된 글일 경우 나타나는 평가완료 버튼의 조건식 */}
                         { alreadyRated(requestWriterId, star) &&
                         <Rated>평가완료</Rated>}
                     </TitleDiv>
