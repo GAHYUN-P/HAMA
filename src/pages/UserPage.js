@@ -13,11 +13,9 @@ import colorBg from '../assets/colorBg.png';
 import ProfileImg from '../elements/ProfileImg';
 import SurveyWrite from '../assets/SurveyWrite.svg';
 import gotoTest from '../assets/gotoTest.svg';
-import { IoIosArrowForward } from "react-icons/io";
 import Expert from '../components/Expert';
 import { categoryEncoder } from '../shared/categoryEncoder';
 import { BsChevronDoubleRight } from "react-icons/bs";
-import UserCommentList from '../components/UserCommentList';
 
 const UserPage = (props) => {
 
