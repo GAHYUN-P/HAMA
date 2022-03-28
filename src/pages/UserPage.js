@@ -7,7 +7,6 @@ import Medal from '../components/Medal';
 import MypostList from '../components/MypostList';
 import MyanswerList from '../components/MyanswerList';
 import Header from '../components/Header';
-import { history } from '../redux/configureStore';
 import Footer from '../components/Footer';
 import colorBg from '../assets/colorBg.png';
 import ProfileImg from '../elements/ProfileImg';

@@ -15,8 +15,6 @@ import { history } from '../redux/configureStore';
 // Pages
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
-import Chatting from '../pages/Chatting';
-import Signup from '../pages/Signup';
 import Answer from '../pages/Answer';
 import AnswerEdit from '../pages/AnswerEdit';
 import AnswerDetail from '../pages/AnswerDetail';
@@ -31,7 +29,6 @@ import ImageViewer from '../pages/ImageViewer';
 
 // component
 import Home from '../pages/Home';
-import PasswordFind from '../pages/PasswordFind';
 import UserInfo from '../pages/UserInfo';
 import Survey from '../pages/Survey';
 import SurveyResult from '../pages/SurveyResult';
@@ -43,7 +40,6 @@ import Notice from '../pages/Notice';
 import DevInfo from '../pages/DevInfo';
 import HMpost from '../pages/HMpost';
 import UserPage from '../pages/UserPage';
-import Test from '../pages/Test';
 import UserpageDetail from '../pages/UserpageDetail';
 
 function App() {
