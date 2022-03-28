@@ -13,11 +13,9 @@ import colorBg from '../assets/colorBg.png';
 import ProfileImg from '../elements/ProfileImg';
 import SurveyWrite from '../assets/SurveyWrite.svg';
 import gotoTest from '../assets/gotoTest.svg';
-import { IoIosArrowForward } from "react-icons/io";
 import Expert from '../components/Expert';
 import { categoryEncoder } from '../shared/categoryEncoder';
 import { BsChevronDoubleRight } from "react-icons/bs";
-import UserCommentList from '../components/UserCommentList';
 
 const UserPage = (props) => {
 
@@ -97,6 +95,7 @@ const UserPage = (props) => {
         {achievement_list.map((info, idx) => {
                   return (
                     <Medal
+                      key={idx}
                       value = {info}
                       idx= {idx}
                       />
@@ -107,7 +106,7 @@ const UserPage = (props) => {
       <MyanswerList userpage={true} id={id} nickname={nickname}/>
       <div style={{height:'10vh'}}/>
       </MyContents>
-      {/* <UserCommentList /> */}
+      {/* <UserCommentList Id={id} /> */}
     </Wrap>
     <Footer />
     </React.Fragment>

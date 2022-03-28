@@ -8,6 +8,7 @@ import { getPage } from '../shared/getPages';
 
 import AlarmBadge from './AlarmBadge';
 import Popup from './Popup';
+import UserCommentList from './UserCommentList';
 
 import logo from '../assets/logo_final.svg';
 
@@ -68,6 +69,17 @@ const Header = (props) => {
         <FiMoreHorizontal onClick={()=>{setOpen(true)}} id='hor'/>
       </MGrid>
         {open && <Popup visible={open} closePopup={closePopup} />}
+      </React.Fragment>
+    )
+  }
+
+  if(pathname.split('/')[1] === 'userpage'){
+    return(
+      <React.Fragment>
+        <MGrid>
+        <FiChevronLeft onClick={GoBack} id='che'/>
+        유저 페이지
+      </MGrid>
       </React.Fragment>
     )
   }

@@ -7,54 +7,62 @@ import { getUserId } from "../shared/cookie";
 import {BiSubdirectoryRight} from 'react-icons/bi';
 
 import styled from "styled-components";
+import { userpageActions } from "../redux/modules/userpage";
 
 const UserChild = (props) => {
     const dispatch = useDispatch();
-    const { comment, setComment, commentRef, imgUrl, commentWriterId, commentWriter, commentId, content, modifiedAt } = props
+    const { comment, setComment, commentRef,
+         imgUrl, commentWriterId, commentWriter, commentId, parentId, content, modifiedAt } = props
+        
+    const del = () => {
+        const data = {commentId: commentId, parentId: parentId}
+        dispatch(userpageActions.delCommentsDB(data))
+    }
 
     return(
         <React.Fragment>
             <Grid>
-                        <Icon>
-                            <BiSubdirectoryRight/>
-                        </Icon>
+                <Icon>
+                    <BiSubdirectoryRight/>
+                </Icon>
 
-                        <ChildGrid>
-                            <div> 
-                                <ProHippo src={imgUrl} />
-                            </div>
-                            <div style={{width:'100%'}} >
-                                <UserGrid>
-                                    <CWrieter>
-                                        {commentWriter}
-                                    </CWrieter>
-                                    {commentWriterId === getUserId()  &&
-                                    <div style={{display:'flex'}} > 
-                                        <PairBtn id='edit'
-                                        onClick={()=>{
-                                            commentRef.current.commentId = commentId;
-                                            commentRef.current.value = content;
-                                            commentRef.current.focus();
-                                        }}
-                                        >수정</PairBtn>
-                                        <PairBtn
-                                        onClick={()=>{
-                                            if(window.confirm('댓글을 삭제하겠습니까?')){
-                                                dispatch()
-                                            }}} >삭제</PairBtn>
-                                    </div>}
-                                </UserGrid>
-                                <div>
-                                    <ContentDiv>
-                                        {content}
-                                    </ContentDiv>
-                                    <TimeSet>
-                                        {modifiedAt}
-                                    </TimeSet>
-                                </div>
-                            </div>
-                        </ChildGrid>
-                    </Grid>
+                <ChildGrid>
+                    <div> 
+                        <ProHippo src={imgUrl} />
+                    </div>
+                    <div style={{width:'100%'}} >
+                        <UserGrid>
+                            <CWrieter>
+                                {commentWriter}
+                            </CWrieter>
+                            {commentWriterId === getUserId()  &&
+                            <div style={{display:'flex'}} > 
+                                <PairBtn id='edit'
+                                onClick={()=>{
+                                    commentRef.current.commentId = commentId;
+                                    commentRef.current.parentId = parentId;
+                                    commentRef.current.value = content;
+                                    commentRef.current.focus();
+                                }}
+                                >수정</PairBtn>
+                                <PairBtn
+                                onClick={()=>{
+                                    if(window.confirm('댓글을 삭제하겠습니까?')){
+                                        del()
+                                    }}} >삭제</PairBtn>
+                            </div>}
+                        </UserGrid>
+                        <div>
+                            <ContentDiv>
+                                {content}
+                            </ContentDiv>
+                            <TimeSet>
+                                {modifiedAt}
+                            </TimeSet>
+                        </div>
+                    </div>
+                </ChildGrid>
+            </Grid>
         </React.Fragment>
     )
 };
@@ -95,6 +103,7 @@ const ProHippo = styled.img`
 
 const CWrieter = styled.div`
     font-size: ${({theme})=> theme.fontSizes.small};
+    color: #666;
 `;
 
 const ContentDiv = styled.div`

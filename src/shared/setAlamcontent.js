@@ -50,6 +50,15 @@ const setAlamContent = (data)=> {
             )
         }
 
+    };
+    // 방명록 작성 알람
+    if(alarmType === 'commentMP'){
+        return(
+            <Crid>
+                {senderNickName}님이 방명록에 [{title}]이라는 글을 남겼습니다.
+                <Time>{modifiedAt}</Time>
+            </Crid>
+        )
     }
     // 업적 달성 시
     if(alarmType === 'achieve'){
@@ -59,7 +68,7 @@ const setAlamContent = (data)=> {
                 <Time>{modifiedAt}</Time>
             </Crid>
         )
-    }
+    };
     // 답변작성 완료 시
     if(alarmType === 'answerC'){
         return(
@@ -174,13 +183,13 @@ const MoveTo = (alarmType,id) => {
     if(alarmType === 'child'){
         history.push(`/comment/${id}`);
     }
-    if(alarmType === 'level'){
+    if(alarmType === 'level' || alarmType === 'commentMP' ){
         history.push('/mypage');
     }
     if(alarmType === 'achieve'){
         history.push('/mypage_achievement');
     }
-    return
+    return;
 }
 
-export { setAlamContent, MoveTo }
+export { setAlamContent, MoveTo };

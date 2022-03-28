@@ -20,7 +20,7 @@ const RequestCenter = (props) => {
     const pushlike = () => {
         if(plzLogin()){return}
         dispatch(postActions.pushLikeDB(props.request.postId));
-    }
+    };
 
     return (
         <React.Fragment>

@@ -10,23 +10,27 @@ import { getUserId } from "../shared/cookie";
 import styled from "styled-components";
 
 const UserComment = (props) => {
-    const { commentWriterId, commentWriter, content, modifiedAt, imgUrl, set } = props;
+    const { commentId, commentWriterId, commentWriter, content, modifiedAt, imgUrl, childComments, set } = props;
     const dispatch = useDispatch();
+
+    console.log(commentId);
 
     // 댓글 삭제 요청
     const delcom = () => {
         const data = {
-            commentId: props.commentId,
+            commentId: commentId,
         }
-        dispatch();
+        dispatch(userpageActions.delCommentsDB(data));
     };
 
     // 댓글 수정 준비
     const _setEdit = () => {
         set.setComment(props.content);
-        set.commentRef.current.commentId = props.commentId;
+        set.commentRef.current.commentId = commentId;
         set.commentRef.current.focus();
     };
+
+    console.log(childComments);
 
     return(
         <React.Fragment>
@@ -56,13 +60,18 @@ const UserComment = (props) => {
                         {modifiedAt}
                     </TimeSet>
 
-                    <ChildOpen onClick={()=>{}} >
+                    <ChildOpen
+                    id='edit'
+                     onClick={()=>{
+                        set.commentRef.current.parentId = commentId;
+                        set.commentRef.current.focus();
+                    }}>
                         답글쓰기
                     </ChildOpen>
                 </div>
             </Grid>
             <Grid>
-                {[1,2].map((c,i)=>{return <UserChild {...set} />})}
+                {childComments.map((c,i)=>{return <UserChild key={i} parentId={commentId} {...c} {...set} />})}
             </Grid>
         </React.Fragment>
     )
@@ -100,6 +109,7 @@ const PairBtn = styled.button`
 
 const CWrieter = styled.div`
     font-size: ${({theme})=> theme.fontSizes.small};
+    color: #666;
 `;
 
 const ContentDiv = styled.div`

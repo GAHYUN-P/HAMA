@@ -22,8 +22,6 @@ const RequestDetail = (props) => {
     const postId = Number(props.match.params.postId);
     
     const { request, likeUserIdList, answers } = useSelector(state => state.post);
-    
-    console.log(request);
 
     React.useEffect(()=>{
         dispatch(postActions.getOneRequest(postId));
