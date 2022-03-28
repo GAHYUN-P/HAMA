@@ -1,4 +1,4 @@
-const Kakao_key = process.env.REACT_APP_KAKAO_KEY;
+const Kakao_key = 'e3318b36c5ba53a829554c965958bdb9';
 const image = 'https://minki-bucket.s3.ap-northeast-2.amazonaws.com/static/sweet2.png';
 let url = window.location.href.split('result')[0];
 
