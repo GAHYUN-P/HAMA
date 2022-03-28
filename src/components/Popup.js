@@ -13,7 +13,7 @@ import { wsDisConnect } from '../shared/socket';
 const Popup = (props) => {
   const dispatch = useDispatch();
   const { closePopup, visible } = props;
-  const { connected } = useSelector(state => state.alarm)
+  const { connected } = useSelector(state => state.alarm);
 
   const LogOut = () => {
     if(connected){
@@ -42,9 +42,9 @@ const Popup = (props) => {
   return (
     <PopupOverlay>
       <PopupInner ref={popupInside}>
-        <Btn onClick={()=>{history.push('/notice')}} >공지사항</Btn>
-        <Btn onClick={()=>{history.push('/developer')}} >개발자들</Btn>
-        <Btn onClick={LogOut} >로그아웃</Btn>
+        <Btn borderR='.8rem .8rem 0 0' onClick={()=>{history.push('/notice')}} >공지사항</Btn>
+        <Btn borderR='0 0 0 0' onClick={()=>{history.push('/developer')}} >개발자들</Btn>
+        <Btn borderR='0 0 .8rem .8rem' onClick={LogOut} >로그아웃</Btn>
       </PopupInner>
     </PopupOverlay >
   )
@@ -83,7 +83,7 @@ const Btn = styled.button`
   height: 100%;
   border: none;
   border-bottom: .1rem solid #dcdcdc;
-  border-radius: .8rem;
+  border-radius: ${props => props.borderR};
   background-color: #fff;
   color: #ff7a7a;
   font-size: ${({theme})=> theme.fontSizes.lg};

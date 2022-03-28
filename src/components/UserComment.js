@@ -109,6 +109,7 @@ const PairBtn = styled.button`
 
 const CWrieter = styled.div`
     font-size: ${({theme})=> theme.fontSizes.small};
+    color: #666;
 `;
 
 const ContentDiv = styled.div`

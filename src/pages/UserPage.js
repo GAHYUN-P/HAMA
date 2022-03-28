@@ -97,6 +97,7 @@ const UserPage = (props) => {
         {achievement_list.map((info, idx) => {
                   return (
                     <Medal
+                      key={idx}
                       value = {info}
                       idx= {idx}
                       />

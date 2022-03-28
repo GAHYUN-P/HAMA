@@ -16,7 +16,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import Expert from '../components/Expert';
 import { categoryEncoder } from '../shared/categoryEncoder';
 import { BsChevronDoubleRight } from "react-icons/bs";
-
+import UserCommentList from '../components/UserCommentList';
+import { getUserId } from '../shared/cookie'; 
 
 const Mypage = (props) => {
 
@@ -107,6 +108,7 @@ const Mypage = (props) => {
       <MyanswerList mypage={true}/>
       <div style={{height:'10vh'}}/>
       </MyContents>
+      <UserCommentList Id={getUserId()} />
     </Wrap>
     <Footer />
     </React.Fragment>

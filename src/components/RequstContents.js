@@ -4,8 +4,6 @@ import { history } from '../redux/configureStore';
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../redux/modules/post";
 
-import { getUserId } from "../shared/cookie";
-
 import Viewer from "./Viewer";
 import { requestCanEdit } from "../shared/conditions";  
 import { categoryEncoder } from '../shared/categoryEncoder';
