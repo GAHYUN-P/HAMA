@@ -16,8 +16,9 @@ axios.defaults.baseURL = 'https://jumong.xyz';
 
 
 const config = {
-  headers:{
+  headers: {
       'token': getToken(),
+      // 'token': null,
   } 
 }
 

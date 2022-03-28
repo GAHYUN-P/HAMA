@@ -64,12 +64,13 @@ const UserInfo = (props) => {
     // 데이터 체크 한 번 할 것
     if(infoCheck(data,same)){return};
 
+    
     userAPI.userInfo(data)
-    .then(()=>{
+      .then(()=>{
       setFalse()
       history.replace('/')
     })
-    .catch(err=>{console.log(err)})
+    .catch((err)=>{console.log(err)})
   }
 
   

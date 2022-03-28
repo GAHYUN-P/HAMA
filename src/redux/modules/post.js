@@ -3,6 +3,7 @@ import axios from 'axios';
 import { deleteCookie, setCookie } from '../../shared/cookie';
 import { postAPI, requestAPI, imgAPI } from '../../shared/api';
 import { getUserId } from '../../shared/cookie';
+import { userActions } from './user';
 
 export const initialState = {
     list: [],
@@ -121,8 +122,17 @@ const makeRequest = (data) => async (dispatch, getState, {history}) => {
         history.replace(`/requestdetail/${res.data}`);
         dispatch(setLoading());        
     } catch (error) {
-        console.log(error);
-        alert(error.response.data.errorMessage);
+        // console.log(error.response.status);
+        // 이 status가 400 아니면 500이면 다시 로그인시켜라
+        if(error.response.status === 400) {
+            window.alert('비정상적인 접근입니다. 다시 로그인 해주세요');
+            dispatch(userActions.logout());
+            window.location.href='/login';
+            // console.log('400에러임');
+        } else {
+            console.log('예상치 못한 에러가 발생했습니다.');
+        }
+        // alert(error.response.data.errorMessage);
     }
 }
 
