@@ -7,7 +7,6 @@ import CommentInput from "./CommentInput";
 import UserComment from "./UserComment";
 
 import { BsXCircle } from 'react-icons/bs';
-import { BiMessageEdit, BiMessageAltEdit } from 'react-icons/bi';
 
 import styled, {keyframes} from "styled-components";
 

@@ -1,7 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 
-import MainHama from '../assets/rehama.png';
-import logo from '../assets/logo_final.svg';
 import loading from '../assets/loading_2.gif';
 import loading_5 from '../assets/loading_5.svg';
 
@@ -9,8 +7,6 @@ import styled, { keyframes } from "styled-components";
 
 const WaitForAMoment = (props) => {
     const { is_loading } = props;
-
-    
 
     if(is_loading){
         return(

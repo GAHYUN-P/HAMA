@@ -17,10 +17,12 @@ import poor_c from '../assets/poor_c.svg'
 const RequestContents = (props) => {
     const dispatch = useDispatch();
     const { category, title, level, content, fileList, nickname, modifiedAt,
-            postId, timeSet, user_id } = props;
-
+        postId, timeSet, user_id } = props;
+        // 마감 상태를 따로 리덕스로 가져온 이유는 props로 넘겨받는 데이터로는 
+        // 실제 state로 삼을 수 없기에 컴포넌트 상 변화가 일어나지 않기 때문임  
     const _conclusion = useSelector(state => state.post.request.status);
 
+    // 마감 버튼을 누르면 발동하는 함수
     const conclusion = () => {
         if(window.confirm('마감을 누르시면 되돌릴 수 없습니다. 마감하시겠습니까?')){
             dispatch(postActions.concluseRequestDB(postId));
@@ -40,11 +42,14 @@ const RequestContents = (props) => {
                     <div style={{ display:'flex' }} >
                         <TimeLimit>{timeSet}</TimeLimit>
                         <LevelBox>
+                            {/* 난이도에 따라 나오는 이미지가 달라짐 */}
                             {level === '상' && <LevelImg url={good_c} /> }
                             {level === '중' && <LevelImg url={fair_c} /> }
                             {level === '하' && <LevelImg url={poor_c} /> }
                         </LevelBox>
                     </div>
+                    {/* 요청글을 수정 및 마감을 할 수 있는 조건식: 마감이 되지않고 해당글을 작성한
+                    유저여야만 수정 및 마감을 할 수 있음 */}
                     {requestCanEdit(_conclusion,user_id) &&
                     <div style={{ display:'flex' }} >
                         <BtnPair onClick={conclusion} style={{marginRight:'0.4rem'}} >마감</BtnPair>

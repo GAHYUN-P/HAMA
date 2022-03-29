@@ -19,13 +19,14 @@ import styled from "styled-components";
 
 const AnswerContent = (props) => {
     const dispatch = useDispatch();
-    // 이미지 리스트
     const { videoRef, fileList, videoUrl, answerId, answerWriterId, imgUrl } = props;
 
-    // 좋아요 작용
+    // 리덕스 상 따로 빼온 이유는 props로 전달받은 인자로는 화면상 변화가 일어나지않기 때문임
     const likeList = useSelector(state => state.answer.answer.likeUserList);
 
+    // 좋아요 버튼을 누를 시 작동하는 함수
     const push = () => {
+        // 로그인 요청 식
         if(plzLogin()){return}
         const data = {
             answerId: props.answerId,
@@ -34,8 +35,11 @@ const AnswerContent = (props) => {
         dispatch(answerActions.pushLikeDB(data));
     }
 
+    // 답변글 삭제 버튼을 누를 시 작동하는 함수
     const delAnswer =() => {
-        dispatch(answerActions.deleteAnswerDB(answerId));
+        if(window.confirm('정말로 삭제하시겠습니까?')){
+            dispatch(answerActions.deleteAnswerDB(answerId));
+        }
     }
 
     return (
@@ -45,6 +49,7 @@ const AnswerContent = (props) => {
                 <div style={{display:'flex',justifyContent:'space-between'}} >
                     <div>
                         <CategoryTitle>
+                            {/* 영어로 전달받은 카테고리를 다시 한글로 바꿔주는 함수 */}
                             {categoryEncoder(props.category)}
                         </CategoryTitle>
                         <ContentTitle>
@@ -53,6 +58,7 @@ const AnswerContent = (props) => {
                     </div>
 
                     <Likebtn onClick={push}
+                    // 좋아요를 했는지 판단해주는 함수 이에 따라 버튼의 뷰가 달라짐
                     bg={IsLike(likeList) ? '#efefef' : '#fff'}
                     fc={IsLike(likeList) ? '#ff7a7a' : '#9e9e9e'}>
                         {IsLike(likeList) ?<FaHeart /> : <FiHeart />}
@@ -63,6 +69,8 @@ const AnswerContent = (props) => {
                 {/* 중단 */}
                 <CenterGrid>
                     <WriteUser profile={imgUrl} writer={props.answerWriter} modifiedAt={props.modifiedAt} answerWriterId={props.answerWriterId}/>
+                    {/* 요청글의 수정삭제 판단해주는 식에 마감 부분을 opened로 고정하여 답변글 작성자만이
+                    수정 삭제할 수 있는 조건식으로 사용 */}
                     { requestCanEdit('opened',answerWriterId) &&
                     <div>
                         <BtnPair style={{marginRight:'0.4rem'}} onClick={()=>{history.push(`/answeredit/${props.answerId}`)}} >수정</BtnPair>
@@ -75,7 +83,7 @@ const AnswerContent = (props) => {
                     <ContentBox>
                         {props.content}
                     </ContentBox>
-                    
+                    {/*  영상 또는 이미지를 보여주는 뷰어 is_answer에 따라 보여주는 점이 달라짐 */}
                     <Viewer type='answer' id={answerId} videoRef={videoRef} fileList={fileList} video={videoUrl} is_answer/>
                 </div>
 
