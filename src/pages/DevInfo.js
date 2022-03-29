@@ -12,8 +12,6 @@ import yt from '../assets/yt.svg';
 import sh from '../assets/sh.svg';
 import mk from '../assets/mk.svg';
 
-import { FiMail } from "react-icons/fi";
-
 
 const DevInfo = (props) => {
 

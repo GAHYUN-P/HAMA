@@ -1,4 +1,4 @@
-import React,{ useState, useRef } from 'react';
+import React from 'react';
 
 import Header from '../components/Header';
 import ImageDetail from '../components/ImageDetail';
@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ImageViewer = (props) => {
     const dispatch = useDispatch();
+
+    // image, index 불러오기
     const { viewerImages, idx } = useSelector((state)=>state.image)
     const { type,id } = props.match.params;
 

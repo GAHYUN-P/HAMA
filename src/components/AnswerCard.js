@@ -12,7 +12,7 @@ const AnswerCard = (props) => {
     const { requestWriterId, answerWriter, modifiedAt, title, commentCount, answerId, imageCount, answerLikeCount, imgUrl, star } = props;
     
     const profileOnClick = () => {
-        history.replace(`/userpage/${requestWriterId}`);
+        history.replace(`/userpage/${answerWriter}`);
     };
 
     return(

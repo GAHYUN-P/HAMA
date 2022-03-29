@@ -6,7 +6,6 @@ import { connectRouter } from 'connected-react-router';
 
 // Modules
 import User from './modules/user';
-import Chat from './modules/chat';
 import Header from './modules/header';
 import Util from './modules/util';
 import image from './modules/image';
@@ -27,7 +26,6 @@ export const history = createBrowserHistory();
 // export한 Reducer를 모으기
 const rootReducer = combineReducers({
   user: User,
-  chat: Chat,
   header: Header,
   util: Util,
   image: image,
