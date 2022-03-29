@@ -1,4 +1,4 @@
-import React, {useState,useRef} from 'react';
+import React, { useRef } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux'; 
 import { answerActions } from '../redux/modules/answer';

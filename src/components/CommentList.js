@@ -15,21 +15,33 @@ import styled from 'styled-components';
 
 const CommentList = (props) => {
     const dispatch = useDispatch();
+    // 영상과 댓글의 연계를 도와줄 videoRef
     const { videoRef } =props;
+    // 댓글의 배열과 영상의 유무를 알게해 줄 videoUrl
     const commentArray = useSelector(state => state.answer.comments);
-    console.log(commentArray);
-    const {videoUrl} = useSelector(state => state.answer.answer);
+    const { videoUrl } = useSelector(state => state.answer.answer);
 
+    // 댓글 작성과 작성 수정의 역할을 도와줄 commentRef
     const [comment,setComment] = useState('');
+    // ref로 작성과 수정을 나눈 이유는 스테이트가 아니기에 리렌더링에 다른 영향을 
+    // 끼치지않았기 때문이다.
     const commentRef = useRef();
 
+    // 영상의 유무에 따라 placeholder는 타임스탬프를 쓸 수 있는지 없는지 
+    // 알려주어야 하기에 조건식을 걸어줌
     const placeholder = videoUrl ? '00:00(타임 스탬프)댓글을 작성해 주세요.' : '댓글을 작성해주세요';
 
     const add = () => {
+        // 댓글의 내용이 없다면 작성할 수 없음(수정이든 작성이든)
         if(!commentRef.current.value){return}
         
+        // 영상이 있다면 타임스탬프를 얻어야 하기에 getTimeStamp함수를 사용 
+        // 타임스탬프를 얻는 로직이 알고싶다면 separator를 참조할 것
         const timeStamp = videoUrl ? getTimeStamp(commentRef.current.value) : null;
 
+        // 현재 commentRef에 따로 설정된 commentId가 있다면 이는 댓글 수정을 의미함
+        // 따로 boolean값으로 판단하지 않은 것은 undefined로 판단할 때만 내 선에서 
+        // 통제 가능했기 때문
         if(commentRef.current.commentId !== undefined){
             // 수정요청
             const data = {
@@ -41,7 +53,7 @@ const CommentList = (props) => {
             cancel()
             return
         }
-        // 작성요청
+        // 현재 commentRef에 따로 설정된 commentId가 없다면 이는 댓글 작성을 의미함
         const data = {
             comment: commentRef.current.value,
             timestamp: timeStamp,
@@ -51,6 +63,7 @@ const CommentList = (props) => {
         cancel()
     };
 
+    // 댓글 작성 또는 수정 후 commentRef를 초기화 시켜주는 함수
     const cancel = () => {
         setComment('')
         commentRef.current.value = '';
@@ -59,6 +72,7 @@ const CommentList = (props) => {
 
     return (
         <React.Fragment>
+            {/* 댓글은 현재 로그인한 상태일 때만 작성할 수 있음 */}
             { getToken() &&
             <CommentInput 
             commentRef={commentRef}
@@ -84,6 +98,7 @@ const CommentList = (props) => {
 
             <CommentGrid>
                 {commentArray.map((c,i)=>{
+                    // 영상 유무에 따라 videoRef를 넘겨줄지 말지 정함
                     return(<AnswerComments
                          videoRef={videoUrl ? videoRef : null}
                          setComment={setComment}

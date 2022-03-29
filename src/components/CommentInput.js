@@ -6,36 +6,50 @@ import styled from 'styled-components';
 
 const CommentInput = (props) => {
     const { commentRef, comment, setComment, type, placeholder, add, is_child } = props;
+    // 댓글창의 범위를 지정하기 위한 ref
     const inputRef = useRef();
 
+    // 댓글창의 범위를 벗어나면 작동하는 함수
     const Cancel = () => {
+        // 확인을 한 후 확인을 누른다면 내용 초기화
             if(window.confirm('작성을 취소하시겠습니까?')){
+                // 댓글창 내용 초기화
                 setComment('')
                 commentRef.current.value = '';
+                // 수정을 위한 댓글의 아이디 초기화
                 commentRef.current.commentId = undefined;
+                // 대댓글 작성을 위한 부모댓글의 아이디 초기화
                 commentRef.current.parentId = undefined;
                 return
             }
+            // 취소를 누른다면 다시 댓글창에 포커스
             commentRef.current.focus();
     }
 
+    // 댓글창의 범위를 감지하기 위한 함수
     const clickOutside = ({target}) => {
-        // 수정버튼을 눌렀을 경우는 예외처리
+        // 수정버튼을 누를 경우 타겟팅에서 제외되어 무조건 cancel이 작동
+        // 이를 예외처리하기 위하여 수정 버튼에는 전부 id값을 주었고 
+        // target의 id값이 edit이면 예외처리가 되도록 해주었음
         if(target?.id === 'edit'){return};
+        // target에 댓글창이 없다면 작동
         if(!inputRef.current?.contains(target)){
-            // 댓글 내용이 없거나 수정을 위한 아이디가 없을 때는 그냥 나가기
+            // 만일 댓글 내용이 없거나 수정을 위한 아이디 또는 대댓글 작성을 위한 부모댓글이 없을 때는 작동 방지
             if(!commentRef.current?.value && !commentRef.current?.commentId && !commentRef.current?.parentId){return}
             Cancel();
         }
     }
 
     React.useEffect(()=>{
+        // 클릭이벤트를 구독하여 댓글창 이외를 누르면 clickOutside가 작동하도록 구성 
         window.addEventListener("click", clickOutside);
         return () => {
+            // 컴포넌트가 사라지면 구독해제
             window.removeEventListener("click", clickOutside);
         };
     },[]);
 
+    // 일반댓글창
     if(!is_child){
         return(
             <InputGrid ref={inputRef} >
@@ -52,6 +66,7 @@ const CommentInput = (props) => {
         )
     }
 
+    // 대댓글 댓글창
     return(
         <WholeGrid>
             <Back ref={inputRef} >

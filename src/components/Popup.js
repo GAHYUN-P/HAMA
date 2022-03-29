@@ -12,10 +12,16 @@ import { wsDisConnect } from '../shared/socket';
 // 채팅방 생성 창
 const Popup = (props) => {
   const dispatch = useDispatch();
-  const { closePopup, visible } = props;
+  // 영역을 설정하기 위한 ref
+  const popupInside = React.useRef();
+  // 열린 팝업을 닫기위한 함수
+  const { closePopup } = props;
+  // 현재 상태에서 소켓과 연결되어있는지 체크하기위한 스테이트
   const { connected } = useSelector(state => state.alarm);
 
+  // 로그아웃을 하기위한 함수
   const LogOut = () => {
+    // 소켓과 연결되어 있다면 소켓 구독해지를 해주는 함수
     if(connected){
       wsDisConnect();
     }
@@ -24,14 +30,14 @@ const Popup = (props) => {
     window.location.href = '/';
   }
 
-  const popupInside = React.useRef();
-  //  바깥 클릭시 팝업 끄기
+  // ref로 지정한 영역 외를 누르면 작동하는 함수
   const clickOutside = ({ target }) => {
     if (!popupInside.current?.contains(target)) {
       closePopup()
     }
   }
 
+  // clickOutside를 이벤트 리스너 클릭으로 구독함
   React.useEffect(() => {
     window.addEventListener("click", clickOutside);
     return () => {

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
 
 import { imgActions } from "../redux/modules/image";
-import { imgAPI } from "../shared/api";
 import { useDispatch, useSelector } from "react-redux";
 
 import pre_video from '../assets/video.svg';
@@ -13,16 +12,22 @@ import styled from "styled-components";
 
 const VideoUploader = (props) => {
     const dispatch = useDispatch();
+    // videoPreview: 비디오의 프리뷰
+    // videouploading: 비디오가 업로드 중인지 알려주는 state
     const { videoPreview, videouploading } = useSelector(state => state.image);
+    // 비디오를 업로드하기위한 input의 ref
     const videoRef = React.useRef();
+    // 수정페이지인지 아닌지 판단하기 위한 props
     const is_edit = props.is_edit;
     
+    // 인풋에 비디오를 골랐을 때 작동하는 함수 
     const change = () => {
         const file = videoRef.current.files[0];
         
         if(file){
+            // 100메가바이트 이상의 파일들은 올리지 못함
             if(fileSize(file.size)){return}
-
+            // dataUrl로 만들어서 리덕스 상의 videoPreview에 넣어줌
             const prevideo = URL.createObjectURL(file);
             const data = {file,prevideo}
             dispatch(imgActions.setVideo(data));
@@ -31,9 +36,11 @@ const VideoUploader = (props) => {
         console.log('not get');
     }
 
+    // 수정 페이지일 때 작동하는 함수 
     const edit = () => {
         const file = videoRef.current.files[0];
         if(file){
+            // 따로 dataUrl로 만들지않고 바로 서버에 저장하는 요청을 넣음
             const formdata = new FormData();
             formdata.append('file',null);
             formdata.append('video',file);

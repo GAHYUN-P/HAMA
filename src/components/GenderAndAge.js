@@ -5,12 +5,14 @@ import ToggleBox from '../components/ToggleBox';
 import styled from 'styled-components';
 
 const GenderAndAge = (props) => {
+  // 나이와 성별의 스테이트를 프롭스로 받아와서 사용
     const { age, gender, setAge, setGender } = props;
 
     return(
         <GandA>
           <div>
             <InvidPart>성별</InvidPart>
+            {/* 토글 박스에 다시금 넘겨주어 성별을 정하는 기능을 최종적으로 사용함 */}
             <ToggleBox gender={gender} setGender={setGender} />
           </div>
           <div>

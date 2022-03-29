@@ -10,12 +10,13 @@ import { getUserId } from "../shared/cookie";
 import styled from "styled-components";
 
 const UserComment = (props) => {
+    // 댓글 하나의 데이터를 넘겨받음
+    // childComments: 해당 댓글이 지니고 있는 대댓글들의 리스트
+    // set: 댓글인풋의 접근하기 ref와 스테이트를 넘겨받음
     const { commentId, commentWriterId, commentWriter, content, modifiedAt, imgUrl, childComments, set } = props;
     const dispatch = useDispatch();
 
-    console.log(commentId);
-
-    // 댓글 삭제 요청
+    // 댓글 삭제 요청 함수
     const delcom = () => {
         const data = {
             commentId: commentId,
@@ -23,14 +24,14 @@ const UserComment = (props) => {
         dispatch(userpageActions.delCommentsDB(data));
     };
 
-    // 댓글 수정 준비
+    // 댓글 수정 준비 함수
     const _setEdit = () => {
+        // 댓글 내용을 넣어줌
         set.setComment(props.content);
+        // 댓글의 아이디를 넣어줌
         set.commentRef.current.commentId = commentId;
         set.commentRef.current.focus();
     };
-
-    console.log(childComments);
 
     return(
         <React.Fragment>

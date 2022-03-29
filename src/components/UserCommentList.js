@@ -12,19 +12,28 @@ import styled, {keyframes} from "styled-components";
 
 const UserCommentList = (props) => {
     const dispatch = useDispatch();
+    // 해당 유저의 아이디
     const { Id } = props;
-    const { comments, userId } = useSelector(state => state.userpage);
+    // 리덕스 상의 방명록 리스트
+    // userId: 현재 리덕스 상의 방명록의 유저 아이디
+    // nickname: 현재 리덕스 상의 방명록의 유저 닉네임
+    const { comments, userId, nickname } = useSelector(state => state.userpage);
+    // 방명록을 열기위한 state
     const [open,setOpen] = useState(false);
+    // 댓글입력창을 다루기 위한 ref와 state
     const [comment,setComment] = useState('');
     const commentRef = useRef();
 
     React.useEffect(()=>{
+        // props로 넘겨받은 아이디와 리덕스 상의 아이디가 다르다면 다시 요청받음
         if(Number(Id) !== userId){
             dispatch(userpageActions.getCommentsDB(Id));
         }
     },[])
 
+    // 댓글작성 버튼을 누를시 작동하는 함수
     const add = () => {
+        // 현재 ref에 들어 있는 정보들을 가져옴
         const commentId = commentRef.current.commentId;
         const parentId = commentRef.current.parentId;
         const content = commentRef.current.value;
@@ -34,18 +43,21 @@ const UserCommentList = (props) => {
             commentId: commentId,
             parentId: parentId,
             content: content
-        }
-
-        console.log(data);
+        };
 
         if(!content){window.alert('빈칸이 있으면 작성할 수 없습니다.'); return};
-        if(!commentId && !parentId){dispatch(userpageActions.addCommentsDB(data))}
-        if(commentId && !parentId){dispatch(userpageActions.editCommentsDB(data))}
-        if(!commentId && parentId){dispatch(userpageActions.addCommentsDB(data))}
+        // 댓글 아이디와 부모댓글 아이디가 없다면 일반 댓글 작성
+        if(!commentId && !parentId){dispatch(userpageActions.addCommentsDB(data))};
+        // 댓글 아이디가 있고 부모댓글 아이디가 없다면 일반 댓글 수정
+        if(commentId && !parentId){dispatch(userpageActions.editCommentsDB(data))};
+        // 댓글 아이디가 없이 부모댓글 아이디가 있다면 대댓글 작성
+        if(!commentId && parentId){dispatch(userpageActions.addCommentsDB(data))};
+        // 댓글 아이디가 있고 부모댓글의 아이디도 있다멵 대댓글 수정
         if(commentId && parentId){dispatch(userpageActions.editCommentsDB(data))}
         cancel()
     };
 
+    // 댓글 작성하고 난 후 ref를 초기화 시켜주는 함수
     const cancel = () => {
         setComment('')
         commentRef.current.value = '';
@@ -53,20 +65,20 @@ const UserCommentList = (props) => {
         commentRef.current.commentId = undefined;
     };
 
+    // 댓글창을 조작하기 위한 ref와 스테이트를 모아 놓음
     const set = {comment: comment, setComment:setComment, commentRef:commentRef, add:add };
 
     return (
         <React.Fragment>
             <CommentBtn>
-                <Btn onClick={()=>{setOpen(true)}} >
-                    {/* <BiMessageAltEdit /> */}
+                <Btn onClick={()=>{setOpen(true)}}>
                     방명록
                 </Btn>
             </CommentBtn>
             { open &&
             <Wrap>
                 <NavBar>
-                    방명록
+                    {nickname}'s 방명록
                     <Icon onClick={()=>{setOpen(false)}} ><BsXCircle /></Icon>
                 </NavBar>
                 <CommentInput {...set} type='text' placeholder='방명록을 작성해주세요.' />

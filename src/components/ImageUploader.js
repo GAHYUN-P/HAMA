@@ -51,6 +51,9 @@ const ImageUploader = (props) => {
         console.log('Not get')
     }
 
+    // 수정 시 사용되는 함수 한번에 한 이미지만을 고를 수 있으며
+    // 이미지를 고를 때마다 서버에 저장 요청을 보내고 돌려받은 url주소로
+    // 프리뷰를 만들어줌
     const edit = () => {
         const file = inputRef.current.files[0];
         if(file){
@@ -67,6 +70,9 @@ const ImageUploader = (props) => {
         console.log('Not get')
     }
     
+    // 프리뷰는 초기화 하지않으면 이전에 사용한 이미지들이 남아있음으로
+    // 초기화를 해주어야 다음에 요텅이나 답변 작성 페이지에 들어갈 때
+    // 이전에 등록한 이미지가 남아있지않음
     React.useEffect(()=>{
         return()=>{
             dispatch(imgActions.reset());
