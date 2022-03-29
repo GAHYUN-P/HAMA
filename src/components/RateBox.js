@@ -7,14 +7,20 @@ import Star_c from '../assets/Star_c.svg'
 import Star_g from '../assets/Star_g.svg'
 
 import styled from "styled-components";
-import { style } from "@mui/system";
 
 const RateBox = (props) => {
     const dispatch = useDispatch();
+    // 따로 점수를 빼온 이유는 리덕스상 구독을 통해 변화를 만들기 위함
     const starPoint = useSelector(state => state.answer.answer.star);
+    // 점수를 설정해주는 스테이트
     const [point, setPoint] = React.useState(0);
 
+    // map함수를 사용하기위한 배열
+    const arr = [1,2,3,4,5];
+
+    // 점수를 줄 때 작동하는 함수
     const rating = () => {
+        // 점수는 최소 1점 이상을 주어야 한다.
         if(point === 0){
             window.alert('적어도 1점은 주셔야 합니다!')
             return
@@ -26,6 +32,8 @@ const RateBox = (props) => {
         dispatch(answerActions.starDB(data));
     }
 
+    // 이미 평가가 된 상태라면 적어도 1이상이기 때문에 평가가 끝난 상태임을 알 수 있다.
+    // 이를 바탕으로 점수를 표기해줌
     if(starPoint > 0){
         return (
             <React.Fragment>
@@ -34,11 +42,9 @@ const RateBox = (props) => {
                     <div>평가완료</div>
                 </div>
                 <StarBox>
-                    <Elstar url={starPoint > 0 ? Star_c:Star_g} />
-                    <Elstar url={starPoint > 1 ? Star_c:Star_g} />
-                    <Elstar url={starPoint > 2 ? Star_c:Star_g} />
-                    <Elstar url={starPoint > 3 ? Star_c:Star_g} />
-                    <Elstar url={starPoint > 4 ? Star_c:Star_g} />
+                    {arr.map((m,i)=>{
+                        return(<Elstar key={m} url={starPoint > i ? Star_c:Star_g} />)
+                    })}
                 </StarBox>
             </div>
         </React.Fragment>
@@ -57,11 +63,9 @@ const RateBox = (props) => {
                     </PlzBtn>
                 </div>
                 <StarBox>
-                    <Elstar onClick={()=>{setPoint(1)}} url={point > 0 ? Star_c : Star_g } />
-                    <Elstar onClick={()=>{setPoint(2)}} url={point > 1 ? Star_c : Star_g } />
-                    <Elstar onClick={()=>{setPoint(3)}} url={point > 2 ? Star_c : Star_g } />
-                    <Elstar onClick={()=>{setPoint(4)}} url={point > 3 ? Star_c : Star_g } />
-                    <Elstar onClick={()=>{setPoint(5)}} url={point > 4 ? Star_c : Star_g } />
+                    {arr.map((n,i)=>{
+                        return (<Elstar key={i} onClick={()=>{setPoint(n)}} url={point > i ? Star_c : Star_g } />)
+                    })}
                     <Point>{point}점</Point>
                 </StarBox>
             </div>

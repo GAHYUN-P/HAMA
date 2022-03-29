@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { history } from '../redux/configureStore';
 
 const WriteUser = (props) => {
+    // 유저정보를 보여주기 위한 컴포넌트
     const { writer, modifiedAt, profile, answerWriterId } = props;
 
     const profileOnClick = () => {

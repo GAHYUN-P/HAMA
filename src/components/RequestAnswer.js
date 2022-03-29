@@ -8,8 +8,11 @@ import AnswerCard from './AnswerCard';
 
 const RequestAnswer = (props) => {
     const dispatch = useDispatch();
+    // 요청글에 달린 답변글은 정렬하기 위한 기준
     const [stand, setStand] = useState('최신순');
+    // 답변글을 정렬하기위한 기준을 담은 배열
     const standard = ['최신순', '댓글순', '좋아요순'];
+    // 요청글에 달린 답변글들의 데이터가 담긴 배열
     const answerList = useSelector(state => state.post.answers);
 
     // 작성된 답변글이 없다면 빈칸이 되도록 만들어줌

@@ -11,26 +11,27 @@ import styled from 'styled-components';
 
 const AnswerComments = (props) => {
     const dispatch = useDispatch();
-    const { videoRef,timestamp,content, imgUrl, childCnt, commentWriterId } = props;
-    // 댓글 삭제 요청
+    const { videoRef, timestamp, content, imgUrl, childCnt, commentWriterId } = props;
+    // 댓글 삭제를 누를 시 작동하는 함수
     const delcom = () => {
         const data = {
             commentId: props.commentId,
+            // 댓글 갯수의 차감을 위한 숫자
             cnt: 1 + (childCnt ? childCnt : 0)
         }
         dispatch(answerActions.deleteCommentDB(data));
     }
 
-    // 댓글 수정 준비
+    // 댓글 수정을 누를 시 작동하는 함수
     const _setEdit = () => {
-        console.log(props.content)
         props.setComment(props.content);
         props.commentRef.current.commentId = props.commentId;
-        console.log(props.commentRef.current.commentId);
         props.commentRef.current.focus();
     };
 
+    // 타임스탬프를 누를 시 작동하는 함수
     const pushStamp = () => {
+        // ReactPlayer에 들어 있는 seekTo함수를 사용하여 작동
         videoRef.current.seekTo(timestamp);
     }
 
@@ -51,7 +52,7 @@ const AnswerComments = (props) => {
                         <CWrieter onClick={profileOnClick}>
                             {props.commentWriter}
                         </CWrieter>
-                        {props.commentWriterId === Number(getUserId()) &&
+                        {props.commentWriterId === getUserId() &&
                         <div style={{display:'flex'}} >
                             <PairBtn id='edit' style={{marginRight:'.4rem'}} onClick={_setEdit} >수정</PairBtn>
                             <PairBtn onClick={delcom} >삭제</PairBtn>
@@ -61,6 +62,8 @@ const AnswerComments = (props) => {
                     {/* 타임스탬프가 있을 때 나올 댓글 */}
                     {timestamp &&
                     <ContentDiv>
+                        {/* 타임스탬프를 얻기위한 함수 getBtnString,
+                        타임스탬프를 제외한 댓글을 얻기위한 getComment 자세한 점은 separator 참조 */}
                         <TimeStampBtn onClick={pushStamp}>{getBtnString(content)}</TimeStampBtn>
                         {getComment(content)}
                     </ContentDiv>}

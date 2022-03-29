@@ -10,8 +10,14 @@ import NR from '../assets/no_result.svg'
 import styled from "styled-components";
 
 const Results = (props) => {
-    const { list, is_request, keyword } =props;
+    // 검색결과를 나타내는 컴포넌트
+    // list: 넘겨받은 검색결과들의 배열
+    // is_request: 요청글 배열인지 답변글 배열인지 판단하게 해주는 역할
+    // keyword: 어떤 단어를 검색했는지 알려주는 역할
+    // separator에서 어떤 단어를 기준으로 내용을 잘라낼지 알 수 있도록 해줌 *separator 참조
+    const { list, is_request, keyword } = props;
 
+    // 검색결과가 없으면 보여줄 이미지
     if(list.length === 0){
         return (
                 <div style={{display:'flex',justifyContent:'center',alignItems:'center'}} >
@@ -41,7 +47,8 @@ const Results = (props) => {
                                         {l.title}
                                     </TitleGrid>
 
-                                    
+                                    {/* 해당 검색 결과글에 키워드가 있다면 보여줌 
+                                    *separator 참조 */}
                                     {getSearchContent(l.content,keyword) &&
                                     <ContentGrid>
                                         {getSearchContent(l.content,keyword).split('/')[0] ? 

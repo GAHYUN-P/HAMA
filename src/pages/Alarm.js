@@ -6,28 +6,28 @@ import { alarmActions } from "../redux/modules/alarm";
 import AlarmCard from "../components/AlarmCard";
 import Header from '../components/Header';
 
-import Stomp from 'stompjs';
-import SockJS from 'sockjs-client';
-
-import { getToken, getUserId } from "../shared/cookie";
-
 import styled from "styled-components";
 
 const Alarm = (props) => {
     const dispatch = useDispatch();
+    // 알람들의 리스트
     const { alams } = useSelector(state => state.alarm);
 
     React.useEffect(()=>{
+      // 페이지로 들어올 때 알람 정보들을 dispatch
         dispatch(alarmActions.getAlarmsDB());
         return()=>{
+          // 페이지를 나갈 때 알람을 읽었다는 dispatch
           dispatch(alarmActions.checkAlarmDB());  
         }
     },[])
 
+    // 모든 알람을 삭제하는 요청을 하는 함수
     const delAll = () => {
         dispatch(alarmActions.deleteAllDB());
     }
 
+    // 알람이 없을경우 보여줄 페이지
     if(!alams || alams.length === 0){
         return (
             <React.Fragment>

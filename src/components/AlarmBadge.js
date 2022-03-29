@@ -15,34 +15,31 @@ import styled from 'styled-components';
 
 const AlarmBadge = (props) => {
     const dispatch = useDispatch();
+    // notReadCount: 읽지않은 알람의 갯수를 나타내기위한 스테이트
+    // connected: 소켓과의 연결상태를 나타내는 스테이트
     const { notReadCount, connected } = useSelector(state => state.alarm);
+    // 쇼츠일 경우 종모양 아이콘의 색깔이 달라져야 하기에 사용하는 pathname
     const pathname = window.location.pathname;
 
     React.useEffect(()=>{
+        // 로그인 시 해당 유저의 읽지않은 알람의 갯수를 요청하는 dispatch
         if(getToken()){
           dispatch(alarmActions.getNotReadCountDB());
         }
+        // 로그인 상태이며 연결되지않은 상태일 때 요청하는 함수
+        // wsAlarm: 소켓에 연결을 하는 함수 안에서 사용하기 위해 dispatch를 변수로 받음
         if(getToken()&&!connected){
           wsAlarm(dispatch)
           dispatch(alarmActions.setConnected());
         }
     },[])
 
-    if(notReadCount){
-        return(
-            <React.Fragment>
-                <Grid onClick={()=>{history.push('/alarm')}} >
-                    <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
-                    <Count>{notReadCount > 9 ? 9 : notReadCount}</Count>
-                </Grid>
-            </React.Fragment>
-        )
-    }
-
     return(
         <React.Fragment>
             <Grid onClick={()=>{if(plzLogin()){return};history.push('/alarm')}} >
                 <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
+                { notReadCount !== 0 &&
+                <Count>{notReadCount > 9 ? 9 : notReadCount}</Count>}
             </Grid>
         </React.Fragment>
     )

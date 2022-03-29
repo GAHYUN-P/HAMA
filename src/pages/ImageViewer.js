@@ -13,16 +13,22 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ImageViewer = (props) => {
     const dispatch = useDispatch();
-
-    // image, index 불러오기
+    // viewerImages: 요청 또는 답변글의 이미지 리스트를 가져옴
+    // idx: 현재 보고있는 이미지의 인덱스를 나타냄
     const { viewerImages, idx } = useSelector((state)=>state.image)
+
+    // type: 현재보고자 하는 리스트가 요청글인지 답변글인지 알게 해주는 params
+    // id: 현재보고자 하는 리스트의 요청글이나 답변글의 아이디
     const { type,id } = props.match.params;
 
     React.useEffect(()=>{
+        // 현재 리덕스 상에 viewerImages가 없다면 서버에 다시 요청을 넣어서
+        // 데이터를 가져옴
        if(!viewerImages){
             dispatch(imgActions.getImagesDB({type,id}))
         }
         return()=>{
+            // 다른 이미지가 남는 것 방지
             dispatch(imgActions.reset());
         }
     },[])
@@ -37,13 +43,12 @@ const ImageViewer = (props) => {
         }
     };
 
+    // 아직 이미지 리스트가 없을 때 보여줄 로딩창
     if(!viewerImages){
         return(
             <WaitForAMoment is_loading />
         )
     }
-
-    console.log(idx);
 
     return(
         <React.Fragment>
