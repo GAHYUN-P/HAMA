@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Header from '../components/Header';
 
 import styled from 'styled-components';
 
-import { Button, Input, Wrapper } from '../elements';
-import ErrorMsg from '../elements/ErrorMsg';
 import { userActions } from '../redux/modules/user';
 import { KAKAO_JS_ID } from '../shared/common';
 
@@ -15,19 +13,12 @@ import hama from '../assets/rehama.png';
 import logoS from '../assets/logo_string.png';
 import logoF from '../assets/logo_final.svg';
 
-import useInput from '../shared/useInput';
 import KaKaoLogin from 'react-kakao-login';
 import { utilActions } from '../redux/modules/util';
 
 // 로그인 페이지 컴포넌트
 const Login = ({ history, match }) => {
   const dispatch = useDispatch();
-  // email, password 입력 value
-  // useInput  setValue(e.target.value)를 사용하기 위해 만든 hook
-  const [email, setEmail, onChangeEmail] = useInput('');
-  const [password, setPassword, onChangePassword] = useInput('');
-  const loginError = useSelector((state) => state.user.loginError);
-  const username = useSelector((state) => state.user.userInfo?.username);
 
   useEffect(() => {
     return () => {
@@ -35,13 +26,6 @@ const Login = ({ history, match }) => {
       dispatch(userActions.setLoginError(null));
     };
   }, []);
-
-  // 로그인
-  const onLogin = () => {
-    if (!email || !password) return;
-
-    dispatch(userActions.fetchLogin({ email, password }));
-  };
 
   // 카카오 로그인
   const kakaoLoginSuccessHandler = (res) => {
@@ -58,9 +42,7 @@ const Login = ({ history, match }) => {
   return (
     <React.Fragment>
     <Header />
-    <Grid>
-{/* 3 */}
-{/* 1 */}  
+    <Grid>  
       <div style={{width:'100%',height:'4rem'}} />
       <MakeCenter>
         <LoginPic width='30%' src={logoF} />
@@ -82,7 +64,6 @@ const Login = ({ history, match }) => {
       <HamaCenter>
         <LoginPic width='100%' src={hama} />
       </HamaCenter>
-{/* 2 */}
     </Grid>
     </React.Fragment>
   );
