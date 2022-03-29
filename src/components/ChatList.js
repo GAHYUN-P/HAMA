@@ -12,9 +12,6 @@ import { useSelector, useDispatch } from 'react-redux';
 // 채팅 관련 함수들 가져오기
 import { chatActions } from '../redux/modules/chat';
 
-// select
-import { Select } from '@class101/ui';
-
 // 카테고리 통신
 import { chatAPI } from '../shared/api';
 
@@ -80,16 +77,6 @@ const ChatList = (props) => {
     <Container>
       <Title>Chat</Title>
       <SelectWrap>
-        <Select
-          value={tag}
-          placeholder="채팅방 카테고리를 골라주세요"
-          options={['전체조회', 'REACT', 'SPRING', 'RN', 'NODEJS']}
-          onChange={(e) => { selectTag(e) }}
-          style={{
-            marginBottom: '20px',
-            width: '90%',
-          }}
-        />
       </SelectWrap>
       <ChatListWrap className="scroll">
         {/* 받아온 채팅 리스트 구현하기 */}

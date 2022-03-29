@@ -7,11 +7,8 @@ import { history } from '../redux/configureStore';
 import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
 import Header from '../components/Header';
-import WaitForAMoment from '../components/WaitForAMoment';
 
-import loading from '../assets/logo_final.svg';
-
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 
 const Answer = (props) => {

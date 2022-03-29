@@ -42,6 +42,7 @@ const RequestCenter = (props) => {
                         응답 {props.request.answerCount}개
                     </Texts>
                 </CenterContainer>
+                {/* 공유 시 띄워줄 정보를 위해 요청글의 정보를 넘겨줌 */}
                 <SharedBtn {...request} />
             </Wrap>
                 {/* 글쓰기 버튼 */}

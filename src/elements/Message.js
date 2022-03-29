@@ -10,8 +10,6 @@ import { useSelector, useDispatch } from 'react-redux';
 // 프로필 사진
 import { Image } from '../elements';
 
-// Spinner
-import { Spinner } from '@class101/ui';
 
 // 사용자 - 상대방의 메시지 내용을 출력할 말풍선 컴포넌트
 const Message = (props) => {
@@ -25,7 +23,6 @@ const Message = (props) => {
     if (!messageInfo) {
       return (
         <MessageWrap>
-          <Spinner />
         </MessageWrap>
       )
     }

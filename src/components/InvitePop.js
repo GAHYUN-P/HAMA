@@ -16,8 +16,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Upload from './Upload';
 
-// select
-import { Select } from '@class101/ui';
 
 // 채팅방 생성 창
 const InvitePop = (props) => {
