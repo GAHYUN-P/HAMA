@@ -22,6 +22,8 @@ import { getUserId } from '../shared/cookie';
 const Mypage = (props) => {
 
     const dispatch = useDispatch();
+
+    
     React.useEffect(() => {
         dispatch(mypageActions.getBanner());
         dispatch(mypageActions.getAchievement());

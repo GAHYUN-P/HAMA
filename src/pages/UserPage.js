@@ -7,7 +7,6 @@ import Medal from '../components/Medal';
 import MypostList from '../components/MypostList';
 import MyanswerList from '../components/MyanswerList';
 import Header from '../components/Header';
-import { history } from '../redux/configureStore';
 import Footer from '../components/Footer';
 import colorBg from '../assets/colorBg.png';
 import ProfileImg from '../elements/ProfileImg';
@@ -16,6 +15,7 @@ import gotoTest from '../assets/gotoTest.svg';
 import Expert from '../components/Expert';
 import { categoryEncoder } from '../shared/categoryEncoder';
 import { BsChevronDoubleRight } from "react-icons/bs";
+import UserCommentList from '../components/UserCommentList';
 
 const UserPage = (props) => {
 
@@ -106,7 +106,7 @@ const UserPage = (props) => {
       <MyanswerList userpage={true} id={id} nickname={nickname}/>
       <div style={{height:'10vh'}}/>
       </MyContents>
-      {/* <UserCommentList Id={id} /> */}
+      <UserCommentList Id={id} />
     </Wrap>
     <Footer />
     </React.Fragment>

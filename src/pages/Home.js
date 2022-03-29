@@ -17,6 +17,7 @@ const Home = (props) => {
 
   const dispatch = useDispatch();
 
+  // 가이드 페이지 팝업 설정
   const popupOpen = useSelector((state) => state.util.popupOpen);
 
   const closePopup = () => {
