@@ -5,7 +5,6 @@ import styled from 'styled-components';
 // Components
 import MessageList from './MessageList';
 import MessageWrite from './MessageWrite';
-import ChatList from './ChatList';
 
 // elements
 import { ChatName } from '../elements';
@@ -154,7 +153,6 @@ const ChattingRoom = (props) => {
   if(outRoomStat === true){
     return (
       <Container>
-        <ChatList prevRoomId={roomId} />
         <NoRoom />
       </Container>
     );

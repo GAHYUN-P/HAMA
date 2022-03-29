@@ -3,14 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // elements
-import Message from '../elements/Message';
 import { Input, Button } from '../elements';
 
 // 리덕스 접근
 import { useSelector, useDispatch } from 'react-redux';
-
-// components
-import InvitePop from '../components/InvitePop';
 
 // 방 나가기 API
 import chat, { chatActions } from '../redux/modules/chat';
@@ -66,17 +62,11 @@ const MessageList = (props) => {
 
   return (
     <Container className="scroll" id="messagelist">
-      {messages.map((m, idx) => {
-        return <Message key={idx} messageInfo={m} is_me= {true}/>;
-      })}
-
       <div ref={messageEndRef}></div>
 
       <BtnContainer>
         <Button _onClick={openPopup} width="10%">초대하기</Button>
-        {/* 초대하기 팝업 창 */}
-        {popupOpen && <InvitePop visible={popupOpen} closePopup={closePopup} />}
-        
+
         <Button _onClick={(e) => {
                 onClickOutRoom();
                 e.stopPropagation();
