@@ -19,10 +19,14 @@ import styled from "styled-components";
 
 const RequestDetail = (props) => {
     const dispatch =useDispatch();
+    // params로 넘겨받은 해당 요청글의 아이디
     const postId = Number(props.match.params.postId);
-    
+    // request: 요청글의 데이터
+    // likeUserIdList: 해당 요청글에 좋아요를 누른 유저들의 아이디 리스트
+    // answers: 해당 요청글에 달린 답변글들의 데이터
     const { request, likeUserIdList, answers } = useSelector(state => state.post);
 
+    // 게시글로 들어오면 해당 게시글의 데이터를 dispatch
     React.useEffect(()=>{
         dispatch(postActions.getOneRequest(postId));
     },[])

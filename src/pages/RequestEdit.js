@@ -12,26 +12,34 @@ import styled from 'styled-components';
 
 const RequestEdit = (props) => {
     const dispatch = useDispatch();
+    // 현재 리덕스 상에 있는 요청글의 데이터 가져옴
     const requestData = useSelector(state => state.post.request);
+    // params로 넘겨받은 해당 요청글의 아이디
     const postId = props.match.params.postId;
+    // 내용을 다루기위한 state
     const [content,setContent] = useState('');
 
     React.useEffect(()=>{
+        // params로 넘겨받은 아이디와 리덕스 상의 아이디가 다르다면 다시 데이터 요청
         if(Number(postId) !== requestData.postId){
             dispatch(postActions.getOneRequest(postId));
             return
         }
+        // 수정하기위해 해당 요청글의 데이터로 초기화
         setContent(requestData.content);
         dispatch(imgActions.setEdit(requestData.fileList));
     },[])
 
     React.useEffect(()=>{
+        // 새로고침 시 리덕스 상의 데이터가 다 사라짐으로
+        // 데이터 요청 후 다시 초기화 해주기위한 함수
         if(requestData.fileList){
             setContent(requestData.content);
             dispatch(imgActions.setEdit(requestData.fileList));
         }
     },[requestData])
 
+    // 수정버튼을 누를 시 작동하는 함수
     const editing = () => {
         if(!content){
             window.alert('내용이 비어있으면 수정할 수 없어요.')
