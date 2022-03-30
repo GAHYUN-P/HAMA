@@ -15,14 +15,21 @@ const SurveyResult = (props) => {
     // thunk 만들어서 깔아주면 될듯?!
     const dispatch = useDispatch();
 
+    // 설문조사 검색결과를 가져오는 함수 따로 보내는 데이터가 
+    // 없는 이유는 해당 유저가 설문을 마친 시점에서 결과가 유저별로 
+    // 고정이 되기 때문 따라서 유저의 토큰으로 해당 경로로 요청을 보내면
+    // 해당하는 결과의 데이털르 받아옴
     React.useEffect(() => {
         dispatch(utilActions.getSurveyResult())
     }, []);
 
+    // 검색결과들
+    // hippoName: 해당유저의 하마 캐릭터의 이름
+    // imgUrl: 해당 유저의 하마 캐릭터 이미지 주소
+    // surveyResult: 해당 유저의 하마 캐릭터 설명 문구
     const { hippoName, imgUrl, surveyResult } = useSelector((state)=>state.util.result);
+    // 해당 유저의 하마 캐릭터에게 추천하는 요청글 리스트(단 2 개임)
     const recommend = useSelector((state)=>state.util.recommend);
-
-    console.log(recommend);
 
   return (
     <Grid>

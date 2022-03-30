@@ -1,4 +1,4 @@
-// 타임스탬프 값 가져오기
+// 타임스탬프 값 가져오기 위한 함수
 export const getTimeStamp = (comment) => {
     // 우선 :을 기준으로 분리
     let sep = comment.split(':');
@@ -25,16 +25,20 @@ export const getTimeStamp = (comment) => {
     return stamp;
 };
 
+// 타임스탬프가 있는 경우 댓글만 분리하기위한 함수
 export const getComment = (comment) => {
     comment = comment.split(':')[1].substring(2);
     return comment;
 }
 
+// 타임스탬프가 있는 경우 해당 숫자를 가져와 다로 분리하기 위한 함수
 export const getBtnString = (comment) => {
     comment = comment.split(':')[0] + ':' + comment.split(':')[1].slice(0,2);
     return comment;
 }
 
+// 검색결과 중 내용에 해당 키워드가 있는 경우 이를
+// 10글자로 나타내기위해 분리해주는 함수
 export const getSearchContent = (content,keyword) => {
     if(!content.includes(keyword)){
         return null

@@ -41,7 +41,6 @@ const Request = (props) => {
             window.alert('제목,내용,분야,난이도는 필수 선택사항입니다!')
             return
         }
-        // 서버에 요청을 보내기위한 JSON객체 형태로 만들어줌
         const data = {
             title: title,
             content: content,
@@ -132,6 +131,7 @@ const Request = (props) => {
                 <Btn onClick={posting}>등록</Btn>
             </BtnGrid>}
         </Grid>
+        {/* 로딩 시 보여줄 컴포넌트 */}
         { loading && <WaitForAMoment /> }
     </React.Fragment>
     )
