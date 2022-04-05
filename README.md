@@ -3,4 +3,9 @@
 # 네가 원하는 그 일 내가 HAMA! 개인이 개인의 대리만족을 해주는 플랫폼
 <img src='https://user-images.githubusercontent.com/95837382/161722926-58161573-7ecd-4aa2-9937-de5dba7e3ac5.png' width='80' height='100'/>
 
-#### [내가 HAMA 바로가기](https://www.i-hama.xyz/)
+## [내가 HAMA 바로가기](https://www.i-hama.xyz/)
+
+# TEAMMATES
+
+ 이름 | 깃허브 | 포지션
+ 박가현 | 123 | 리더/프론트
