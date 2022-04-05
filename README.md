@@ -9,8 +9,8 @@
 
 이름 | 깃허브 | 포지션
  ---|---|---|
-박가현 | [짱쎈하마](https://github.com/GAHYUN-P) | 리더/프론트엔드
-김민기 | 123 | 부리더/백엔드
-박재균 | 123 | 백엔드
-이규진 | 123 | 백엔드
-유영탁 | 123 | 프론트엔드
+박가현 | [대장 하마](https://github.com/GAHYUN-P) | 리더/프론트엔드
+김민기 | [도깨비 하마](https://github.com/GAHYUN-P) | 부리더/백엔드
+박재균 | [스마트 하마](https://github.com/GAHYUN-P) | 백엔드
+이규진 | [재간둥이 하마](https://github.com/GAHYUN-P) | 백엔드
+유영탁 | [막내 하마](https://github.com/GAHYUN-P) | 프론트엔드
