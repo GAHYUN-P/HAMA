@@ -43,12 +43,15 @@
     <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=black">
 </div>
 
+# More Information
+
+[내가HAMA Notion](https://www.notion.so/ccfcaddf2ecd4548ae01e35144a9da2b)
+
 <details>
 <summary>ERD</summary>
 <div markdown="1">
 
 ![mysql](https://user-images.githubusercontent.com/95837382/161892413-e4827955-0f91-431e-8c1e-3b5415fc02cb.png)
-ng)
 
 </div>
 </details>
