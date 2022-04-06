@@ -16,4 +16,6 @@
 유영탁 | [막내 하마](https://github.com/GAHYUN-P) | 프론트엔드
 
 ## FrontEnd 기술 스택
+<div align='center'>
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+</div>
