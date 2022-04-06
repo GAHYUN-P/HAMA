@@ -1,7 +1,6 @@
+<img align='left' src='https://user-images.githubusercontent.com/95837382/161722926-58161573-7ecd-4aa2-9937-de5dba7e3ac5.png' width='80' height='100'/>
 <img align='center' src="https://user-images.githubusercontent.com/95837382/161723257-86dea2f6-4238-4860-a0fb-aa8d2ac13ce1.png" width="400" height="50"/>
 <br/>
-
-<img align='left' src='https://user-images.githubusercontent.com/95837382/161722926-58161573-7ecd-4aa2-9937-de5dba7e3ac5.png' width='80' height='100'/>
 
 # 네가 원하는 그 일 내가 HAMA! 
 
@@ -20,8 +19,21 @@
 유영탁 | [막내 하마](https://github.com/youngtakyoo) | 프론트엔드
 
 ## 핵심기능
-+reactPlayer를 이용한 다양한 기능들
-    1. 유저들이 인증을 위해 업로드한 영상을 기반으로 만든 쇼츠!
+<details>
+<summary>React-Player를 이용한 다양한 기능들</summary>
+<div markdown="1">
+
+1. react-slick을 적용하여 만든 쇼츠기능
+
+2. useRef를 응용한 타임스탬프 기능
+
+</div>
+</details>
+
+>socket을 이용한 실시간 알람기능
+
+>유저의 성향을 정하기 위한 설문조사 기능
+
 
 ## 기술 스택
 >FrontEnd
