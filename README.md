@@ -14,3 +14,6 @@
 박재균 | [스마트 하마](https://github.com/GAHYUN-P) | 백엔드
 이규진 | [재간둥이 하마](https://github.com/GAHYUN-P) | 백엔드
 유영탁 | [막내 하마](https://github.com/GAHYUN-P) | 프론트엔드
+
+## FrontEnd 기술 스택
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
