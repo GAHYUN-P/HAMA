@@ -30,9 +30,27 @@
 </div>
 </details>
 
->socket을 이용한 실시간 알람기능
+<details>
+<summary>socket을 이용한 실시간 알람기능</summary>
+<div markdown="1">
 
->유저의 성향을 정하기 위한 설문조사 기능
+1. 다양한 활동들에 대한 즉각적인 알람
+
+</div>
+</details>
+
+<details>
+<summary>유저의 성향을 정하기 위한 설문조사 기능</summary>
+<div markdown="1">
+
+1. 설문조사를 통한 총 8가지 성향의 하마선택 가능
+
+2. 다양한 활동을 하면 얻는 경험치를 통하여 업그레이드 가능
+
+</div>
+</details>
+
+
 
 
 ## 기술 스택
