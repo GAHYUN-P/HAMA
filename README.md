@@ -44,10 +44,11 @@
 </div>
 
 <details>
-<summary>토글 접기/펼치기</summary>
+<summary>ERD</summary>
 <div markdown="1">
 
-안녕
+![mysql](https://user-images.githubusercontent.com/95837382/161892413-e4827955-0f91-431e-8c1e-3b5415fc02cb.png)
+ng)
 
 </div>
 </details>
