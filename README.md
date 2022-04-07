@@ -296,10 +296,6 @@ JPQL은 **DB테이블이 아니라 엔티티를 대상으로 쿼리를 검색**�
 
 **유저페이지는 기존의 마이페이지의 코드를, 방명록은 기존의 댓글 대댓글 코드를 재사용 하여 빠르게 기능 추가를 할 수 있었습니다.**
 
-![Untitled](%E1%84%82%E1%85%A2%E1%84%80%E1%85%A1HAMA%20bb384/Untitled.png)
-
-![Untitled](%E1%84%82%E1%85%A2%E1%84%80%E1%85%A1HAMA%20bb384/Untitled%201.png)
-
 # More Information
 
 [내가HAMA Notion](https://www.notion.so/ccfcaddf2ecd4548ae01e35144a9da2b)
@@ -314,6 +310,7 @@ JPQL은 **DB테이블이 아니라 엔티티를 대상으로 쿼리를 검색**�
 
 </div>
 </details>
+
 <details>
 <summary>와이어 프레임</summary>
 <div markdown="1">
