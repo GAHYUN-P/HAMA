@@ -83,6 +83,7 @@
 # More Information
 
 [내가HAMA Notion](https://www.notion.so/ccfcaddf2ecd4548ae01e35144a9da2b)
+
 [내가HAMA Figma](https://www.figma.com/file/5664OUWKkhs03kyxIg7S1l/이건내가HAMA?node-id=0%3A1)
 
 <details>
