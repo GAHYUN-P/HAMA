@@ -7,6 +7,8 @@ import { FiChevronLeft } from 'react-icons/fi';
 import styled from 'styled-components';
 
 const ProgressBar = (props) => {
+    // 진행도를 나타내는 변수 질문이 넘어갈 때마다 
+    // 인덱스가 올라감으로 진행도의 길이도 길어짐
     const progress = ((props.q + 1) * 10) + '%';
 
     return(

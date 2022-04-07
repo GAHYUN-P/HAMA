@@ -26,6 +26,7 @@ const getToken = () => {
   return null;
 }
 
+// 유저가 개인정보를 입력했는지 여부가 담긴 status가져오기
 const getStatus = () => {
   if(document.cookie){
     let status = document.cookie.split('userStatus=')[1].split(';')[0];

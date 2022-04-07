@@ -47,6 +47,7 @@ const initialState = {
   },
   comments: [],
   userId: 0,
+  nickname: 'nick',
 };
 
 // action
@@ -90,9 +91,9 @@ const userpage = createReducer(initialState, {
     state.userinfo = action.payload;
   },
   [setComments] : (state, action) => {
-    console.log(action.payload);
     state.comments = action.payload.comments;
     state.userId = action.payload.userId;
+    state.nickname = action.payload.nickname;
   },
   [addComment] : (state, action) => {
     state.comments = [...state.comments,action.payload];

@@ -10,17 +10,19 @@ import styled from "styled-components";
 
 const RecentWord = (props) => {
     const dispatch = useDispatch();
+    // 최근 검색어 기능을 보여줄지 말지 결정하는 state
     const [view,setView] = useState(true);
+    // 최근 검색어 배열
     const recentWord = useSelector(state => state.search.recentWord);
 
-    console.log(recentWord);
-
+    // 모든 최근 검색어를 삭제 요청하는 함수
     const deleteAll = () => {
         if(window.confirm('정말로 전부 삭제하시겠습니까?')){
             dispatch(searchActions.deleteAllRecentWordDB());
         }
-    }
+    };
 
+    // 로그인 상태일 때에만 해당유저의 최근 검색어를 요청함
     React.useEffect(()=>{
         if(getToken()){
             dispatch(searchActions.setRecentWordDB());

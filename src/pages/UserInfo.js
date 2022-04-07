@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../redux/modules/user';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { userAPI } from '../shared/api';
 import { history } from '../redux/configureStore';
 
@@ -13,6 +12,7 @@ import GenderAndAge from '../components/GenderAndAge';
 import NickMaking from '../components/NickMaking';
 import Tag from '../elements/Tag';
 import CallNumber from '../components/CallNumber';
+import WaitForAMoment from '../components/WaitForAMoment';
 
 import { FiInfo } from 'react-icons/fi';
 
@@ -20,18 +20,20 @@ import { FiInfo } from 'react-icons/fi';
 import styled from 'styled-components';
 
 const UserInfo = (props) => {
-  
-  const dispatch = useDispatch();
-
+  // 나이 성별 흥미 전화번호를 다루기 위한 state
   const [nickname, setNickname] = useState('');
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
   const [interest, setInterest] = useState('');
   const [phone, setPhone] = useState('');
+  // 닉네임 중복체크를 자루기 위한 state
   const [same, setSame] = useState('needCheck');
+  // 추가 설명문의 display여부를 다루기 위한 state
   const [open,setOpen] = useState(false);
   const [open2,setOpen2] = useState(false);
 
+  // 유저의 status가 flase라면 이미 등록한 고객이기에 
+  // 다시 설정할 수 없음으로 메인페이지로 돌려보냄
   React.useEffect(()=>{
     if(!getStatus()){
       window.alert('이미 등록하신 고객님이십니다. 변경을 원하시면 문의를 주세요.');
@@ -40,6 +42,7 @@ const UserInfo = (props) => {
     }
   },[]);
 
+  // 중복체크를 위한 함수
   const sameCheck = () => {
     if(!nickname){
       window.alert('닉네임을 제대로 작성해주세요.');
@@ -52,6 +55,7 @@ const UserInfo = (props) => {
     .catch(err=>{console.log(err)});
   }
 
+  // 제출 버튼을 누르면 작동하는 함수
   const onClickSubmit = async () => {
     const data = {
       category: EngCategoryEncoder(interest),
@@ -61,7 +65,7 @@ const UserInfo = (props) => {
       phone: phone,
     };
     
-    // 데이터 체크 한 번 할 것
+    // 데이터 체크를 하는 함수
     if(infoCheck(data,same)){return};
 
     
@@ -73,7 +77,10 @@ const UserInfo = (props) => {
     .catch((err)=>{console.log(err)})
   }
 
-  
+  if(!getStatus()){
+    return(<WaitForAMoment />)
+  }
+
   return (
   <React.Fragment>
     <Header />

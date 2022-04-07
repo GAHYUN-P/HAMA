@@ -8,7 +8,8 @@ import { initKakao, shareResultKakao } from "../shared/kakaoShare";
 import styled from "styled-components";
 
 const ResultBtns = (props) => {
-
+      
+      // 카카오 브라우저를 초기화 해주는 함수 
       React.useEffect(()=>{
         initKakao();
       },[]);

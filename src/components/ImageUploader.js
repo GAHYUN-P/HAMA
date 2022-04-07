@@ -8,20 +8,27 @@ import styled from "styled-components";
 
 const ImageUploader = (props) => {
     const dispatch = useDispatch();
+    // 인풋에 들어오는 데이터를 감지하기위한 ref
     const inputRef = React.useRef();
+    // 인풋에 넣어놓은 데이터를 다루기 위한 스테이트들
     const { preview, uploading, count } = useSelector(state => state.image);
+    // 수정페이지에서 넘겨받는 props로 업로드 시 발생하는 함수를 바꿔주기 위함
     const is_edit = props.is_edit;
 
+    // 작성 시 인풋의 이미지 업로드 시 발생하는 함수
     const change = () => {
-        // 사진 갯수제한 그 때 그 때 달라짐
+        // 사진 갯수제한 현재 올라와 있는 갯수에 따라 업로드 가능한 이미지를 알려줌
         if(inputRef.current.files.length > count){
             window.alert(`현재 업로드 가능한 이미지는 ${count}장 입니다.`)
             return
         }
+        // 파일은 객체로 담겨 있기에 이를 배열로 다루기위한 공정과정
         const file = [...inputRef.current.files];
 
         if(file){
+            // 이미지를 올리는 버튼을 disabled하기위한 디스패치를 작동
             dispatch(imgActions.uploading());
+            // 이미지의 갯수만큼 반복하여 프리뷰를 만들어줌
             file.map( async (f) =>{
                 const reader = new FileReader();
                 reader.readAsDataURL(f);
@@ -31,28 +38,41 @@ const ImageUploader = (props) => {
                 }
                 return f
             })
+            // 만일 현재 남은 업로드 가능한 프리뷰의 갯수가 0이 아니라면
+            // disabled시켜주는 스테이트를 다시 해제하기위한 디스패치를 보냄
             if(count !== 0){
                 dispatch(imgActions.uploading());
             }
+            // 같은 이미지 또는 기존에 있는 이미지가 배열에 있으면 업로드가 안됨
+            // 따라서 그러한 경우를 방지하기 위하여 다시 인풋을 비워줌
             inputRef.current.value = '';
             return
         }
         console.log('Not get')
     }
 
+    // 수정 시 사용되는 함수 한번에 한 이미지만을 고를 수 있으며
+    // 이미지를 고를 때마다 서버에 저장 요청을 보내고 돌려받은 url주소로
+    // 프리뷰를 만들어줌
     const edit = () => {
-        console.log('edit')
         const file = inputRef.current.files[0];
         if(file){
+            dispatch(imgActions.uploading());
             const formdata = new FormData();
             formdata.append('file',file);
             formdata.append('video',null);
             dispatch(imgActions.uploadToDB(formdata));
+            if(count !== 0){
+                dispatch(imgActions.uploading());
+            }
             return
         }
         console.log('Not get')
     }
     
+    // 프리뷰는 초기화 하지않으면 이전에 사용한 이미지들이 남아있음으로
+    // 초기화를 해주어야 다음에 요텅이나 답변 작성 페이지에 들어갈 때
+    // 이전에 등록한 이미지가 남아있지않음
     React.useEffect(()=>{
         return()=>{
             dispatch(imgActions.reset());

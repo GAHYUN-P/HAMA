@@ -11,12 +11,26 @@ import { userpageActions } from "../redux/modules/userpage";
 
 const UserChild = (props) => {
     const dispatch = useDispatch();
-    const { comment, setComment, commentRef,
-         imgUrl, commentWriterId, commentWriter, commentId, parentId, content, modifiedAt } = props
+    // commentRef: 댓글창에 접근하기 위한 ref 
+    // 이 외는 각 댓글의 내용 및 정보들
+    const { commentRef, imgUrl, commentWriterId, commentWriter,
+         commentId, parentId, content, modifiedAt } = props
         
+    // 대댓글을 삭제하기 위한 함수
     const del = () => {
         const data = {commentId: commentId, parentId: parentId}
         dispatch(userpageActions.delCommentsDB(data))
+    }
+
+    // 수정버튼 누른다면 ref에 대댓글 수정을 위한 값들을 넣어주는 함수
+    const Edit = () => {
+        // 해당 대댓글의 아이디
+        commentRef.current.commentId = commentId;
+        // 해당 대댓글의 부모 댓글 아이디
+        commentRef.current.parentId = parentId;
+        // 해당 대댓글의 내용
+        commentRef.current.value = content;
+        commentRef.current.focus();
     }
 
     return(
@@ -38,12 +52,7 @@ const UserChild = (props) => {
                             {commentWriterId === getUserId()  &&
                             <div style={{display:'flex'}} > 
                                 <PairBtn id='edit'
-                                onClick={()=>{
-                                    commentRef.current.commentId = commentId;
-                                    commentRef.current.parentId = parentId;
-                                    commentRef.current.value = content;
-                                    commentRef.current.focus();
-                                }}
+                                onClick={Edit}
                                 >수정</PairBtn>
                                 <PairBtn
                                 onClick={()=>{
