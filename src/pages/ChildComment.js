@@ -8,38 +8,43 @@ import { history } from '../redux/configureStore';
 import Header from '../components/Header';
 import CommentInput from '../components/CommentInput';
 
-import PP from '../assets/Paper_Plane.svg';
 import {BiSubdirectoryRight} from 'react-icons/bi';
 
 import styled from 'styled-components';
 
 const ChildComment = (props) => {
     const dispatch = useDispatch();
-    const commentRef = React.useRef();
+    // 댓글인풋을 다루기 위한 state와 ref들 
     const [comment,setComment] = useState('');
+    const commentRef = React.useRef();
+    // parentId: dispatch시 대댓글임을 알 수 있게하기위한 부모댓글 아이디
     const parentId = props.match.params.commentId;
+
+    // 부모댓글을 나타내기 위한 부모댓글의 데이터
     const parent = useSelector(state => state.child.parentComment);
-    console.log(parent);
+    // 대댓글 리스트 
     const childs = useSelector(state => state.child.childComments);
-    console.log(childs);
 
     React.useEffect(()=>{
+        // 리덕스 상의 부모아이디와 params로 넘겨받은 아이디가 다르다면
+        // 해당 부모댓글의 아댓글의 이디로 서버상에 다시 요청을 넣음
         if(parentId !== parent.commentId){
             dispatch(childActions.getChildsDB(parentId));
         }
     },[]);
 
+    // 댓글 작성 시 작동하는 함수
     const add = () => {
         if(!commentRef.current.value){
             window.alert('내용이 비었습니다.')
             return;
         }
+        // 댓글의 아이디가 있다면 수정을 의미함
         if(commentRef.current.commentId !== undefined){
             const data = {
                 comment: commentRef.current.value,
                 commentId: commentRef.current.commentId
             }
-            console.log(data);
             dispatch(childActions.editChildDB(data));
             cancel();
             return;
@@ -53,6 +58,7 @@ const ChildComment = (props) => {
         cancel();
     };
 
+    // 작성 후 댓글 인풋을 초기화하는 함수
     const cancel = () => {
         setComment('');
         commentRef.current.commentId = undefined;
@@ -60,10 +66,6 @@ const ChildComment = (props) => {
 
     const profileOnClick = () => {
         history.push(`/userpage/${parent.commentWriterId}`)
-    };
-
-    const childProfileOnClick = () => {
-        history.push(`/userpage/${childs.commentWriterId}`)
     };
 
     return(
@@ -146,6 +148,7 @@ const ChildComment = (props) => {
                     )
                     })}
             </WholeGrid>
+            {/* 로그인 상태일 때만 댓글 작성 인풋이 보임 */}
             { getToken() &&
             <CommentInput
                 is_child

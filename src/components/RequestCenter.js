@@ -18,6 +18,8 @@ const RequestCenter = (props) => {
     const { postId, request } =props;
 
     const pushlike = () => {
+        // 로그인을 하지않으면 좋아요를 누를 수 없음 이 때 원한다면 
+        // 로그인 페이지로 이동시켜주는 조건식
         if(plzLogin()){return}
         dispatch(postActions.pushLikeDB(props.request.postId));
     };
@@ -27,6 +29,7 @@ const RequestCenter = (props) => {
             <Wrap>
                 <CenterContainer>
                     <div onClick={pushlike} >
+                        {/* 해당 유저가 게시글에 대해 좋아요를 눌렀는지 판단해주는 조건식 */}
                         { IsLike(props.like) ? 
                         <FaHeart style={{color:'#ff7a7a',fontSize:'1.05rem'}} />
                         :
@@ -39,9 +42,12 @@ const RequestCenter = (props) => {
                         응답 {props.request.answerCount}개
                     </Texts>
                 </CenterContainer>
+                {/* 공유 시 띄워줄 정보를 위해 요청글의 정보를 넘겨줌 */}
                 <SharedBtn {...request} />
             </Wrap>
                 {/* 글쓰기 버튼 */}
+                {/* 답변글을 작성할 수 있는지 판단하는 조건식: 글이 마감되지않고 해당 요청글을 
+                작성하지않은 유저만이 답변글 작성 버튼을 볼 수 있음 */}
                 { canWrite(request.status,request.user_id) &&
                 <AnswerWriteBtn postId={postId} /> }
         </React.Fragment>

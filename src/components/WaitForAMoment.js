@@ -1,46 +1,21 @@
-import React, {useState} from "react";
+import React from "react";
 
-import MainHama from '../assets/rehama.png';
-import logo from '../assets/logo_final.svg';
-import loading from '../assets/loading_2.gif';
 import loading_5 from '../assets/loading_5.svg';
 
 import styled, { keyframes } from "styled-components";
 
 const WaitForAMoment = (props) => {
-    const { is_loading } = props;
-
-    
-
-    if(is_loading){
-        return(
+    // 로딩 상태일 때 쓰기위한 컴포넌트
+     
+    return(
         <WaitGrid>
             <Wait src={loading_5} />
             <Anounce color='#ffcd48' >
                 로딩중
             </Anounce>
         </WaitGrid>
-        )
-    }
-
-    return(
-        <Comment>
-            <HamaImg src={loading} />
-        </Comment>
     )
 }
-
-const Comment = styled.div`
-    width: 100%;
-    height: 30rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const HamaImg = styled.img`
-    width: 50%;
-`;
 
 const WaitGrid =styled.div`
     width: 100%;

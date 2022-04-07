@@ -1,4 +1,4 @@
-import React,{ useState, useRef } from 'react';
+import React,{ useRef } from 'react';
 
 import { useSelector,useDispatch } from 'react-redux';
 import { history } from '../redux/configureStore';
@@ -17,7 +17,9 @@ const Search = (props) => {
     const requestResult = useSelector(state => state.search.requestResult);
     const ref = useRef('');
 
+    // 단어를 검색할 시 작동하는 함수
     const insertWord = (e) => {
+        // 엔터키를 누를 시 검색결과창으로 넘어감
         if(e.key !== 'Enter'){
             return
         }
@@ -29,7 +31,10 @@ const Search = (props) => {
     }
 
     React.useEffect(()=>{
+        // 들어오면 바로 검색창에 단어를 입력할 수 있도록
+        // 인풋에 바로 focus를 걸어줌
         ref.current.focus();
+        // 만일 이전 검색 결과가 남아 있다면 이를 초기화 해주는 함수
         if(requestResult){
             dispatch(searchActions.initResult());
             ref.current.focus();

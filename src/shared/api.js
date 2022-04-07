@@ -10,6 +10,7 @@ axios.defaults.baseURL = 'https://jumong.xyz';
 
 // 로컬
 // axios.defaults.baseURL = 'http://52.79.68.84';
+// axios.defaults.baseURL = 'https://coin11.shop';
 
 // 재균
 // axios.defaults.baseURL = 'http://13.125.218.107';

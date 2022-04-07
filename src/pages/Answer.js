@@ -7,20 +7,21 @@ import { history } from '../redux/configureStore';
 import ImageUploader from '../components/ImageUploader';
 import VideoUploader from '../components/VideoUploader';
 import Header from '../components/Header';
-import WaitForAMoment from '../components/WaitForAMoment';
 
-import loading from '../assets/logo_final.svg';
-
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 
 const Answer = (props) => {
     const dispatch = useDispatch();
+    // 업로드한 사진의 갯수를 나타내기 위해 가져오는 스테이트
     const { files } = useSelector(state => state.image);
-    const postId = props.match.params.postId
+    // 어떠한 요청글의 답변글을 쓰는지 알기위해 받아오는 요청글의 아이디
+    const postId = props.match.params.postId;
+    // 제목과 내용을 받아오기 위한 ref
     const titleRef = React.useRef();
     const contentRef = React.useRef();
 
+    // 답변글을 작성할 경우 작동하는 함수
     const answering = () => {
       const title = titleRef.current.value;
       const content = contentRef.current.value;
@@ -28,9 +29,8 @@ const Answer = (props) => {
         title:title,
         content:content
       }
-      console.log(data,postId);
       dispatch(answerActions.answeringDB2(data,postId))
-    //   dispatch(answerActions.answeringDB(data,postId))
+    //dispatch(answerActions.answeringDB(data,postId))
     }
 
     return (

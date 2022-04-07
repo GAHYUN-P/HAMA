@@ -3,8 +3,6 @@ import React, {useState} from 'react';
 import { history } from '../redux/configureStore';
 import { utilAPI } from '../shared/api';
 
-import axios from 'axios';
-
 import ProgressBar from '../components/ProgressBar';
 
 import { question, answer1, answer2 } from '../shared/surveyList';
