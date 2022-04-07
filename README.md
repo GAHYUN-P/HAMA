@@ -144,20 +144,13 @@
 ### 🔗Link
 
 > Website
-> 
-
-[내가하마!](https://www.i-hama.xyz/)
-
-> Youtube Link
-> 
+> [내가하마!](https://www.i-hama.xyz/)
+ 
 
 > instagram
-> 
-
-[](https://www.instagram.com/i_hama99/)
-
-> Github Link
-> 
+> [내가하마 인스타그램](https://www.instagram.com/i_hama99/)
+ 
+### Github Link
 
 **FrontEnd**
 
@@ -168,10 +161,8 @@
 [GitHub - rlaalsrl715/naegahama](https://github.com/rlaalsrl715/naegahama)
 
 > 공용 노션
-> 
+> [내가하마 Notion](https://www.notion.so/e7561b0e4749484c8de53b7eb42caf0c)
 
-> 개발자 프로필
-> 
 
 [개발자 연락처](https://www.notion.so/e49a1a48eb0041ef80eda30a774711c3)
 
@@ -295,27 +286,3 @@ JPQL은 **DB테이블이 아니라 엔티티를 대상으로 쿼리를 검색**�
 또한 구글폼을 통한 유저 피드백으로도 다른 유저의 프로필, 작성글을 보거나 서로 소통할 수 있는 창구가 있으면 좋겠다는 의견을 받아 유저페이지와 방명록 기능을 추가하였습니다.
 
 **유저페이지는 기존의 마이페이지의 코드를, 방명록은 기존의 댓글 대댓글 코드를 재사용 하여 빠르게 기능 추가를 할 수 있었습니다.**
-
-# More Information
-
-[내가HAMA Notion](https://www.notion.so/ccfcaddf2ecd4548ae01e35144a9da2b)
-
-[내가HAMA Figma](https://www.figma.com/file/5664OUWKkhs03kyxIg7S1l/이건내가HAMA?node-id=0%3A1)
-
-<details>
-<summary>ERD</summary>
-<div markdown="1">
-
-![mysql](https://user-images.githubusercontent.com/95837382/161892413-e4827955-0f91-431e-8c1e-3b5415fc02cb.png)
-
-</div>
-</details>
-
-<details>
-<summary>와이어 프레임</summary>
-<div markdown="1">
-
-![Untitled](https://user-images.githubusercontent.com/95837382/162130651-415ee68a-c3d5-4409-80b7-d86d58ac1c55.png)
-
-</div>
-</details>
