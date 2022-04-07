@@ -11,6 +11,8 @@ import { plzLogin } from '../shared/getPages';
 import live_off from '../assets/live_alarm_off.svg';
 import white_bell from '../assets/white_bell.svg';
 
+import Div from '../elements/Div';
+
 import styled from 'styled-components';
 
 const AlarmBadge = (props) => {
@@ -35,39 +37,20 @@ const AlarmBadge = (props) => {
     },[])
 
     return(
-        <React.Fragment>
-            <Grid onClick={()=>{if(plzLogin()){return};history.push('/alarm')}} >
-                <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
-                { notReadCount !== 0 &&
-                <Count>{notReadCount > 9 ? 9 : notReadCount}</Count>}
-            </Grid>
-        </React.Fragment>
+      <React.Fragment>
+        <Div _onClick={()=>{if(plzLogin()){return};history.push('/alarm')}} >
+          <LiveOff src={pathname === '/shorts' ? white_bell : live_off} />
+          { notReadCount !== 0 &&
+          <Div display='flex' justify='center' items='center' width='.6rem' height='.6rem' fontSize='8px' color='#fff' bc='#f55' Bradius='.6rem' position='absolute' top='0'  right='0'>
+            {notReadCount > 9 ? 9 : notReadCount}
+          </Div>}
+        </Div>
+      </React.Fragment>
     )
-}
-
-const Grid = styled.div`
-    position: relative;
-    display: flex;
-    align-items: center;
-`;
+};
 
 const LiveOff = styled.img`
   width: 1.5rem;
-`;
-
-const Count = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: .6rem;
-  height: .6rem;
-  font-size: 8px;
-  color: #fff;
-  background-color: #f55;
-  border-radius: .6rem;
-  position: absolute;
-  right: 0;
-  top: 0;
 `;
 
 export default AlarmBadge;

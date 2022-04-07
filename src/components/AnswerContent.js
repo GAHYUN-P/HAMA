@@ -6,6 +6,7 @@ import { answerActions } from "../redux/modules/answer";
 
 import WriteUser from "./WriteUser";
 import Viewer from '../components/Viewer'
+import Div from "../elements/Div";
 
 import { getUserId } from "../shared/cookie";
 import { plzLogin } from "../shared/getPages";
@@ -46,28 +47,31 @@ const AnswerContent = (props) => {
         <React.Fragment>
             <div>
                 {/* 상단 */}
-                <div style={{display:'flex',justifyContent:'space-between'}} >
+                <Div display='flex'justify='space-between'>
                     <div>
-                        <CategoryTitle>
+                        <Div fontSize='.75rem' color='#666' padding='0 0 .4rem' >
                             {/* 영어로 전달받은 카테고리를 다시 한글로 바꿔주는 함수 */}
                             {categoryEncoder(props.category)}
-                        </CategoryTitle>
-                        <ContentTitle>
+                        </Div>
+                        <Div fontSize='1rem' >
                             {props.title}
-                        </ContentTitle>
+                        </Div>
                     </div>
-
-                    <Likebtn onClick={push}
-                    // 좋아요를 했는지 판단해주는 함수 이에 따라 버튼의 뷰가 달라짐
-                    bg={IsLike(likeList) ? '#efefef' : '#fff'}
-                    fc={IsLike(likeList) ? '#ff7a7a' : '#9e9e9e'}>
-                        {IsLike(likeList) ?<FaHeart /> : <FiHeart />}
-                    </Likebtn>
                     
-                </div>
+                    <Div _onClick={push}
+                    display='flex' justify='center' items='center' fontSize='.75rem'
+                    width='1.5rem' height='1.5rem' border='.08rem solid #efefef' Bradius='1.5rem'
+                    padding='.1rem 0 0' margin='.3rem 0 0' Bsizing='border-box'
+                    // 좋아요를 했는지 판단해주는 함수 이에 따라 버튼의 뷰가 달라짐
+                    bc={IsLike(likeList) ? '#efefef' : '#fff'}
+                    color={IsLike(likeList) ? '#ff7a7a' : '#9e9e9e'}>
+                        {IsLike(likeList) ?<FaHeart /> : <FiHeart />}
+                    </Div>
+                    
+                </Div>
 
                 {/* 중단 */}
-                <CenterGrid>
+                <Div display='flex' justify='space-between' borderB='.1rem solid #f5f5f5' padding='0 0 .6rem' margin='.6rem 0 0' >
                     <WriteUser profile={imgUrl} writer={props.answerWriter} modifiedAt={props.modifiedAt} answerWriterId={props.answerWriterId}/>
                     {/* 요청글의 수정삭제 판단해주는 식에 마감 부분을 opened로 고정하여 답변글 작성자만이
                     수정 삭제할 수 있는 조건식으로 사용 */}
@@ -76,45 +80,20 @@ const AnswerContent = (props) => {
                         <BtnPair style={{marginRight:'0.4rem'}} onClick={()=>{history.push(`/answeredit/${props.answerId}`)}} >수정</BtnPair>
                         <BtnPair onClick={delAnswer} >삭제</BtnPair>
                     </div>}
-                </CenterGrid>
+                </Div>
 
                 {/* 하단 */}
-                <div style={{padding:'5px 0'}} >
-                    <ContentBox>
+                <Div padding='5px 0' >
+                    <Div width='100%' padding='.6rem  0' fontSize='.75rem' color='#666' whiteSpace='pre-line' >
                         {props.content}
-                    </ContentBox>
+                    </Div>
                     {/*  영상 또는 이미지를 보여주는 뷰어 is_answer에 따라 보여주는 점이 달라짐 */}
                     <Viewer type='answer' id={answerId} videoRef={videoRef} fileList={fileList} video={videoUrl} is_answer/>
-                </div>
-
+                </Div>
             </div>
         </React.Fragment>
     )
 }
-
-const CenterGrid = styled.div`
-    margin-top: ${({theme})=> theme.margins.lg};
-    display: flex;
-    justify-content: space-between;
-    border-bottom: .1rem solid #f5f5f5;
-    padding-bottom: ${({theme})=>theme.paddings.base};
-`;
-
-const Likebtn = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: ${({theme})=> theme.fontSizes.small};
-    color: ${props => props.fc};
-    width: 1.5rem;
-    height: 1.5rem;
-    border: .08rem solid #efefef;
-    border-radius: 1.5rem;
-    padding-top: .1rem;
-    margin-top: .3rem;
-    background-color: ${props => props.bg};
-    box-sizing: border-box;
-`;
 
 const BtnPair = styled.button`
     border: none;
@@ -127,24 +106,6 @@ const BtnPair = styled.button`
         color: #fff;
         background-color: #ff7a7a;
     }
-`;
-
-const CategoryTitle = styled.div`
-    font-size: ${({theme})=> theme.fontSizes.small};
-    color: #666;
-    padding-bottom: .4rem;
-`;
-
-const ContentTitle = styled.div`
-    font-size: ${({theme})=> theme.fontSizes.lg};
-`;
-
-const ContentBox = styled.div`
-    width: 100%;
-    padding: ${({theme})=>theme.paddings.lg} 0;
-    font-size: ${({theme})=>theme.fontSizes.small};
-    color: #666;
-    white-space: pre-line;
 `;
 
 export default AnswerContent;

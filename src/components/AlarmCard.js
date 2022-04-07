@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import { useDispatch } from "react-redux";
 import { alarmActions } from "../redux/modules/alarm";
@@ -8,6 +7,8 @@ import { setAlamContent, MoveTo } from "../shared/setAlamcontent";
 import { typeEncoder } from "../shared/categoryEncoder";
 
 import {BsX} from 'react-icons/bs';
+
+import Div from "../elements/Div";
 
 const AlarmCard = (props) => {
     const dispatch = useDispatch();
@@ -35,53 +36,21 @@ const AlarmCard = (props) => {
 
     return (
         <React.Fragment>
-            <Grid color={color} >
-                <BtnGrid>
-                    <TypeBtn>   
+            <Div color={color} display='flex' padding='1rem 0' borderB='1px solid #ccc' >
+                <Div width='20%' display='flex' justify='left' items='start'>
+                    <Div color='#9e9e9e' padding='.15rem .5rem' border='.1rem solid #e4e4e4' Bradius='.8rem' >
                         {typeEncoder(alarmType)}
-                    </TypeBtn>
-                </BtnGrid>
+                    </Div>
+                </Div>
                 <div onClick={Move} style={{width:'70%'}}>
                     {setAlamContent(props)}
                 </div>
-                <ExBox onClick={deletAlarm}>
+                <Div _onClick={deletAlarm} fontSize='1.5rem' color='#747474' width='10%' display='flex' justify='right' items='center' >
                     <BsX />
-                </ExBox>
-            </Grid>
+                </Div>
+            </Div>
         </React.Fragment>
     )
-}
-
-const Grid = styled.div`
-    color: ${props => props.color};
-    display: flex;
-    padding: 1rem 0;
-    border-bottom: 1px solid #ccc;
-`;
-
-const BtnGrid = styled.div`
-    width: 20%;
-    display: flex;
-    justify-content: left;
-    align-items: start;
-`;
-
-const TypeBtn = styled.div`
-    color: #9e9e9e;
-    padding: .15rem ${({theme})=> theme.paddings.small};
-    border: .1rem solid #e4e4e4;
-    border-radius: .8rem;
-`;
-
-const ExBox = styled.div`
-    font-size: ${({theme})=> theme.fontSizes.xxxxl};
-    color: #747474;
-    width: 10%;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-`;
-
-
+};
 
 export default AlarmCard;
