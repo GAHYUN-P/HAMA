@@ -76,7 +76,7 @@ const VideoUploader = (props) => {
 
 const Ellabel = styled.label`
     margin: 3rem 0 ${({theme})=>theme.paddings.small};
-    display: display: block;
+    display: block;
     width: auto;
     font-size: ${({theme})=> theme.fontSizes.base};
     color: #9e9e9e;
