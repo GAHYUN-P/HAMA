@@ -14,6 +14,8 @@ axios.defaults.baseURL = 'https://jumong.xyz';
 // 재균
 // axios.defaults.baseURL = 'http://13.125.218.107';
 
+// 테스트
+// axios.defaults.baseURL = 'https://coin11.shop';
 
 const config = {
   headers: {
