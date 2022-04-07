@@ -83,12 +83,21 @@
 # More Information
 
 [내가HAMA Notion](https://www.notion.so/ccfcaddf2ecd4548ae01e35144a9da2b)
+[내가HAMA Figma](https://www.figma.com/file/5664OUWKkhs03kyxIg7S1l/이건내가HAMA?node-id=0%3A1)
 
 <details>
 <summary>ERD</summary>
 <div markdown="1">
 
 ![mysql](https://user-images.githubusercontent.com/95837382/161892413-e4827955-0f91-431e-8c1e-3b5415fc02cb.png)
+
+</div>
+</details>
+<details>
+<summary>와이어 프레임</summary>
+<div markdown="1">
+
+![Untitled](https://user-images.githubusercontent.com/95837382/162130651-415ee68a-c3d5-4409-80b7-d86d58ac1c55.png)
 
 </div>
 </details>
