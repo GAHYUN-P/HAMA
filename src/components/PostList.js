@@ -20,11 +20,6 @@ const PostList = (props) => {
     
     const [target, setTarget] = useState(""); // target
     const [isLoading, setIsLoading] = useState(false); // isloading
-    const [length, setLength] = useState(0);
-
-    const increase = () => {
-        setLength(lengths => lengths + 10);
-    };
     
 
     // postlist 리덕스로부터 가져오기

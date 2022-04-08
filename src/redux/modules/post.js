@@ -230,11 +230,9 @@ const getSortList = (tag, sort) => async (dispatch, getState, {history}) => {
 const cutItemList = () => async (dispatch, getState, {history}) => {
     try{
         const list = getState().post.list;
-        console.log(list);
         const idx = getState().post.length;
-        console.log(idx);
         const newList = list.slice(idx, idx+5);
-        console.log(newList);
+        
         dispatch(setItemList(newList));
         dispatch(setListLength());
     }catch(error){
