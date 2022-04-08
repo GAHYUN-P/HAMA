@@ -22,6 +22,8 @@ export const initialState = {
     tag: "all",
     sort: "",
     loading: false,
+    length: 0,
+    itemList: [],
 };
 
 const setList = createAction('post/SETLIST');
@@ -34,7 +36,9 @@ const setSort = createAction('post/SORT');
 const concluseRequest = createAction('post/concluseRequest');
 const sortAnswer = createAction('post/sortAnswer');
 const reset = createAction('post/reset');
-const setLoading = createAction('post/setLoading')
+const setLoading = createAction('post/setLoading');
+const setListLength = createAction('post/setListLength');
+const setItemList = createAction('post/setItemList');
 
 const post = createReducer(initialState, {
     [setLoading] : (state, action) => {
@@ -44,7 +48,7 @@ const post = createReducer(initialState, {
         state.list = action.payload;
     },
     [setHMList] : (state, action) => {
-        state.HMlist = action.payload;
+        state.HMlist = action.payload  
     },
     [setRequest] : (state, action) => {
         state.request = action.payload.request;
@@ -93,6 +97,13 @@ const post = createReducer(initialState, {
     [reset] : (state, action) => {
         state.request = '';
     },
+    [setListLength] : (state, action) => {
+        state.length = state.length + 10;
+    },
+    [setItemList] : (state, action) => {
+        state.itemList = state.itemList.concat(action.payload);
+    },
+
 
 });
 
@@ -186,8 +197,9 @@ const getPostList = () => async (dispatch, getState, { history }) => {
     }
 };
 
-const getHMPostList = () => async (dispatch, getState, { history }) => {
+const getHMPostList = (start = null, size=3) => async (dispatch, getState, { history }) => {
     try {
+
       const res = await postAPI.getHMPostList();
       dispatch(setHMList(res.data));
     }
@@ -215,6 +227,19 @@ const getSortList = (tag, sort) => async (dispatch, getState, {history}) => {
     }
 }
 
+const cutItemList = () => async (dispatch, getState, {history}) => {
+    try{
+        const list = getState().post.list;
+        const idx = getState().post.length;
+        const newList = list.slice(idx, idx+5);
+        
+        dispatch(setItemList(newList));
+        dispatch(setListLength());
+    }catch(error){
+
+    }
+}
+
 export const postActions = {
     setList,
     getPostList,
@@ -230,6 +255,8 @@ export const postActions = {
     sortAnswer,
     reset,
     getHMPostList,
+    setListLength,
+    cutItemList,
 };
 
 export default post;
