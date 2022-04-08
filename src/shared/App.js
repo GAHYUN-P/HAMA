@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import styled from 'styled-components';
 import '../App.css';
 
@@ -13,7 +13,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 
 // Pages
-import Login from '../pages/Login';
+// import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Answer from '../pages/Answer';
 import AnswerEdit from '../pages/AnswerEdit';
@@ -42,6 +42,10 @@ import HMpost from '../pages/HMpost';
 import UserPage from '../pages/UserPage';
 import UserpageDetail from '../pages/UserpageDetail';
 
+const Login = lazy(()=> import('../pages/Login'));
+
+
+
 function App() {
   const dispatch = useDispatch();
   const { connected } = useSelector(state => state.alarm);
@@ -59,6 +63,7 @@ function App() {
     <ConnectedRouter history={history}>
       <Container>
         <div id="wrap">
+        <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               <CardList>
               <Route path="/" exact component={Home} />
@@ -89,6 +94,7 @@ function App() {
               </CardList>
               <Route path="*" exact component={NotFound} />
             </Switch>
+          </Suspense>
         </div>
       </Container>
     </ConnectedRouter>
