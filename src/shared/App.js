@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import styled from 'styled-components';
 import '../App.css';
 
@@ -13,14 +13,14 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 
 // Pages
-import Login from '../pages/Login';
+// import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Answer from '../pages/Answer';
 import AnswerEdit from '../pages/AnswerEdit';
 import AnswerDetail from '../pages/AnswerDetail';
 import Request from '../pages/Request';
 import RequestEdit from '../pages/RequestEdit';
-import RequestDetail from '../pages/RequestDetail';
+// import RequestDetail from '../pages/RequestDetail';
 import ChildComment from '../pages/ChildComment';
 import SearchResult from '../pages/SearchResult';
 import Search from '../pages/Search';
@@ -34,13 +34,18 @@ import Survey from '../pages/Survey';
 import SurveyResult from '../pages/SurveyResult';
 import Mypage from '../pages/Mypage';
 import MypageDetail from '../pages/MypageDetail';
-import Shorts from '../pages/Shorts';
+// import Shorts from '../pages/Shorts';
 import MypageAch from '../pages/MypageAch';
-import Notice from '../pages/Notice';
+// import Notice from '../pages/Notice';
 import DevInfo from '../pages/DevInfo';
 import HMpost from '../pages/HMpost';
 import UserPage from '../pages/UserPage';
 import UserpageDetail from '../pages/UserpageDetail';
+
+const Login = lazy(()=> import('../pages/Login'));
+const Shorts = lazy(()=> import('../pages/Shorts'));
+const RequestDetail = lazy(()=> import('../pages/RequestDetail'));
+const Notice = lazy(()=> import('../pages/Notice'));
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +64,7 @@ function App() {
     <ConnectedRouter history={history}>
       <Container>
         <div id="wrap">
+        <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               <CardList>
               <Route path="/" exact component={Home} />
@@ -89,6 +95,7 @@ function App() {
               </CardList>
               <Route path="*" exact component={NotFound} />
             </Switch>
+          </Suspense>
         </div>
       </Container>
     </ConnectedRouter>

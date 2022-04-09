@@ -7,10 +7,10 @@ import { history } from '../redux/configureStore';
 
 import vector9 from '../assets/vector9.svg';
 
-import ban_1 from '../assets/banner_1.png';
-import ban_2 from '../assets/banner_2.png';
-import ban_3 from '../assets/banner_3.png';
-import ban_4 from '../assets/banner_4.png';
+import ban_1 from '../assets/banner_1.svg';
+import ban_2 from '../assets/banner_2.svg';
+import ban_3 from '../assets/banner_3.svg';
+import ban_4 from '../assets/banner_4.svg';
 
 const Banner = (props) => {
 

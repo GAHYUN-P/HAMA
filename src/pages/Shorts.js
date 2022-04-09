@@ -21,6 +21,7 @@ const Shorts = (props) => {
     const [play, setPlay] = React.useState(false);
     const [firstpg, setFirstpg] = React.useState(true);
 
+    // 비디오 리스트 불러오기
     React.useEffect(() => {
         console.log('유즈이펙트');
         dispatch(shortsActions.getShort());
@@ -30,6 +31,9 @@ const Shorts = (props) => {
     const items = useSelector((state) => state.shorts.shortsList);
     console.log(items);
 
+    // react-slick slider Setting
+    // 슬라이드가 바뀌고 나서 play라는 state를 true로
+    // 만들어 주어 영상을 재생시킨다.
     const settings = {
         infinite: false,
         lazyLoad: true,
@@ -43,17 +47,16 @@ const Shorts = (props) => {
         },
         afterChange: () => { 
             setPlay(true);
-            console.log('바뀌고나서~');
           },
         onEdge: () => {
           window.location.reload();
           // 맨앞으로 이동
-          // 배열 length만큼 초고속으로 계속 앞으로가
-          // dispatch(shortsActions.getShort());
-          // slider.current.slick(0);
         }
     };
 
+    
+    // React-player의 OnEnded라는 이벤트 리스너에
+    // 영상이 끝나면 1초간 멈춘 후에 다음 페이지로 넘어가게 한다.
     const handleVideo = () => {
       console.log('영상끝');
       setTimeout(() => {
@@ -61,6 +64,8 @@ const Shorts = (props) => {
         }, 1000);
     }
 
+    // play라는 status가 슬라이드가 바뀔때만 true가 되기때문에
+    // 슬라이드가 넘어갈때부터 영상이 재생된다.
     const handlePlaying = () => {
       if(play === true) {
         return true;

@@ -5,6 +5,7 @@ import { alarmActions } from '../redux/modules/alarm';
 
 import { getToken,getUserId } from '../shared/cookie';
 
+
 // 소켓을 서버와 연결하기 위한 준비들
 // 소켓과 연결할 서버 지정
 const sock = new SockJS('https://jumong.xyz/ws-stomp');

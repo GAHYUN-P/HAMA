@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, intersectionObserver, IntersectionObserverEntry } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PostEach from './PostEach';
 import { postActions } from '../redux/modules/post';
-import { postAPI } from '../shared/api';
-import { push } from 'connected-react-router';
-
-import Footer from './Footer';
+import ReactLoading from "react-loading";
 
 const PostList = (props) => {
     // 트러블 슈팅: 카테고리 누르면 나오는데 안누르고 딱 로딩됐을때
@@ -20,35 +17,75 @@ const PostList = (props) => {
     React.useEffect(() => {
         dispatch(postActions.getPostList());
     }, []);
+    
+    const [target, setTarget] = useState(""); // target
+    const [isLoading, setIsLoading] = useState(false); // isloading
+    
 
     // postlist 리덕스로부터 가져오기
     const post_list = useSelector((state) => state.post.list);
+
+    const itemList = useSelector((state) => state.post.itemList);
     console.log(post_list);
 
-    const sort = useSelector((state) => state.post.sort);
+    
 
-    const selectTag = async (e) => {
-        
-        if (e.target.value === 'latest') {
-          return
+    const onIntersect = async ([entry], observer) => {
+        if (entry.isIntersecting && !isLoading) {
+          observer.unobserve(entry.target);
+          setIsLoading(true);
+          dispatch(postActions.cutItemList());
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          setIsLoading(false);
+          observer.observe(entry.target);
         }
+      };
 
-        if (e.target.value === 'time') {
-            return
-          }
-    }
+    useEffect(() => {
+        let observer;
+        if (target) {
+          // callback 함수, option
+          observer = new IntersectionObserver(onIntersect, {
+            threshold: 0.4,
+          });
+          observer.observe(target); // 타겟 엘리먼트 지정
+        }
+        return () => observer && observer.disconnect();
+    }, [target]);
+
+    
+    
 
     return (
         <Grid>
-            {post_list.map((info, idx) => {
-                return (<PostEach key={info.id} {...info}/>);
+            {itemList.map((info, idx) => {
+                return (
+                    <PostEach key={idx} {...info}/>
+                );
             })}
+            {isLoading ? (
+              <LoaderWrap>
+                <ReactLoading type="balls" color="#FAA3A2" />
+              </LoaderWrap>
+            ) : (
+              ""
+            )}
+            <div ref={setTarget}/>
         </Grid>   
     );
 };
 
 const Grid = styled.div`
     padding-bottom: 3.5rem;
+`;
+
+const LoaderWrap = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 `;
 
 export default PostList;
