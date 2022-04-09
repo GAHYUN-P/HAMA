@@ -37,11 +37,11 @@ const AnswerCard = (props) => {
 
                     <Div display='flex' justify='space-between' >
                         {/* 작성자, 작성일 */}
-                        <Div fontSize='.2rem' color='#9e9e9e' >
+                        <Div fontSize='.62rem' color='#9e9e9e' >
                             {answerWriter} {modifiedAt}
                         </Div>
 
-                        <Div fontSize='.2rem' color='#9e9e9e' >
+                        <Div fontSize='.62rem' color='#9e9e9e' >
                             <Div fontSize='.62rem' display='inline-block' height='.8rem' padding='0 .1rem 0 .4rem' >
                                 <FiImage/>
                             </Div>
